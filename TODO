@@ -7,7 +7,7 @@ TODO
 [x] Main Handler
 [x] Dummy HTML
 [x] Web Error Handler
-[ ] Add allowed libraries
+[x] Add allowed libraries
 [x] Setup log printer
 [ ] Review Comments
 [ ] Draft READ.md
