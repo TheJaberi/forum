@@ -2,11 +2,14 @@ TODO
 
 [x] new Develop branch
 [x] TODO File
-[ ] Backend server
-[ ] File server initializer
-[ ] Main Handler
-[ ] Dummy HTML
-[ ] Error Handler
+[x] Backend server
+[x] File server initializer
+[x] Main Handler
+[x] Dummy HTML
+[ ] Web Error Handler
+[ ] Add allowed libraries
+[ ] Setup log printer
 [ ] Review Comments
+[ ] Draft READ.md
 
 TODO For the best use of this file, find and add this extension --> Gruntfuggly.todo-tree
