@@ -6,9 +6,9 @@ TODO
 [x] File server initializer
 [x] Main Handler
 [x] Dummy HTML
-[ ] Web Error Handler
+[x] Web Error Handler
 [ ] Add allowed libraries
-[ ] Setup log printer
+[x] Setup log printer
 [ ] Review Comments
 [ ] Draft READ.md
 

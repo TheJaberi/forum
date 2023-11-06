@@ -9,6 +9,7 @@ func StaticFileLoader() {
 		HTMLs = []string{
 			// Add new html / template names here
 			"../webapp/static/main.html",
+			"../webapp/static/error.html",
 		}
 	}
 	cssFiles := http.FileServer(http.Dir("../webapp/static/css"))

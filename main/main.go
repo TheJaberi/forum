@@ -9,6 +9,7 @@ import (
 
 // Whatever needs to load before the server starts (Files/APIs)
 func init() {
+	log.SetFlags(log.Lshortfile | log.LstdFlags)
 	forum.StaticFileLoader()
 }
 
