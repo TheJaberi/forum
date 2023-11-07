@@ -9,5 +9,8 @@
 <body>
     <h1>REBOOT FORUM</h1>
     <h3>This is the main page of the our forum</h3>
+    <textarea name="title" id="title" placeholder="Enter text here (maximum 50 characters)" rows="1" cols="10" required="true" maxlength="500">{{ .Title }}</textarea>
+    <textarea name="post" id="post" placeholder="Enter text here (maximum 500 characters)" rows="5" cols="33" required="true" maxlength="500">{{ .Input }}</textarea>
+    <button class="downl-btn" id="format" name="format" value="txt" formmethod="GET" formaction="/download">Download TXT</button>
 </body>
 </html>

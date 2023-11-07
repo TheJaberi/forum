@@ -3,6 +3,7 @@ package forum
 import (
 	"html/template"
 	"net/http"
+	forum"forum/functions"
 )
 
 func MainHandler(w http.ResponseWriter, req *http.Request) {
@@ -20,5 +21,8 @@ func MainHandler(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 	w.WriteHeader(http.StatusOK)
+	title := req.FormValue("title")
+	post := req.FormValue("post")
+	forum.CreateTables(title, post)
 	t.ExecuteTemplate(w, "main.html", nil)
 }
