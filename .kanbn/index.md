@@ -24,12 +24,12 @@ completedColumns:
 - [user-create-registeration](tasks/user-create-registeration.md)
 - [user-admin-sign-in](tasks/user-admin-sign-in.md)
 - [category-create](tasks/category-create.md)
-- [posts-create](tasks/posts-create.md)
 - [posts-view](tasks/posts-view.md)
 - [comments-create](tasks/comments-create.md)
 - [comments-view](tasks/comments-view.md)
 - [like-dislike-create](tasks/like-dislike-create.md)
 - [filter-create-view](tasks/filter-create-view.md)
+- [posts-create](tasks/posts-create.md)
 
 ## In Progress
 

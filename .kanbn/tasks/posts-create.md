@@ -1,6 +1,6 @@
 ---
 created: 2023-11-07T11:05:40.373Z
-updated: 2023-11-07T15:47:58.787Z
+updated: 2023-11-08T11:14:48.592Z
 assigned: ""
 progress: 0
 tags:
@@ -24,3 +24,6 @@ tags:
   date: 2023-11-07T15:47:43.251Z
   - Use struct if there is no access to table
   - Build the struct to match proposed table attributes
+- author: ajaberi
+  date: 2023-11-08T11:13:37.762Z
+  If post is created inside a specifc category page, let it have that category by default

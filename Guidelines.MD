@@ -13,7 +13,7 @@ git push -u origin <task-name>
 
 ### Merging back to develop branch
 
-To protect the branches from conflicts, and to have more team memebers understand the added features branch protection was enabled for the repo
+To protect the branches from conflicts, and to have more team members understand the added features branch protection was enabled for the repo
 
 Merging to master or develop branches is done as follows:
 1.  Go to the merging branch on gitea e.g. test branch
