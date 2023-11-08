@@ -73,3 +73,6 @@ sqlite3 mydb.db << create db
 add table
 .quit
 */
+
+INSERT INTO users (user_name, user_email, user_pass, user_type) VALUES (?, ?, ?, ?)
+SELECT user_id, user_name FROM users WHERE user_id = 1
