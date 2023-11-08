@@ -1,17 +1,18 @@
 package forum
 
 import (
+	"fmt"
+	forum "forum/functions"
 	"html/template"
 	"net/http"
-	// forum"forum/functions"
 )
-
-func MainHandler(w http.ResponseWriter, req *http.Request) {
-	if req.URL.Path != "/" {
+func Posthandler(w http.ResponseWriter, req *http.Request) {
+	fmt.Println("test1")
+	if req.URL.Path != "/post" {
 		ErrorHandler(w, req, http.StatusNotFound)
 		return
 	}
-	if req.Method != "GET" {
+	if req.Method != "POST" {
 		ErrorHandler(w, req, http.StatusMethodNotAllowed)
 		return
 	}
@@ -21,5 +22,11 @@ func MainHandler(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 	w.WriteHeader(http.StatusOK)
+	title := req.FormValue("title")
+	post := req.FormValue("post")
+	username := req.FormValue("username")
+	password := req.FormValue("password")
+	forum.CreateTables(title, post, username, password)
 	t.ExecuteTemplate(w, "main.html", nil)
 }
+ 
