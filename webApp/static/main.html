@@ -9,13 +9,16 @@
     
 </head>
 <body>
-    <form method="post" action="/post">
+    
     <h1>REBOOT FORUM</h1>
     <h3>This is the main page of the our forum</h3>
+    <form method="post" action="/login">
     username<textarea name="username" id="username" placeholder="" rows="1" cols="10" maxlength="50"></textarea>
     password<textarea name="password" id="password" placeholder="" rows="1" cols="20" required="true" maxlength="500"></textarea><br>
-    Post Title<textarea name="title" id="title" placeholder="Enter text here (maximum 50 characters)" rows="1" cols="10" required="true" maxlength="50"></textarea>
-    Post Body<textarea name="post" id="post" placeholder="Enter text here (maximum 500 characters)" rows="5" cols="33" required="true" maxlength="500"></textarea>
-    <button class="downl-btn" id="format" name="format" value="txt">Download TXT</button>
+    <button class="login-btn" id="login" name="login" value="txt">Login</button></form>
+    <form method="post" action="/post">
+    Post Title<textarea name="title" id="title" placeholder="Enter text here (maximum 50 characters)" rows="1" cols="10" maxlength="50"></textarea>
+    Post Body<textarea name="post" id="post" placeholder="Enter text here (maximum 500 characters)" rows="5" cols="33" maxlength="500"></textarea>
+    <button class="downl-btn" id="format" name="format" value="txt">Create post</button>
 </body></form>
 </html>

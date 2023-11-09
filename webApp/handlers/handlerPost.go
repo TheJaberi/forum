@@ -23,10 +23,8 @@ func Posthandler(w http.ResponseWriter, req *http.Request) {
 	}
 	w.WriteHeader(http.StatusOK)
 	title := req.FormValue("title")
-	post := req.FormValue("post")
-	username := req.FormValue("username")
-	password := req.FormValue("password")
-	forum.CreateTables(title, post, username, password)
+	body := req.FormValue("post")
+	forum.CreatePost(title, body)
 	t.ExecuteTemplate(w, "main.html", nil)
 }
  
