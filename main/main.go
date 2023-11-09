@@ -16,7 +16,7 @@ func init() {
 func main() {
 	const port = ":8080"
 	http.HandleFunc("/", forum.MainHandler)
-	http.HandleFunc("/post", forum.Posthandler)
 	fmt.Println("http://localhost" + port)
+	http.HandleFunc("/post", forum.Posthandler)
 	log.Fatal(http.ListenAndServe(port, nil))
 }
