@@ -1,14 +1,12 @@
 package forum
 
 import (
-	"fmt"
 	forum "forum/functions"
 	"html/template"
 	"net/http"
 )
 
 func HandlerLogin(w http.ResponseWriter, req *http.Request){
-	fmt.Println("test1")
 	if req.URL.Path != "/login" {
 		ErrorHandler(w, req, http.StatusNotFound)
 		return
@@ -23,8 +21,8 @@ func HandlerLogin(w http.ResponseWriter, req *http.Request){
 		return
 	}
 	w.WriteHeader(http.StatusOK)
-	username := req.FormValue("username")
-	password := req.FormValue("password")
-	forum.Login(username, password)
+	username := req.FormValue("username") // when the login button is clicked the username data is assigned to a variable
+	password := req.FormValue("password") // when the login button is clicked the password data is assigned to a variable
+	forum.Login(username, password) // login func goes over all the rows in the users table and checks if it matches
 	t.ExecuteTemplate(w, "main.html", nil)
 }

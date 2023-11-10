@@ -11,23 +11,19 @@ import (
 
 func CreatePost(title string, body string) {
 	fmt.Println(LoggedUser)
-	if LoggedUser.Registered{
+	if LoggedUser.Registered{  // check if registered is to true to add the post to the database
 		Database, err := sql.Open("sqlite3", "./forum.db")
 		if err != nil{
 			log.Fatal(err)
 		}
-	// postsTable, err2 := Database.Prepare("INSERT INTO Posts (Title, body) VALUES (?, ?)")
-	// postsTable.Exec(title, body)
-	query := "INSERT INTO `Posts` (`Title`, `body`) VALUES (?, ?)"
-	_, err2 := Database.ExecContext(context.Background(),query, title, body)
-	if err2 != nil {
+	query := "INSERT INTO `Posts` (`Title`, `body`, `user_id`) VALUES (?, ?, ?)" 
+	_, err2 := Database.ExecContext(context.Background(),query, title, body, LoggedUser.Userid)
+	if err2 != nil { // the post is added using the ExecContext along with the userid which is in the LoggedUser variable
 		log.Fatal(err2)
 	}
-	fmt.Println(title)
-	fmt.Println(body)
-	fmt.Println(LoggedUser.Userid)
 }else {
 	ErrorMsg = "Cannot create post need to log in first"
 	fmt.Println(ErrorMsg)
 }
+defer Database.Close()
 }
