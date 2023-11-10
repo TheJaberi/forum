@@ -19,21 +19,21 @@ completedColumns:
 
 ## Todo
 
-- [build-database](tasks/build-database.md)
-- [admin-create](tasks/admin-create.md)
-- [user-create-registeration](tasks/user-create-registeration.md)
-- [user-admin-sign-in](tasks/user-admin-sign-in.md)
 - [category-create](tasks/category-create.md)
 - [posts-view](tasks/posts-view.md)
+- [admin-create](tasks/admin-create.md)
 - [comments-create](tasks/comments-create.md)
 - [comments-view](tasks/comments-view.md)
 - [like-dislike-create](tasks/like-dislike-create.md)
 - [filter-create-view](tasks/filter-create-view.md)
-- [posts-create](tasks/posts-create.md)
 
 ## In Progress
 
 - [database-planning](tasks/database-planning.md)
+- [user-create-registeration](tasks/user-create-registeration.md)
+- [posts-create](tasks/posts-create.md)
+- [user-admin-sign-in](tasks/user-admin-sign-in.md)
+- [build-database](tasks/build-database.md)
 
 ## Done
 
