@@ -14,10 +14,10 @@ fmt.Println(66)
 	if err != nil {
 		log.Fatal(err)
 	}
-	_, errpragma := Database.Exec("PRAGMA foreign_keys = ON")
-	if errpragma != nil {
-		log.Fatal(errpragma)
-	}
+	// _, errpragma := Database.Exec("PRAGMA foreign_keys = ON")
+	// if errpragma != nil {
+	// 	log.Fatal(errpragma)
+	// }
 	usertable, err2 := Database.Prepare("CREATE TABLE IF NOT EXISTS Users (id INTEGER PRIMARY KEY, username TEXT NOT NULL, Password TEXT NOT NULL, email TEXT)")
 	if err2 != nil {
 		log.Fatal(err2)

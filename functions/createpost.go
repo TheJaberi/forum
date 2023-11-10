@@ -1,9 +1,11 @@
 package forum
 
 import (
+	"context"
 	"database/sql"
 	"fmt"
 	"log"
+
 	_ "github.com/mattn/go-sqlite3"
 )
 
@@ -14,8 +16,10 @@ func CreatePost(title string, body string) {
 		if err != nil{
 			log.Fatal(err)
 		}
-	postsTable, err2 := Database.Prepare("INSERT INTO Posts (Title, body) VALUES (?, ?)")
-	postsTable.Exec(title, body)
+	// postsTable, err2 := Database.Prepare("INSERT INTO Posts (Title, body) VALUES (?, ?)")
+	// postsTable.Exec(title, body)
+	query := "INSERT INTO `Posts` (`Title`, `body`) VALUES (?, ?)"
+	_, err2 := Database.ExecContext(context.Background(),query, title, body)
 	if err2 != nil {
 		log.Fatal(err2)
 	}
