@@ -3,7 +3,7 @@ package forum
 import (
 	"html/template"
 	"net/http"
-	forum"forum/functions"
+	// forum"forum/functions"
 )
 
 func MainHandler(w http.ResponseWriter, req *http.Request) {
@@ -20,7 +20,7 @@ func MainHandler(w http.ResponseWriter, req *http.Request) {
 		ErrorHandler(w, req, http.StatusInternalServerError)
 		return
 	}
-	forum.CreateTables() // create table creates the database and the tables for the project
+	// forum.CreateTables() // create table creates the database and the tables for the project
 	w.WriteHeader(http.StatusOK)
 	t.ExecuteTemplate(w, "main.html", nil)
 }

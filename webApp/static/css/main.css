@@ -1,6 +1,26 @@
+
+input[type="checkbox"]:checked{
+    background-color: rgb(0, 0, 0);
+    opacity: 0.3 
+}
 body {
     margin: 0;
     background-color:beige
+}
+input[type="checkbox"]:checked ~ .createpost {
+    opacity: 1;
+    visibility: visible;
+    background-color: rgba(0 0 0 / 0.35);
+    transition: 0.3s;
+    inset: 0;
+    position: fixed;
+    margin-top: 35vh;
+}
+
+.createpost {
+opacity: 0;
+visibility: hidden;
+justify-content: right
 }
 
 h1 {
@@ -12,3 +32,4 @@ h3 {
     text-align: center;
     color:chocolate
 }
+
