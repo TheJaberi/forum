@@ -31,9 +31,9 @@ completedColumns:
 
 - [database-planning](tasks/database-planning.md)
 - [user-create-registeration](tasks/user-create-registeration.md)
-- [posts-create](tasks/posts-create.md)
 - [user-admin-sign-in](tasks/user-admin-sign-in.md)
 - [build-database](tasks/build-database.md)
+- [posts-create](tasks/posts-create.md)
 
 ## Done
 

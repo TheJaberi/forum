@@ -1,7 +1,7 @@
 ---
 created: 2023-11-07T11:05:40.373Z
-updated: 2023-11-10T11:16:01.020Z
-assigned: ""
+updated: 2023-11-12T11:10:23.315Z
+assigned: aalali
 progress: 0.05
 tags:
   - 'Main Feature'
