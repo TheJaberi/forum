@@ -13,5 +13,9 @@ func StaticFileLoader() {
 		}
 	}
 	cssFiles := http.FileServer(http.Dir("../webApp/static/css"))
+	imgFiles := http.FileServer(http.Dir("../webApp/static/img"))
+	fontFiles := http.FileServer(http.Dir("../webApp/static/fonts"))
 	http.Handle("/css/", http.StripPrefix("/css/", cssFiles))
+	http.Handle("/img/", http.StripPrefix("/img/", imgFiles))
+	http.Handle("/fonts/", http.StripPrefix("/fonts/", fontFiles))
 }
