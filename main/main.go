@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	forum "forum/webApp/handlers"
+	forumfunc "forum/functions"
 	"log"
 	"net/http"
 )
@@ -17,6 +18,8 @@ func main() {
 	const port = ":8080"
 	http.HandleFunc("/", forum.MainHandler) // MainHandler executes main.html an has the function create table which creates the database
 	fmt.Println("http://localhost" + port)
+	forumfunc.ViewPosts()
+	fmt.Println(forumfunc.AllPosts)
 	http.HandleFunc("/register", forum.HandlerRegister) // HandlerRegister has function NewUser which adds the data for the user to the database
 	http.HandleFunc("/login", forum.HandlerLogin) // HandlerLogin checks if the user is registered, if so it adds his data to a Global variable
 	http.HandleFunc("/post", forum.HandlerPost)  // HandlerPost adds the data in the post to the database
