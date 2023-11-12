@@ -12,7 +12,10 @@ func Login(username string, password string) {
 	var usernametmp string
 	var passwordtmp string
 	var emailtmp string
-	Database, _ := sql.Open("sqlite3", "./forum.db")
+	Database, errdatabase := sql.Open("sqlite3", "./forum.db")
+	if errdatabase != nil {
+		log.Fatal(errdatabase)
+	}
 	userdata, err := Database.Query("SELECT id, username, password, email FROM Users") // select gets the data from users table
 	if err != nil {
 		log.Fatal(err)
