@@ -2,18 +2,11 @@ package forum
 
 import (
 	"database/sql"
-	"fmt"
-	"os"
 
 	_ "github.com/mattn/go-sqlite3"
 )
 
-func DataBase() {
-	db, err := sql.Open("sqlite3", "./forum.db")
-	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
-	}
+func DataBase(db *sql.DB) {
 	var query string
 	query = `CREATE TABLE IF NOT EXISTS users (
 		user_id INTEGER NOT NULL,
@@ -90,15 +83,4 @@ func DataBase() {
 	)`
 	actionsTable, _ := db.Prepare(query)
 	actionsTable.Exec()
-	row, _ := db.Query("SELECT user_id, user_name FROM users WHERE user_id = 1")
-	var user_id int
-	var user_name string
-	for row.Next() {
-		row.Scan(&user_id, &user_name)
-		break
-	}
-	if user_id != 1 && user_name != "admin" {
-		usersTable, _ = db.Prepare("INSERT INTO users (user_name, user_email, user_pass, user_type) VALUES (?, ?, ?, ?)")
-		usersTable.Exec("admin", "admin", "admin", "admin")
-	}
 }
