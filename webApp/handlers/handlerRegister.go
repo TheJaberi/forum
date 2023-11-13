@@ -23,6 +23,7 @@ func HandlerRegister(w http.ResponseWriter, req *http.Request){
 	w.WriteHeader(http.StatusOK)
 	username := req.FormValue("username") // when the register button is clicked the username data is assigned to a variable
 	password := req.FormValue("password") // when the register button is clicked the password data is assigned to a variable
-	forum.NewUser(username, password) // NewUser adds the username and password to the database
+	email := req.FormValue("email")
+	forum.NewUser(username, password, email) // NewUser adds the username and password to the database
 	t.ExecuteTemplate(w, "main.html", nil)
 }
