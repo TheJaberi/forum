@@ -20,28 +20,26 @@ func init() {
 		fmt.Println(err)
 		os.Exit(1)
 	}
-	DataBase(DB)
-	row, _ := DB.Query("SELECT user_id, user_name FROM users WHERE user_id = 1")
-	var user_id int
-	var user_name string
-	for row.Next() {
-		row.Scan(&user_id, &user_name)
-		break
-	}
-	if user_id != 1 && user_name != "admin" {
-		sqlStmt, _ := DB.Prepare("INSERT INTO users (user_name, user_email, user_pass, user_type) VALUES (?, ?, ?, ?)")
+	if !isTableExists(DB, "users") {
+		DataBase(DB)
+		sqlStmt, err := DB.Prepare("INSERT INTO users (user_name, user_email, user_pass, user_type) VALUES (?, ?, ?, ?)")
+		if err != nil {
+			fmt.Println(err)
+			os.Exit(1)
+		}
 		sqlStmt.Exec("admin", "admin", "admin", "admin")
 	}
+
 }
 
 func PathHandler(w http.ResponseWriter, r *http.Request) {
 	switch r.URL.Path {
 	case "/": // home page
 		MainHandler(w, r)
-	case "/sign_up": // artist page
+	case "/sign_up": // sign up page
 		SignUpHandler(w, r, DB)
-	// case "/sign_in": // about page
-	// 	AboutHandler(w, r)
+	case "/sign_in": // sign in page
+		SignInHandler(w, r, DB)
 	// case "/create_post": // welcome page
 	// 	WelcomeHundler(w, r)
 	// case "/create_comment": // filter page
@@ -55,4 +53,18 @@ func PathHandler(w http.ResponseWriter, r *http.Request) {
 	default: // any invalid path will be redirected to 404 error handler
 		ErrorHandler(w, r, 404)
 	}
+}
+
+func isTableExists(db *sql.DB, tableName string) bool {
+	sqlStmt, err := db.Prepare("SELECT COUNT(*) FROM sqlite_master WHERE type = 'table' AND name = ?")
+	if err != nil {
+		return false
+	}
+	defer sqlStmt.Close()
+	var count int
+	err = sqlStmt.QueryRow(tableName).Scan(&count)
+	if err != nil {
+		return false
+	}
+	return count > 0
 }

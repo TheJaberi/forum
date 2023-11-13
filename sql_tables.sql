@@ -76,3 +76,4 @@ add table
 
 INSERT INTO users (user_name, user_email, user_pass, user_type) VALUES (?, ?, ?, ?)
 SELECT user_id, user_name FROM users WHERE user_id = 1
+SELECT user_pass FROM users WHERE user_email = 1
