@@ -7,12 +7,7 @@ import (
 	"net/http"
 )
 
-type Login struct {
-	User_email string
-	User_pass  string
-}
-
-func SignInHandler(w http.ResponseWriter, r *http.Request, db *sql.DB) {
+func LoginHandler(w http.ResponseWriter, r *http.Request, db *sql.DB) {
 	err := r.ParseForm()
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)

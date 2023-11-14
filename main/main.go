@@ -2,7 +2,8 @@ package main
 
 import (
 	"fmt"
-	forum "forum/webApp/handlers"
+	db "forum/database"
+	webApp "forum/webApp/handlers"
 	"log"
 	"net/http"
 )
@@ -10,12 +11,13 @@ import (
 // Whatever needs to load before the server starts (Files/APIs)
 func init() {
 	log.SetFlags(log.Lshortfile | log.LstdFlags)
-	forum.StaticFileLoader()
+	webApp.StaticFileLoader()
+	db.DatabaseLoader()
 }
 
 func main() {
 	const port = ":8080"
-	http.HandleFunc("/", forum.PathHandler)
+	http.HandleFunc("/", webApp.PathHandler)
 	fmt.Println("http://localhost" + port)
 	log.Fatal(http.ListenAndServe(port, nil))
 }

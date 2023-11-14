@@ -8,14 +8,7 @@ import (
 	"regexp"
 )
 
-type Register struct {
-	User_name  string
-	User_email string
-	User_pass  string
-	User_type  string
-}
-
-func SignUpHandler(w http.ResponseWriter, r *http.Request, db *sql.DB) {
+func RegisterHandler(w http.ResponseWriter, r *http.Request, db *sql.DB) {
 	err := r.ParseForm()
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
