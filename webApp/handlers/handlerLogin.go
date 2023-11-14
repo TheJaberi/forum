@@ -5,6 +5,10 @@ import (
 	"fmt"
 	"html/template"
 	"net/http"
+	"time"
+
+	"github.com/gofrs/uuid"
+	bcrypt "golang.org/x/crypto/bcrypt"
 )
 
 func LoginHandler(w http.ResponseWriter, r *http.Request, db *sql.DB) {
@@ -19,19 +23,25 @@ func LoginHandler(w http.ResponseWriter, r *http.Request, db *sql.DB) {
 		fmt.Println("User Email not exist!")
 	}
 	data.User_pass = r.PostFormValue("password2")
-	rows, err := db.Query("SELECT user_pass FROM users WHERE user_email = ?", data.User_email)
+	sqlStmt, err := db.Prepare("SELECT user_pass FROM users WHERE user_email = ?")
 	if err != nil {
 		fmt.Println(err)
 	}
-	var current_pass string
-	for rows.Next() {
-		rows.Scan(&current_pass)
-		break
-	}
-	if data.User_pass == current_pass {
-		fmt.Println("true")
+	var session Session = Session{}
+	var current_pass []byte
+	err = sqlStmt.QueryRow(data.User_email).Scan(&current_pass)
+	if err != nil {
+		fmt.Println("Error: in reading password or email not exist!")
 	} else {
-		fmt.Println("false")
+		fmt.Println("Your pass match the password in data!")
+		session.Email = data.User_email
+		session.Uuid, _ = uuid.NewV4()
+		session.CreatedAt = time.Now()
+		fmt.Println(session)
+	}
+	err = bcrypt.CompareHashAndPassword(current_pass, []byte(data.User_pass))
+	if err != nil {
+		fmt.Println("Error: not match!")
 	}
 	t, err := template.ParseFiles(HTMLs...)
 	if err != nil {

@@ -6,6 +6,8 @@ import (
 	"html/template"
 	"net/http"
 	"regexp"
+
+	bcrypt "golang.org/x/crypto/bcrypt"
 )
 
 func RegisterHandler(w http.ResponseWriter, r *http.Request, db *sql.DB) {
@@ -23,10 +25,11 @@ func RegisterHandler(w http.ResponseWriter, r *http.Request, db *sql.DB) {
 	if !EmailChecker(data.User_email) {
 		fmt.Println("User Email error!")
 	}
-	data.User_pass = r.PostFormValue("password")
-	if !PasswordChecker(data.User_pass) {
+	pass := r.PostFormValue("password")
+	if !PasswordChecker(pass) {
 		fmt.Println("User Password error!")
 	}
+	data.User_pass, _ = bcrypt.GenerateFromPassword([]byte(pass), 4)
 	data.User_type = "member"
 	println(data.User_name, data.User_email, data.User_pass, data.User_type)
 	sqlStmt, err := db.Prepare("INSERT INTO users (user_name, user_email, user_pass, user_type) VALUES (?, ?, ?, ?)")

@@ -5,6 +5,7 @@ import (
 	"log"
 
 	_ "github.com/mattn/go-sqlite3"
+	bcrypt "golang.org/x/crypto/bcrypt"
 )
 
 var DB *sql.DB
@@ -21,7 +22,8 @@ func DatabaseLoader() {
 		if err != nil {
 			log.Fatalf("%v", err)
 		}
-		sqlStmt.Exec("admin", "admin", "admin", "admin")
+		admin_pass, _ := bcrypt.GenerateFromPassword([]byte("admin"), 4)
+		sqlStmt.Exec("admin", "admin", admin_pass, "admin")
 	}
 
 }

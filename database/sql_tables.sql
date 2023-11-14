@@ -2,7 +2,7 @@ CREATE TABLE users (
     user_id INTEGER NOT NULL,
     user_name CHAR(10) NOT NULL UNIQUE,
     user_email CHAR(25) NOT NULL UNIQUE,
-    user_pass CHAR(25) NOT NULL,
+    user_pass PASSWORD NOT NULL,
     user_type TEXT NOT NULL DEFAULT member,
     time_created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY("user_id" AUTOINCREMENT)
