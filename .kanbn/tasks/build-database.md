@@ -1,11 +1,11 @@
 ---
 created: 2023-11-07T11:24:04.137Z
-updated: 2023-11-10T11:18:11.101Z
-assigned: ""
+updated: 2023-11-15T11:48:17.987Z
+assigned: aabdeen
 progress: 0.05
 tags:
   - 'Main Feature'
-started: 2023-11-10T00:00:00.000Z
+started: 2023-11-15T00:00:00.000Z
 ---
 
 # Build Database

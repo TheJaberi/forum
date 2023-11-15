@@ -1,10 +1,11 @@
 ---
 created: 2023-11-07T11:33:38.679Z
-updated: 2023-11-07T15:48:10.753Z
-assigned: ""
+updated: 2023-11-15T11:45:04.000Z
+assigned: aalali
 progress: 0
 tags:
   - 'Main Features'
+started: 2023-11-15T00:00:00.000Z
 ---
 
 # Posts View

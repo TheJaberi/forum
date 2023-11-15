@@ -1,7 +1,7 @@
 ---
 created: 2023-11-07T11:11:03.102Z
-updated: 2023-11-10T11:16:42.252Z
-assigned: ""
+updated: 2023-11-15T11:47:44.347Z
+assigned: halaboo
 progress: 0.05
 tags:
   - 'Main Feature'
