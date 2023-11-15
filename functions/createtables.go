@@ -26,5 +26,10 @@ func CreateTables() {
 		log.Fatal(err4)
 	}
 	postsTable.Exec() // Exec executes query on line 25
+	categoryTable, err5 := Database.Prepare("CREATE TABLE IF NOT EXISTS Category (id INTEGER PRIMARY KEY, Name TEXT, post_id INTEGER)")
+	if err5 != nil { // table for posts is created if it doesnot exist
+		log.Fatal(err4)
+	}
+	categoryTable.Exec() // Exec executes query on line 29
 	defer Database.Close()
 }

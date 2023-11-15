@@ -24,6 +24,9 @@ func MainHandler(w http.ResponseWriter, req *http.Request) {
 	w.WriteHeader(http.StatusOK)
 	if forum.AllPosts == nil {
 	forum.ViewPosts()}
-	fmt.Println(forum.AllPosts)
-	t.ExecuteTemplate(w, "main.html", forum.AllPosts)
+	forum.ViewCategory()
+	forum.AllData.AllPosts = forum.AllPosts
+	forum.AllData.AllCategories = forum.AllCategories
+	fmt.Println(forum.AllData)
+	t.ExecuteTemplate(w, "main.html", forum.AllData)
 }

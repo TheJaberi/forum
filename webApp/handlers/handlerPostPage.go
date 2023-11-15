@@ -14,7 +14,6 @@ func HandlerPostPage(w http.ResponseWriter, req *http.Request){
 		return
 	}
 	if req.Method != "GET" {
-		fmt.Println("test")
 		ErrorHandler(w, req, http.StatusMethodNotAllowed)
 		return
 	}

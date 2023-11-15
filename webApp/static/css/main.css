@@ -7,7 +7,7 @@ body {
     margin: 0;
     background-color:beige
 }
-input[type="checkbox"]:checked ~ .createpost {
+/* input[type="checkbox"]:checked ~ .createpost {
     opacity: 1;
     visibility: visible;
     background-color: rgba(0 0 0 / 0.35);
@@ -21,7 +21,7 @@ input[type="checkbox"]:checked ~ .createpost {
 opacity: 0;
 visibility: hidden;
 justify-content: right
-}
+} */
 
 h1 {
     text-align: center;

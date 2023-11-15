@@ -2,7 +2,6 @@ package forum
 
 import (
 	"database/sql"
-	"fmt"
 	"log"
 	_ "github.com/mattn/go-sqlite3"
 )
@@ -16,7 +15,7 @@ func ViewPosts(){
 	defer Database.Close()
 	countRows:= Database.QueryRow("SELECT COUNT(*) FROM Posts")
 	countRows.Scan(&count)
-	fmt.Println(count)
+	// fmt.Println(count)
 	for i:=1;i<=count;i++{
 	var posttmp Post
 	postData := Database.QueryRow("Select * from Posts where id = ?", i)
