@@ -23,6 +23,7 @@ func HandlerPost(w http.ResponseWriter, req *http.Request) {
 	title := req.FormValue("title") // when the createpost button is clicked the title data is assigned to a variable
 	body := req.FormValue("post")// when the createpost button is clicked the body data is assigned to a variable
 	forum.CreatePost(title, body) // create post adds the title and body to the table in the database
-	t.ExecuteTemplate(w, "main.html", nil)
+	// MainHandler(w, req)
+	t.ExecuteTemplate(w, "main.html", forum.AllPosts)
 }
  

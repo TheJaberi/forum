@@ -4,6 +4,7 @@ import (
 	forum "forum/functions"
 	"html/template"
 	"net/http"
+	"fmt"
 )
 
 func MainHandler(w http.ResponseWriter, req *http.Request) {
@@ -21,5 +22,8 @@ func MainHandler(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 	w.WriteHeader(http.StatusOK)
+	if forum.AllPosts == nil {
+	forum.ViewPosts()}
+	fmt.Println(forum.AllPosts)
 	t.ExecuteTemplate(w, "main.html", forum.AllPosts)
 }

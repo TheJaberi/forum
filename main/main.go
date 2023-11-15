@@ -19,7 +19,7 @@ func main() {
 	http.HandleFunc("/", forum.MainHandler) // MainHandler executes main.html an has the function create table which creates the database
 	fmt.Println("http://localhost" + port)
 	forumfunc.CreateTables() // create table creates the database and the tables for the project
-	forumfunc.ViewPosts()
+	http.HandleFunc("/postpage/", forum.HandlerPostPage)
 	http.HandleFunc("/register", forum.HandlerRegister) // HandlerRegister has function NewUser which adds the data for the user to the database
 	http.HandleFunc("/login", forum.HandlerLogin) // HandlerLogin checks if the user is registered, if so it adds his data to a Global variable
 	http.HandleFunc("/post", forum.HandlerPost)  // HandlerPost adds the data in the post to the database

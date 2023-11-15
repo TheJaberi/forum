@@ -1,28 +1,34 @@
-package forum 
+package forum
 
 import (
-	// "fmt"
-	"log"
 	"database/sql"
-	_"github.com/mattn/go-sqlite3"
+	"fmt"
+	"log"
+	_ "github.com/mattn/go-sqlite3"
 )
 
 func ViewPosts(){
-	var posttmp Post
+	var count int
 	Database, errdatabase := sql.Open("sqlite3", "./forum.db")
 	if errdatabase != nil {
 		log.Fatal(errdatabase)
 	}
 	defer Database.Close()
-	postData := Database.QueryRow("Select * from Posts")
+	countRows:= Database.QueryRow("SELECT COUNT(*) FROM Posts")
+	countRows.Scan(&count)
+	fmt.Println(count)
+	for i:=1;i<=count;i++{
+	var posttmp Post
+	postData := Database.QueryRow("Select * from Posts where id = ?", i)
 	postData.Scan(&posttmp.PostID, &posttmp.Title, &posttmp.Body, &posttmp.UserID)
 		// if errPost != nil {
 		// 	log.Fatal(errPost)
 		// }
-		userData := Database.QueryRow("Select username from Users where user_id = ?", posttmp.UserID)
+		userData := Database.QueryRow("Select username from Users where id = ?", posttmp.UserID)
 		userData.Scan(&posttmp.Username)
 			// if errUser != nil {
 			// 	log.Fatal(errUser)
 			// }
 		AllPosts = append(AllPosts, posttmp)
+	}
 	}
