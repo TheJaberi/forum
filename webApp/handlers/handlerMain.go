@@ -20,5 +20,5 @@ func MainHandler(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 	w.WriteHeader(http.StatusOK)
-	t.ExecuteTemplate(w, "main.html", nil)
+	t.ExecuteTemplate(w, "index.html", nil)
 }

@@ -37,12 +37,12 @@ p {
 
 #container {
     margin: 0 auto;
-    display: flex;
+    display: grid;
 }
 
 #navbar {
     display: block;
-    position: absolute;
+    position: relative;
     left: 200px;
     width: 70%;
     background-color: #585B56;
@@ -83,6 +83,7 @@ p {
 
 #navbar span {
     float: left;
+    margin-left: 30px;
 }
 
 #navbar span a {
@@ -101,21 +102,24 @@ p {
     font-weight: bold;
 }
 
-#navLeft {
-    float: left;
-    width: 50%;
+#navLeft span form input {
+    height: 26px;
+    padding: 5px;
+    background-color: #383b37;
+    color: #E76B74;
+    border: 2px solid #000000;
 }
 
-#navRight {
-    float: right;
-    width: 50%;
+#navLeft {
+    float: left;
+    width: 100%;
 }
 
 #section {
     display: block;
-    position: absolute;
+    position: relative;
     left: 200px;
-    margin-top: 80px;
+    margin-top: 50px;
     width: 69%;
     background-color: #585B56;
     color: #EA526F;

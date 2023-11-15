@@ -8,7 +8,7 @@ func StaticFileLoader() {
 	if HTMLs == nil {
 		HTMLs = []string{
 			// Add new html / template names here
-			"../webApp/static/main.html",
+			"../webApp/static/index.html",
 			"../webApp/static/error.html",
 		}
 	}
