@@ -28,13 +28,6 @@ func ViewPosts(){
 			// if errUser != nil {
 			// 	log.Fatal(errUser)
 			// }
-		if i<len(AllCategories){
-		posttmp.Categories = AllCategories[i]}
-		AllPosts = append(AllPosts, posttmp)
-	}
-	for i:= count;i<len(AllCategories);i++{
-		var posttmp Post
-		posttmp.Categories = AllCategories[i]
 		AllPosts = append(AllPosts, posttmp)
 	}
 	}
