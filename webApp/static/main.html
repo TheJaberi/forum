@@ -20,20 +20,16 @@
     username<textarea name="username" id="username" placeholder="" rows="1" cols="10" required="true" maxlength="50"></textarea>
     password<textarea name="password" id="password" placeholder="" rows="1" cols="20" required="true" maxlength="500"></textarea><br>
     <button class="login-btn" id="login" name="login" value="txt">Login</button></form>
-Post<input type="checkbox" id = "createpost">
- <div class="createpost">
     <form method="post" action="/post">
     Post Title<textarea name="title" id="title" placeholder="Enter text here (maximum 50 characters)" rows="1" cols="10" required="true" maxlength="50"></textarea>
     Post Body<textarea name="post" id="post" placeholder="Enter text here (maximum 500 characters)" rows="5" cols="33" required="true" maxlength="500"></textarea>
     Category
-    {{.AllCategories}}
-    <button class="downl-btn" id="format" name="format" value="txt">Create post</button></div>
-</form>
+    {{range .}}<option value="{{.}}">{{.Categories}}</option>{{end}}
+    <button class="downl-btn" id="format" name="format" value="txt">Create post</button></form>
     <form method="post" action="/createcategory">
         Create category<textarea name="category" id="category" placeholder="Enter text here (maximum 50 characters)" rows="1" cols="10" required="true" maxlength="50"></textarea>
-        <button class="downl-btn" id="format" name="format" value="txt">Create Category</button></div></form>
-    {{range .}}
-    <a href="/postpage?id={{.PostID}}">
+        <button class="downl-btn" id="format" name="format" value="txt">Create Category</button></form>
+        {{range .}}<a href="/postpage?id={{.PostID}}">
     <option value="{{.}}">{{.Title}}</option></a>
     <option value="{{.}}">Created by:{{.Username}}</option>
     {{end}}

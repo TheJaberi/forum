@@ -1,10 +1,11 @@
 package forum
 
 import (
+	"fmt"
 	forum "forum/functions"
 	"html/template"
 	"net/http"
-	"fmt"
+	// "fmt"
 )
 
 func MainHandler(w http.ResponseWriter, req *http.Request) {
@@ -22,11 +23,9 @@ func MainHandler(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 	w.WriteHeader(http.StatusOK)
+	forum.ViewCategory()
 	if forum.AllPosts == nil {
 	forum.ViewPosts()}
-	forum.ViewCategory()
-	forum.AllData.AllPosts = forum.AllPosts
-	forum.AllData.AllCategories = forum.AllCategories
-	fmt.Println(forum.AllData)
-	t.ExecuteTemplate(w, "main.html", forum.AllData)
+	fmt.Println(forum.AllPosts)
+	t.ExecuteTemplate(w, "main.html", forum.AllPosts)
 }

@@ -8,16 +8,8 @@ var (
 	ErrorMsg   string
 	AllPosts   []Post
 	AllCategories []string
-	AllData Data
 )
 
-type Data struct {
-	AllPosts []Post
-	AllCategories []string
-}
-type Category struct {
-	
-}
 type User struct {
 	Userid     int
 	Username   string
@@ -38,4 +30,5 @@ type Post struct {
 	UserID int
 	Username string
 	Category string
+	Categories string
 }
