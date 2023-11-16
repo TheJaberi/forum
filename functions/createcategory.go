@@ -7,6 +7,7 @@ import (
 )
 
 func CreateCategory(name string) {
+	var cat Category
 	Database, err := sql.Open("sqlite3", "./forum.db")
 	if err != nil {
 		log.Fatal(err)
@@ -17,5 +18,6 @@ func CreateCategory(name string) {
 	if err2 != nil { // the post is added using the ExecContext along with the userid which is in the LoggedUser variable
 		log.Fatal(err2)
 	}
-	AllCategories = append(AllCategories, name)
+	cat.CategoryName = name 
+	AllCategories = append(AllCategories, cat)
 }

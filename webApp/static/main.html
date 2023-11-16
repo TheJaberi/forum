@@ -26,7 +26,7 @@ Post<input type="checkbox" id = "createpost">
     Post Title<textarea name="title" id="title" placeholder="Enter text here (maximum 50 characters)" rows="1" cols="10" required="true" maxlength="50"></textarea>
     Post Body<textarea name="post" id="post" placeholder="Enter text here (maximum 500 characters)" rows="5" cols="33" required="true" maxlength="500"></textarea>
     Category
-    {{.AllCategories}}
+    {{range .AllCategories}}<input type="checkbox" name= "category" id = "category" value="{{.CategoryID}}">{{.CategoryName}}{{end}}
     <button class="downl-btn" id="format" name="format" value="txt">Create post</button></div>
 </form>
     <form method="post" action="/createcategory">

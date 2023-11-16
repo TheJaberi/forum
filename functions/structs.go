@@ -7,16 +7,17 @@ var (
 	LoggedUser User
 	ErrorMsg   string
 	AllPosts   []Post
-	AllCategories []string
+	AllCategories []Category
 	AllData Data
 )
 
 type Data struct {
 	AllPosts []Post
-	AllCategories []string
+	AllCategories []Category
 }
 type Category struct {
-	
+	CategoryName string
+	CategoryID int
 }
 type User struct {
 	Userid     int

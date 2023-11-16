@@ -24,5 +24,5 @@ func HandlerLogin(w http.ResponseWriter, req *http.Request){
 	username := req.FormValue("username") // when the login button is clicked the username data is assigned to a variable
 	password := req.FormValue("password") // when the login button is clicked the password data is assigned to a variable
 	forum.Login(username, password) // login func goes over all the rows in the users table and checks if it matches
-	t.ExecuteTemplate(w, "main.html", nil)
+	t.ExecuteTemplate(w, "main.html", forum.AllData)
 }

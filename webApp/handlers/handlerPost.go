@@ -1,9 +1,11 @@
 package forum
 
 import (
+	"fmt"
 	forum "forum/functions"
 	"html/template"
 	"net/http"
+	"strconv"
 )
 func HandlerPost(w http.ResponseWriter, req *http.Request) {
 	if req.URL.Path != "/post" {
@@ -22,8 +24,10 @@ func HandlerPost(w http.ResponseWriter, req *http.Request) {
 	w.WriteHeader(http.StatusOK)
 	title := req.FormValue("title") // when the createpost button is clicked the title data is assigned to a variable
 	body := req.FormValue("post")// when the createpost button is clicked the body data is assigned to a variable
+	categoryid, _ := strconv.Atoi(req.FormValue("category"))
+	fmt.Println(categoryid)
 	forum.CreatePost(title, body) // create post adds the title and body to the table in the database
 	// MainHandler(w, req)
-	t.ExecuteTemplate(w, "main.html", forum.AllPosts)
+	t.ExecuteTemplate(w, "main.html", forum.AllData)
 }
  
