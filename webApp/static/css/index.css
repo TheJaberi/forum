@@ -265,7 +265,7 @@ main .left h2 {
     position: relative;
     border-radius: 0.4rem;
     padding: 1rem;
-    background-color: var(--whiteColor);
+    background-color: var(--lightBlackColor);
     max-width: 80rem;
     width: 100%;
     margin: 4rem auto 1rem;
@@ -283,12 +283,12 @@ main .left h2 {
   
   .login .top h2 {
     font-size: 2.7rem;
-    color: var(--lightBlackColor);
+    color: var(--darkRedColor);
   }
   
   .login .top i {
     font-size: var(--fs24);
-    color: var(--darkGrayColor);
+    color: var(--whiteColor);
     cursor: pointer;
   }
   
@@ -312,7 +312,7 @@ main .left h2 {
   
   .login .row .content .login-left form input:not([type="checkbox"]) {
     display: block;
-    color: var(--lightBlackColor);
+    color: var(--whiteColor);
     background-color: #f6f6f6;
     border: 0.1rem;
     border-color: #cbcbcb;
@@ -356,7 +356,7 @@ main .left h2 {
   }
   
   .login .row .content .login-left .remember label {
-    color: var(--lightBlackColor);
+    color: var(--whiteColor);
   }
   
   .login .row .content .login-left .btn,
@@ -398,8 +398,9 @@ main .left h2 {
     position: absolute;
     top: 9rem;
     right: calc(50% - 2rem);
-    color: var(--darkGrayColor);
-    background: var(--whiteColor);
+    color: var(--darkRedColor);
+    background: var(--lightBlackColor);
+    border: 1px solid var(--blackColor);
     padding: 1rem;
     width: 2rem;
     height: 2rem;
@@ -411,8 +412,8 @@ main .left h2 {
     display: flex;
     background: transparent;
     padding: 1.2rem 1.5rem;
-    border: 0.1rem solid var(--darkGrayColor);
-    color: var(--darkGrayColor);
+    border: 0.1rem solid var(--blackColor);
+    color: var(--darkRedColor);
   }
   
   .login .row .content .login-right .btn:first-of-type {
@@ -421,7 +422,7 @@ main .left h2 {
   
   .login .row .content .login-right .btn i {
     color: #3b5998;
-    background-color: var(--whiteColor);
+    background-color: transparent;
     font-size: 2rem;
   }
   
@@ -435,15 +436,18 @@ main .left h2 {
   
   .login .row .content .login-right .btn:hover {
     background-color: rgba(104, 108, 110, 0.1);
+    color: var(--lightRedColor);
   }
   
   .login .row .bottom {
     text-align: center;
     padding: 1rem;
-    background-color: #e3e7e9;
+    background-color: var(--darkRedColor);
     margin-top: 1rem;
     margin-inline: -1rem;
     margin-bottom: -1rem;
+    color: var(--whiteColor);
+    font-style: italic;
   }
   
   .login .row .bottom h4 {
@@ -452,6 +456,7 @@ main .left h2 {
   
   .login .row .bottom a {
     text-transform: capitalize;
+    color: var(--whiteColor);
   }
   
   @media (min-width: 649px) {
