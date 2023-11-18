@@ -1,13 +1,13 @@
 package forum
 
 import (
-	"fmt"
 	forum "forum/functions"
 	"html/template"
 	"net/http"
 	"strconv"
 )
-func HandlerPostPage(w http.ResponseWriter, req *http.Request){
+
+func HandlerPostPage(w http.ResponseWriter, req *http.Request) {
 	var postData forum.Post
 	if req.URL.Path != "/postpage/" {
 		ErrorHandler(w, req, http.StatusNotFound)
@@ -23,8 +23,6 @@ func HandlerPostPage(w http.ResponseWriter, req *http.Request){
 		return
 	}
 	postNumb, _ := strconv.Atoi(req.URL.Query().Get("id"))
-	fmt.Println(postNumb)
 	postData = forum.AllPosts[postNumb-1]
-	fmt.Println(postData)
 	t.ExecuteTemplate(w, "postpage.html", postData)
 }

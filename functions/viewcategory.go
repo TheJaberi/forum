@@ -2,9 +2,8 @@ package forum
 
 import (
 	"database/sql"
-	"fmt"
-	"log"
 	_ "github.com/mattn/go-sqlite3"
+	"log"
 )
 
 func ViewCategory() {
@@ -14,11 +13,11 @@ func ViewCategory() {
 		log.Fatal(errdatabase)
 	}
 	defer Database.Close()
-		var category Category
-		categoryData, _ := Database.Query("Select id, Name from Category")
-		for categoryData.Next(){
+	var category Category
+	categoryData, _ := Database.Query("Select id, Name from Category")
+	for categoryData.Next() {
 		categoryData.Scan(&category.CategoryID, &category.CategoryName)
-		fmt.Println(category)
 		defer categoryData.Close()
-		AllCategories = append(AllCategories, category)}
+		AllCategories = append(AllCategories, category)
 	}
+}

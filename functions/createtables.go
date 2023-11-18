@@ -2,10 +2,9 @@ package forum
 
 import (
 	"database/sql"
+	_ "github.com/mattn/go-sqlite3"
 	"log"
-	_"github.com/mattn/go-sqlite3"
 )
-
 
 func CreateTables() {
 	Database, err := sql.Open("sqlite3", "./forum.db") // The Database must be opened and assigned to a variable
@@ -17,7 +16,7 @@ func CreateTables() {
 		log.Fatal(errpragma)
 	}
 	usertable, err2 := Database.Prepare("CREATE TABLE IF NOT EXISTS Users (id INTEGER PRIMARY KEY, username TEXT NOT NULL, Password TEXT NOT NULL, email TEXT)")
-	if err2 != nil {      // table for users is created if it does not exist in line 24 
+	if err2 != nil { // table for users is created if it does not exist in line 24
 		log.Fatal(err2)
 	}
 	usertable.Exec() // Exec executes the query which was Prepared in line 20

@@ -6,7 +6,7 @@ import (
 	"net/http"
 )
 
-func HandlerRegister(w http.ResponseWriter, req *http.Request){
+func HandlerRegister(w http.ResponseWriter, req *http.Request) {
 	if req.URL.Path != "/register" {
 		ErrorHandler(w, req, http.StatusNotFound)
 		return

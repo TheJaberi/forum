@@ -2,11 +2,12 @@ package forum
 
 import (
 	"forum/functions"
-	"net/http"
 	_ "github.com/mattn/go-sqlite3"
 	"html/template"
+	"net/http"
 )
-func HandlerCreateCategory(w http.ResponseWriter, req *http.Request){
+
+func HandlerCreateCategory(w http.ResponseWriter, req *http.Request) {
 	if req.URL.Path != "/createcategory" {
 		ErrorHandler(w, req, http.StatusNotFound)
 		return

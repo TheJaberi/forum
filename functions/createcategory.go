@@ -18,6 +18,6 @@ func CreateCategory(name string) {
 	if err2 != nil { // the post is added using the ExecContext along with the userid which is in the LoggedUser variable
 		log.Fatal(err2)
 	}
-	cat.CategoryName = name 
+	cat.CategoryName = name
 	AllCategories = append(AllCategories, cat)
 }

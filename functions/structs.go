@@ -3,21 +3,21 @@ package forum
 import "database/sql"
 
 var (
-	Database   *sql.DB
-	LoggedUser User
-	ErrorMsg   string
-	AllPosts   []Post
+	Database      *sql.DB
+	LoggedUser    User
+	ErrorMsg      string
+	AllPosts      []Post
 	AllCategories []Category
-	AllData Data
+	AllData       Data
 )
 
 type Data struct {
-	AllPosts []Post
+	AllPosts      []Post
 	AllCategories []Category
 }
 type Category struct {
 	CategoryName string
-	CategoryID int
+	CategoryID   int
 }
 type User struct {
 	Userid     int
@@ -32,11 +32,12 @@ var ErrResponse struct {
 	StatusCode bool
 	ErrorMsg   string
 }
+
 type Post struct {
-	Title   string
-	Body    string
-	PostID int
-	UserID int
+	Title    string
+	Body     string
+	PostID   int
+	UserID   int
 	Username string
 	Category []Category
 }
