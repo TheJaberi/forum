@@ -24,7 +24,7 @@ func HandlerPostPage(w http.ResponseWriter, req *http.Request){
 	}
 	postNumb, _ := strconv.Atoi(req.URL.Query().Get("id"))
 	fmt.Println(postNumb)
-	postData = forum.AllPosts[postNumb]
+	postData = forum.AllPosts[postNumb-1]
 	fmt.Println(postData)
 	t.ExecuteTemplate(w, "postpage.html", postData)
 }

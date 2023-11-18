@@ -1,13 +1,14 @@
 package forum
 
 import (
-	"fmt"
+	// "fmt"
 	forum "forum/functions"
 	"html/template"
 	"net/http"
 	"strconv"
 )
 func HandlerPost(w http.ResponseWriter, req *http.Request) {
+	var postCategories []int
 	if req.URL.Path != "/post" {
 		ErrorHandler(w, req, http.StatusNotFound)
 		return
@@ -24,9 +25,11 @@ func HandlerPost(w http.ResponseWriter, req *http.Request) {
 	w.WriteHeader(http.StatusOK)
 	title := req.FormValue("title") // when the createpost button is clicked the title data is assigned to a variable
 	body := req.FormValue("post")// when the createpost button is clicked the body data is assigned to a variable
-	categoryid, _ := strconv.Atoi(req.FormValue("category"))
-	fmt.Println(categoryid)
-	forum.CreatePost(title, body) // create post adds the title and body to the table in the database
+	for i:=1;i<=len(forum.AllCategories);i++{
+	categorytmp := req.FormValue(strconv.Itoa(i))
+	if categorytmp != ""{
+	postCategories = append(postCategories, i)}}
+	forum.CreatePost(title, body, postCategories) // create post adds the title and body to the table in the database
 	// MainHandler(w, req)
 	t.ExecuteTemplate(w, "main.html", forum.AllData)
 }

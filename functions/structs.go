@@ -38,5 +38,5 @@ type Post struct {
 	PostID int
 	UserID int
 	Username string
-	Category string
+	Category []Category
 }

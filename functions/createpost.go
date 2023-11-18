@@ -8,7 +8,7 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
-func CreatePost(title string, body string) {
+func CreatePost(title string, body string, postCategories []int) {
 	fmt.Println(LoggedUser)
 	var postData Post
 	postData.Title = title
@@ -22,10 +22,26 @@ func CreatePost(title string, body string) {
 		}
 		defer Database.Close()
 	query := "INSERT INTO `Posts` (`Title`, `body`, `user_id`) VALUES (?, ?, ?)" 
-	_, err2 := Database.ExecContext(context.Background(),query, title, body, LoggedUser.Userid)
+	rowdata, err2 := Database.ExecContext(context.Background(),query, title, body, LoggedUser.Userid)
 	if err2 != nil { // the post is added using the ExecContext along with the userid which is in the LoggedUser variable
 		log.Fatal(err2)
 	}
+	postid, err:= rowdata.LastInsertId()
+	if err != nil {
+		log.Fatal(err)
+	}
+	for i:=0;i<len(postCategories);i++{
+	queryCategory := "INSERT INTO `Post2Category` (`post_id`, `category_id`) VALUES (?, ?)"
+	_, err3 := Database.ExecContext(context.Background(),queryCategory, postid, postCategories[i])
+	if err3 != nil { // the post is added using the ExecContext along with the userid which is in the LoggedUser variable
+		log.Fatal(err3)
+	}
+	for j:=0;j<len(AllCategories);j++{
+		if AllCategories[j].CategoryID == postCategories[i]{
+			postData.Category = append(postData.Category, AllCategories[j])
+			break
+		}
+	}}
 	AllPosts = append(AllPosts, postData)
 }else {
 	ErrorMsg = "Cannot create post need to log in first"

@@ -26,7 +26,7 @@ Post<input type="checkbox" id = "createpost">
     Post Title<textarea name="title" id="title" placeholder="Enter text here (maximum 50 characters)" rows="1" cols="10" required="true" maxlength="50"></textarea>
     Post Body<textarea name="post" id="post" placeholder="Enter text here (maximum 500 characters)" rows="5" cols="33" required="true" maxlength="500"></textarea>
     Category
-    {{range .AllCategories}}<input type="checkbox" name= "category" id = "category" value="{{.CategoryID}}">{{.CategoryName}}{{end}}
+    {{range .AllCategories}}<input type="checkbox" name= "{{.CategoryID}}" id = "category" value="{{.CategoryID}}">{{.CategoryName}}{{end}}
     <button class="downl-btn" id="format" name="format" value="txt">Create post</button></div>
 </form>
     <form method="post" action="/createcategory">
@@ -35,6 +35,7 @@ Post<input type="checkbox" id = "createpost">
     {{range .AllPosts}}
     <a href="/postpage?id={{.PostID}}">
     <option value="{{.}}">{{.Title}}</option></a>
+    Categories:{{range .Category}}<option value="{{.}}">{{ .CategoryName}}</option>{{end}}
     <option value="{{.}}">Created by:{{.Username}}</option>
     {{end}}
 </body>

@@ -9,7 +9,8 @@
 </head>
 <body>
 {{.Title}}<br> 
-{{.Body}}
+{{.Body}}<br>
+Categories:{{range .Category}}<option value="{{.}}">{{ .CategoryName}}</option>{{end}}
 </body><br>
 Done by {{.Username}}
 </html>

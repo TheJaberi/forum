@@ -22,9 +22,9 @@ func MainHandler(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 	w.WriteHeader(http.StatusOK)
+	forum.ViewCategory()
 	if forum.AllPosts == nil {
 	forum.ViewPosts()}
-	forum.ViewCategory()
 	forum.AllData.AllPosts = forum.AllPosts
 	forum.AllData.AllCategories = forum.AllCategories
 	fmt.Println(forum.AllData)

@@ -15,7 +15,7 @@ func ViewCategory() {
 	}
 	defer Database.Close()
 		var category Category
-		categoryData, _ := Database.Query("Select id, Name from Category where post_id IS NULL")
+		categoryData, _ := Database.Query("Select id, Name from Category")
 		for categoryData.Next(){
 		categoryData.Scan(&category.CategoryID, &category.CategoryName)
 		fmt.Println(category)

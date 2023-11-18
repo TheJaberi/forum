@@ -26,10 +26,15 @@ func CreateTables() {
 		log.Fatal(err4)
 	}
 	postsTable.Exec() // Exec executes query on line 25
-	categoryTable, err5 := Database.Prepare("CREATE TABLE IF NOT EXISTS Category (id INTEGER PRIMARY KEY, Name TEXT, post_id INTEGER)")
-	if err5 != nil { // table for posts is created if it doesnot exist
-		log.Fatal(err4)
+	categoryTable, err5 := Database.Prepare("CREATE TABLE IF NOT EXISTS Category (id INTEGER PRIMARY KEY, Name TEXT)")
+	if err5 != nil { // table for category is created if it doesnot exist
+		log.Fatal(err5)
 	}
 	categoryTable.Exec() // Exec executes query on line 29
+	post2categoryTable, err6 := Database.Prepare("CREATE TABLE IF NOT EXISTS Post2Category (id INTEGER PRIMARY KEY, post_id INTEGER NOT NULL, category_id INTEGER NOT NULL)")
+	if err6 != nil { // table for linking posts and categories is created if it doesnot exist
+		log.Fatal(err6)
+	}
+	post2categoryTable.Exec() // Exec executes query on line 34
 	defer Database.Close()
 }
