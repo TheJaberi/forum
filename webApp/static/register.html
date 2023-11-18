@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="css/header.css" />
     <link rel="stylesheet" href="css/register.css" />
     <link rel="stylesheet" href="css/footer.css" />
-    <title>Document</title>
+    <title>Reboot Journal</title>
   </head>
   <body>
     <header class="header" id="header">
@@ -15,9 +15,8 @@
         <div class="container">
           <div class="header-content">
             <div class="logo">
-              <a href="index.html"
-                ><img src="img/hondashadow_net.svg" alt="logo"
-              /></a>
+              <a href="/"
+                ><h2>Reboot Journal</h2></a>
             </div>
             <div class="nav-search">
               <div class="form-group">
@@ -52,16 +51,16 @@
       <section class="register">
         <div class="container">
           <div class="row">
-            <form action="#">
+            <form action="post">
               <h2>Sign up</h2>
               <div class="form-group">
-                <input type="text" name="" id="" placeholder="User name">
+                <input type="text" name="" id="" placeholder="User name" required>
               </div>
               <div class="form-group">
-                <input type="email" name="" id="" placeholder="Email">
+                <input type="email" name="" id="" placeholder="Email" required>
               </div>
               <div class="form-group">
-                <input type="password" name="" id="" placeholder="Password">
+                <input type="password" name="" id="" placeholder="Password" required>
               </div>
               <span>Entering a password is required.</span>
               <div class="form-group check">
@@ -72,7 +71,7 @@
                 <input type="checkbox" name="" id="terms">
                 <label for="terms">I agree to the terms and privacy policy.</label>
               </div>
-              <a href="#" class="btn btn-red">Sign up</a>
+              <input type="submit" value="Sign Up" id="signupBtn" />
             </form>
           </div>
         </div>

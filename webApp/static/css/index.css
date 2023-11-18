@@ -71,7 +71,7 @@ main .left h2 {
     padding: 1.8rem;
     border-radius: 0.7rem;
     margin-bottom: 0.9rem;
-    background-color: var(--whiteColor);
+    background-color: var(--lightBlackColor);
     box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.11),
       0 0.1rem 0.1rem rgba(0, 0, 0, 0.04);
   }
@@ -81,12 +81,12 @@ main .left h2 {
     font-size: var(--fs24);
     line-height: 2.7rem;
     margin-bottom: 0.5rem;
-    color: var(--lightBlackColor);
+    color: var(--lightBrownColor);
   }
   
   main .right .first span {
     display: block;
-    color: var(--darkGrayColor);
+    color: var(--darkBrownColor);
     text-transform: capitalize;
     font-size: var(--fs14);
     margin-bottom: 1.8rem;
@@ -97,7 +97,7 @@ main .left h2 {
     font-size: var(--fs14);
     line-height: 1.5;
     margin-bottom: 0.3rem;
-    color: var(--darkGrayColor);
+    color: var(--whiteColor);
     max-height: 23rem;
   }
   
@@ -124,13 +124,13 @@ main .left h2 {
     font-size: 3rem;
     font-weight: 500;
     letter-spacing: -0.3rem;
-    color: var(--lightBlackColor);
+    color: var(--lightBrownColor);
   }
   
   main .right .first .stats div span {
     text-transform: lowercase;
     font-size: var(--fs14);
-    color: var(--darkGrayColor);
+    color: var(--darkBrownColor);
     letter-spacing: -0.1px;
   }
   
@@ -161,7 +161,7 @@ main .left h2 {
     font-size: var(--fs18);
     font-weight: 700;
     text-transform: capitalize;
-    color: var(--lightBlackColor);
+    color: var(--lightBrownColor);
   }
   main .right .top-forums > a,
   main .right .top-contributors > a {
@@ -195,7 +195,7 @@ main .left h2 {
     display: flex;
     align-items: center;
     gap: 0.3rem;
-    color: var(--darkGrayColor);
+    color: var(--whiteColor);
   }
   
   main .right .top-forums .inner-box .stats .stat i {
@@ -236,7 +236,7 @@ main .left h2 {
   main .right .top-contributors .inner-box .details span,
   main .right .recommended-communities .inner-box .details span {
     font-size: var(--fs14);
-    color: var(--darkGrayColor);
+    color: var(--whiteColor);
   }
   
   main .right .recommended-communities h3 {
