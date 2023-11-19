@@ -35,6 +35,16 @@ func ViewPosts() {
 				}
 			}
 		}
+		likedata, likeerr := Database.Query("Select COUNT from Interaction where post_id = ? AND interaction = true", posttmp.PostID)
+		if likeerr != nil {
+			log.Fatal(likeerr)
+		}
+		likedata.Scan(&posttmp.Likes)
+		dislikedata, dislikeerr := Database.Query("Select COUNT from Interaction where post_id = ? AND interaction = false", posttmp.PostID)
+		if dislikeerr != nil {
+			log.Fatal(dislikeerr)
+		}
+		dislikedata.Scan(&posttmp.Dislikes)
 		AllPosts = append(AllPosts, posttmp)
 	}
 }

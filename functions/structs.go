@@ -40,4 +40,8 @@ type Post struct {
 	UserID   int
 	Username string
 	Category []Category
+	Likes int
+	Dislikes int
+	Userlike bool
+	UserDislike bool
 }

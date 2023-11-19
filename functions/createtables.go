@@ -35,5 +35,10 @@ func CreateTables() {
 		log.Fatal(err6)
 	}
 	post2categoryTable.Exec() // Exec executes query on line 34
+	interactionTable, err7 := Database.Prepare("CREATE TABLE IF NOT EXISTS Interaction (id INTEGER PRIMARY KEY, post_id INTEGER NOT NULL, user_id INTEGER NOT NULL, interaction BOOL)")
+	if err7 != nil { // table for linking posts and categories is created if it doesnot exist
+		log.Fatal(err7)
+	}
+	interactionTable.Exec()
 	defer Database.Close()
 }

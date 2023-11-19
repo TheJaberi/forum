@@ -39,6 +39,8 @@ Post<input type="checkbox" id = "createpost">
     <option value="{{.}}">{{.Title}}</option></a>
     Categories:{{range .Category}}<option value="{{.}}">{{ .CategoryName}}</option>{{end}}
     <option value="{{.}}">Created by:{{.Username}}</option>
+    <option value="{{.}}">Likes:{{.Likes}}</option>
+    <option value="{{.}}">DisLikes:{{.DisLikes}}</option>
     {{end}}
 </body>
 </html>
