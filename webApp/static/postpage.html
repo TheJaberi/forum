@@ -10,9 +10,9 @@
 <body>
 {{.Title}}<br> 
 {{.Body}}<br>
-Categories:{{range .Category}}<option value="{{.}}">{{ .CategoryName}}</option>{{end}}
+Categories:{{range .Category}}<option value="{{.}}">{{.CategoryName}}</option>{{end}}
 </body><br>
-{{if .UserLike}}
+{{ if .Userlike }}
 <form method="GET" action="/like">
 <button name= "removeInteraction" id = "removeInteraction" value="{{.PostID}}">already Like</button></form>
 <form method="GET" action="/dislike">
@@ -22,10 +22,12 @@ Categories:{{range .Category}}<option value="{{.}}">{{ .CategoryName}}</option>{
 <form method="GET" action="/like">
     <button name= "postInteraction" id = "postInteraction" value="{{.PostID}}">Like</button></form>
 <form method="GET" action="/dislike">
-    <button name= "removeInteraction" id = "removeInteraction" value="{{.PostID}}">DisLike</button></form>
+    <button name= "removeInteraction" id = "removeInteraction" value="{{.PostID}}">already DisLike</button></form>
     {{else}}
     <form method="GET" action="/dislike">
         <button name= "postInteraction" id = "postInteraction" value="{{.PostID}}">DisLike</button></form>
         <form method="GET" action="/like">
             <button name= "postInteraction" id = "postInteraction" value="{{.PostID}}">Like</button></form>
-        Done by {{.Username}}</html>
+        {{end}}
+        {{end}}
+            Done by {{.Username}}</html>
