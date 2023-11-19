@@ -1,7 +1,6 @@
 const join = document.querySelector(".join"),
   overlay = document.querySelector(".overlay"),
-  closeBtn = document.querySelector(".overlay .close"),
-  passToggle = document.querySelector(".passToggle");
+  closeBtn = document.querySelector(".overlay .close");
 
 join.addEventListener("click", () => {
   overlay.classList.add("active");
@@ -11,14 +10,14 @@ closeBtn.addEventListener("click", () => {
   overlay.classList.remove("active");
 });
 
-passToggle.addEventListener("click", () => {
-  var passLbl = document.getElementById("passLbl");
-  if (passLbl.textContent == "show")
-  {
-    passLbl.textContent = "hide";
+function togglePass() {
+  var x = document.getElementById("passIn");
+  var txt = document.getElementById("toggleTxt");
+  if (x.type === "password") {
+    x.type = "text";
+    txt.textContent = "Hide";
+  } else {
+    x.type = "password";
+    txt.textContent = "Show";
   }
-  else if (passLbl.textContent == "hide")
-  {
-    passLbl.textContent = "show";
-  }
-});
+}

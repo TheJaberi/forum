@@ -24,6 +24,14 @@
   .header .row .header-content .logo {
     order: 1;
   }
+
+  .header .row .header-content .logo a {
+    color: var(--whiteColor);
+  }
+
+  .header .row .header-content .logo a:hover {
+    color: var(--darkRedColor);
+  }
   
   .header .row .header-content .logo img {
     height: 4rem;
@@ -90,10 +98,11 @@
   
   .header .row .header-content .nav-group ul li a {
     font-size: var(--fs24);
-    color: var(--lightRedColor);
+    color: var(--whiteColor);
   }
   
-  .header .row .header-content .nav-group ul li a:hover {
+  .header .row .header-content .nav-group ul li a:hover,
+  .header .row .header-content .nav-group ul li a span:hover {
     color: var(--darkRedColor);
   }
   
@@ -147,7 +156,7 @@
       text-transform: capitalize;
       font-size: var(--fs14);
       font-weight: 500;
-      color: var(--darkRedColor);
+      color: var(--whiteColor);
       margin-left: 0.5rem;
     }
   }

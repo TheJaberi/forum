@@ -312,7 +312,7 @@ main .left h2 {
   
   .login .row .content .login-left form input:not([type="checkbox"]) {
     display: block;
-    color: var(--whiteColor);
+    color: var(--darkRedColor);
     background-color: #f6f6f6;
     border: 0.1rem;
     border-color: #cbcbcb;
@@ -356,7 +356,11 @@ main .left h2 {
   }
   
   .login .row .content .login-left .remember label {
-    color: var(--whiteColor);
+    color: var(--darkRedColor);
+  }
+
+  .login .row .content .login-left form input:focus {
+    color: var(--darkRedColor);
   }
   
   .login .row .content .login-left .btn,
@@ -407,13 +411,18 @@ main .left h2 {
     text-align: center;
     z-index: 1;
   }
+
+  .login .row .content .login-right h2 {
+    text-align: center;
+    color: var(--darkRedColor);
+  }
   
   .login .row .content .login-right .btn {
     display: flex;
     background: transparent;
     padding: 1.2rem 1.5rem;
     border: 0.1rem solid var(--blackColor);
-    color: var(--darkRedColor);
+    color: var(--whiteColor);
   }
   
   .login .row .content .login-right .btn:first-of-type {
@@ -456,7 +465,7 @@ main .left h2 {
   
   .login .row .bottom a {
     text-transform: capitalize;
-    color: var(--whiteColor);
+    color: var(--darkRedColor);
   }
   
   @media (min-width: 649px) {
