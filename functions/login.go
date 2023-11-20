@@ -32,5 +32,6 @@ func Login(username string, password string) {
 			}
 		}
 	}
+	AllData.LoggedUser = LoggedUser
 	defer Database.Close()
 }

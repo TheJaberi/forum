@@ -14,6 +14,7 @@ var (
 type Data struct {
 	AllPosts      []Post
 	AllCategories []Category
+	LoggedUser    User
 }
 type Category struct {
 	CategoryName string
