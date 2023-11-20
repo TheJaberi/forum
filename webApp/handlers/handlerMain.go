@@ -22,9 +22,7 @@ func MainHandler(w http.ResponseWriter, req *http.Request) {
 	}
 	w.WriteHeader(http.StatusOK)
 	forum.ViewCategory()
-	if forum.AllPosts == nil {
 		forum.ViewPosts()
-	}
 	forum.AllData.AllPosts = forum.AllPosts
 	forum.AllData.AllCategories = forum.AllCategories
 	t.ExecuteTemplate(w, "main.html", forum.AllData)

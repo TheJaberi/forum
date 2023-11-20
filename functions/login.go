@@ -19,13 +19,13 @@ func Login(username string, password string) {
 		LoggedUser.Registered = true
 	}
 	for i:= 0;i<len(AllPosts);i++{
-		var interaction bool
+		var interaction int
 		postData := Database.QueryRow("SELECT interaction where post_id = ?, user_id = ?", i+1, LoggedUser.Userid)
 		errpost := postData.Scan(&interaction)
 		if errpost!=nil{
 			continue
 		} else {
-			if interaction {
+			if interaction==1{
 				AllPosts[i].Userlike = true
 			} else {
 				AllPosts[i].UserDislike = true

@@ -6,14 +6,15 @@ var (
 	Database      *sql.DB
 	LoggedUser    User
 	ErrorMsg      string
-	AllPosts      []Post
 	AllCategories []Category
 	AllData       Data
+	AllPosts      []Post
 )
 
 type Data struct {
 	AllPosts      []Post
 	AllCategories []Category
+	Postpage      Post
 	LoggedUser    User
 }
 type Category struct {
@@ -45,4 +46,5 @@ type Post struct {
 	Dislikes int
 	Userlike bool
 	UserDislike bool
+	LoggedUser bool
 }

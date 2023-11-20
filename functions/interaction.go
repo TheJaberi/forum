@@ -7,7 +7,7 @@ import (
 	"log"
 )
 
-func InsertInteraction(post_id int, user_id int, likeOrDislike bool) {
+func InsertInteraction(post_id int, user_id int, likeOrDislike int) {
 	Database, err := sql.Open("sqlite3", "./forum.db")
 	if err != nil {
 		log.Fatal(err)

@@ -2,11 +2,14 @@ package forum
 
 import (
 	"database/sql"
-	_ "github.com/mattn/go-sqlite3"
+	"fmt"
 	"log"
+
+	_ "github.com/mattn/go-sqlite3"
 )
 
 func ViewPosts() {
+	AllPosts = nil
 	Database, errdatabase := sql.Open("sqlite3", "./forum.db")
 	if errdatabase != nil {
 		log.Fatal(errdatabase)
@@ -35,16 +38,26 @@ func ViewPosts() {
 				}
 			}
 		}
-		likedata, likeerr := Database.Query("SELECT COUNT(user_id) FROM Interaction where post_id = ? AND interaction = true", posttmp.PostID)
-		if likeerr != nil {
-			log.Fatal(likeerr)
-		}
+		likedata := Database.QueryRow("SELECT COUNT(user_id) FROM Interaction where post_id = ? AND interaction = ?", posttmp.PostID, 1)
 		likedata.Scan(&posttmp.Likes)
-		dislikedata, dislikeerr := Database.Query("SELECT COUNT(user_id) FROM Interaction where post_id = ? AND interaction = false", posttmp.PostID)
-		if dislikeerr != nil {
-			log.Fatal(dislikeerr)
-		}
+		dislikedata := Database.QueryRow("SELECT COUNT(user_id) FROM Interaction where post_id = ? AND interaction = ?", posttmp.PostID, 0)
 		dislikedata.Scan(&posttmp.Dislikes)
 		AllPosts = append(AllPosts, posttmp)
 	}
+	if LoggedUser.Registered{
+	for i:= 0;i<len(AllPosts);i++{
+		var interaction int
+		postData := Database.QueryRow("SELECT interaction from Interaction where post_id = ? AND user_id = ?", i+1, LoggedUser.Userid)
+		errpost := postData.Scan(&interaction)
+		if errpost!=nil{
+			fmt.Println(errpost)
+			continue
+		} else {
+			if interaction==1{
+				AllPosts[i].Userlike = true
+			} else {
+				AllPosts[i].UserDislike = true
+			}
+		}
+	}}
 }

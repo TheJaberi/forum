@@ -8,9 +8,11 @@
       
 </head>
 <body>
+
 {{.Title}}<br> 
 {{.Body}}<br>
 Categories:{{range .Category}}<option value="{{.}}">{{.CategoryName}}</option>{{end}}
+{{if .LoggedUser}}
 </body><br>
 {{ if .Userlike }}
 <form method="GET" action="/like">
@@ -29,5 +31,7 @@ Categories:{{range .Category}}<option value="{{.}}">{{.CategoryName}}</option>{{
         <form method="GET" action="/like">
             <button name= "postInteraction" id = "postInteraction" value="{{.PostID}}">Like</button></form>
         {{end}}
+        {{end}}
+        {{else}}
         {{end}}
             Done by {{.Username}}</html>
