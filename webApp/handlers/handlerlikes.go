@@ -11,6 +11,7 @@ import (
 )
 
 func HandlerLikes(w http.ResponseWriter, req *http.Request){
+	var postData forum.Post
 	if req.URL.Path != "/dislike/" && req.URL.Path != "/like/" {
 		fmt.Println("@222")
 		ErrorHandler(w, req, http.StatusNotFound)
@@ -30,6 +31,7 @@ func HandlerLikes(w http.ResponseWriter, req *http.Request){
 	remPost_id, _ := strconv.Atoi(req.FormValue("removeInteraction"))
 	user_id := forum.LoggedUser.Userid
 	if addPost_id > remPost_id{
+		postData = forum.AllPosts[addPost_id-1]
 		if req.URL.Path == "/like/"{
 		 if !forum.AllPosts[addPost_id-1].UserDislike{
 		forum.InsertInteraction(addPost_id, user_id, 1)
@@ -49,9 +51,13 @@ func HandlerLikes(w http.ResponseWriter, req *http.Request){
 		forum.AllPosts[addPost_id-1].Userlike =  false
 	}
 }
+postData = forum.AllPosts[addPost_id-1]
 } else{
-	fmt.Println("test")
 		forum.RemoveInteraction(remPost_id, user_id)
+		forum.AllPosts[remPost_id-1].Userlike =  false
+		forum.AllPosts[remPost_id-1].UserDislike =  false
+		postData = forum.AllPosts[remPost_id-1]
 }
-	t.ExecuteTemplate(w, "postpage.html", forum.AllData)
+postData.LoggedUser = forum.LoggedUser.Registered
+	t.ExecuteTemplate(w, "postpage.html", postData)
 }

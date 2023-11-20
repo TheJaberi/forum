@@ -2,9 +2,7 @@ package forum
 
 import (
 	"database/sql"
-	"fmt"
 	"log"
-
 	_ "github.com/mattn/go-sqlite3"
 )
 
@@ -50,7 +48,6 @@ func ViewPosts() {
 		postData := Database.QueryRow("SELECT interaction from Interaction where post_id = ? AND user_id = ?", i+1, LoggedUser.Userid)
 		errpost := postData.Scan(&interaction)
 		if errpost!=nil{
-			fmt.Println(errpost)
 			continue
 		} else {
 			if interaction==1{

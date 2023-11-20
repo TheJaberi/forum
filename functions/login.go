@@ -2,8 +2,9 @@ package forum
 
 import (
 	"database/sql"
-	_ "github.com/mattn/go-sqlite3"
+	"fmt"
 	"log"
+	_ "github.com/mattn/go-sqlite3"
 )
 
 func Login(username string, password string) {
@@ -14,8 +15,8 @@ func Login(username string, password string) {
 	userdata := Database.QueryRow("SELECT id, username, password, email FROM Users where username = ? AND password = ?", username, password) // select gets the data from users table
 	err := userdata.Scan(&LoggedUser.Userid, &LoggedUser.Username, &LoggedUser.Password, &LoggedUser.Email)                                  // scan assigns the data of the row to variables
 	if err != nil {
-		log.Fatal(err)
-	} else {
+		fmt.Println(err)
+			} else {
 		LoggedUser.Registered = true
 	}
 	for i:= 0;i<len(AllPosts);i++{
