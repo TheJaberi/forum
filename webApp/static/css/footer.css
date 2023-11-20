@@ -1,9 +1,9 @@
 footer {
   bottom: 0;
-  position: fixed;
+  position: relative;
   width: 100%;
   background-color: #232324;
-  padding: 1rem 0 3rem 0;
+  padding: 1rem 0 1rem 0;
   color: var(--whiteColor);
   font-size: var(--fs14);
 }
@@ -17,7 +17,7 @@ footer .container ul {
   align-items: center;
   flex-wrap: wrap;
   margin-bottom: 1rem;
-  margin-left: 70rem;
+  margin-left: 30%;
 }
   
 footer .container ul li {
