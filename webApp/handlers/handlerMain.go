@@ -25,5 +25,7 @@ func MainHandler(w http.ResponseWriter, req *http.Request) {
 		forum.ViewPosts()
 	forum.AllData.AllPosts = forum.AllPosts
 	forum.AllData.AllCategories = forum.AllCategories
+	forum.AllData.LoggedUser = forum.LoggedUser
+	forum.AllData.IsLogged = false
 	t.ExecuteTemplate(w, "main.html", forum.AllData)
 }

@@ -7,9 +7,9 @@ import (
 	"strconv"
 )
 
-func HandlerFilter(w http.ResponseWriter, req *http.Request) {
+func HandlerFilterCategory(w http.ResponseWriter, req *http.Request) {
 	var filteredPosts []forum.Post
-	if req.URL.Path != "/filter/" {
+	if req.URL.Path != "/filtercategory/" {
 		ErrorHandler(w, req, http.StatusNotFound)
 		return
 	}

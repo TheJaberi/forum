@@ -11,8 +11,17 @@
 <body>
     <h1>REBOOT FORUM</h1>
     <h3>This is the main page of the our forum</h3>
-    <form method="GET" action="/filter">
+    <form method="GET" action="/filtercategory">
     {{range .AllCategories}}<button name= "category" id = "category" value="{{.CategoryID}}">{{.CategoryName}}{{end}}</button></form>
+    {{if .IsLogged}}
+    <form method="GET" action="/myposts">
+        <button name= "interaction" id = "interaction" value="{{.LoggedUserID}}">my posts</button></form>
+        <form method="GET" action="/mylikes">
+        <button name= "interaction" id = "interaction" value="{{.LoggedUserID}}">my likes</button></form>
+        <form method="GET" action="/mydislikes">
+        <button name= "interaction" id = "interaction" value="{{.LoggedUserID}}">my dislikes</button></form>
+    {{else}}
+    {{end}}
     <form method="post" action="/register">
         username<textarea name="username" id="username" placeholder="" rows="1" cols="10" required="true" maxlength="50"></textarea>
         email<textarea name="email" id="email" placeholder="" rows="1" cols="10" required="true" maxlength="50"></textarea>
@@ -42,5 +51,6 @@ Post<input type="checkbox" id = "createpost">
     <option value="{{.}}">Likes:{{.Likes}}</option>
     <option value="{{.}}">DisLikes:{{.Dislikes}}</option>
     {{end}}
+    
 </body>
 </html>

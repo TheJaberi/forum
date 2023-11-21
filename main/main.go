@@ -21,7 +21,10 @@ func main() {
 	forumfunc.CreateTables() // create table creates the database and the tables for the project
 	http.HandleFunc("/createcategory", forum.HandlerCreateCategory)
 	http.HandleFunc("/postpage/", forum.HandlerPostPage)
-	http.HandleFunc("/filter/", forum.HandlerFilter)
+	http.HandleFunc("/filtercategory/", forum.HandlerFilterCategory)
+	http.HandleFunc("/myposts/", forum.HandlerMyFilter)
+	http.HandleFunc("/mylikes/", forum.HandlerMyFilter)
+	http.HandleFunc("/mydislikes/", forum.HandlerMyFilter)
 	http.HandleFunc("/like/", forum.HandlerLikes)
 	http.HandleFunc("/dislike/", forum.HandlerLikes)
 	http.HandleFunc("/register", forum.HandlerRegister) // HandlerRegister has function NewUser which adds the data for the user to the database

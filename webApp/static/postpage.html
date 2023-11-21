@@ -26,10 +26,11 @@ Categories:{{range .Category}}<option value="{{.}}">{{.CategoryName}}</option>{{
 <form method="GET" action="/dislike">
     <button name= "removeInteraction" id = "removeInteraction" value="{{.PostID}}">already DisLike</button></form>
     {{else}}
-    <form method="GET" action="/dislike">
-        <button name= "postInteraction" id = "postInteraction" value="{{.PostID}}">DisLike</button></form>
         <form method="GET" action="/like">
-            <button name= "postInteraction" id = "postInteraction" value="{{.PostID}}">Like</button></form>
+        <button name= "postInteraction" id = "postInteraction" value="{{.PostID}}">Like</button></form>
+        <form method="GET" action="/dislike">
+        <button name= "postInteraction" id = "postInteraction" value="{{.PostID}}">DisLike</button></form>
+
         {{end}}
         {{end}}
         {{else}}
