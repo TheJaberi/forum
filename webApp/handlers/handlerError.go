@@ -23,6 +23,8 @@ func ErrorHandler(w http.ResponseWriter, req *http.Request, statusError int) {
 		errResponse.StatusMessage = "Not Found"
 	case statusError == http.StatusMethodNotAllowed:
 		errResponse.StatusMessage = "Method Not Allowed"
+	case statusError == http.StatusNotAcceptable:
+		errResponse.StatusMessage = "Not Acceptable"
 	case statusError == http.StatusInternalServerError:
 		errResponse.StatusMessage = "Internal Server Error"
 	default:
