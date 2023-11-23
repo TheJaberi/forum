@@ -67,15 +67,13 @@ func UserDbLogin(credentials forum.Login, db *sql.DB) error {
 }
 
 func isUsernameExists(db *sql.DB, applicantEmail string) error {
-	sqlStmt, err := db.Prepare("SELECT user_email FROM users WHERE EXISTS (user_email = ?")
+	sqlStmt := `SELECT EXISTS (SELECT 1 FROM users WHERE user_email = ?)`
+	var exists bool
+	err := db.QueryRow(sqlStmt, applicantEmail).Scan(&exists)
 	if err != nil {
 		return err
 	}
-	defer sqlStmt.Close()
-
-	var exists bool
-	sqlStmt.QueryRow(applicantEmail).Scan(&exists)
-	if exists == true {
+	if !exists {
 		return UserExistsError
 	}
 	return nil
