@@ -1,6 +1,7 @@
 package forum
 
 import (
+	forum "forum/functions"
 	"html/template"
 	"net/http"
 )
@@ -20,5 +21,11 @@ func MainHandler(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 	w.WriteHeader(http.StatusOK)
-	t.ExecuteTemplate(w, "index.html", nil)
+	forum.ViewCategory()
+	forum.ViewPosts()
+	forum.AllData.AllPosts = forum.AllPosts
+	forum.AllData.AllCategories = forum.AllCategories
+	forum.AllData.LoggedUser = forum.LoggedUser
+	forum.AllData.IsLogged = false
+	t.ExecuteTemplate(w, "main.html", forum.AllData)
 }

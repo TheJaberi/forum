@@ -10,8 +10,7 @@ func StaticFileLoader() {
 			// Add new html / template names here
 			"../webApp/static/index.html",
 			"../webApp/static/error.html",
-			"../webApp/static/register.html",
-			"../webApp/static/subscribe.html",
+			"../webApp/static/postpage.html",
 		}
 	}
 	cssFiles := http.FileServer(http.Dir("../webApp/static/css"))

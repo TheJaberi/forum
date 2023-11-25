@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/main.css">
+    <title>FORUM</title>
+    
+</head>
+<body>
+    <h1>REBOOT FORUM</h1>
+    <h3>This is the main page of the our forum</h3>
+    <form method="GET" action="/filtercategory">
+    {{range .AllCategories}}<button name= "category" id = "category" value="{{.CategoryID}}">{{.CategoryName}}{{end}}</button></form>
+    {{if .IsLogged}}
+    <form method="GET" action="/myposts">
+        <button name= "interaction" id = "interaction" value="{{.LoggedUserID}}">my posts</button></form>
+        <form method="GET" action="/mylikes">
+        <button name= "interaction" id = "interaction" value="{{.LoggedUserID}}">my likes</button></form>
+        <form method="GET" action="/mydislikes">
+        <button name= "interaction" id = "interaction" value="{{.LoggedUserID}}">my dislikes</button></form>
+    {{else}}
+    {{end}}
+    <form method="post" action="/register">
+        username<textarea name="username" id="username" placeholder="" rows="1" cols="10" required="true" maxlength="50"></textarea>
+        email<textarea name="email" id="email" placeholder="" rows="1" cols="10" required="true" maxlength="50"></textarea>
+        password<textarea name="password" id="password" placeholder="" rows="1" cols="20" required="true" maxlength="500"></textarea><br>
+        <button class="login-btn" id="register" name="register" value="txt">Register</button></form>
+    <form method="post" action="/login">
+    username<textarea name="username" id="username" placeholder="" rows="1" cols="10" required="true" maxlength="50"></textarea>
+    password<textarea name="password" id="password" placeholder="" rows="1" cols="20" required="true" maxlength="500"></textarea><br>
+    <button class="login-btn" id="login" name="login" value="txt">Login</button></form>
+Post<input type="checkbox" id = "createpost">
+ <div class="createpost">
+    <form method="post" action="/post">
+    Post Title<textarea name="title" id="title" placeholder="Enter text here (maximum 50 characters)" rows="1" cols="10" required="true" maxlength="50"></textarea>
+    Post Body<textarea name="post" id="post" placeholder="Enter text here (maximum 500 characters)" rows="5" cols="33" required="true" maxlength="500"></textarea>
+    Category
+    {{range .AllCategories}}<input type="checkbox" name= "{{.CategoryID}}" id = "category" value="{{.CategoryID}}">{{.CategoryName}}{{end}}
+    <button class="downl-btn" id="format" name="format" value="txt">Create post</button></div>
+</form>
+    <form method="post" action="/createcategory">
+        Create category<textarea name="category" id="category" placeholder="Enter text here (maximum 50 characters)" rows="1" cols="10" required="true" maxlength="50"></textarea>
+        <button class="downl-btn" id="format" name="format" value="txt">Create Category</button></div></form>
+    {{range .AllPosts}}
+    <a href="/postpage?id={{.PostID}}">
+    <option value="{{.}}">{{.Title}}</option></a>
+    Categories:{{range .Category}}<option value="{{.}}">{{ .CategoryName}}</option>{{end}}
+    <option value="{{.}}">Created by:{{.Username}}</option>
+    <option value="{{.}}">Likes:{{.Likes}}</option>
+    <option value="{{.}}">DisLikes:{{.Dislikes}}</option>
+    {{end}}
+    
+</body>
+</html>

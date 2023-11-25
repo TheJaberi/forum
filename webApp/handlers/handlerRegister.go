@@ -1,16 +1,17 @@
 package forum
 
 import (
+	forum "forum/functions"
 	"html/template"
 	"net/http"
 )
 
-func RegisterHandler(w http.ResponseWriter, req *http.Request) {
-	if req.URL.Path != "/signup" {
+func HandlerRegister(w http.ResponseWriter, req *http.Request) {
+	if req.URL.Path != "/register" {
 		ErrorHandler(w, req, http.StatusNotFound)
 		return
 	}
-	if req.Method != "GET" {
+	if req.Method != "POST" {
 		ErrorHandler(w, req, http.StatusMethodNotAllowed)
 		return
 	}
@@ -20,5 +21,9 @@ func RegisterHandler(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 	w.WriteHeader(http.StatusOK)
-	t.ExecuteTemplate(w, "register.html", nil)
+	username := req.FormValue("username") // when the register button is clicked the username data is assigned to a variable
+	password := req.FormValue("password") // when the register button is clicked the password data is assigned to a variable
+	email := req.FormValue("email")
+	forum.NewUser(username, password, email) // NewUser adds the username and password to the database
+	t.ExecuteTemplate(w, "main.html", nil)
 }
