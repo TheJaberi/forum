@@ -17,44 +17,30 @@ func ViewPosts() {
 	if errpost != nil {
 		log.Fatal(errpost)
 	}
-	for postData.Next() {
-		var posttmp Post
-		postData.Scan(&posttmp.PostID, &posttmp.Title, &posttmp.Body, &posttmp.UserID)
-		userData := Database.QueryRow("Select username from Users where id = ?", posttmp.UserID)
+	for postData.Next() { // this loop ends at the end of the function since it needs to get the data for each post from 5 tables
+		var posttmp Post // temporary type post is appended to all posts at the end of the loop after gathering all of the data
+		postData.Scan(&posttmp.PostID, &posttmp.Title, &posttmp.Body, &posttmp.UserID) // posts id, title, body and user id is from posts table
+		userData := Database.QueryRow("Select username from Users where id = ?", posttmp.UserID) // username of the user who posted
 		userData.Scan(&posttmp.Username)
-		categorydata, categoryerr := Database.Query("Select category_id from Post2Category where post_id = ?", posttmp.PostID)
+		categorydata, categoryerr := Database.Query("Select category_id from Post2Category where post_id = ?", posttmp.PostID) // link between posts and its categories
 		if categoryerr != nil {
 			log.Fatal(categoryerr)
 		}
 		for categorydata.Next() {
 			var categorytmp int
 			categorydata.Scan(&categorytmp)
-			for i := 0; i < len(AllCategories); i++ {
+			for i := 0; i < len(AllCategories); i++ { // the name of the categories is already saved in all categories 
 				if categorytmp == AllCategories[i].CategoryID {
 					posttmp.Category = append(posttmp.Category, AllCategories[i])
 					break
 				}
 			}
 		}
-		likedata := Database.QueryRow("SELECT COUNT(user_id) FROM Interaction where post_id = ? AND interaction = ?", posttmp.PostID, 1)
+		likedata := Database.QueryRow("SELECT COUNT(user_id) FROM Interaction where post_id = ? AND interaction = ?", posttmp.PostID, 1) // to present the numb of likes for each post
 		likedata.Scan(&posttmp.Likes)
-		dislikedata := Database.QueryRow("SELECT COUNT(user_id) FROM Interaction where post_id = ? AND interaction = ?", posttmp.PostID, 0)
+		dislikedata := Database.QueryRow("SELECT COUNT(user_id) FROM Interaction where post_id = ? AND interaction = ?", posttmp.PostID, 0) // to present the numb of dislikes for each post
 		dislikedata.Scan(&posttmp.Dislikes)
 		AllPosts = append(AllPosts, posttmp)
 	}
-	if LoggedUser.Registered{
-	for i:= 0;i<len(AllPosts);i++{
-		var interaction int
-		postData := Database.QueryRow("SELECT interaction from Interaction where post_id = ? AND user_id = ?", i+1, LoggedUser.Userid)
-		errpost := postData.Scan(&interaction)
-		if errpost!=nil{
-			continue
-		} else {
-			if interaction==1{
-				AllPosts[i].Userlike = true
-			} else {
-				AllPosts[i].UserDislike = true
-			}
-		}
-	}}
+UpdatePosts()
 }

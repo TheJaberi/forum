@@ -1,7 +1,7 @@
 package forum
 
 import (
-	"fmt"
+	// "fmt"
 	forum "forum/functions"
 	"html/template"
 	"net/http"
@@ -13,7 +13,6 @@ import (
 func HandlerLikes(w http.ResponseWriter, req *http.Request){
 	var postData forum.Post
 	if req.URL.Path != "/dislike/" && req.URL.Path != "/like/" {
-		fmt.Println("@222")
 		ErrorHandler(w, req, http.StatusNotFound)
 		return
 	}
@@ -27,17 +26,17 @@ func HandlerLikes(w http.ResponseWriter, req *http.Request){
 		return
 	}
 	w.WriteHeader(http.StatusOK)
-	addPost_id, _ := strconv.Atoi(req.FormValue("postInteraction"))
-	remPost_id, _ := strconv.Atoi(req.FormValue("removeInteraction"))
+	addPost_id, _ := strconv.Atoi(req.FormValue("postInteraction")) // post interaction handles the data from like or dislike button if the user logged hasn't already clicked on it 
+	remPost_id, _ := strconv.Atoi(req.FormValue("removeInteraction")) // remove interaction handles the data from like or dislike button if the user logged has already clicked on it 
 	user_id := forum.LoggedUser.Userid
-	if addPost_id > remPost_id{
+	if addPost_id > remPost_id{ // which ever value is greater determines whether to add or remove 
 		postData = forum.AllPosts[addPost_id-1]
 		if req.URL.Path == "/like/"{
 		 if !forum.AllPosts[addPost_id-1].UserDislike{
-		forum.InsertInteraction(addPost_id, user_id, 1)
-		forum.AllPosts[addPost_id-1].Userlike =  true
+		forum.InsertInteraction(addPost_id, user_id, 1) // insert adds the interaction to the database 1 is like 0 is dislike
+		forum.AllPosts[addPost_id-1].Userlike =  true // changes the post like or dislike for the logged in user in the all posts var
 	} else {
-		forum.UpdateInteraction(addPost_id, user_id, 1) // function not created
+		forum.UpdateInteraction(addPost_id, user_id, 1) // update is used if a like has to be changed to a dislike or vice versa
 		forum.AllPosts[addPost_id-1].Userlike =  true
 		forum.AllPosts[addPost_id-1].UserDislike =  false
 	}
@@ -53,11 +52,11 @@ func HandlerLikes(w http.ResponseWriter, req *http.Request){
 }
 postData = forum.AllPosts[addPost_id-1]
 } else{
-		forum.RemoveInteraction(remPost_id, user_id)
+		forum.RemoveInteraction(remPost_id, user_id) //remove is greater means there is already an interaction that needs to be removed
 		forum.AllPosts[remPost_id-1].Userlike =  false
 		forum.AllPosts[remPost_id-1].UserDislike =  false
 		postData = forum.AllPosts[remPost_id-1]
 }
-postData.LoggedUser = forum.LoggedUser.Registered
+	postData.LoggedUser = true
 	t.ExecuteTemplate(w, "postpage.html", postData)
 }

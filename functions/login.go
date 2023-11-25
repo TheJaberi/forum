@@ -36,6 +36,6 @@ func Login(username string, password string) {
 	AllData.LoggedUser = LoggedUser
 	AllData.LoggedUserID = LoggedUser.Userid
 	AllData.IsLogged = true
-	ViewPosts()
+	UpdatePosts()
 	defer Database.Close()
 }
