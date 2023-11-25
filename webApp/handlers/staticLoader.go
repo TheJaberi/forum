@@ -9,7 +9,8 @@ func StaticFileLoader() {
 		HTMLs = []string{
 			// Add new html / template names here
 			"../webApp/static/index.html",
-			"../webApp/static/error.html",
+			"../webApp/static/main.html",
+			"../webApp/static/error2.html",
 			"../webApp/static/postpage.html",
 		}
 	}

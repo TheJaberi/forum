@@ -53,37 +53,27 @@
           <div class="row">
             <section class="left">
               <h2>Welcome to Reboot Journal</h2>
-              <form method="get">
-                <select>
-                  <option>Select a Category</option>
-                  <option>General Discussion</option>
-                  <option>Artificial Intelligence</option>
-                  <option>Blockchain & Crypto</option>
-                  <option>Cybersecurity</option>
-                  <option>Mobile Development</option>
-                  <option>Video Games Development</option>
+              <form method="get" action="/filtercategory">
+                <select>{{range .AllCategories}}<option name= "category" id = "category" value="{{.CategoryID}}">{{.CategoryName}}</option></form>{{end}}
                 </select>
-              </form>
-              <div class="inner-left">
-                <div class="box">
-                  <div class="img">
-                    <img src="img/302688.jpg" alt="" />
-                  </div>
                   <div class="details">
-                    <p>technical discussion</p>
-                    <h3>93 shadow vt1100c</h3>
+                    {{range .AllPosts}}
+                    <a href="/postpage?id={{.PostID}}">
+                    <h3><option value="{{.}}">{{.Title}}</option></a></h3>
+                    <p>Categories:{{range .Category}}<option value="{{.}}">{{ .CategoryName}}</option>{{end}}</p>           
                     <div class="sub-details">
-                      <span>jason.aalbers95.</span>
-                      <span>9 h ago.</span>
-                      <span>jason.aalbers95</span>
+                      <span><option value="{{.}}">Created by:{{.Username}}</option></span>
+                      <span><option value="{{.}}">Likes:{{.Likes}}</option></span>
+                    <span><option value="{{.}}">DisLikes:{{.Dislikes}}</option>9 h ago.</span>
                       <span>replied</span>
                       <span>5 h ago</span>
                       <div class="comment">
                         <i class="fa-solid fa-comment"></i>
                         <span>6</span>
                       </div>
-                    </div>
+                    </div> 
                   </div>
+                  {{end}}
                 </div>
               </div>
             </section>
