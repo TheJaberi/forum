@@ -33,5 +33,5 @@ func HandlerFilterCategory(w http.ResponseWriter, req *http.Request) {
 	}
 	forum.AllData.AllPosts = filteredPosts
 	forum.AllData.AllCategories = forum.AllCategories
-	t.ExecuteTemplate(w, "main.html", forum.AllData) // execute the main html with only the filtered posts
+	t.ExecuteTemplate(w, "index.html", forum.AllData) // execute the main html with only the filtered posts
 }

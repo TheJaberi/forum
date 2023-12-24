@@ -1,17 +1,18 @@
 package forum
-
 import (
 	// "fmt"
 	forum "forum/functions"
 	"html/template"
 	"net/http"
 	"strconv"
-
 	_ "github.com/mattn/go-sqlite3"
 )
-
 func HandlerLikes(w http.ResponseWriter, req *http.Request){
 	var postData forum.Post
+	if !forum.AllData.IsLogged{
+		ErrorHandler(w, req, http.StatusNotFound)
+		return
+	}
 	if req.URL.Path != "/dislike/" && req.URL.Path != "/like/" {
 		ErrorHandler(w, req, http.StatusNotFound)
 		return

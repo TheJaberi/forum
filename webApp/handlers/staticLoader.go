@@ -12,6 +12,8 @@ func StaticFileLoader() {
 			"../webApp/static/main.html",
 			"../webApp/static/error2.html",
 			"../webApp/static/postpage.html",
+			"../webApp/static/register2.html",
+			"../webApp/static/subscribe2.html",
 		}
 	}
 	cssFiles := http.FileServer(http.Dir("../webApp/static/css"))

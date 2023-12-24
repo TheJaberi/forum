@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +7,17 @@
       
 </head>
 <body>
-
+    <form method="GET" action="/">
+    <button>back to homepage</button></form>
+    <form method="GET" action="/postpage/id="{{.PostID}}>
+        <button>next post</button>
+    </form>
+<script>
+    history.pushState(null, null, document.title);
+window.addEventListener('popstate', function () {
+    history.pushState(null, null, document.title);
+});
+</script>
 {{.Title}}<br> 
 {{.Body}}<br>
 Categories:{{range .Category}}<option value="{{.}}">{{.CategoryName}}</option>{{end}}
@@ -30,7 +39,6 @@ Categories:{{range .Category}}<option value="{{.}}">{{.CategoryName}}</option>{{
         <button name= "postInteraction" id = "postInteraction" value="{{.PostID}}">Like</button></form>
         <form method="GET" action="/dislike">
         <button name= "postInteraction" id = "postInteraction" value="{{.PostID}}">DisLike</button></form>
-
         {{end}}
         {{end}}
         {{else}}
