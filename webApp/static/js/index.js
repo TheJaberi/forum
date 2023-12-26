@@ -21,3 +21,11 @@ function togglePass() {
     txt.textContent = "Show";
   }
 }
+
+// const catOptions = document.getElementById('catOptions');
+// if (catOptions) {
+//   const lastOption = catOptions.querySelector('option:last-child');
+//   if (lastOption) {
+//     lastOption.innerHTML = "{{ .CategoryName}}";
+//   }
+// }

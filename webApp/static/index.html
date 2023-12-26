@@ -53,14 +53,15 @@
               <h2>Welcome to Reboot Journal</h2>
                   {{range .AllPosts}}
                   <div class="box">
+                    <img src="">
                     <div class="details">
                       <a href="/postpage?id={{.PostID}}">
                       <h3><option value="{{.}}">{{.Title}}</option></a></h3>
-                      <p>Categories:{{range .Category}}<option value="{{.}}">{{ .CategoryName}}</option>{{end}}</p>           
+                      <p id="catOptions">{{range .Category}}<option value="{{.}}">{{ .CategoryName}}</option>{{end}}</p>
                       <div class="sub-details">
-                        <span><option value="{{.}}">Created by:{{.Username}}</option></span>
-                        <span><option value="{{.}}">Likes:{{.Likes}}</option></span>
-                        <span><option value="{{.}}">DisLikes:{{.Dislikes}}</option></span>
+                        <span><option value="{{.}}">Created by: {{.Username}}</option></span>
+                        <span><option value="{{.}}">Likes: {{.Likes}}</option></span>
+                        <span><option value="{{.}}">DisLikes: {{.Dislikes}}</option></span>
                         <div class="comment">
                           <i class="fa-solid fa-comment"></i>         
                           <span>6</span>

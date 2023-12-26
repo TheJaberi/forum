@@ -31,6 +31,11 @@ main .left .box {
     0 0.1rem 0.1rem rgba(0, 0, 0, 0.04);
   width: 500px;
   float: left;
+  border: 1px solid #000;
+}
+
+main .left .box:hover {
+  background-color: var(--blackColor);
 }
   
 main .left .box .img {
@@ -50,6 +55,11 @@ main .left .box .img {
     text-transform: capitalize;
     color: var(--lightBrownColor);
   }
+
+  main .left .box .details p option {
+    display: inline;
+    margin-left: 0.6rem;
+  }
   
   main .left .box .details h3 {
     font-weight: 700;
@@ -67,6 +77,7 @@ main .left .box .img {
   
   main .left .box .details .sub-details span {
     color: var(--darkBrownColor);
+    margin-left: 0.5rem;
   }
   
   main .left .box .details .sub-details .comment {
