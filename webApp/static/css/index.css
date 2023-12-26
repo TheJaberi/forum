@@ -1,3 +1,5 @@
+
+
 main .left h2 {
   margin-bottom: 2.7rem;
   font-size: var(--fs24);
@@ -13,22 +15,25 @@ main .left form select {
   color: var(--darkRedColor);
 }
 
-main .left .inner-left {
+main .left {
   margin-top: 20px;
 }
   
-main .left .inner-left .box {
+main .left .box {
   display: flex;
   align-items: center;
   background-color: var(--lightBlackColor);
   padding: 0.9rem 1.2rem;
   border-radius: 0.7rem;
   margin-bottom: 0.9rem;
+  margin-left: 0.7rem;
   box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.11),
     0 0.1rem 0.1rem rgba(0, 0, 0, 0.04);
+  width: 500px;
+  float: left;
 }
   
-main .left .inner-left .box .img {
+main .left .box .img {
   display: none;
   width: 4.8rem;
   height: 4.8rem;
@@ -36,35 +41,35 @@ main .left .inner-left .box .img {
   overflow: hidden;
 }
   
-  main .left .inner-left .box .details {
+  main .left .box .details {
     padding-left: 1.2rem;
   }
   
-  main .left .inner-left .box .details p {
+  main .left .box .details p {
     font-size: 1.3rem;
     text-transform: capitalize;
     color: var(--lightBrownColor);
   }
   
-  main .left .inner-left .box .details h3 {
+  main .left .box .details h3 {
     font-weight: 700;
     color: var(--darkRedColor);
     font-size: var(--fs18);
     letter-spacing: -0.02em;
   }
   
-  main .left .inner-left .box .details .sub-details {
+  main .left .box .details .sub-details {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
     gap: 0.4rem;
   }
   
-  main .left .inner-left .box .details .sub-details span {
+  main .left .box .details .sub-details span {
     color: var(--darkBrownColor);
   }
   
-  main .left .inner-left .box .details .sub-details .comment {
+  main .left .box .details .sub-details .comment {
     padding: 0.2rem 0.8rem 0;
     background-color: var(--lightWhiteColor);
     color: var(--darkGrayColor);
@@ -482,7 +487,7 @@ main .left .inner-left .box .img {
   }
   
   @media (min-width: 649px) {
-    main .left .inner-left .box .img {
+    main .left .box .img {
       display: block;
     }
   
