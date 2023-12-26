@@ -36,5 +36,5 @@ func HandlerMyFilter(w http.ResponseWriter, req *http.Request) {
 	}
 	forum.AllData.AllPosts = filteredPosts
 	forum.AllData.AllCategories = forum.AllCategories
-	t.ExecuteTemplate(w, "main.html", forum.AllData)
+	t.ExecuteTemplate(w, "index.html", forum.AllData)
 }

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/general.css" />
     <link rel="stylesheet" href="css/header.css">
-    <link rel="stylesheet" href="css/index.css" />
+    <link rel="stylesheet" href="/css/index.css" />
     <link rel="stylesheet" href="css/footer.css" />
     <title>Reboot Journal</title>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
@@ -26,15 +26,12 @@
               <div class="nav-group">
                 <ul>
                   <li>
-                    <a href="#"><i class="fa-solid fa-comment"></i></a>
-                  </li>
-                  <li>
-                    <a href="#"><i class="fa-solid fa-list-ul"></i></a>
+                    <a href="#"><i class="fa-solid fa-comment"></i> Create Post</a>
                   </li>
                   <li class="join">
                     <a href="#">
                       <i class="fa-solid fa-user"></i>
-                      <span>login / join</span>
+                      Login / Join
                     </a>
                   </li>
                   <li>
@@ -59,11 +56,9 @@
                     <div class="sub-details">
                       <span><option value="{{.}}">Created by:{{.Username}}</option></span>
                       <span><option value="{{.}}">Likes:{{.Likes}}</option></span>
-                    <span><option value="{{.}}">DisLikes:{{.Dislikes}}</option>9 h ago.</span>
-                      <span>replied</span>
-                      <span>5 h ago</span>
+                    <span><option value="{{.}}">DisLikes:{{.Dislikes}}</option></span>
                       <div class="comment">
-                        <i class="fa-solid fa-comment"></i>
+                        <i class="fa-solid fa-comment"></i>         
                         <span>6</span>
                       </div>
                     </div> 
@@ -81,14 +76,6 @@
                   specializations: Video Games, Mobile Apps, Blockchain & Crypto, Cybersecurity, Artificial Intelligence, etc...
                 </p>
                 <div class="stats">
-                  <div>
-                    <h4>1.6M</h4>
-                    <span>posts</span>
-                  </div>
-                  <div>
-                    <h4>79.4k</h4>
-                    <span>members</span>
-                  </div>
                 </div>
                 <div class="buttons">
                   <a href="/signup" class="btn btn-red"
@@ -250,7 +237,7 @@
                   <input type="text" placeholder="Username" />
                   <div class="form-group">
                     <input type="password" placeholder="Password" id="passIn" />
-                    <div id="togglePassBox" onclick="togglePass()"><i class="fa-regular fa-eye"></i> <span id="toggleTxt">Show</span></div>
+                    <!-- <div id="togglePassBox" onclick="togglePass()"><i class="fa-regular fa-eye"></i> <span id="toggleTxt">Show</span></div> -->
                   </div>
                   <a href="#">Forget your password?</a>
                   <div class="remember">

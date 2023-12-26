@@ -24,5 +24,5 @@ func HandlerCreateCategory(w http.ResponseWriter, req *http.Request) {
 	w.WriteHeader(http.StatusOK)
 	categoryName := req.FormValue("category")
 	forum.CreateCategory(categoryName)
-	t.ExecuteTemplate(w, "main.html", forum.AllPosts)
+	t.ExecuteTemplate(w, "index.html", forum.AllPosts)
 }

@@ -1,6 +1,7 @@
 package forum
 
 import (
+	"fmt"
 	forum "forum/functions"
 	"html/template"
 	"net/http"
@@ -22,6 +23,8 @@ func HandlerFilterCategory(w http.ResponseWriter, req *http.Request) {
 		ErrorHandler(w, req, http.StatusInternalServerError)
 		return
 	}
+	forum.ViewCategory()
+		forum.ViewPosts()
 	category, _ := strconv.Atoi(req.FormValue("category")) // gets the data from the button clicked for filtering
 	for i := 0; i < len(forum.AllPosts); i++ {
 		for j := 0; j < len(forum.AllPosts[i].Category); j++ {
@@ -31,7 +34,11 @@ func HandlerFilterCategory(w http.ResponseWriter, req *http.Request) {
 			}
 		}
 	}
+	w.WriteHeader(http.StatusOK)
 	forum.AllData.AllPosts = filteredPosts
 	forum.AllData.AllCategories = forum.AllCategories
+	forum.AllData.LoggedUser = forum.LoggedUser
+	forum.AllData.IsLogged = false
+	fmt.Println(forum.AllData)
 	t.ExecuteTemplate(w, "index.html", forum.AllData) // execute the main html with only the filtered posts
 }
