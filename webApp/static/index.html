@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/general.css" />
-    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="/css/general.css" />
+    <link rel="stylesheet" href="/css/header.css">
     <link rel="stylesheet" href="/css/index.css" />
-    <link rel="stylesheet" href="css/footer.css" />
+    <link rel="stylesheet" href="/css/footer.css" />
     <title>Reboot Journal</title>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
@@ -28,7 +28,7 @@
               </div>
               <div class="nav-group">
                 <ul>
-                  <li>
+                  <li class="createpost">
                     <a href="#"><i class="fa-solid fa-comment"></i> Create Post</a>
                   </li>
                   <li class="join">
@@ -47,6 +47,9 @@
         </div>
     </header>
     <main>
+      <form method="post" action="/createcategory">
+        Create category<textarea name="category" id="category" placeholder="Enter text here (maximum 50 characters)" rows="1" cols="10" required="true" maxlength="50"></textarea>
+        <button class="downl-btn" id="format" name="format" value="txt">Create Category</button></div></form>
         <div class="container">
           <div class="row">
             <section class="left">
@@ -239,10 +242,11 @@
           <div class="row">
             <div class="content">
               <div class="login-left">
-                <form action="#">
-                  <input type="text" placeholder="Username" />
+                  <form method="POST" action="/register">
+                  <input type="text" placeholder="Username" name="username"/>
                   <div class="form-group">
-                    <input type="password" placeholder="Password" id="passIn" />
+                    <input type="password" placeholder="Password" name="password" id="passIn" />
+                    <button>join now</button></form>
                     <!-- <div id="togglePassBox" onclick="togglePass()"><i class="fa-regular fa-eye"></i> <span id="toggleTxt">Show</span></div> -->
                   </div>
                   <a href="#">Forget your password?</a>
@@ -251,7 +255,6 @@
                     <label for="remember">Stay logged in</label>
                   </div>
                   <button type="submit" class="btn btn-red">Log in</button>
-                </form>
               </div>
               <div class="line"></div>
               <div class="login-right">
@@ -269,11 +272,20 @@
             </div>
             <div class="bottom">
               <h4>New to Reboot Journal Forums?</h4>
-              <a href="/signup" style="color: #FFFFFF;">join now</a>
             </div>
           </div>
         </div>
       </div>
+      <div class="overlayposts">
+        <div class="postbox" id="postbox">
+        <form method="post" action="/post">
+          Post Title<textarea name="title" id="title" placeholder="Title (max 35 characters)" rows="1" cols="35" required="true" maxlength="35"></textarea><i class="fa-solid fa-xmark close"></i><br>
+          Post Body<textarea name="post" id="post" rows="20" cols="150" placeholder="(max 2000 characters)" required="true" maxlength="2000"></textarea>
+          Category
+          {{range .AllCategories}}<input type="checkbox" name= "{{.CategoryID}}" id = "category" value="{{.CategoryID}}">{{.CategoryName}}{{end}}
+          <button class="downl-btn" id="format" name="format" value="txt">Create post</button></div>
+      </form>
+    </div>
       <script
       src="https://kit.fontawesome.com/9e5ba2e3f5.js"
       crossorigin="anonymous"

@@ -12,13 +12,14 @@ import (
 func init() {
 	log.SetFlags(log.Lshortfile | log.LstdFlags)
 	forum.StaticFileLoader()
+	forumfunc.DatabaseLoader()
 }
 
 func main() {
 	const port = ":8080"
 	http.HandleFunc("/", forum.MainHandler)
 	fmt.Println("http://localhost" + port)
-	forumfunc.CreateTables() // create table creates the database and the tables for the project
+	// forumfunc.CreateTables() // create table creates the database and the tables for the project
 	http.HandleFunc("/createcategory", forum.HandlerCreateCategory) // for the admin only to create new categories
 	http.HandleFunc("/postpage/", forum.HandlerPostPage) // handles the post that is clicked on in the homepage
 	http.HandleFunc("/filtercategory/", forum.HandlerFilterCategory) // handles the filtering by category
