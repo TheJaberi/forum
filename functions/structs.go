@@ -49,4 +49,5 @@ type Post struct {
 	Userlike bool
 	UserDislike bool
 	LoggedUser bool
+	TimeCreated string
 }

@@ -1,6 +1,7 @@
 package forum
 
 import (
+	"fmt"
 	forum "forum/functions"
 	"html/template"
 	"net/http"
@@ -27,5 +28,6 @@ func MainHandler(w http.ResponseWriter, req *http.Request) {
 	forum.AllData.AllCategories = forum.AllCategories
 	forum.AllData.LoggedUser = forum.LoggedUser
 	forum.AllData.IsLogged = false
+	fmt.Println(forum.LoggedUser)
 	t.ExecuteTemplate(w, "index.html", forum.AllData)
 }

@@ -2,9 +2,11 @@ package forum
 
 import (
 	// "Database/sql"
-	"log"
-	_ "github.com/mattn/go-sqlite3"
 	"fmt"
+	"log"
+	"strings"
+
+	_ "github.com/mattn/go-sqlite3"
 )
 
 func ViewPosts() {
@@ -14,13 +16,15 @@ func ViewPosts() {
 	// 	log.Fatal(errdatabase)
 	// }
 	// defer Database.Close()
-	postData, errpost := DB.Query("Select id, Title, body, user_id from posts")
+	postData, errpost := DB.Query("Select id, Title, body, user_id, time_created from posts")
 	if errpost != nil {
 		log.Fatal(errpost)
 	}
 	for postData.Next() { // this loop ends at the end of the function since it needs to get the data for each post from 5 tables
 		var posttmp Post // temporary type post is appended to all posts at the end of the loop after gathering all of the data
-		postData.Scan(&posttmp.PostID, &posttmp.Title, &posttmp.Body, &posttmp.UserID) // posts id, title, body and user id is from posts table
+		postData.Scan(&posttmp.PostID, &posttmp.Title, &posttmp.Body, &posttmp.UserID, &posttmp.TimeCreated) // posts id, title, body and user id is from posts table
+		posttmp.TimeCreated = strings.Replace(posttmp.TimeCreated, "T", " ", -1)
+		posttmp.TimeCreated = strings.Replace(posttmp.TimeCreated, "Z", " ", -1)
 		userData := DB.QueryRow("Select user_name from users where id = ?", posttmp.UserID) // username of the user who posted
 		userData.Scan(&posttmp.Username)
 		categorydata, categoryerr := DB.Query("Select category_id from Post2Category where post_id = ?", posttmp.PostID) // link between posts and its categories

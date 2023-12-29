@@ -17,7 +17,7 @@
             <div class="header-content">
               <div class="logo">
                 <a href="/"
-                ><h2>Reboot Journal</h2></a>
+                ><h2>Reboot01 Forum</h2></a>
               </div>
               <div class="nav-search">
                 <form method="GET" action="/filtercategory">
@@ -37,9 +37,6 @@
                       Login / Join
                     </a>
                   </li>
-                  <li>
-                    <a href="#"><i class="fa-solid fa-ellipsis-vertical"></i></a>
-                  </li>
                 </ul>
               </div>
             </div>
@@ -53,21 +50,23 @@
         <div class="container">
           <div class="row">
             <section class="left">
-              <h2>Welcome to Reboot Journal</h2>
+              <h2>Welcome to Reboot01 Forum</h2>
                   {{range .AllPosts}}
                   <div class="box">
                     <img src="">
                     <div class="details">
                       <a href="/postpage?id={{.PostID}}">
-                      <h3><option value="{{.}}">{{.Title}}</option></a></h3>
-                      <p id="catOptions">{{range .Category}}<option value="{{.}}">{{ .CategoryName}}</option>{{end}}</p>
+                      <h1><option value="{{.}}">{{.Title}}</option></a></h1>
+                      <p id="catOptions">{{range .Category}}<option value="{{.}}">{{ .CategoryName}}<br></option>{{end}}</p>
                       <div class="sub-details">
-                        <span><option value="{{.}}">Created by: {{.Username}}</option></span>
+                        <span><option value="{{.}}">Created by:{{.Username}}</option></span>
                         <span><option value="{{.}}">Likes: {{.Likes}}</option></span>
                         <span><option value="{{.}}">DisLikes: {{.Dislikes}}</option></span>
+                        <span><option value="{{.}}">Created on: {{.TimeCreated}}</option></span>
                         <div class="comment">
                           <i class="fa-solid fa-comment"></i>         
-                          <span>6</span>
+                          <span>6</span>  
+                          <!-- add number of comments -->
                         </div>
                       </div>
                     </div>
@@ -76,160 +75,13 @@
                 </div>
               </div>
             </section>
-            <section class="right">
-              <div class="box first">
-                <h3>Reboot Journal Forums</h3>
-                <span>since 2023</span>
-                <p>
-                  Welcome to Reboot Journal Forum. Come in and discuss any technical 
-                  specializations: Video Games, Mobile Apps, Blockchain & Crypto, Cybersecurity, Artificial Intelligence, etc...
-                </p>
-                <div class="stats">
-                </div>
-                <div class="buttons">
-                  <a href="/signup" class="btn btn-red"
-                    ><i class="fa-solid fa-user-large"></i> Join Community</a
-                  >
-                  <a href="#" class="btn btn-white"
-                    ><i class="fa-solid fa-store"></i> grow your business</a
-                  >
-                </div>
-              </div>
-              <div class="box top-forums">
-                <h3>our top forums</h3>
-                <a href="#">View All <i class="fa-solid fa-arrow-right"></i></a>
-                <div class="inner-box">
-                  <h4><a href="#">general bike discussion</a></h4>
-                  <div class="stats">
-                    <div class="stat comments">
-                      <i class="fa-solid fa-comment"></i><span> 709.4k</span>
-                    </div>
-                    <div class="stat views">
-                      <i class="fa-regular fa-eye"></i><span>104.4M</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="inner-box">
-                  <h4><a href="#">technical discussion</a></h4>
-                  <div class="stats">
-                    <div class="stat comments">
-                      <i class="fa-solid fa-comment"></i><span> 395.7k</span>
-                    </div>
-                    <div class="stat views">
-                      <i class="fa-regular fa-eye"></i><span>124.2M</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="inner-box">
-                  <h4><a href="#">member introductions</a></h4>
-                  <div class="stats">
-                    <div class="stat comments">
-                      <i class="fa-solid fa-comment"></i><span> 178.9k</span>
-                    </div>
-                    <div class="stat views">
-                      <i class="fa-regular fa-eye"></i><span>22.1M</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="inner-box">
-                  <h4><a href="#">rides and events</a></h4>
-                  <div class="stats">
-                    <div class="stat comments">
-                      <i class="fa-solid fa-comment"></i><span> 5.3k</span>
-                    </div>
-                    <div class="stat views">
-                      <i class="fa-regular fa-eye"></i><span>1.6M</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="inner-box">
-                  <h4><a href="#">canadian riders</a></h4>
-                  <div class="stats">
-                    <div class="stat comments">
-                      <i class="fa-solid fa-comment"></i><span> 4.2k</span>
-                    </div>
-                    <div class="stat views">
-                      <i class="fa-regular fa-eye"></i><span>1.1M</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="box top-contributors">
-                <h3>top contributors this month</h3>
-                <a href="#">View All <i class="fa-solid fa-arrow-right"></i></a>
-                <div class="inner-box">
-                  <div class="img">
-                    <img src="img/302688.jpg" alt="" />
-                  </div>
-                  <div class="details">
-                    <a href="#">Captain D</a>
-                    <span>202 replies</span>
-                  </div>
-                </div>
-                <div class="inner-box">
-                  <div class="img">
-                    <img src="img/302688.jpg" alt="" />
-                  </div>
-                  <div class="details">
-                    <a href="#">oldguy</a>
-                    <span>196 replies</span>
-                  </div>
-                </div>
-                <div class="inner-box">
-                  <div class="img">
-                    <img src="img/302688.jpg" alt="" />
-                  </div>
-                  <div class="details">
-                    <a href="#">Inferno</a>
-                    <span>174 replies</span>
-                  </div>
-                </div>
-              </div>
-              <div class="box recommended-communities">
-                <h3>recommended communities</h3>
-                <div class="inner-box">
-                  <div class="img">
-                    <img src="img/302688.jpg" alt="" />
-                  </div>
-                  <div class="details">
-                    <a href="#">Jeep Forum</a>
-                    <span>718k+ members</span>
-                  </div>
-                </div>
-                <div class="inner-box">
-                  <div class="img">
-                    <img src="img/302688.jpg" alt="" />
-                  </div>
-                  <div class="details">
-                    <a href="#">VWVortex Volkswagen Forum</a>
-                    <span>2M+ members</span>
-                  </div>
-                </div>
-                <div class="inner-box">
-                  <div class="img">
-                    <img src="img/302688.jpg" alt="" />
-                  </div>
-                  <div class="details">
-                    <a href="#">Climbing</a>
-                    <span>50+ members</span>
-                  </div>
-                </div>
-              </div>
-            </section>
           </div>
         </div>
       </main>
+      <!-- add creators data in Footer -->
       <footer>
         <div class="container">
-          <ul>
-            <li><a href="#">home</a></li>
-            <li><a href="#">about us</a></li>
-            <li><a href="#">terms of use</a></li>
-            <li><a href="#">privacy policy</a></li>
-            <li><a href="#">help</a></li>
-            <li><a href="#">contact us</a></li>
-          </ul>
-          <p>Technology is best when it brings people together.</p>
+          <p>Created By: </p>
           <p>Any sufficiently advanced technology is indistinguishable from magic.</p>
         </div>
       </footer>
@@ -242,37 +94,37 @@
           <div class="row">
             <div class="content">
               <div class="login-left">
-                  <form method="POST" action="/register">
+                  <form method="POST" action="/login">
                   <input type="text" placeholder="Username" name="username"/>
                   <div class="form-group">
                     <input type="password" placeholder="Password" name="password" id="passIn" />
-                    <button>join now</button></form>
-                    <!-- <div id="togglePassBox" onclick="togglePass()"><i class="fa-regular fa-eye"></i> <span id="toggleTxt">Show</span></div> -->
                   </div>
-                  <a href="#">Forget your password?</a>
-                  <div class="remember">
-                    <input type="checkbox" name="remember" value="1" checked />
-                    <label for="remember">Stay logged in</label>
-                  </div>
-                  <button type="submit" class="btn btn-red">Log in</button>
+                  <button type="submit" class="btn btn-red">Log in</button></form>
+                  <h2>Coming Soon!</h2>
+                  <a href="#" class="btn"
+                    ><i class="fa fa-github"></i>
+                    <span>  Login with GitHub (Unavailable)</span></a
+                  >
+                  <a href="#" class="btn"
+                    ><span>
+                      Login with Google (Unavailable)</span
+                    ></a
+                  >
               </div>
               <div class="line"></div>
               <div class="login-right">
-                <h2>Coming Soon!</h2>
-                <a href="#" class="btn"
-                  ><i class="fa-brands fa-square-facebook"></i>
-                  <span>Login with Facebook (Unavailable)</span></a
-                >
-                <a href="#" class="btn"
-                  ><img src="img/download.png" /><span>
-                    Login with Google (Unavailable)</span
-                  ></a
-                >
+                <form method="POST" action="/register">
+                  <input type="text" placeholder="Username" name="username"/>
+                  <div class="for-group">
+                    <input type="password" placeholder="Password" name="password" id="passIn" /><br>
+                    <input type="email" placeholder="email" name="email" id="email" /><br>
+                    <button>join now</button></form>
               </div>
             </div>
-            <div class="bottom">
-              <h4>New to Reboot Journal Forums?</h4>
             </div>
+            <!-- <div class="bottom">
+              <h4>New to Reboot Journal Forums?</h4>
+            </div> -->
           </div>
         </div>
       </div>
