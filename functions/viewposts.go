@@ -1,8 +1,6 @@
 package forum
 
 import (
-	// "Database/sql"
-	"fmt"
 	"log"
 	"strings"
 
@@ -47,6 +45,6 @@ func ViewPosts() {
 		dislikedata.Scan(&posttmp.Dislikes)
 		AllPosts = append(AllPosts, posttmp)
 	}
-	fmt.Println(AllPosts)
 UpdatePosts()
+AllData.AllPosts = AllPosts
 }
