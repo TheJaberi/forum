@@ -26,10 +26,10 @@ main .left .box {
   padding: 0.9rem 1.2rem;
   border-radius: 0.7rem;
   margin-bottom: 0.9rem;
-  margin-left: 0.7rem;
+  margin-left: 1.7rem;
   box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.11),
     0 0.1rem 0.1rem rgba(0, 0, 0, 0.04);
-  width: 1000px;
+  width: 1020px;
   float: left;
   border: 1px solid #000;
 }
@@ -487,7 +487,7 @@ main .left .box .img {
     margin-bottom: -1rem;
     color: var(--whiteColor);
     font-style: italic;
-    margin-bottom: -2;
+    margin-bottom: -0.2rem;
   }
   
   .login .row .bottom h4 {

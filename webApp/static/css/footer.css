@@ -10,13 +10,14 @@ footer {
 
 footer .container {
   text-align: center;
+  margin-bottom: 0rem;
+
 }
   
 footer .container ul {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  margin-bottom: 1rem;
   margin-left: 30%;
 }
   
@@ -26,9 +27,8 @@ footer .container ul li {
 }
   
 footer .container ul li a {
-  color: var(--whiteColor);
   text-transform: capitalize;
-  padding: 0.2rem 0.4rem;
+  /* padding: 0.2rem 0.4rem; */
   border-radius: 0.2rem;
   transition: all 0.3s ease;
 }
@@ -40,16 +40,16 @@ footer .container ul li:last-child {
 footer .container ul li:last-child::before {
   content: "";
   position: absolute;
-  top: 50%;
+  /* top: 50%; */
   left: -0.8rem;
   transform: translateY(-50%);
   width: 0.1rem;
-  height: 1rem;
+  /* height: 1rem; */
   background-color: var(--mediumGray);
 }
   
 footer .container p {
-  margin-bottom: 1rem;
+  margin-bottom: auto;
   color: var(--mediumGray);
 }
   

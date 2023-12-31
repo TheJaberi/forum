@@ -16,7 +16,9 @@ type Data struct {
 	AllCategories []Category
 	Postpage      Post
 	LoggedUser   User
-	IsLogged      bool    
+	IsLogged      bool	
+	LoggedUserID  int
+	TypeAdmin     bool
 }
 type Category struct {
 	CategoryName string

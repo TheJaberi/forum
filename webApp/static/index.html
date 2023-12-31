@@ -20,25 +20,30 @@
                 ><h2>Reboot01 Forum</h2></a>
               </div>
               <div class="nav-search">
-                  <ul>
-                    {{range .AllCategories}}<li><a href="filtercategory/?category={{.CategoryID}}">{{.CategoryName}}</a>{{end}}</li>
+                <ul>{{if .IsLogged}}
+                <li><a href="/mylikes/?user={{.LoggedUserID}}">MY LIKES</a></li>
+                <li><a href="/mydislikes/?user={{.LoggedUserID}}">MY DISLIKES</a></li>
+                <li><a href="/myposts/?user={{.LoggedUserID}}">MY POSTS</a></li>
+                {{else}}
+                {{end}}           
+                    {{range .AllCategories}}<li><a href="/filtercategory/?category={{.CategoryID}}">{{.CategoryName}}</a>{{end}}</li>
                   </ul>
               </div>
               <div class="nav-group">
                 <ul>
                   {{if .IsLogged}}
                   <li class="createpost">
-                    <a href="#"><i class="fa-solid fa-comment"></i> Create Post</a>
+                    <a href="/#"><i class="fa-solid fa-comment"></i> Create Post</a>
                   </li>
                   <li class="join">
-                    <a href="#">
+                    <a href="/logout/">         
                       <i class="fa fa-sign-out"></i>
                       LogOut
-                    </a>
+                    </a><a href="/#"></a>
                   </li>
                   {{else}}
                   <li class="join">
-                    <a href="#">
+                    <a href="/#">
                       <i class="fa-solid fa-user"></i>
                       Login / Join
                     </a>
@@ -51,6 +56,7 @@
         </div>
     </header>
     <main>
+
       <!-- <form method="post" action="/createcategory"> -->
         <!-- Create category<textarea name="category" id="category" placeholder="Enter text here (maximum 50 characters)" rows="1" cols="10" required="true" maxlength="50"></textarea> -->
         <!-- <button class="downl-btn" id="format" name="format" value="txt">Create Category</button></div></form> -->
@@ -103,26 +109,27 @@
                   <div class="form-group">
                     <input type="password" placeholder="Password" name="password" id="passIn" />
                   </div>
+                  <a href="#" class="btn"
+                  >
+                  <span>  Login with GitHub (Unavailable)</span></a
+                >
+                <a href="#" class="btn"
+                  ><span>
+                    Login with Google (Unavailable)</span
+                  ></a
+                >
                   <button type="submit" class="btn btn-red">Log in</button></form>
-                  <h2>Coming Soon!</h2>
-                  <a href="#" class="btn"
-                    >
-                    <span>  Login with GitHub (Unavailable)</span></a
-                  >
-                  <a href="#" class="btn"
-                    ><span>
-                      Login with Google (Unavailable)</span
-                    ></a
-                  >
+
               </div>
-              <div class="line"></div>
-              <div class="login-right">
+              <div class="login-left">
+                <div class="top-right">
+                <h2>Register</h2></div>
                 <form method="POST" action="/register">
                   <input type="text" placeholder="Username" name="username"/>
                   <div class="for-group">
                     <input type="password" placeholder="Password" name="password" id="passIn" /><br>
                     <input type="email" placeholder="email" name="email" id="email" /><br>
-                    <button>join now</button></form>
+                    <button type="submit" class="btn btn-red">Join Now</button></form>
               </div>
             </div>
             </div>
