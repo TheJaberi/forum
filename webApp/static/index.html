@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/general.css" />
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/index.css" />
+    <link rel="stylesheet" href="/css/footer.css" />
+    <title>Reboot Journal</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+<body>
+    <header class="header" id="header">
+        <div class="row">
+          <div class="container">
+            <div class="header-content">
+              <div class="logo">
+                <a href="/"
+                ><h2>Reboot01 Forum</h2></a>
+              </div>
+              <div class="nav-search">
+                <ul>{{if .IsLogged}}
+                <li><a href="/mylikes/?user={{.LoggedUserID}}">MY LIKES</a></li>
+                <li><a href="/mydislikes/?user={{.LoggedUserID}}">MY DISLIKES</a></li>
+                <li><a href="/myposts/?user={{.LoggedUserID}}">MY POSTS</a></li>
+                {{else}}
+                {{end}}           
+                    {{range .AllCategories}}<li><a href="/filtercategory/?category={{.CategoryID}}">{{.CategoryName}}</a>{{end}}</li>
+                  </ul>
+              </div>
+              <div class="nav-group">
+                <ul>
+                  {{if .IsLogged}}
+                  <li class="createpost">
+                    <a href="/#"><i class="fa-solid fa-comment"></i> Create Post</a>
+                  </li>
+                  <li class="join">
+                    <a href="/logout/">         
+                      <i class="fa fa-sign-out"></i>
+                      LogOut
+                    </a><a href="/#"></a>
+                  </li>
+                  {{else}}
+                  <li class="join">
+                    <a href="/#">
+                      <i class="fa-solid fa-user"></i>
+                      Login / Join
+                    </a>
+                  </li>
+                  {{end}}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+    </header>
+    <main>
+
+      <!-- <form method="post" action="/createcategory"> -->
+        <!-- Create category<textarea name="category" id="category" placeholder="Enter text here (maximum 50 characters)" rows="1" cols="10" required="true" maxlength="50"></textarea> -->
+        <!-- <button class="downl-btn" id="format" name="format" value="txt">Create Category</button></div></form> -->
+        <div class="container">
+          <div class="row">
+            <section class="left">
+              <!-- <h2>Welcome to Reboot01 Forum</h2> -->
+                  {{range .AllPosts}}
+                  <a href="/postpage?id={{.PostID}}">
+                  <div class="box">
+                    <img src="">
+                    <div class="details">
+                      
+                      <h1><option value="{{.}}">{{.Title}}</option></h1><div class="categories">Categories: {{range .Category}} <option value="{{.}}"><h6>{{ .CategoryName}}</h6></option><span>&#44;&nbsp;</span>{{end}}</div>
+                          <span><option value="{{.}}">Created on: <h6>{{.TimeCreated}}</h6></option></span>
+                          <span><option value="{{.}}">Created by: <h6>{{.Username}}</h6></option></span>
+                          <div class="sub-details">
+                            <i class="fa-solid fa-comment"></i><span>6</span>   <!-- add number of comments -->
+                            <span><option value="{{.}}"><i class="fa fa-thumbs-up"></i> {{.Likes}} </option></span>
+                            <span><option value="{{.}}"><i class="fa fa-thumbs-down"></i> {{.Dislikes}}</option></span>
+                      </div>
+                    </div>
+                  
+                  </div>
+                  {{end}}
+                </div></a>
+              </div>
+            </section>
+          </div>
+        </div>
+      </main>
+      <!-- add creators data in Footer -->
+      <footer>
+        <div class="container">
+          <p>Created By: </p>
+          <p>Any sufficiently advanced technology is indistinguishable from magic.</p>
+        </div>
+      </footer>
+      <div class="overlay">
+        <div class="login" id="login">
+          <div class="top">
+            <h2>Log in</h2>
+            <i class="fa-solid fa-xmark close"></i>
+          </div>
+          <div class="row">
+            <div class="content">
+              <div class="login-left">
+                  <form method="POST" action="/login">
+                  <input type="text" placeholder="Email" name="email"/>
+                  <div class="form-group">
+                    <input type="password" placeholder="Password" name="password" id="passIn" />
+                  </div>
+                  <a href="#" class="btn"
+                  >
+                  <span>  Login with GitHub (Unavailable)</span></a
+                >
+                <a href="#" class="btn"
+                  ><span>
+                    Login with Google (Unavailable)</span
+                  ></a
+                >
+                  <button type="submit" class="btn btn-red">Log in</button></form>
+
+              </div>
+              <div class="login-left">
+                <div class="top-right">
+                <h2>Register</h2></div>
+                <form method="POST" action="/register">
+                  <input type="text" placeholder="Username" name="username"/>
+                  <div class="for-group">
+                    <input type="password" placeholder="Password" name="password" id="passIn" /><br>
+                    <input type="email" placeholder="email" name="email" id="email" /><br>
+                    <button type="submit" class="btn btn-red">Join Now</button></form>
+              </div>
+            </div>
+            </div>
+            <!-- <div class="bottom">
+              <h4>New to Reboot Journal Forums?</h4>
+            </div> -->
+          </div>
+        </div>
+      </div>
+      <div class="overlayposts">
+        <div class="postbox" id="postbox">
+        <form method="post" action="/post">
+          Post Title<textarea name="title" id="title" placeholder="Title (max 35 characters)" rows="1" cols="35" required="true" maxlength="35"></textarea><i class="fa-solid fa-xmark close"></i><br>
+          Post Body<textarea name="post" id="post" rows="20" cols="150" placeholder="(max 2000 characters)" required="true" maxlength="2000"></textarea>
+          Category
+          {{range .AllCategories}}<input type="checkbox" name= "{{.CategoryID}}" id = "category" value="{{.CategoryID}}">{{.CategoryName}}{{end}}
+          <button class="downl-btn" id="format" name="format" value="txt">Create post</button></div>
+      </form>
+    </div>
+      <script
+      src="https://kit.fontawesome.com/9e5ba2e3f5.js"
+      crossorigin="anonymous"
+    ></script>
+  <script src="js/index.js"></script>
+</body>
+</html>

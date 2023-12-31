@@ -6,8 +6,8 @@ import (
 	"net/http"
 )
 
-func MainHandler(w http.ResponseWriter, req *http.Request) {
-	if req.URL.Path != "/" {
+func HandlerLogout(w http.ResponseWriter, req *http.Request) {
+	if req.URL.Path != "/logout/" {
 		ErrorHandler(w, req, http.StatusNotFound)
 		return
 	}
@@ -21,12 +21,9 @@ func MainHandler(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 	w.WriteHeader(http.StatusOK)
-	forum.ViewCategory()
-	forum.ViewPosts()
-	forum.AllData.AllPosts = forum.AllPosts
-	forum.AllData.AllCategories = forum.AllCategories
-	// forum.AllData.LoggedUser = forum.LoggedUser
-	// forum.AllData.LoggedUserID = forum.LoggedUser.Userid
-	// forum.AllData.IsLogged = forum.LoggedUser.Registered
+	var empty forum.User
+	forum.AllData.LoggedUser = empty
+	forum.AllData.IsLogged = false
+	forum.UpdatePosts()
 	t.ExecuteTemplate(w, "index.html", forum.AllData)
 }
