@@ -1,7 +1,6 @@
 package forum
 
 import (
-	"fmt"
 	forum "forum/functions"
 	"html/template"
 	"net/http"
@@ -10,10 +9,6 @@ import (
 
 func HandlerFilterCategory(w http.ResponseWriter, req *http.Request) {
 	var filteredPosts []forum.Post
-	if req.URL.Path != "/filtercategory/" {   
-		ErrorHandler(w, req, http.StatusNotFound)
-		return
-	}
 	if req.Method != "GET" {
 		ErrorHandler(w, req, http.StatusMethodNotAllowed)
 		return
@@ -38,7 +33,5 @@ func HandlerFilterCategory(w http.ResponseWriter, req *http.Request) {
 	forum.AllData.AllPosts = filteredPosts
 	forum.AllData.AllCategories = forum.AllCategories
 	forum.AllData.LoggedUser = forum.LoggedUser
-	forum.AllData.IsLogged = false
-	fmt.Println(forum.AllData)
 	t.ExecuteTemplate(w, "index.html", forum.AllData) // execute the main html with only the filtered posts
 }

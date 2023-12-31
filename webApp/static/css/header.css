@@ -48,17 +48,24 @@
   order: 3;
   padding: 0;
   margin: 0;
+  display: flex;
 }
-
-.nav-search form ul {
+.nav-search button{
+  order: 3;
+  padding: 0;
+  margin: 0;
+  opacity: transparent;
+}
+.nav-search ul {
   list-style: none;
   padding: 15px;
   margin: 0;
+  display: flex;
 }
 
-.nav-search form ul li {
+.nav-search ul li {
   margin: 0 0 0 25px;
-  display: inline;
+  display: flex;
 }
 
 .nav-search ul li a {

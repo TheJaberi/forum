@@ -34,20 +34,19 @@ func UserDbRegisteration(applicant forum.Applicant, db *sql.DB) error {
 }
 
 // Login
-func UserDbLogin(credentials forum.Login, db *sql.DB) error {
-	if isUsernameExists(db, credentials.Email) != nil {
+func UserDbLogin(email string, password string) error {
+	if isUsernameExists(email) != nil {
 		return UserEmailError
 	}
-	sqlStmt, err := db.Prepare("SELECT user_pass FROM users WHERE user_email = ?")
+	userdata := DB.QueryRow("SELECT user_id, user_name, user_pass, user_email FROM users where user_email = ?", email) // select gets the data from users table
+	err := userdata.Scan(&LoggedUser.Userid, &LoggedUser.Username, &LoggedUser.Password, &LoggedUser.Email)                                  // scan assigns the data of the row to variables
 	if err != nil {
-		return err
+		fmt.Println(err)
+			} else {
+		LoggedUser.Registered = true
+		AllData.IsLogged = true
 	}
-	var currentPass []byte
-	err = sqlStmt.QueryRow(credentials.Email).Scan(&currentPass)
-	if err != nil {
-		return err
-	}
-	err = bcrypt.CompareHashAndPassword(currentPass, []byte(credentials.Password))
+	err = bcrypt.CompareHashAndPassword([]byte(LoggedUser.Password), []byte(password))
 	if err != nil {
 		return err
 	}
@@ -55,21 +54,22 @@ func UserDbLogin(credentials forum.Login, db *sql.DB) error {
 	if err != nil {
 		return err
 	}
-
 	// XXX implement and return Cookie
 	session := forum.Session{
-		Email:     credentials.Email,
+		Id: LoggedUser.Userid,
+		Email:     email,
 		CreatedAt: time.Now(),
 		Uuid:      uuid,
 	}
 	fmt.Println(session)
+	UpdatePosts()	
 	return nil
 }
 
-func isUsernameExists(db *sql.DB, applicantEmail string) error {
+func isUsernameExists(applicantEmail string) error {
 	sqlStmt := `SELECT EXISTS (SELECT 1 FROM users WHERE user_email = ?)`
 	var exists bool
-	err := db.QueryRow(sqlStmt, applicantEmail).Scan(&exists)
+	err := DB.QueryRow(sqlStmt, applicantEmail).Scan(&exists)
 	if err != nil {
 		return err
 	}

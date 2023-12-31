@@ -25,7 +25,7 @@ func ViewPosts() {
 		postData.Scan(&posttmp.PostID, &posttmp.Title, &posttmp.Body, &posttmp.UserID, &posttmp.TimeCreated) // posts id, title, body and user id is from posts table
 		posttmp.TimeCreated = strings.Replace(posttmp.TimeCreated, "T", " ", -1)
 		posttmp.TimeCreated = strings.Replace(posttmp.TimeCreated, "Z", " ", -1)
-		userData := DB.QueryRow("Select user_name from users where id = ?", posttmp.UserID) // username of the user who posted
+		userData := DB.QueryRow("Select user_name from users where user_id = ?", posttmp.UserID) // username of the user who posted
 		userData.Scan(&posttmp.Username)
 		categorydata, categoryerr := DB.Query("Select category_id from Post2Category where post_id = ?", posttmp.PostID) // link between posts and its categories
 		if categoryerr != nil {

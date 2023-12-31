@@ -20,7 +20,7 @@ main .left {
 }
   
 main .left .box {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   background-color: var(--lightBlackColor);
   padding: 0.9rem 1.2rem;
@@ -29,7 +29,7 @@ main .left .box {
   margin-left: 0.7rem;
   box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.11),
     0 0.1rem 0.1rem rgba(0, 0, 0, 0.04);
-  width: 500px;
+  width: 1000px;
   float: left;
   border: 1px solid #000;
 }
@@ -49,30 +49,31 @@ main .left .box .img {
   main .left .box .details {
     padding-left: 1.2rem;
   }
-  
-  main .left .box .details p {
-    font-size: 1.3rem;
-    text-transform: capitalize;
-    color: var(--lightBrownColor);
-  }
-
-  main .left .box .details p option {
-    display: inline;
-    margin-left: 0.6rem;
-  }
-  
-  main .left .box .details h3 {
+  main .left .box .details .categories {
+    display: flex;
+    min-height: 20px;
+  }  
+  main .left .box .details h1{
     font-weight: 700;
     color: var(--darkRedColor);
-    font-size: var(--fs18);
+    font-size: 4rem;
     letter-spacing: -0.02em;
+  }
+  main .left .box .details h6{
+    font-weight: 700;
+    color: var(--lightBrownColor);
+    font-size: 1.5rem;
+    letter-spacing: -0.004em;
+    display: inline;
+
   }
   
   main .left .box .details .sub-details {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    gap: 0.4rem;
+    gap: 0.6rem;
+    font-size: 2rem;
   }
   
   main .left .box .details .sub-details span {
@@ -486,6 +487,7 @@ main .left .box .img {
     margin-bottom: -1rem;
     color: var(--whiteColor);
     font-style: italic;
+    margin-bottom: -2;
   }
   
   .login .row .bottom h4 {
