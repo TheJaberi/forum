@@ -3,25 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/main.css">
-      
+    <link rel="stylesheet" href="/css/postpage.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>history.pushState(null, null, document.title);
+        window.addEventListener('popstate', function () {
+            history.pushState(null, null, document.title);
+        });
+        const create = document.querySelector(".createpost"),
+        post = document.querySelector(".overlayposts"),
+        closepost = document.querySelector(".overlayposts .close");
+        create.addEventListener("click", () => {
+            post.classList.add("active");
+          });
+          closepost.addEventListener("click", () => {
+            post.classList.remove("active");
+          });</script>
 </head>
 <body>
     <form method="GET" action="/">
     <button>back to homepage</button></form>
-    <form method="GET" action="/postpage/id="{{.PostID}}>
-        <button>next post</button>
-    </form>
-<script>
-    history.pushState(null, null, document.title);
-window.addEventListener('popstate', function () {
-    history.pushState(null, null, document.title);
-});
-</script>
 {{.Title}}<br> 
 {{.Body}}<br>
 Categories:{{range .Category}}<option value="{{.}}">{{.CategoryName}}</option>{{end}}
 {{if .LoggedUser}}
+<li class="createpost">
+    <a href="#"><i class="fa-solid fa-comment"></i>Create Comment</a></li>
+    <div class="overlayposts">
+        <div class="postbox" id="postbox">
+        <form method="post" action="/comment">
+          Comment<textarea name="commentContent" id="commentContent" rows="20" cols="150" placeholder="(max 2000 characters)" required="true" maxlength="2000"></textarea>
+          <button name= "postid" id = "postid" value="{{.PostID}}">Add Comment</button></div>
+      </form>
+    </div>
 </body><br>
 {{ if .Userlike }}
 <form method="GET" action="/like">
@@ -43,4 +56,6 @@ Categories:{{range .Category}}<option value="{{.}}">{{.CategoryName}}</option>{{
         {{end}}
         {{else}}
         {{end}}
-            Done by {{.Username}}</html>
+            Done by {{.Username}}
+
+</html>

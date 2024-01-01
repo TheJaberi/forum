@@ -2,7 +2,6 @@ package forum
 
 import (
 	"context"
-	// "database/sql"
 	_ "github.com/mattn/go-sqlite3"
 	"log"
 )
@@ -11,8 +10,8 @@ func CreatePost(title string, body string, postCategories []int) {
 	var postData Post
 	postData.Title = title
 	postData.Body = body
-	postData.UserID = 1
-	postData.Username = "test"
+	postData.UserID = LoggedUser.Userid
+	postData.Username = LoggedUser.Username
 	// if LoggedUser.Registered { // check if registered is to true to add the post to the database
 		query := "INSERT INTO `posts` (`Title`, `body`, `user_id`) VALUES (?, ?, ?)"
 		rowdata, err2 := DB.ExecContext(context.Background(), query, title, body, LoggedUser.Userid)
@@ -37,4 +36,4 @@ func CreatePost(title string, body string, postCategories []int) {
 			}
 		}
 		AllPosts = append(AllPosts, postData)
-  		ViewPosts()	}
+}

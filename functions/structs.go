@@ -51,4 +51,12 @@ type Post struct {
 	UserDislike bool
 	LoggedUser bool
 	TimeCreated string
+	Comments []Comment
+}
+
+type Comment struct {
+	Body string
+	post_id int
+	user_id int
+	username string
 }

@@ -9,11 +9,6 @@ import (
 
 func ViewPosts() {
 	AllPosts = nil
-	// Database, errdatabase := sql.Open("sqlite3", "./forum.db")
-	// if errdatabase != nil {
-	// 	log.Fatal(errdatabase)
-	// }
-	// defer Database.Close()
 	postData, errpost := DB.Query("Select id, Title, body, user_id, time_created from posts")
 	if errpost != nil {
 		log.Fatal(errpost)
