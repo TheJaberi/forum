@@ -9,13 +9,11 @@ import (
 )
 
 func HandlerComments(w http.ResponseWriter, req *http.Request) {
-	fmt.Println("11")
-	if req.URL.Path != "/comment/" {
-		fmt.Println("11")
+	if req.URL.Path != "/comment" {
 		ErrorHandler(w, req, http.StatusNotFound)
 		return
 	}
-	if req.Method != "GET" {
+	if req.Method != "POST" {
 		ErrorHandler(w, req, http.StatusMethodNotAllowed)
 		return
 	}
@@ -29,6 +27,8 @@ func HandlerComments(w http.ResponseWriter, req *http.Request) {
 	commentContent := req.FormValue("commentContent")
 	fmt.Println(post_id, commentContent)
 	forum.CreateComment(commentContent, post_id) // create post adds the title and body to the table in the database
-	postData := forum.AllPosts[post_id]
+	forum.ViewPosts()
+	postData := forum.AllData.AllPosts[post_id-1]
+	postData.LoggedUser = true
 	t.ExecuteTemplate(w, "postpage.html", postData)
 }

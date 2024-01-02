@@ -12,10 +12,10 @@ func CreateComment(commentContent string, postID int) {
 	if err2 != nil {
 		log.Fatal(err2)
 	}
-	var comment Comment
-	comment.Body = commentContent
-	comment.post_id = postID
-	comment.user_id = LoggedUser.Userid
-	comment.username = LoggedUser.Username
-	AllData.AllPosts[postID].Comments = append(AllData.AllPosts[postID].Comments, comment)
+	var commenTmp Comment
+	commenTmp.Post_id = postID
+	commenTmp.User_id = AllData.LoggedUser.Userid
+	commenTmp.CommentUsername = AllData.LoggedUser.Username
+	commenTmp.Body = commentContent
+	AllData.AllPosts[postID].Comments = append(AllData.AllPosts[postID].Comments, commenTmp)
 }

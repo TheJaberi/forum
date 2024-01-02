@@ -9,33 +9,21 @@
         window.addEventListener('popstate', function () {
             history.pushState(null, null, document.title);
         });
-        const create = document.querySelector(".createpost"),
-        post = document.querySelector(".overlayposts"),
-        closepost = document.querySelector(".overlayposts .close");
-        create.addEventListener("click", () => {
-            post.classList.add("active");
-          });
-          closepost.addEventListener("click", () => {
-            post.classList.remove("active");
-          });</script>
+</script>
 </head>
 <body>
     <form method="GET" action="/">
     <button>back to homepage</button></form>
 {{.Title}}<br> 
 {{.Body}}<br>
+
 Categories:{{range .Category}}<option value="{{.}}">{{.CategoryName}}</option>{{end}}
-{{if .LoggedUser}}
-<li class="createpost">
-    <a href="#"><i class="fa-solid fa-comment"></i>Create Comment</a></li>
-    <div class="overlayposts">
-        <div class="postbox" id="postbox">
-        <form method="post" action="/comment">
-          Comment<textarea name="commentContent" id="commentContent" rows="20" cols="150" placeholder="(max 2000 characters)" required="true" maxlength="2000"></textarea>
-          <button name= "postid" id = "postid" value="{{.PostID}}">Add Comment</button></div>
-      </form>
-    </div>
+Comments:{{range .Comments}}
+<div><option value="{{.}}">{{.Body}}</option>
+    <option value="{{.}}">{{.CommentUsername}}</option></div>{{end}}
 </body><br>
+Done by {{.Username}}
+{{ if .LoggedUser }}
 {{ if .Userlike }}
 <form method="GET" action="/like">
 <button name= "removeInteraction" id = "removeInteraction" value="{{.PostID}}">already Like</button></form>
@@ -54,8 +42,15 @@ Categories:{{range .Category}}<option value="{{.}}">{{.CategoryName}}</option>{{
         <button name= "postInteraction" id = "postInteraction" value="{{.PostID}}">DisLike</button></form>
         {{end}}
         {{end}}
+        <div class="overlayposts">
+            <div class="postbox" id="postbox">
+            <form method="post" action="/comment">
+              Comment<textarea name="commentContent" id="commentContent" rows="20" cols="150" placeholder="(max 2000 characters)" required="true" maxlength="2000"></textarea>
+              <button name= "postid" id = "postid" value="{{.PostID}}">Add Comment</button></div>
+          </form>
+        </div>
         {{else}}
         {{end}}
-            Done by {{.Username}}
+
 
 </html>

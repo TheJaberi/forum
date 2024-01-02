@@ -56,7 +56,7 @@ type Post struct {
 
 type Comment struct {
 	Body string
-	post_id int
-	user_id int
-	username string
+	Post_id int
+	User_id int
+	CommentUsername string
 }
