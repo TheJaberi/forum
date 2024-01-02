@@ -4,6 +4,7 @@ import (
 	"fmt"
 	db "forum/database"
 	webApp "forum/webApp/handlers"
+	valds "forum/webApp/validators"
 	"log"
 	"net/http"
 )
@@ -13,6 +14,7 @@ func init() {
 	log.SetFlags(log.Lshortfile | log.LstdFlags)
 	webApp.StaticFileLoader()
 	db.DatabaseLoader()
+	valds.SecretKeyInit()
 }
 
 func main() {
