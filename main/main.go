@@ -26,6 +26,7 @@ func main() {
 	http.HandleFunc("/myposts/", forum.HandlerMyFilter) // handles the filtering by user's posts, likes or dislikes
 	http.HandleFunc("/mylikes/", forum.HandlerMyFilter) 
 	http.HandleFunc("/logout/", forum.HandlerLogout) 
+	http.HandleFunc("/comment", forum.HandlerComments) 
 	http.HandleFunc("/mydislikes/", forum.HandlerMyFilter)
 	http.HandleFunc("/like/", forum.HandlerLikes) // handles the function which adds the interaction to the database
 	http.HandleFunc("/dislike/", forum.HandlerLikes)

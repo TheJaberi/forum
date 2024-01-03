@@ -3,26 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/main.css">
-      
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/postpage.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+    // history.pushState(null, null, document.title);
+    //     window.addEventListener('popstate', function () {
+    //         history.pushState(null, null, document.title);
+    //     });
+        src="https://kit.fontawesome.com/9e5ba2e3f5.js"
+      crossorigin="anonymous"
+</script>
 </head>
 <body>
     <form method="GET" action="/">
     <button>back to homepage</button></form>
-    <form method="GET" action="/postpage/id="{{.PostID}}>
-        <button>next post</button>
-    </form>
-<script>
-    history.pushState(null, null, document.title);
-window.addEventListener('popstate', function () {
-    history.pushState(null, null, document.title);
-});
-</script>
 {{.Title}}<br> 
-{{.Body}}<br>
+{{.Body}}<br>  
 Categories:{{range .Category}}<option value="{{.}}">{{.CategoryName}}</option>{{end}}
-{{if .LoggedUser}}
+Comments:{{range .Comments}}
+<div><option value="{{.}}">{{.Body}}</option>
+    <option value="{{.}}">{{.CommentUsername}}</option></div>{{end}}
 </body><br>
+<i class="fal fas-thumbs-up"></i>
+Done by {{.Username}}
+{{ if .LoggedUser }}
 {{ if .Userlike }}
 <form method="GET" action="/like">
 <button name= "removeInteraction" id = "removeInteraction" value="{{.PostID}}">already Like</button></form>
@@ -38,9 +43,19 @@ Categories:{{range .Category}}<option value="{{.}}">{{.CategoryName}}</option>{{
         <form method="GET" action="/like">
         <button name= "postInteraction" id = "postInteraction" value="{{.PostID}}">Like</button></form>
         <form method="GET" action="/dislike">
-        <button name= "postInteraction" id = "postInteraction" value="{{.PostID}}">DisLike</button></form>
+        <button name= "postInteraction" id = "postInteraction" value="{{.PostID}}">
+            <!-- <i class="fa fa-thumbs-up" <style></style>"blue"</i></button></form> -->
         {{end}}
         {{end}}
+        <div class="overlayposts">
+            <div class="postbox" id="postbox">
+            <form method="post" action="/comment">
+              Comment<textarea name="commentContent" id="commentContent" rows="20" cols="150" placeholder="(max 2000 characters)" required="true" maxlength="2000"></textarea>
+              <button name= "postid" id = "postid" value="{{.PostID}}">Add Comment</button></div>
+          </form>
+        </div>
         {{else}}
         {{end}}
-            Done by {{.Username}}</html>
+
+
+</html>

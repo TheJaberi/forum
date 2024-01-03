@@ -9,11 +9,6 @@ import (
 
 func ViewPosts() {
 	AllPosts = nil
-	// Database, errdatabase := sql.Open("sqlite3", "./forum.db")
-	// if errdatabase != nil {
-	// 	log.Fatal(errdatabase)
-	// }
-	// defer Database.Close()
 	postData, errpost := DB.Query("Select id, Title, body, user_id, time_created from posts")
 	if errpost != nil {
 		log.Fatal(errpost)
@@ -39,12 +34,25 @@ func ViewPosts() {
 				}
 			}
 		}
+		commentData, commenterr := DB.Query("Select body, user_id from comments where post_id = ?", posttmp.PostID) // link between posts and its categories
+		if commenterr != nil {
+			log.Fatal(categoryerr)
+		}
+		for commentData.Next() {
+			var commenttmp Comment
+			commentData.Scan(&commenttmp.Body, &commenttmp.User_id)
+			userData := DB.QueryRow("Select user_name from users where user_id = ?", commenttmp.User_id)
+			userData.Scan(&commenttmp.CommentUsername)
+			posttmp.Comments = append(posttmp.Comments, commenttmp)
+		}
 		likedata := DB.QueryRow("SELECT COUNT(user_id) FROM Interaction where post_id = ? AND interaction = ?", posttmp.PostID, 1) // to present the numb of likes for each post
 		likedata.Scan(&posttmp.Likes)
 		dislikedata := DB.QueryRow("SELECT COUNT(user_id) FROM Interaction where post_id = ? AND interaction = ?", posttmp.PostID, 0) // to present the numb of dislikes for each post
 		dislikedata.Scan(&posttmp.Dislikes)
 		AllPosts = append(AllPosts, posttmp)
 	}
+	
 UpdatePosts()
 AllData.AllPosts = AllPosts
+// fmt.Println(AllData.AllPosts)
 }
