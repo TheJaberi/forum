@@ -35,6 +35,7 @@ func CreatePost(title string, body string, postCategories []int) {
 				}
 			}
 		}
+		postData.TimeCreated = "Now"
 		AllPosts = append(AllPosts, postData)
 		AllData.AllPosts = AllPosts
 }

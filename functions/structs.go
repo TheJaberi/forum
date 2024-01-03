@@ -52,6 +52,7 @@ type Post struct {
 	LoggedUser bool
 	TimeCreated string
 	Comments []Comment
+	NumbOfComments int
 }
 
 type Comment struct {

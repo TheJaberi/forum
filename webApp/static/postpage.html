@@ -7,10 +7,10 @@
     <link rel="stylesheet" href="/css/postpage.css">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>
-    // history.pushState(null, null, document.title);
-    //     window.addEventListener('popstate', function () {
-    //         history.pushState(null, null, document.title);
-    //     });
+    history.pushState(null, null, document.title);
+        window.addEventListener('popstate', function () {
+            history.pushState(null, null, document.title);
+        });
         src="https://kit.fontawesome.com/9e5ba2e3f5.js"
       crossorigin="anonymous"
 </script>
@@ -30,21 +30,21 @@ Done by {{.Username}}
 {{ if .LoggedUser }}
 {{ if .Userlike }}
 <form method="GET" action="/like">
-<button name= "removeInteraction" id = "removeInteraction" value="{{.PostID}}">already Like</button></form>
+<button name= "removeInteraction" id = "removeInteraction" value="{{.PostID}}"><i class="fa fa-thumbs-up fa-5x" style="color: blue;"></i></button></form>
 <form method="GET" action="/dislike">
-    <button name= "postInteraction" id = "postInteraction" value="{{.PostID}}">DisLike</button></form>
+    <button name= "postInteraction" id = "postInteraction" value="{{.PostID}}"><i class="fa fa-thumbs-down fa-5x" id="notclicked"></i></button></form>
 {{else}}
 {{if .UserDislike}}
 <form method="GET" action="/like">
-    <button name= "postInteraction" id = "postInteraction" value="{{.PostID}}">Like</button></form>
+    <button name= "postInteraction" id = "postInteraction" value="{{.PostID}}"><i class="fa fa-thumbs-up fa-5x"></i></button></form>
 <form method="GET" action="/dislike">
-    <button name= "removeInteraction" id = "removeInteraction" value="{{.PostID}}">already DisLike</button></form>
+    <button name= "removeInteraction" id = "removeInteraction" value="{{.PostID}}"><i class="fa fa-thumbs-down fa-5x" style="color: blue;"></i></button></form>
     {{else}}
         <form method="GET" action="/like">
-        <button name= "postInteraction" id = "postInteraction" value="{{.PostID}}">Like</button></form>
+        <button name= "postInteraction" id = "postInteraction" value="{{.PostID}}"><i class="fa fa-thumbs-up fa-5x"></i></button></form>
         <form method="GET" action="/dislike">
         <button name= "postInteraction" id = "postInteraction" value="{{.PostID}}">
-            <!-- <i class="fa fa-thumbs-up" <style></style>"blue"</i></button></form> -->
+            <i class="fa fa-thumbs-down fa-5x"></i></button></form>
         {{end}}
         {{end}}
         <div class="overlayposts">

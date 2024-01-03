@@ -15,18 +15,16 @@
     overflow: hidden;
     font-size: large;
   }
-  /* i {
-    font-size: var(--fs24);
-    color: blueviolet;
+  button i {
+    color: rgb(255, 255, 255);
     cursor: pointer;
-    margin-left: 53%;
-    font-size: xx-large;
-  } */
+  }
   .postbox button {
     font-size: x-large;
     color: #2fbcfd;
     background-color: black;
     padding: 6px;
+    cursor: pointer;
     /* border-radius: 20%; */
   }
   textarea {
