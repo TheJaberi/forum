@@ -14,7 +14,7 @@ type Applicant struct {
 }
 
 type Session struct {
-	Id        int
+	Name      string
 	Uuid      uuid.UUID
 	Email     string
 	UserId    int

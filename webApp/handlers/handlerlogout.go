@@ -4,7 +4,7 @@ import (
 	"fmt"
 	forum "forum/functions"
 	"html/template"
-		"net/http"
+	"net/http"
 )
 
 func HandlerLogout(w http.ResponseWriter, req *http.Request) {

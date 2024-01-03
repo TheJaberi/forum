@@ -7,6 +7,10 @@ import (
 )
 
 func MainHandler(w http.ResponseWriter, req *http.Request) {
+	session := forum.CheckCookies(req)
+	if session != nil {
+		HandlerLogout(w, req)
+	}
 	if req.URL.Path != "/" {
 		ErrorHandler(w, req, http.StatusNotFound)
 		return

@@ -2,8 +2,9 @@ package forum
 
 import (
 	"context"
-	_ "github.com/mattn/go-sqlite3"
 	"log"
+
+	_ "github.com/mattn/go-sqlite3"
 )
 
 func RemoveInteraction(post_id int, user_id int) {

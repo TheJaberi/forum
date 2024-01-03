@@ -1,11 +1,11 @@
 package forum
 
 import (
+	"fmt"
+	forumVar "forum"
 	forum "forum/functions"
 	"html/template"
 	"net/http"
-	"fmt"
-	forumVar "forum"
 )
 
 func HandlerRegister(w http.ResponseWriter, req *http.Request) {
@@ -24,11 +24,11 @@ func HandlerRegister(w http.ResponseWriter, req *http.Request) {
 	}
 	w.WriteHeader(http.StatusOK)
 	var NewApplicant forumVar.Applicant
-	NewApplicant.Username = req.FormValue("username") // when the register button is clicked the username data is assigned to a variable
+	NewApplicant.Username = req.FormValue("username")         // when the register button is clicked the username data is assigned to a variable
 	NewApplicant.Password = []byte(req.FormValue("password")) // when the register button is clicked the password data is assigned to a variable
 	NewApplicant.Email = req.FormValue("email")
 	fmt.Println(1)
 
-	forum.UserDbRegisteration(NewApplicant,forum.DB) // NewUser adds the username and password to the database
+	forum.UserDbRegisteration(NewApplicant, forum.DB) // NewUser adds the username and password to the database
 	t.ExecuteTemplate(w, "index.html", nil)
 }

@@ -9,7 +9,7 @@ import (
 
 func HandlerFilterCategory(w http.ResponseWriter, req *http.Request) {
 	var filteredPosts []forum.Post
-	if req.URL.Path != "/filtercategory/"{
+	if req.URL.Path != "/filtercategory/" {
 		ErrorHandler(w, req, http.StatusNotFound)
 		return
 	}
@@ -23,7 +23,7 @@ func HandlerFilterCategory(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 	forum.ViewCategory()
-		forum.ViewPosts()
+	forum.ViewPosts()
 	category, _ := strconv.Atoi(req.FormValue("category")) // gets the data from the button clicked for filtering
 	for i := 0; i < len(forum.AllPosts); i++ {
 		for j := 0; j < len(forum.AllPosts[i].Category); j++ {

@@ -9,7 +9,7 @@ import (
 
 func HandlerMyFilter(w http.ResponseWriter, req *http.Request) {
 	var filteredPosts []forum.Post
-	if req.URL.Path != "/mylikes/" && req.URL.Path != "/myposts/" && req.URL.Path != "/mydislikes/"{
+	if req.URL.Path != "/mylikes/" && req.URL.Path != "/myposts/" && req.URL.Path != "/mydislikes/" {
 		ErrorHandler(w, req, http.StatusNotFound)
 		return
 	}
@@ -22,9 +22,9 @@ func HandlerMyFilter(w http.ResponseWriter, req *http.Request) {
 		ErrorHandler(w, req, http.StatusInternalServerError)
 		return
 	}
-	user_id, _ := strconv.Atoi(req.FormValue("user"))// whenever any of the buttons is clicked the user logged in id is saved
-	for i := 0; i < len(forum.AllPosts); i++ { // depending on the url path that is displayed when each of the buttons is clicked the data well be filtered
-		if req.URL.Path == "/myposts/" && forum.AllPosts[i].UserID == user_id { 
+	user_id, _ := strconv.Atoi(req.FormValue("user")) // whenever any of the buttons is clicked the user logged in id is saved
+	for i := 0; i < len(forum.AllPosts); i++ {        // depending on the url path that is displayed when each of the buttons is clicked the data well be filtered
+		if req.URL.Path == "/myposts/" && forum.AllPosts[i].UserID == user_id {
 			filteredPosts = append(filteredPosts, forum.AllPosts[i])
 		}
 		if req.URL.Path == "/mylikes/" && forum.AllPosts[i].Userlike {

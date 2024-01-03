@@ -14,7 +14,7 @@ func ViewPosts() {
 		log.Fatal(errpost)
 	}
 	for postData.Next() { // this loop ends at the end of the function since it needs to get the data for each post from 5 tables
-		var posttmp Post // temporary type post is appended to all posts at the end of the loop after gathering all of the data
+		var posttmp Post                                                                                     // temporary type post is appended to all posts at the end of the loop after gathering all of the data
 		postData.Scan(&posttmp.PostID, &posttmp.Title, &posttmp.Body, &posttmp.UserID, &posttmp.TimeCreated) // posts id, title, body and user id is from posts table
 		posttmp.TimeCreated = strings.Replace(posttmp.TimeCreated, "T", " ", -1)
 		posttmp.TimeCreated = strings.Replace(posttmp.TimeCreated, "Z", " ", -1)
@@ -27,7 +27,7 @@ func ViewPosts() {
 		for categorydata.Next() {
 			var categorytmp int
 			categorydata.Scan(&categorytmp)
-			for i := 0; i < len(AllCategories); i++ { // the name of the categories is already saved in all categories 
+			for i := 0; i < len(AllCategories); i++ { // the name of the categories is already saved in all categories
 				if categorytmp == AllCategories[i].CategoryID {
 					posttmp.Category = append(posttmp.Category, AllCategories[i])
 					break
@@ -51,8 +51,8 @@ func ViewPosts() {
 		dislikedata.Scan(&posttmp.Dislikes)
 		AllPosts = append(AllPosts, posttmp)
 	}
-	
-UpdatePosts()
-AllData.AllPosts = AllPosts
-// fmt.Println(AllData.AllPosts)
+
+	UpdatePosts()
+	AllData.AllPosts = AllPosts
+	// fmt.Println(AllData.AllPosts)
 }

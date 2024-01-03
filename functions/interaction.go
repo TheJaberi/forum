@@ -2,8 +2,9 @@ package forum
 
 import (
 	"context"
-	_ "github.com/mattn/go-sqlite3"
 	"log"
+
+	_ "github.com/mattn/go-sqlite3"
 )
 
 func InsertInteraction(post_id int, user_id int, likeOrDislike int) {

@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"errors"
 	"fmt"
+	"net/http"
 	"time"
 
 	"forum"
@@ -13,6 +14,8 @@ import (
 )
 
 var (
+	Session forum.Session
+	Empty   forum.Session
 	// XXX Implement into db calls
 	UserNameError     = errors.New("User Name error!")
 	UserEmailError    = errors.New("User Email error!")
@@ -34,15 +37,16 @@ func UserDbRegisteration(applicant forum.Applicant, db *sql.DB) error {
 }
 
 // Login
-func UserDbLogin(email string, password string) error {
+func UserDbLogin(email string, password string) (forum.Session, error) {
+	var empty forum.Session
 	if isUsernameExists(email) != nil {
-		return UserEmailError
+		return empty, UserEmailError
 	}
 	userdata := DB.QueryRow("SELECT user_id, user_name, user_pass, user_email, user_type FROM users where user_email = ?", email) // select gets the data from users table
-	err := userdata.Scan(&LoggedUser.Userid, &LoggedUser.Username, &LoggedUser.Password, &LoggedUser.Email, &LoggedUser.Type) // scan assigns the data of the row to variables
+	err := userdata.Scan(&LoggedUser.Userid, &LoggedUser.Username, &LoggedUser.Password, &LoggedUser.Email, &LoggedUser.Type)     // scan assigns the data of the row to variables
 	if err != nil {
 		fmt.Println(err)
-			} else {
+	} else {
 		LoggedUser.Registered = true
 		AllData.IsLogged = true
 		AllData.LoggedUser = LoggedUser
@@ -53,22 +57,23 @@ func UserDbLogin(email string, password string) error {
 	}
 	err = bcrypt.CompareHashAndPassword([]byte(LoggedUser.Password), []byte(password))
 	if err != nil {
-		return err
+		return empty, err
 	}
 	uuid, err := uuid.NewV4()
 	if err != nil {
-		return err
+		return empty, err
 	}
 	// XXX implement and return Cookie
-	session := forum.Session{
-		Id: LoggedUser.Userid,
+	Session = forum.Session{
+		Name:      "myCookies",
+		UserId:    LoggedUser.Userid,
 		Email:     email,
 		CreatedAt: time.Now(),
 		Uuid:      uuid,
 	}
-	fmt.Println(session)
-	UpdatePosts()	
-	return nil
+	fmt.Println(Session)
+	UpdatePosts()
+	return Session, nil
 }
 
 func isUsernameExists(applicantEmail string) error {
@@ -80,6 +85,20 @@ func isUsernameExists(applicantEmail string) error {
 	}
 	if !exists {
 		return UserExistsError
+	}
+	return nil
+}
+
+func CheckCookies(r *http.Request) error {
+	cookie, err := r.Cookie(Session.Name)
+	if err != nil {
+		return err
+	}
+
+	// Get cookie value:
+	if cookie.Value != Session.Uuid.String() || cookie.MaxAge < 0 {
+		Session = Empty
+		return errors.New("session expired")
 	}
 	return nil
 }

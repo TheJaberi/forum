@@ -33,6 +33,6 @@ func HandlerPost(w http.ResponseWriter, req *http.Request) {
 	}
 	forum.CreatePost(title, body, postCategories) // create post adds the title and body to the table in the database
 	// MainHandler(w, req)
-	
+
 	t.ExecuteTemplate(w, "index.html", forum.AllData)
 }

@@ -1,10 +1,11 @@
 package forum
 
 import (
-	"forum/functions"
-	_ "github.com/mattn/go-sqlite3"
+	forum "forum/functions"
 	"html/template"
 	"net/http"
+
+	_ "github.com/mattn/go-sqlite3"
 )
 
 func HandlerCreateCategory(w http.ResponseWriter, req *http.Request) {

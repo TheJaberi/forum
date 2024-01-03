@@ -15,8 +15,8 @@ type Data struct {
 	AllPosts      []Post
 	AllCategories []Category
 	Postpage      Post
-	LoggedUser   User
-	IsLogged      bool	
+	LoggedUser    User
+	IsLogged      bool
 	LoggedUserID  int
 	TypeAdmin     bool
 }
@@ -39,24 +39,24 @@ var ErrResponse struct {
 }
 
 type Post struct {
-	Title    string
-	Body     string
-	PostID   int
-	UserID   int
-	Username string
-	Category []Category
-	Likes int
-	Dislikes int
-	Userlike bool
+	Title       string
+	Body        string
+	PostID      int
+	UserID      int
+	Username    string
+	Category    []Category
+	Likes       int
+	Dislikes    int
+	Userlike    bool
 	UserDislike bool
-	LoggedUser bool
+	LoggedUser  bool
 	TimeCreated string
-	Comments []Comment
+	Comments    []Comment
 }
 
 type Comment struct {
-	Body string
-	Post_id int
-	User_id int
+	Body            string
+	Post_id         int
+	User_id         int
 	CommentUsername string
 }
