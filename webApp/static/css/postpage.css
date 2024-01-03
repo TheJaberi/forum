@@ -15,12 +15,13 @@
     overflow: hidden;
     font-size: large;
   }
-  .postbox i {
+  /* i {
     font-size: var(--fs24);
-    color: var(--whiteColor);
+    color: blueviolet;
     cursor: pointer;
     margin-left: 53%;
-  }
+    font-size: xx-large;
+  } */
   .postbox button {
     font-size: x-large;
     color: #2fbcfd;

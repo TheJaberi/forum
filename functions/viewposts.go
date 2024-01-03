@@ -1,7 +1,6 @@
 package forum
 
 import (
-	"fmt"
 	"log"
 	"strings"
 
@@ -44,7 +43,6 @@ func ViewPosts() {
 			commentData.Scan(&commenttmp.Body, &commenttmp.User_id)
 			userData := DB.QueryRow("Select user_name from users where user_id = ?", commenttmp.User_id)
 			userData.Scan(&commenttmp.CommentUsername)
-			fmt.Println(commenttmp)
 			posttmp.Comments = append(posttmp.Comments, commenttmp)
 		}
 		likedata := DB.QueryRow("SELECT COUNT(user_id) FROM Interaction where post_id = ? AND interaction = ?", posttmp.PostID, 1) // to present the numb of likes for each post

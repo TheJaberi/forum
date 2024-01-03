@@ -36,4 +36,5 @@ func CreatePost(title string, body string, postCategories []int) {
 			}
 		}
 		AllPosts = append(AllPosts, postData)
+		AllData.AllPosts = AllPosts
 }
