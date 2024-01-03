@@ -39,19 +39,20 @@ var ErrResponse struct {
 }
 
 type Post struct {
-	Title       string
-	Body        string
-	PostID      int
-	UserID      int
-	Username    string
-	Category    []Category
-	Likes       int
-	Dislikes    int
-	Userlike    bool
-	UserDislike bool
-	LoggedUser  bool
-	TimeCreated string
-	Comments    []Comment
+	Title         string
+	Body          string
+	PostID        int
+	UserID        int
+	Username      string
+	Category      []Category
+	Likes         int
+	Dislikes      int
+	Userlike      bool
+	UserDislike   bool
+	LoggedUser    bool
+	TimeCreated   string
+	CommentsCount int
+	Comments      []Comment
 }
 
 type Comment struct {

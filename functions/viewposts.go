@@ -45,6 +45,7 @@ func ViewPosts() {
 			userData.Scan(&commenttmp.CommentUsername)
 			posttmp.Comments = append(posttmp.Comments, commenttmp)
 		}
+		posttmp.CommentsCount = len(posttmp.Comments)
 		likedata := DB.QueryRow("SELECT COUNT(user_id) FROM Interaction where post_id = ? AND interaction = ?", posttmp.PostID, 1) // to present the numb of likes for each post
 		likedata.Scan(&posttmp.Likes)
 		dislikedata := DB.QueryRow("SELECT COUNT(user_id) FROM Interaction where post_id = ? AND interaction = ?", posttmp.PostID, 0) // to present the numb of dislikes for each post
