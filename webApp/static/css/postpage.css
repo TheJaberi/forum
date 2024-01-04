@@ -1,20 +1,28 @@
 *{
-    background-color: aquamarine;
+    background-color: var(--lightBlackColor);
+    color: var(--aquaColor);
 }
 
-  .postbox {
+h1 {
+  font-size: 8rem;
+  position: relative;
+  text-align:center;
+  background-color: rgb(15, 15, 15);
+}
+  /* .postbox {
+    color:var(--aquaColor);
     position: relative;
     border-radius: 0.4rem;
     padding: 1rem;
     background-color: var(--lightRedColor);
     max-width: 108rem;
     width: 100%;
-    margin: 4rem auto 10rem;
-    margin-top: 25vh;
-    box-shadow: 0 0.5rem 1.5rem 0 rgba(0 0 0 / 0.5);
-    overflow: hidden;
-    font-size: large;
-  }
+    /* margin: 4rem auto 10rem; */
+    /* margin-top: 25vh; */
+    /* box-shadow: 0 0.5rem 1.5rem 0 rgba(255, 0, 0, 0.5); */
+    /* overflow: hidden; */
+    /* font-size: large; */
+  /* } */ 
   button i {
     color: rgb(255, 255, 255);
     cursor: pointer;
@@ -32,6 +40,6 @@
     resize: none;
     max-width: 106rem;
     background-color: black;
-    color: #ffffff;
+    color: var(--aquaColor);
     font-weight: 900;
   }

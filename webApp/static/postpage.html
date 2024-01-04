@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/css/postpage.css">
+    <link rel="stylesheet" href="/css/general.css">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>
     history.pushState(null, null, document.title);
@@ -17,16 +18,10 @@
 </head>
 <body>
     <form method="GET" action="/">
-    <button>back to homepage</button></form>
-{{.Title}}<br> 
-{{.Body}}<br>  
-Categories:{{range .Category}}<option value="{{.}}">{{.CategoryName}}</option>{{end}}
-Comments:{{range .Comments}}
-<div><option value="{{.}}">{{.Body}}</option>
-    <option value="{{.}}">{{.CommentUsername}}</option></div>{{end}}
-</body><br>
-<i class="fal fas-thumbs-up"></i>
+    <button>Reboot01 Forum HomePage</button></form>
+<h1>{{.Title}}</h1>Categories:{{range .Category}}<option value="{{.}}">{{.CategoryName}}</option>{{end}} 
 Done by {{.Username}}
+<div class="likeButton">
 {{ if .LoggedUser }}
 {{ if .Userlike }}
 <form method="GET" action="/like">
@@ -47,15 +42,21 @@ Done by {{.Username}}
             <i class="fa fa-thumbs-down fa-5x"></i></button></form>
         {{end}}
         {{end}}
-        <div class="overlayposts">
-            <div class="postbox" id="postbox">
-            <form method="post" action="/comment">
-              Comment<textarea name="commentContent" id="commentContent" rows="20" cols="150" placeholder="(max 2000 characters)" required="true" maxlength="2000"></textarea>
-              <button name= "postid" id = "postid" value="{{.PostID}}">Add Comment</button></div>
-          </form>
-        </div>
-        {{else}}
+        {{else}}</div>
         {{end}}
-
-
+<h3>{{.Body}}</h3><br>  
+<div class="postbox" id="postbox">Comments:{{range .Comments}}
+<option value="{{.}}">{{.Body}}</option>
+    <option value="{{.}}">{{.CommentUsername}}</option></div>{{end}}
+    {{ if .LoggedUser }}
+    <div class="overlayposts">
+        <div class="postbox" id="postbox">
+        <form method="post" action="/comment">
+          Comment<textarea name="commentContent" id="commentContent" rows="20" cols="150" placeholder="(max 2000 characters)" required="true" maxlength="2000"></textarea>
+          <button name= "postid" id = "postid" value="{{.PostID}}">Add Comment</button></div>
+      </form>
+    </div> 
+    {{else}}
+    {{end}}
+</body><br>
 </html>
