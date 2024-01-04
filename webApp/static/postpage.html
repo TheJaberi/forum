@@ -17,6 +17,7 @@
 </script>
 </head>
 <body>
+    <div class="details">
     <form method="GET" action="/">
     <button>Reboot01 Forum HomePage</button></form>
 <h1>{{.Title}}</h1>Categories:{{range .Category}}<option value="{{.}}">{{.CategoryName}}</option>{{end}} 
@@ -42,17 +43,19 @@ Done by {{.Username}}
             <i class="fa fa-thumbs-down fa-5x"></i></button></form>
         {{end}}
         {{end}}
-        {{else}}</div>
+        {{else}}
         {{end}}
+    </div>
+</div>
 <h3>{{.Body}}</h3><br>  
 <div class="postbox" id="postbox">Comments:{{range .Comments}}
 <option value="{{.}}">{{.Body}}</option>
-    <option value="{{.}}">{{.CommentUsername}}</option></div>{{end}}
+    <option value="{{.}}"><div class="username">Comment By:{{.CommentUsername}}</div></option>{{end}}</div>
     {{ if .LoggedUser }}
     <div class="overlayposts">
         <div class="postbox" id="postbox">
         <form method="post" action="/comment">
-          Comment<textarea name="commentContent" id="commentContent" rows="20" cols="150" placeholder="(max 2000 characters)" required="true" maxlength="2000"></textarea>
+          Comment  <textarea name="commentContent" id="commentContent" rows="2" cols="150" placeholder="(max 2000 characters)" required="true" maxlength="2000"></textarea>
           <button name= "postid" id = "postid" value="{{.PostID}}">Add Comment</button></div>
       </form>
     </div> 

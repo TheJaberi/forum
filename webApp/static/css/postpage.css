@@ -1,7 +1,7 @@
-*{
+/* *{
     background-color: var(--lightBlackColor);
     color: var(--aquaColor);
-}
+} */
 
 h1 {
   font-size: 8rem;
@@ -9,31 +9,18 @@ h1 {
   text-align:center;
   background-color: rgb(15, 15, 15);
 }
-  /* .postbox {
-    color:var(--aquaColor);
-    position: relative;
-    border-radius: 0.4rem;
-    padding: 1rem;
-    background-color: var(--lightRedColor);
-    max-width: 108rem;
-    width: 100%;
-    /* margin: 4rem auto 10rem; */
-    /* margin-top: 25vh; */
-    /* box-shadow: 0 0.5rem 1.5rem 0 rgba(255, 0, 0, 0.5); */
-    /* overflow: hidden; */
-    /* font-size: large; */
-  /* } */ 
+
   button i {
     color: rgb(255, 255, 255);
     cursor: pointer;
   }
-  .postbox button {
+  .postbox {
     font-size: x-large;
-    color: #2fbcfd;
+    resize: none;
+    /* max-width: 106rem; */
     background-color: black;
-    padding: 6px;
-    cursor: pointer;
-    /* border-radius: 20%; */
+    color: var(--aquaColor);
+    font-weight: 900;
   }
   textarea {
     font-size: x-large;
@@ -43,3 +30,25 @@ h1 {
     color: var(--aquaColor);
     font-weight: 900;
   }
+  .postbox button {
+    font-size: x-large;
+    resize: none;
+    max-width: 106rem;
+    background-color: black;
+    color: var(--aquaColor);
+    font-weight: 900;
+  }
+  body .likeButton {
+    text-align: right;
+    margin-top: -90px;
+  }
+  body .likeButton button{
+   position: inline-flex;
+   font-size: xx-small;
+  }
+.details {
+  background-color: darkblue;
+}
+.postbox .username {
+  font-size: large;
+}
