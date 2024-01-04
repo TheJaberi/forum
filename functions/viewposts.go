@@ -9,13 +9,17 @@ import (
 
 func ViewPosts() {
 	AllPosts = nil
-	postData, errpost := DB.Query("Select id, Title, body, user_id, time_created from posts")
+	postData, errpost := DB.Query("Select id, Title, img_url, body, user_id, time_created from posts")
 	if errpost != nil {
 		log.Fatal(errpost)
 	}
 	for postData.Next() { // this loop ends at the end of the function since it needs to get the data for each post from 5 tables
-		var posttmp Post                                                                                     // temporary type post is appended to all posts at the end of the loop after gathering all of the data
-		postData.Scan(&posttmp.PostID, &posttmp.Title, &posttmp.Body, &posttmp.UserID, &posttmp.TimeCreated) // posts id, title, body and user id is from posts table
+		var posttmp Post // temporary type post is appended to all posts at the end of the loop after gathering all of the data
+		posttmp.IsImage = false
+		postData.Scan(&posttmp.PostID, &posttmp.Title, &posttmp.Image, &posttmp.Body, &posttmp.UserID, &posttmp.TimeCreated) // posts id, title, body and user id is from posts table
+		if posttmp.Image != "" {
+			posttmp.IsImage = true
+		}
 		posttmp.TimeCreated = strings.Replace(posttmp.TimeCreated, "T", " ", -1)
 		posttmp.TimeCreated = strings.Replace(posttmp.TimeCreated, "Z", " ", -1)
 		userData := DB.QueryRow("Select user_name from users where user_id = ?", posttmp.UserID) // username of the user who posted

@@ -3,7 +3,6 @@ package forum
 import (
 	"fmt"
 	forum "forum/functions"
-	"html/template"
 	"net/http"
 )
 
@@ -16,16 +15,18 @@ func HandlerLogout(w http.ResponseWriter, req *http.Request) {
 		ErrorHandler(w, req, http.StatusMethodNotAllowed)
 		return
 	}
-	t, err := template.ParseFiles(HTMLs...)
-	if err != nil {
-		ErrorHandler(w, req, http.StatusInternalServerError)
-		return
-	}
+	// t, err := template.ParseFiles(HTMLs...)
+	// if err != nil {
+	// 	ErrorHandler(w, req, http.StatusInternalServerError)
+	// 	return
+	// }
 	w.WriteHeader(http.StatusOK)
 	var empty forum.User
 	forum.AllData.LoggedUser = empty
 	fmt.Println(forum.AllData.LoggedUser)
 	forum.AllData.IsLogged = false
-	forum.UpdatePosts()
-	t.ExecuteTemplate(w, "index.html", forum.AllData)
+	http.Redirect(w, req, "/", http.StatusOK)
+	// forum.UpdatePosts()
+	// MainHandler(w, req)
+	// t.ExecuteTemplate(w, "index.html", forum.AllData)
 }

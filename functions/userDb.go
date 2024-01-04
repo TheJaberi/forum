@@ -38,9 +38,8 @@ func UserDbRegisteration(applicant forum.Applicant, db *sql.DB) error {
 
 // Login
 func UserDbLogin(email string, password string) (forum.Session, error) {
-	var empty forum.Session
 	if isUsernameExists(email) != nil {
-		return empty, UserEmailError
+		return Empty, UserEmailError
 	}
 	userdata := DB.QueryRow("SELECT user_id, user_name, user_pass, user_email, user_type FROM users where user_email = ?", email) // select gets the data from users table
 	err := userdata.Scan(&LoggedUser.Userid, &LoggedUser.Username, &LoggedUser.Password, &LoggedUser.Email, &LoggedUser.Type)     // scan assigns the data of the row to variables
@@ -57,11 +56,11 @@ func UserDbLogin(email string, password string) (forum.Session, error) {
 	}
 	err = bcrypt.CompareHashAndPassword([]byte(LoggedUser.Password), []byte(password))
 	if err != nil {
-		return empty, err
+		return Empty, err
 	}
 	uuid, err := uuid.NewV4()
 	if err != nil {
-		return empty, err
+		return Empty, err
 	}
 	// XXX implement and return Cookie
 	Session = forum.Session{
@@ -94,10 +93,11 @@ func CheckCookies(r *http.Request) error {
 	if err != nil {
 		return err
 	}
-
+	fmt.Println(cookie)
 	// Get cookie value:
-	if cookie.Value != Session.Uuid.String() || cookie.MaxAge < 0 {
+	if cookie.MaxAge < 0 {
 		Session = Empty
+		fmt.Println("here")
 		return errors.New("session expired")
 	}
 	return nil

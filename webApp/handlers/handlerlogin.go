@@ -36,7 +36,6 @@ func HandlerLogin(w http.ResponseWriter, req *http.Request) {
 		MaxAge:   3600,
 		HttpOnly: true,
 	}
-	fmt.Println(sessionCookie)
 	// Set cookie in response headers
 	http.SetCookie(w, sessionCookie)
 	forum.UpdatePosts()

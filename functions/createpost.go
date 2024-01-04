@@ -7,15 +7,16 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
-func CreatePost(title string, body string, postCategories []int) {
+func CreatePost(title, image, body string, postCategories []int) {
 	var postData Post
 	postData.Title = title
+	postData.Image = image
 	postData.Body = body
 	postData.UserID = LoggedUser.Userid
 	postData.Username = LoggedUser.Username
 	// if LoggedUser.Registered { // check if registered is to true to add the post to the database
-	query := "INSERT INTO `posts` (`Title`, `body`, `user_id`) VALUES (?, ?, ?)"
-	rowdata, err2 := DB.ExecContext(context.Background(), query, title, body, LoggedUser.Userid)
+	query := "INSERT INTO `posts` (`Title`, `img_url`, `body`, `user_id`) VALUES (?, ?, ?, ?)"
+	rowdata, err2 := DB.ExecContext(context.Background(), query, title, image, body, LoggedUser.Userid)
 	if err2 != nil { // the post is added using the ExecContext along with the userid which is in the LoggedUser variable
 		log.Fatal(err2)
 	}

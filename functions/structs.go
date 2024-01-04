@@ -1,6 +1,8 @@
 package forum
 
-import "database/sql"
+import (
+	"database/sql"
+)
 
 var (
 	Database      *sql.DB
@@ -40,6 +42,8 @@ var ErrResponse struct {
 
 type Post struct {
 	Title         string
+	Image         string
+	IsImage       bool
 	Body          string
 	PostID        int
 	UserID        int

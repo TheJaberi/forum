@@ -24,14 +24,15 @@ func HandlerPost(w http.ResponseWriter, req *http.Request) {
 	}
 	w.WriteHeader(http.StatusOK)
 	title := req.FormValue("title") // when the createpost button is clicked the title data is assigned to a variable
-	body := req.FormValue("post")   // when the createpost button is clicked the body data is assigned to a variable
+	image := req.FormValue("image")
+	body := req.FormValue("post") // when the createpost button is clicked the body data is assigned to a variable
 	for i := 1; i <= len(forum.AllCategories); i++ {
 		categorytmp := req.FormValue(strconv.Itoa(i))
 		if categorytmp != "" {
 			postCategories = append(postCategories, i)
 		}
 	}
-	forum.CreatePost(title, body, postCategories) // create post adds the title and body to the table in the database
+	forum.CreatePost(title, image, body, postCategories) // create post adds the title and body to the table in the database
 	// MainHandler(w, req)
 
 	t.ExecuteTemplate(w, "index.html", forum.AllData)

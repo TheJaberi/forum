@@ -33,8 +33,12 @@
               <div class="nav-group">
                 <ul>
                   {{if .IsLogged}}
+                  
                   <li class="createpost">
                     <a href="#"><i class="fa-solid fa-comment"></i> Create Post</a>
+                  </li>
+                  <li class="createcategory">
+                    <a href="##"><i class="fa-solid fa-comment"></i> Create Category</a>
                   </li>
                   <li class="join">
                     <a href="/logout/">         
@@ -70,6 +74,13 @@
                   <div class="box">
                     <img src="">
                     <div class="details">
+                      <div style="height: 50px; width: 50px;">
+                        {{if .IsImage}}
+                      <img src="{{.Image}}" alt="img" title="{{.Title}}" style="height: 50px; width: 50px;">
+                      {{else}}
+                      <br>
+                      {{end}}
+                      </div>
                       
                       <h1><option value="{{.}}">{{.Title}}</option></h1><div class="categories">Categories: {{range .Category}} <option value="{{.}}"><h6>{{ .CategoryName}}</h6></option><span>&#44;&nbsp;</span>{{end}}</div>
                           <span><option value="{{.}}">Created on: <h6>{{.TimeCreated}}</h6></option></span>
@@ -105,7 +116,7 @@
           <div class="row">
             <div class="content">
               <div class="login-left">
-                  <form method="POST" action="/login">
+                  <form method="post" action="/login">
                   <input type="text" placeholder="Email" name="email"/>
                   <div class="form-group">
                     <input type="password" placeholder="Password" name="password" id="passIn" />
@@ -144,12 +155,20 @@
         <div class="postbox" id="postbox">
         <form method="post" action="/post">
           Post Title<textarea name="title" id="title" placeholder="Title (max 35 characters)" rows="1" cols="35" required="true" maxlength="35"></textarea><i class="fa-solid fa-xmark close"></i><br>
+          Post Image<textarea name="image" id="title" placeholder="Image" rows="1" cols="35"></textarea><br>
           Post Body<textarea name="post" id="post" rows="20" cols="150" placeholder="(max 2000 characters)" required="true" maxlength="2000"></textarea>
           Category
           {{range .AllCategories}}<input type="checkbox" name= "{{.CategoryID}}" id = "category" value="{{.CategoryID}}">{{.CategoryName}}{{end}}
-          <button class="downl-btn" id="format" name="format" value="txt">Create post</button></div>
-      </form>
-    </div>
+          <button class="downl-btn" id="format" name="format" value="txt">Create Post</button></div>
+        </form>
+      </div>
+      <div class="overlaycatogaries">
+        <div class="postbox" id="postbox">
+        <form method="post" action="/createcategory">
+          Category Name<textarea name="category" id="title" placeholder="Category Name (max 35 characters)" rows="1" cols="35" required="true" maxlength="35"></textarea><i class="fa-solid fa-xmark close"></i><br>
+          <button class="downl-btn" id="format" name="format" value="txt">Create Category</button></div>
+        </form>
+      </div>
       <script
       src="https://kit.fontawesome.com/9e5ba2e3f5.js"
       crossorigin="anonymous"
