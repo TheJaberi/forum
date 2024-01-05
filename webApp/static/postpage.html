@@ -6,19 +6,11 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/css/postpage.css">
     <link rel="stylesheet" href="/css/general.css">
+    <script src=""></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script>
-    history.pushState(null, null, document.title);
-        window.addEventListener('popstate', function () {
-            history.pushState(null, null, document.title);
-        });
-        src="https://kit.fontawesome.com/9e5ba2e3f5.js"
-      crossorigin="anonymous"
-</script>
 <title>Reboot Journal</title>
 </head>
-<form method="GET" action="/">
-    <button>Reboot01 Forum HomePage</button></form>
+<a href="/"><h2>Reboot01 Forum</h2></a>
     <a href="/postpage/?id={{.PostID}}"><h1>{{.Title}}</h1></a> 
 <body>
     <div class="details">
@@ -33,8 +25,9 @@
 {{if .UserDislike}}
 <form method="GET" action="/like">
     <button name= "postInteraction" id = "postInteraction" value="{{.PostID}}"><i class="fa fa-thumbs-up fa-5x"></i></button></form>
-<form method="GET" action="/dislike">
-    <button name= "removeInteraction" id = "removeInteraction" value="{{.PostID}}"><i class="fa fa-thumbs-down fa-5x" style="color: blue;"></i></button></form>
+<a href="http://localhost:8080/postpage/?id={{.PostID}}">
+    <form method="GET" action="/dislike">
+    <button name= "removeInteraction" id = "removeInteraction" value="{{.PostID}}"><i class="fa fa-thumbs-down fa-5x" style="color: blue;"></i></button></form></a>
     {{else}}
         <form method="GET" action="/like">
         <button name= "postInteraction" id = "postInteraction" value="{{.PostID}}"><i class="fa fa-thumbs-up fa-5x"></i></button></form>
@@ -63,3 +56,19 @@
     <h4>{{.Body}}</h4></div>{{end}}</div>
 </body>
 </html>
+<script>
+(function () {
+    window.onpageshow = function(event) {
+        if (event.persisted) {
+            window.location.reload();
+        }
+    };
+})();
+        src="https://kit.fontawesome.com/9e5ba2e3f5.js"
+        src="/js/postpage.js"
+      crossorigin="anonymous"
+      if (location.href !== ("http://localhost:8080/postpage/?id={{.PostID}}")){
+        window.location.replace("http://localhost:8080/postpage/?id={{.PostID}}")
+      } 
+
+</script>

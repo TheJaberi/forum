@@ -5,7 +5,9 @@ main .left h2 {
   font-size: var(--fs24);
   color: var(--darkBlueColor);
 }
-
+h2:hover{
+  color: var(--aquaColor);
+}
 main .left form select {
   width: 60%;
   padding: 1rem 0 1rem 0;
@@ -18,7 +20,10 @@ main .left form select {
 main .left {
   margin-top: 20px;
 }
-  
+li{
+  color:var(--aquaColor);
+  transition: 1.3s;
+}
 main .left .box {
   display: inline-flex;
   align-items: center;
