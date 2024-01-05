@@ -60,4 +60,5 @@ type Comment struct {
 	Post_id int
 	User_id int
 	CommentUsername string
+	TimeCreated string
 }

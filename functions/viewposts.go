@@ -34,7 +34,7 @@ func ViewPosts() {
 				}
 			}
 		}
-		commentData, commenterr := DB.Query("Select body, user_id from comments where post_id = ?", posttmp.PostID) // link between posts and its categories
+		commentData, commenterr := DB.Query("Select body, user_id, time_created from comments where post_id = ?", posttmp.PostID) // link between posts and its categories
 		if commenterr != nil {
 			log.Fatal(categoryerr)
 		}

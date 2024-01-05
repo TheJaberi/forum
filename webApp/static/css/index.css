@@ -12,7 +12,7 @@ main .left form select {
   border-radius: 5rem;
   border: 1px solid var(--blackColor);
   background-color: var(--lightBlackColor);
-  color: var(--darkBlueColor);
+  color: var(--aquaColor);
 }
 
 main .left {
@@ -55,7 +55,7 @@ main .left .box .img {
   }  
   main .left .box .details h1{
     font-weight: 700;
-    color: var(--darkBlueColor);
+    color: var(--aquaColor);
     font-size: 4rem;
     letter-spacing: -0.02em;
   }
