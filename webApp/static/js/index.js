@@ -1,4 +1,5 @@
 const join = document.querySelector(".join"),
+categories = document.querySelector(".nav-search"),
   overlay = document.querySelector(".overlay"),
   closeBtn = document.querySelector(".overlay .close");
 
@@ -11,6 +12,9 @@ join.addEventListener("click", () => {
 
 closeBtn.addEventListener("click", () => {
   overlay.classList.remove("active");
+});
+categories.addEventListener("click", () => {
+  overlay.classList.add("active");
 });
 
 create.addEventListener("click", () => {

@@ -16,6 +16,7 @@ type Data struct {
 	AllCategories []Category
 	Postpage      Post
 	LoggedUser   User
+	CategoryCheck bool
 	IsLogged      bool	
 	LoggedUserID  int
 	TypeAdmin     bool

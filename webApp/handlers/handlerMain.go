@@ -25,6 +25,7 @@ func MainHandler(w http.ResponseWriter, req *http.Request) {
 	forum.ViewPosts()
 	forum.AllData.AllPosts = forum.AllPosts
 	forum.AllData.AllCategories = forum.AllCategories
+	forum.AllData.CategoryCheck = true
 	// forum.AllData.LoggedUser = forum.LoggedUser
 	// forum.AllData.LoggedUserID = forum.LoggedUser.Userid
 	// forum.AllData.IsLogged = forum.LoggedUser.Registered

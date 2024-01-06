@@ -35,6 +35,7 @@ func HandlerMyFilter(w http.ResponseWriter, req *http.Request) {
 		}
 	}
 	forum.AllData.AllPosts = filteredPosts
-	forum.AllData.AllCategories = forum.AllCategories
+	// forum.AllData.AllCategories = nil
+	forum.AllData.CategoryCheck = false
 	t.ExecuteTemplate(w, "index.html", forum.AllData)
 }

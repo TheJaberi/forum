@@ -75,11 +75,11 @@ width: 98%;
     opacity: 0.5;
    }
   body .likeButton {
-    text-align: right;
+    text-align: left;
     margin-right: 3.5rem;
-    margin-top: -90px;
+    margin-top: 10px;
     /* background-color: black; */
-    /* position: inline; */
+    /* position: relative; */
   }
   body .likeButton button{
    position: inline-flex;

@@ -25,6 +25,7 @@ func HandlerPost(w http.ResponseWriter, req *http.Request) {
 	w.WriteHeader(http.StatusOK)
 	title := req.FormValue("title") // when the createpost button is clicked the title data is assigned to a variable
 	body := req.FormValue("post")   // when the createpost button is clicked the body data is assigned to a variable
+	body = forum.AdjustText(body)
 	for i := 1; i <= len(forum.AllCategories); i++ {
 		categorytmp := req.FormValue(strconv.Itoa(i))
 		if categorytmp != "" {

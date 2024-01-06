@@ -31,12 +31,13 @@
               </div>
               <div class="nav-group">
                 <ul>
+                  {{if .CategoryCheck}}
                   {{if .IsLogged}}
                   <li class="createpost">
-                    <a href="#"><i class="fa-solid fa-comment"></i> Create Post</a>
+                    <a href="/#"><i class="fa-solid fa-comment"></i> Create Post</a>
                   </li>
                   <li class="join">
-                    <a href="/logout/">         
+                    <a href="/logout">         
                       <i class="fa fa-sign-out"></i>
                       LogOut
                     </a>
@@ -48,9 +49,13 @@
                       Login / Join
                     </a>
                   </li>
+                  
                   {{end}}
-                </ul>
-              </div>
+                  
+                </ul>              </div>
+                {{else}}
+                  {{end}}
+
             </div>
           </div>
         </div>
@@ -98,7 +103,7 @@
       <div class="overlay">
         <div class="login" id="login">
           <div class="top">
-            <h2>Log in</h2>
+            <h2>Log in</h2><span>&nbsp;</span><h2>Register</h2>
             <i class="fa-solid fa-xmark close"></i>
           </div>
           <div class="row">
@@ -117,25 +122,19 @@
                   ><span>
                     Login with Google (Unavailable)</span
                   ></a
-                >
-                  <button type="submit" class="btn btn-red">Log in</button></form>
-
+                ><br><br>
+                  <button type="submit" class="btn btn-red">Log in</button></form>        
               </div>
-              <div class="login-left">
-                <div class="top-right">
-                <h2>Register</h2></div>
+              <div class="login-right">
                 <form method="POST" action="/register">
-                  <input type="text" placeholder="Username" name="username"/>
-                  <div class="for-group">
-                    <input type="password" placeholder="Password" name="password" id="passIn" /><br>
-                    <input type="email" placeholder="email" name="email" id="email" /><br>
-                    <button type="submit" class="btn btn-red">Join Now</button></form>
-              </div>
+                  <input type="email" placeholder="email" name="email" id="email"/>
+                <div class="form-group">
+                  <input type="password" placeholder="Password" name="password" id="passIn" />
+                </div>
+                <div class="form-group">
+                <input type="text" placeholder="Username" name="username"/></div><br><br>
+                <button type="submit" class="btn btn-red">Join Now</button></form>
             </div>
-            </div>
-            <!-- <div class="bottom">
-              <h4>New to Reboot Journal Forums?</h4>
-            </div> -->
           </div>
         </div>
       </div>
@@ -149,10 +148,21 @@
           <button class="downl-btn" id="format" name="format" value="txt">Create post</button></div>
       </form>
     </div>
-      <script
-      src="https://kit.fontawesome.com/9e5ba2e3f5.js"
-      crossorigin="anonymous"
-    ></script>
+    <script>
+      (function () {
+          window.onpageshow = function(event) {
+              if (event.persisted) {
+                  window.location.reload();
+              }
+          };
+      })();
+              
+              crossorigin="anonymous"
+            if (location.href === ("http://localhost:8080/post") || location.href === ("http://localhost:8080/logout/") || location.href === ("http://localhost:8080/register") || location.href === ("http://localhost:8080/logout/") || location.href === ("http://localhost:8080/login") ){
+              window.location.replace("http://localhost:8080")
+            }     
+      </script>
+      <script src="https://kit.fontawesome.com/9e5ba2e3f5.js"></script>
   <script src="js/index.js"></script>
 </body>
 </html>
