@@ -54,7 +54,7 @@
 {{end}}
 {{range .Comments}}
 <div class="postbox" id="postbox">
-    <div class="username" id="username"><h3>{{.CommentUsername}}</h3><br></div>
+    <div class="username" id="username"><h3>{{.CommentUsername}}</h3><h5>Comment added on: {{.TimeCreated}}</h5></div>
     <h4>{{.Body}}</h4></div>{{end}}</div>
 </body>
 </html>

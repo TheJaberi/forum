@@ -137,3 +137,8 @@ body .details{
   margin-left: 7rem;
   margin-top: -9rem;
 }
+
+.postbox .username h5 {
+  color:#26114d;
+  font-size:1.2rem
+}

@@ -26,7 +26,7 @@
                 <li><a href="/myposts/?user={{.LoggedUserID}}">MY POSTS</a></li>
                 {{else}}
                 {{end}}           
-                    {{range .AllCategories}}<li><a href="/filtercategory/?category={{.CategoryID}}">{{.CategoryName}}</a>{{end}}</li>
+                    {{range .AllCategories}}<li><a href="/filtercategory/?category={{.CategoryID}}">{{.CategoryName}}</a></li>{{end}}
                   </ul>
               </div>
               <div class="nav-group">
@@ -53,10 +53,11 @@
                   {{end}}
                   
                 </ul>              </div>
-                {{else}}
-                  {{end}}
+                
 
             </div>
+            {{else}}
+                  {{end}}
           </div>
         </div>
     </header>
