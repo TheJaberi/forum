@@ -29,7 +29,8 @@ func UserDbRegisteration(applicant forum.Applicant, db *sql.DB) error {
 	if err != nil {
 		return err
 	}
-	_, err = sqlStmt.Exec(applicant.Username, applicant.Email, applicant.Password, applicant.Type)
+	pass, _ := bcrypt.GenerateFromPassword([]byte(applicant.Password), 4)
+	_, err = sqlStmt.Exec(applicant.Username, applicant.Email, pass, applicant.Type)
 	if err != nil {
 		return err
 	}
@@ -95,7 +96,7 @@ func CheckCookies(r *http.Request) error {
 	}
 	fmt.Println(cookie)
 	// Get cookie value:
-	if cookie.MaxAge < 0 {
+	if cookie.MaxAge < 0 || cookie.Value != Session.Uuid.String() {
 		Session = Empty
 		fmt.Println("here")
 		return errors.New("session expired")

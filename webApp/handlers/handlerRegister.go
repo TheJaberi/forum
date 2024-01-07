@@ -1,7 +1,6 @@
 package forum
 
 import (
-	"fmt"
 	forumVar "forum"
 	forum "forum/functions"
 	"html/template"
@@ -27,7 +26,7 @@ func HandlerRegister(w http.ResponseWriter, req *http.Request) {
 	NewApplicant.Username = req.FormValue("username")         // when the register button is clicked the username data is assigned to a variable
 	NewApplicant.Password = []byte(req.FormValue("password")) // when the register button is clicked the password data is assigned to a variable
 	NewApplicant.Email = req.FormValue("email")
-	fmt.Println(1)
+	NewApplicant.Type = "Member"
 
 	forum.UserDbRegisteration(NewApplicant, forum.DB) // NewUser adds the username and password to the database
 	t.ExecuteTemplate(w, "index.html", nil)
