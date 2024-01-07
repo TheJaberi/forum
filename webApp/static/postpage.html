@@ -13,21 +13,18 @@
 <a href="/"><h2>Reboot01 Forum</h2></a>
     <a href="/postpage/?id={{.PostID}}"><h1>{{.Title}}</h1></a> 
 <body>
-    <div class="details">
-        {{range .Category}}<li>{{.CategoryName}}</li>{{end}}</div>
-{{ if .LoggedUser }}<div class="likeButton">
+    <div class="likeButton">{{ if .LoggedUser }}
 {{ if .Userlike }}
 <form method="GET" action="/like">
-<button name= "removeInteraction" id = "removeInteraction" value="{{.PostID}}"><i class="fa fa-thumbs-up fa-5x" style="color: blue;"></i></button></form>
-<form method="GET" action="/dislike">
+<button name= "removeInteraction" id = "removeInteraction" value="{{.PostID}}"><i class="fa fa-thumbs-up fa-5x" style="color: #26114d;"></i></button></form>
+<div class="dislikeButton"><form method="GET" action="/dislike">
     <button name= "postInteraction" id = "postInteraction" value="{{.PostID}}"><i class="fa fa-thumbs-down fa-5x" id="notclicked"></i></button></form>
-{{else}}
+</div>{{else}}
 {{if .UserDislike}}
 <form method="GET" action="/like">
     <button name= "postInteraction" id = "postInteraction" value="{{.PostID}}"><i class="fa fa-thumbs-up fa-5x"></i></button></form>
-<a href="http://localhost:8080/postpage/?id={{.PostID}}">
     <form method="GET" action="/dislike">
-    <button name= "removeInteraction" id = "removeInteraction" value="{{.PostID}}"><i class="fa fa-thumbs-down fa-5x" style="color: blue;"></i></button></form></a>
+    <button name= "removeInteraction" id = "removeInteraction" value="{{.PostID}}"><i class="fa fa-thumbs-down fa-5x" style="color: #26114d;"></i></button></form>
     {{else}}
         <form method="GET" action="/like">
         <button name= "postInteraction" id = "postInteraction" value="{{.PostID}}"><i class="fa fa-thumbs-up fa-5x"></i></button></form>
@@ -36,7 +33,12 @@
             <i class="fa fa-thumbs-down fa-5x"></i></button></form>
         {{end}}
         {{end}}</div>
-        {{else}}
+        
+    <div class="details">
+        {{range .Category}}<li>{{.CategoryName}}</li>{{end}}</div>
+{{else}}
+<div class="detailsnotlogged">
+    {{range .Category}}<li>{{.CategoryName}}</li>{{end}}</div>
         {{end}}<br><br>
 <h2>{{.Body}}</h2><br><br><br><div class="postedby">Posted by {{.Username}}</div><br><br>  
 {{ if .LoggedUser }}

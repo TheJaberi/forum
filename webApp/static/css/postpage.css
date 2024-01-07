@@ -12,6 +12,7 @@ body {
   position: inline;
   width: 98%;
   margin-left: 3.4rem;
+  margin-top: 3rem;
   /* width: 100rem; */
 }
 h1 {
@@ -27,7 +28,6 @@ width: 98%;
   button i {
     color: rgb(255, 255, 255);
     cursor: pointer;
-
   }
   .commentbox {
     font-size: x-large;
@@ -47,7 +47,7 @@ width: 98%;
     /* margin-left: 1.7rem; */
   }
   li {
-    color:black;
+    color:#26114d;
     font-weight:900;
   }
   .commentbox button {
@@ -76,27 +76,42 @@ width: 98%;
    }
   body .likeButton {
     text-align: left;
-    margin-right: 3.5rem;
-    margin-top: 10px;
-    /* background-color: black; */
-    /* position: relative; */
+    margin-left: 1rem;
+    /* margin-top: -4.5rem; */
+    /* border-radius: 0.4rem; */
+    /* background-color: var(--lightBlackColor) */
+    position: inline-flex;
   }
   body .likeButton button{
-   position: inline-flex;
+   /* position: inline-flex; */
    font-size: xx-small;
-   background-color: black;
-   cursor: pointer;
+   color: #000;
+   background-color: var(--blackColor);
+      cursor: pointer;
+      border:0
   }
-  body .likeButton button:hover{
-    position: inline-flex;
+  body .dislikeButton button{
+    /* position: inline-flex; */
     font-size: xx-small;
-    background-color: var(--aquaColor);
-    color:#000;
+    margin-top: 0rem;
+    color: #000;
+    background-color: var(--blackColor);
+       cursor: pointer;
+       border:0
+   }
+  button i:hover{
+    /* position: relative; */
+    /* font-size: xx-small; */
+    background-color: var(--blackColor);
+    color:#CAADFF;
     cursor: pointer;
+    transition: 0.5s;
    }
 
 body .postbox .username {
   font-size: xx-large;
+  color: #26114d;
+
 }
 body .postbox {
   /* display: inline-flex; */
@@ -114,5 +129,11 @@ body .postbox {
 }
 body .postedby {
   font-size: xx-large;
-  color: blueviolet;
+  color: #CAADFF;
+  font-weight:900;
+}
+
+body .details{
+  margin-left: 7rem;
+  margin-top: -9rem;
 }
