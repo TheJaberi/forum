@@ -37,7 +37,7 @@ func HandlerFilterCategory(w http.ResponseWriter, req *http.Request) {
 		}
 	}
 	w.WriteHeader(http.StatusOK)
-	forum.AllData.AllPosts = filteredPosts
+	forum.AllData.AllPosts = RSort(filteredPosts)
 	// forum.AllData.AllCategories = filterCategory
 	forum.AllData.CategoryCheck = false
 	forum.AllData.LoggedUser = forum.LoggedUser

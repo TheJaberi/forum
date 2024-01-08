@@ -19,16 +19,7 @@
                 <a href="/"
                 ><h2>Reboot01 Forum</h2></a>
               </div>
-              <div class="nav-search">
-                <ul>{{if .IsLogged}}
-                <li><a href="/mylikes/?user={{.LoggedUserID}}">MY LIKES</a></li>
-                <li><a href="/mydislikes/?user={{.LoggedUserID}}">MY DISLIKES</a></li>
-                <li><a href="/myposts/?user={{.LoggedUserID}}">MY POSTS</a></li>
-                {{else}}
-                {{end}}           
-                    {{range .AllCategories}}<li><a href="/filtercategory/?category={{.CategoryID}}">{{.CategoryName}}</a></li>{{end}}
-                  </ul>
-              </div>
+    
               <div class="nav-group">
                 <ul>
                   {{if .CategoryCheck}}
@@ -42,7 +33,13 @@
                       LogOut
                     </a>
                   </li>
+                  {{if .TypeAdmin}}
+                  <li class="createcategory">
+                    <a href="##"><i class="fa-solid fa-comment"></i> Create Category</a>
+                  </li>
+                  {{end}}
                   {{else}}
+                  
                   <li class="join">
                     <a href="/#">
                       <i class="fa-solid fa-user"></i>
@@ -51,10 +48,21 @@
                   </li>
                   
                   {{end}}
-                  
-                </ul>              </div>
-                
-
+                  </div>
+                </ul>              
+                  <div class="nav-search">
+                    <div class="my-search">
+                      <ul>{{if .IsLogged}}
+                      <li><a href="/mylikes/?user={{.LoggedUserID}}">MY LIKES</a></li>
+                      <li><a href="/mydislikes/?user={{.LoggedUserID}}">MY DISLIKES</a></li>
+                      <li><a href="/myposts/?user={{.LoggedUserID}}">MY POSTS</a></li>
+                      {{else}}
+                      {{end}} 
+                      </ul></div>
+                  <ul>          
+                      {{range .AllCategories}}<a href="/filtercategory/?category={{.CategoryID}}"><li>{{.CategoryName}}</a>{{end}}</li>
+                    </ul>
+                </div>
             </div>
             {{else}}
                   {{end}}
@@ -62,10 +70,15 @@
         </div>
     </header>
     <main>
-
-      <!-- <form method="post" action="/createcategory"> -->
-        <!-- Create category<textarea name="category" id="category" placeholder="Enter text here (maximum 50 characters)" rows="1" cols="10" required="true" maxlength="50"></textarea> -->
-        <!-- <button class="downl-btn" id="format" name="format" value="txt">Create Category</button></div></form> -->
+{{if .TypeAdmin}}
+<div class="overlaycatogaries">
+  <div class="postbox" id="postbox">
+  <form method="post" action="/createcategory">
+    Category Name<textarea name="category" id="title" placeholder="Category Name (max 35 characters)" rows="1" cols="35" required="true" maxlength="35"></textarea><i class="fa-solid fa-xmark close"></i><br>
+    <button class="downl-btn" id="format" name="format" value="txt">Create Category</button></div>
+  </form>
+</div>
+         {{end}}
         <div class="container">
           <div class="row">
             <section class="left">
@@ -130,10 +143,10 @@
                 <form method="POST" action="/register">
                   <input type="email" placeholder="email" name="email" id="email"/>
                 <div class="form-group">
-                  <input type="password" placeholder="Password" name="password" id="passIn" />
+                  <input type="text" placeholder="Username" name="username"/>
                 </div>
                 <div class="form-group">
-                <input type="text" placeholder="Username" name="username"/></div><br><br>
+                  <input type="password" placeholder="Password" name="password" id="passIn" /></div><br><br>
                 <button type="submit" class="btn btn-red">Join Now</button></form>
             </div>
           </div>
@@ -143,7 +156,7 @@
       <div class="overlayposts">
         <div class="postbox" id="postbox">
         <form method="post" action="/post">
-          Post Title<textarea name="title" id="title" placeholder="Title (max 35 characters)" rows="1" cols="35" required="true" maxlength="35"></textarea><i class="fa-solid fa-xmark close"></i><br>
+          Post Title <textarea name="title" id="title" placeholder=" Title (max 35 characters)" rows="1" cols="35" required="true" maxlength="35"></textarea><i class="fa-solid fa-xmark close"></i><br>
           Post Body<textarea name="post" id="post" rows="20" cols="150" placeholder="(max 2000 characters)" required="true" maxlength="2000"></textarea>
           Category
           {{range .AllCategories}}<input type="checkbox" name= "{{.CategoryID}}" id = "category" value="{{.CategoryID}}">{{.CategoryName}}{{end}}

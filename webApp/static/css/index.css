@@ -17,6 +17,9 @@ main .left form select {
   color: var(--aquaColor);
 }
 
+.header-content {
+text-align: center;
+} 
 main .left {
   margin-top: 20px;
 }
@@ -29,8 +32,8 @@ li{
 
 main .left .box {
   /* display: inline-flex; */
-  color:darkblue;
-  align-items: center;
+  color:rgb(255, 255, 255);
+  /* align-items: center; */
   background-color: var(--lightBlackColor);
   padding: 0.9rem 1.2rem;
   border-radius: 0.7rem;
@@ -61,6 +64,7 @@ main .left .box:hover {
   
   main .left .box .details {
     padding-left: 1.2rem;
+    font-size: 2.5rem;
   }
   main .left .box .details .categories {
     display: inline-flex;
@@ -70,14 +74,14 @@ main .left .box:hover {
   main .left .box .details h1{
     font-weight: 700;
     color: var(--aquaColor);
-    font-size: 4rem;
+    font-size: 4.5rem;
     letter-spacing: -0.02rem;
     display: flex;
   }
   main .left .box .details h6{
     font-weight: 700;
-    color: var(--aquaColor);
-    font-size: 1rem;
+    /* color: var(--aquaColor); */
+    font-size: 1.3rem;
     letter-spacing: -0.004em;
     display: inline;
 
@@ -108,6 +112,9 @@ main .left .box:hover {
     border-radius: 0.3rem;
   }
   
+  .logo {
+    width:50%;
+  }
   /*Overlay*/
   .overlay {
     position: fixed;
@@ -125,7 +132,31 @@ main .left .box:hover {
     opacity: 1;
     visibility: visible;
   }
-  
+
+  .nav-search li{
+    
+    text-align: center;
+    width: 100%;
+    max-width: 20%;
+  }
+  .my-search {
+    /* order:1; */
+    text-align: center;
+    width: 45%;
+    /* max-width: 20%; */
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: -42px;
+    
+  }
+
+  .my-search li{
+    width: 100%;
+    list-style: none;
+    text-align: center; }
+  /* .nav-group{
+    text-align: right;
+  } */
   .login {
     position: relative;
     border-radius: 0.4rem;
@@ -228,12 +259,13 @@ margin-bottom: 0;
     position: fixed;
     inset: 0;
     z-index: 999;
-    background-color: rgba(255, 0, 0, 0.35);
+    background-color: rgba(0, 0, 0, 0.35);
     transition: var(--transition);
     padding: 0 1.5rem;
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.5s, visibility 0.5s;
+    border-radius: 10px;
   }
   
   .overlayposts.active {
@@ -245,7 +277,7 @@ margin-bottom: 0;
     position: relative;
     border-radius: 0.4rem;
     padding: 1rem;
-    background-color: var(--lightBlueColor);
+    background-color: aqua;
     max-width: 108rem;
     width: 100%;
     margin: 4rem auto 10rem;
@@ -253,10 +285,11 @@ margin-bottom: 0;
     box-shadow: 0 0.5rem 1.5rem 0 rgba(0 0 0 / 0.5);
     overflow: hidden;
     font-size: large;
+    border-radius: 10px;
   }
   .postbox i {
     font-size: var(--fs24);
-    color: var(--whiteColor);
+    color: var(--blackColor);
     cursor: pointer;
     margin-left: 53%;
   }
@@ -265,15 +298,34 @@ margin-bottom: 0;
     color: #2fbcfd;
     background-color: black;
     padding: 6px;
-    /* border-radius: 20%; */
+    border-radius: 10px;
   }
   textarea {
     font-size: x-large;
     resize: none;
     max-width: 106rem;
     background-color: black;
-    color: #ffffff;
+    color: rgb(255, 255, 255);
     font-weight: 900;
+    border-radius: 10px;
+
+  }
+
+  .overlaycatogaries {
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    background-color: rgba(255, 0, 0, 0.35);
+    transition: var(--transition);
+    padding: 0 1.5rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s, visibility 0.5s;
+  }
+  
+  .overlaycatogaries.active {
+    opacity: 1;
+    visibility: visible;
   }
   
   @media (min-width: 649px) {

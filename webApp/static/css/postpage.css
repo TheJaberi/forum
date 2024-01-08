@@ -2,6 +2,7 @@
     /* background-color: var(--blackColor); */
     /* color: var(--aquaColor); */
     margin-left: 1rem;
+    /* text-align: center; */
 }
 
 body {
@@ -18,7 +19,6 @@ body {
 h1 {
   font-size: 8rem;
   /* position: relative; */
-  text-align:left;
   /* margin-left: 1rem; */
   /* background-color: rgb(15, 15, 15); */
 }
@@ -47,7 +47,7 @@ width: 98%;
     /* margin-left: 1.7rem; */
   }
   li {
-    color:#26114d;
+    color:#ffffff;
     font-weight:900;
   }
   .commentbox button {
@@ -90,22 +90,13 @@ width: 98%;
       cursor: pointer;
       border:0
   }
-  body .dislikeButton button{
-    /* position: inline-flex; */
-    font-size: xx-small;
-    margin-top: 0rem;
-    color: #000;
-    background-color: var(--blackColor);
-       cursor: pointer;
-       border:0
-   }
   button i:hover{
     /* position: relative; */
     /* font-size: xx-small; */
     background-color: var(--blackColor);
     color:#CAADFF;
     cursor: pointer;
-    transition: 0.5s;
+    transition: 0.2s;
    }
 
 body .postbox .username {
@@ -139,6 +130,6 @@ body .details{
 }
 
 .postbox .username h5 {
-  color:#26114d;
+  color:#ffffff;
   font-size:1.2rem
 }
