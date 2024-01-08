@@ -124,9 +124,9 @@
             <div class="content">
               <div class="login-left">
                   <form method="POST" action="/login">
-                  <input type="text" placeholder="Email" name="email"/>
+                  <input type="text" placeholder="Email" name="email" required/>
                   <div class="form-group">
-                    <input type="password" placeholder="Password" name="password" id="passIn" />
+                    <input type="password" placeholder="Password" name="password" id="passIn" required />
                   </div>
                   <a href="#" class="btn"
                   >
@@ -137,7 +137,7 @@
                     Login with Google (Unavailable)</span
                   ></a
                 ><br><br>
-                  <button type="submit" class="btn btn-red">Log in</button></form>        
+                  <button type="submit" class="btn btn-red">Log in</button></form>
               </div>
               <div class="login-right">
                 <form method="POST" action="/register">

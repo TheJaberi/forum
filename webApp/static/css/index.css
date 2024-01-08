@@ -218,7 +218,7 @@ margin-bottom: 0;
     background-color: #fcfcfc;
     border: 0.1rem;
     border-color: #d7f2ff;
-    border-radius: 0.3rem;
+    border-radius: 0.6rem;
     font-size: 1.9rem;
     padding: 1rem 1.5rem;
     width: 100%;
@@ -226,12 +226,74 @@ margin-bottom: 0;
     position: flex;
     /* line-height: 1.4; */
   }
+
+  .login .row .content .login-left form input:invalid:focus {
+    border: 1px solid #FF0000;
+  }
   
   .login .row .content .login-left form .form-group,
   .login .row .content .login-right form .form-group  {
     position: relative;
     padding-top: 3rem;
     /* margin-top: 1rem; */
+  }
+
+  .login .row .content .login-left .btn-red,
+  .login .row .content .login-right .btn-red {
+    height: 2.8em;
+    width: 15em;
+    background: transparent;
+    -webkit-animation: jello-horizontal 0.9s both;
+    animation: jello-horizontal 0.9s both;
+    border: 2px solid rgb(129, 0, 0);
+    outline: none;
+    color: rgb(129, 0, 0);
+    cursor: pointer;
+    font-size: 17px;
+  }
+
+  .login .row .content .login-left .btn-red:hover,
+  .login .row .content .login-right .btn-red:hover {
+    background-color: rgb(129, 0, 0);
+    color: #FFF;
+    animation: squeeze 0.9s both;
+  }
+
+  @keyframes squeeze {
+    0% {
+      -webkit-transform: scale3d(1, 1, 1);
+      transform: scale3d(1, 1, 1);
+    }
+
+    30% {
+      -webkit-transform: scale3d(1.25, 0.75, 1);
+      transform: scale3d(1.25, 0.75, 1);
+    }
+
+    40% {
+      -webkit-transform: scale3d(0.75, 1.25, 1);
+      transform: scale3d(0.75, 1.25, 1);
+    }
+
+    50% {
+      -webkit-transform: scale3d(1.15, 0.85, 1);
+      transform: scale3d(1.15, 0.85, 1);
+    }
+  
+    65% {
+      -webkit-transform: scale3d(0.95, 1.05, 1);
+      transform: scale3d(0.95, 1.05, 1);
+    }
+  
+    75% {
+      -webkit-transform: scale3d(1.05, 0.95, 1);
+      transform: scale3d(1.05, 0.95, 1);
+    }
+  
+    100% {
+      -webkit-transform: scale3d(1, 1, 1);
+      transform: scale3d(1, 1, 1);
+    }
   }
   
   .login .row .content .login-left .btn,
@@ -248,10 +310,9 @@ margin-bottom: 0;
     margin-top: 1rem;
   }
 
-  .login .row .content .login-left .btn-red,
+  /* .login .row .content .login-left .btn-red,
   .login .row .content .login-right .btn-red {
     min-width: 8rem;
-    /* margin-bottom: 7rem; */
     width: 100%;
     background-color: rgb(129, 0, 0);
   }
@@ -260,7 +321,7 @@ margin-bottom: 0;
     opacity:0.5;
     background-color: rgb(129, 0, 0);
     transition: var(--transition);
-  }
+  } */
   
   .overlayposts {
     position: fixed;
