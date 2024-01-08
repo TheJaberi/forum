@@ -12,5 +12,4 @@ func InsertInteraction(post_id int, user_id int, likeOrDislike int) {
 	if err2 != nil { // the post is added using the ExecContext along with the userid which is in the LoggedUser variable
 		log.Fatal(err2)
 	}
-
 }

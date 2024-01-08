@@ -17,5 +17,5 @@ func CreateComment(commentContent string, postID int) {
 	commenTmp.User_id = AllData.LoggedUser.Userid
 	commenTmp.CommentUsername = AllData.LoggedUser.Username
 	commenTmp.Body = commentContent
-	AllData.AllPosts[postID].Comments = append(AllData.AllPosts[postID].Comments, commenTmp)
+	AllData.AllPosts[postID-1].Comments = append(AllData.AllPosts[postID-1].Comments, commenTmp)
 }

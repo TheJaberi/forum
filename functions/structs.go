@@ -16,6 +16,7 @@ type Data struct {
 	AllCategories []Category
 	Postpage      Post
 	LoggedUser   User
+	CategoryCheck bool
 	IsLogged      bool	
 	LoggedUserID  int
 	TypeAdmin     bool
@@ -52,6 +53,7 @@ type Post struct {
 	LoggedUser bool
 	TimeCreated string
 	Comments []Comment
+	NumbOfComments int
 }
 
 type Comment struct {
@@ -59,4 +61,5 @@ type Comment struct {
 	Post_id int
 	User_id int
 	CommentUsername string
+	TimeCreated string
 }

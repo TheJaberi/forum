@@ -25,6 +25,7 @@ func HandlerComments(w http.ResponseWriter, req *http.Request) {
 	w.WriteHeader(http.StatusOK)
 	post_id, _ := strconv.Atoi(req.FormValue("postid")) // when the createpost button is clicked the title data is assigned to a variable
 	commentContent := req.FormValue("commentContent")
+	commentContent = forum.AdjustText(commentContent)
 	fmt.Println(post_id, commentContent)
 	forum.CreateComment(commentContent, post_id) // create post adds the title and body to the table in the database
 	forum.ViewPosts()

@@ -34,7 +34,8 @@ func HandlerMyFilter(w http.ResponseWriter, req *http.Request) {
 			filteredPosts = append(filteredPosts, forum.AllPosts[i])
 		}
 	}
-	forum.AllData.AllPosts = filteredPosts
-	forum.AllData.AllCategories = forum.AllCategories
+	forum.AllData.AllPosts = RSort(filteredPosts)
+	// forum.AllData.AllCategories = nil
+	forum.AllData.CategoryCheck = false
 	t.ExecuteTemplate(w, "index.html", forum.AllData)
 }

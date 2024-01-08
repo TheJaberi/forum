@@ -23,10 +23,19 @@ func MainHandler(w http.ResponseWriter, req *http.Request) {
 	w.WriteHeader(http.StatusOK)
 	forum.ViewCategory()
 	forum.ViewPosts()
-	forum.AllData.AllPosts = forum.AllPosts
+	forum.AllData.AllPosts = RSort(forum.AllPosts)
 	forum.AllData.AllCategories = forum.AllCategories
+	forum.AllData.CategoryCheck = true
 	// forum.AllData.LoggedUser = forum.LoggedUser
 	// forum.AllData.LoggedUserID = forum.LoggedUser.Userid
 	// forum.AllData.IsLogged = forum.LoggedUser.Registered
 	t.ExecuteTemplate(w, "index.html", forum.AllData)
+}
+
+func RSort(list []forum.Post) []forum.Post {
+	var arrAllPosts []forum.Post
+	for i:=len(list)-1;i>0;i--{
+		arrAllPosts = append(arrAllPosts, list[i])
+	}
+	return arrAllPosts
 }

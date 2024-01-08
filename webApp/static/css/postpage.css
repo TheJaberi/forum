@@ -1,39 +1,135 @@
 *{
-    background-color: aquamarine;
+    /* background-color: var(--blackColor); */
+    /* color: var(--aquaColor); */
+    margin-left: 1rem;
+    /* text-align: center; */
 }
 
-  .postbox {
-    position: relative;
-    border-radius: 0.4rem;
-    padding: 1rem;
-    background-color: var(--lightRedColor);
-    max-width: 108rem;
-    width: 100%;
-    margin: 4rem auto 10rem;
-    margin-top: 25vh;
-    box-shadow: 0 0.5rem 1.5rem 0 rgba(0 0 0 / 0.5);
-    overflow: hidden;
-    font-size: large;
-  }
-  /* i {
-    font-size: var(--fs24);
-    color: blueviolet;
+body {
+
+  color: var(--aquaColor);
+  background-color: var(--blackColor);
+  /* align-content: center; */
+  position: inline;
+  width: 98%;
+  margin-left: 3.4rem;
+  margin-top: 3rem;
+  /* width: 100rem; */
+}
+h1 {
+  font-size: 8rem;
+  /* position: relative; */
+  /* margin-left: 1rem; */
+  /* background-color: rgb(15, 15, 15); */
+}
+h2 {
+width: 98%;
+}
+  button i {
+    color: rgb(255, 255, 255);
     cursor: pointer;
-    margin-left: 53%;
-    font-size: xx-large;
-  } */
-  .postbox button {
+  }
+  .commentbox {
     font-size: x-large;
-    color: #2fbcfd;
-    background-color: black;
-    padding: 6px;
-    /* border-radius: 20%; */
+    /* resize: none; */
+    /* max-width: 106rem; */
+    /* background-color: black; */
+    color: var(--aquaColor);
+    font-weight: 900;
   }
   textarea {
     font-size: x-large;
-    resize: none;
-    max-width: 106rem;
-    background-color: black;
-    color: #ffffff;
+    /* max-width: 106rem; */
+    background-color: var(--blackColor);
+    color: var(--aquaColor);
     font-weight: 900;
+    width: 98%;
+    /* margin-left: 1.7rem; */
   }
+  li {
+    color:#ffffff;
+    font-weight:900;
+  }
+  .commentbox button {
+    font-size: large;
+    background-color: rgb(0, 0, 0);
+    color: var(--aquaColor);
+    font-weight: 900;
+    border-radius: 22px;
+    padding: 8px;
+    border: 1cap;
+    cursor:pointer;
+    /* margin-left: 1.7rem; */
+  }
+  .commentbox button:hover {
+    position: inline-flex;
+    background-color: var(--aquaColor);
+    color:#000;
+    cursor: pointer;
+   }
+   .commentbox button:active {
+    position: inline-flex;
+    background-color: var(--aquaColor);
+    color:#000;
+    cursor: pointer;
+    opacity: 0.5;
+   }
+  body .likeButton {
+    text-align: left;
+    margin-left: 1rem;
+    /* margin-top: -4.5rem; */
+    /* border-radius: 0.4rem; */
+    /* background-color: var(--lightBlackColor) */
+    position: inline-flex;
+  }
+  body .likeButton button{
+   /* position: inline-flex; */
+   font-size: xx-small;
+   color: #000;
+   background-color: var(--blackColor);
+      cursor: pointer;
+      border:0
+  }
+  button i:hover{
+    /* position: relative; */
+    /* font-size: xx-small; */
+    background-color: var(--blackColor);
+    color:#CAADFF;
+    cursor: pointer;
+    transition: 0.2s;
+   }
+
+body .postbox .username {
+  font-size: xx-large;
+  color: #26114d;
+
+}
+body .postbox {
+  /* display: inline-flex; */
+  align-items: center;
+  background-color: var(--lightBlackColor);
+  padding: 0.9rem 1.2rem;
+  border-radius: 0.7rem;
+  margin-bottom: 0.9rem;
+  box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.11),
+    0 0.1rem 0.1rem rgba(0, 0, 0, 0.04);
+  width: 49%;
+  min-height: 200px;
+  float: left;
+  border: 1px solid #000;
+}
+body .postedby {
+  font-size: xx-large;
+  color: #CAADFF;
+  font-weight:900;
+}
+
+body .details{
+  margin-left: 7rem;
+  margin-top: -9rem;
+}
+
+.postbox .username h5 {
+  color:#ffffff;
+  font-size:1.2rem
+}

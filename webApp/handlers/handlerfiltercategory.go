@@ -24,18 +24,22 @@ func HandlerFilterCategory(w http.ResponseWriter, req *http.Request) {
 	}
 	forum.ViewCategory()
 		forum.ViewPosts()
+		// var filterCategory []forum.Category
 	category, _ := strconv.Atoi(req.FormValue("category")) // gets the data from the button clicked for filtering
 	for i := 0; i < len(forum.AllPosts); i++ {
 		for j := 0; j < len(forum.AllPosts[i].Category); j++ {
 			if category == forum.AllPosts[i].Category[j].CategoryID { // loop over all the categories of all the posts if it matches "category" append the data of the post
 				filteredPosts = append(filteredPosts, forum.AllPosts[i])
+				// if filterCategory == nil {
+				// filterCategory = append(filterCategory, forum.AllPosts[i].Category[j])}
 				break
 			}
 		}
 	}
 	w.WriteHeader(http.StatusOK)
-	forum.AllData.AllPosts = filteredPosts
-	forum.AllData.AllCategories = forum.AllCategories
+	forum.AllData.AllPosts = RSort(filteredPosts)
+	// forum.AllData.AllCategories = filterCategory
+	forum.AllData.CategoryCheck = false
 	forum.AllData.LoggedUser = forum.LoggedUser
 	t.ExecuteTemplate(w, "index.html", forum.AllData) // execute the main html with only the filtered posts
 }
