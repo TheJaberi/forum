@@ -33,7 +33,11 @@ func HandlerPostPage(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 	postData = forum.AllPosts[postNumb-1]
+	forum.AllData.Postpage = postData
 	postData.LoggedUser = forum.AllData.IsLogged // if the user is registered the like and dislike buttons appear on the post's page
+	forum.UpdateComments()
+	for i:=0;i<len(postData.Comments);i++{
+	postData.Comments[i].LoggedUser =true}
 	t.ExecuteTemplate(w, "postpage.html", postData) // data from the post clicked on is sent to the template only
 	forum.UpdatePosts()
 }

@@ -57,9 +57,15 @@ type Post struct {
 }
 
 type Comment struct {
+	Comment_id int
 	Body string
 	Post_id int
 	User_id int
 	CommentUsername string
 	TimeCreated string
+	Likes int
+	Dislikes int
+	Userlike bool
+	UserDislike bool
+	LoggedUser bool
 }

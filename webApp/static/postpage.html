@@ -55,7 +55,27 @@
 {{range .Comments}}
 <div class="postbox" id="postbox">
     <div class="username" id="username"><h3>{{.CommentUsername}}</h3><h5>Comment added on: {{.TimeCreated}}</h5></div>
-    <h4>{{.Body}}</h4></div>{{end}}</div>
+    <h4>{{.Body}}</h4>
+        {{ if .LoggedUser }}<div class="likeButton">
+        {{ if .Userlike }}
+        <form method="GET" action="/commentlike">
+        <button name= "removeInteraction" id = "removeInteraction" value="{{.PostID}}"><i class="fa fa-thumbs-up fa-5x" style="color: #9519ce;"></i></button></form>
+        <form method="GET" action="/commentdislike">
+            <button name= "commentInteraction" id = "commentInteraction" value="{{.PostID}}"><i class="fa fa-thumbs-down fa-5x" id="notclicked"></i></button></form>
+        {{else}}
+        {{if .UserDislike}}
+        <form method="GET" action="/commentlike">
+            <button name= "commentInteraction" id = "commentInteraction" value="{{.PostID}}"><i class="fa fa-thumbs-up fa-5x"></i></button></form>
+            <form method="GET" action="/commentdislike">
+            <button name= "removeInteraction" id = "removeInteraction" value="{{.PostID}}"><i class="fa fa-thumbs-down fa-5x" style="color: #9519ce;"></i></button></form>
+            {{else}}
+                <form method="GET" action="/commentlike">
+                <button name= "commentInteraction" id = "commentInteraction" value="{{.PostID}}"><i class="fa fa-thumbs-up fa-5x"></i></button></form>
+                <form method="GET" action="/commentdislike">
+                <button name= "commentInteraction" id = "commentInteraction" value="{{.PostID}}">
+                    <i class="fa fa-thumbs-down fa-5x"></i></button></form>
+                {{end}}
+                {{end}}{{end}}</div></div>{{end}}
 </body>
 </html>
 <script>

@@ -34,26 +34,26 @@ func HandlerLikes(w http.ResponseWriter, req *http.Request){
 		postData = forum.AllPosts[addPost_id-1]
 		if req.URL.Path == "/like/"{
 		 if !forum.AllPosts[addPost_id-1].UserDislike{
-		forum.InsertInteraction(addPost_id, user_id, 1) // insert adds the interaction to the database 1 is like 0 is dislike
+		forum.InsertInteraction(addPost_id, user_id, 1, true, 0) // insert adds the interaction to the database 1 is like 0 is dislike
 		forum.AllPosts[addPost_id-1].Userlike =  true // changes the post like or dislike for the logged in user in the all posts var
 	} else {
-		forum.UpdateInteraction(addPost_id, user_id, 1) // update is used if a like has to be changed to a dislike or vice versa
+		forum.UpdateInteraction(addPost_id, user_id, 1, true, 0) // update is used if a like has to be changed to a dislike or vice versa
 		forum.AllPosts[addPost_id-1].Userlike =  true
 		forum.AllPosts[addPost_id-1].UserDislike =  false
 	}
 } else {
 	if !forum.AllPosts[addPost_id-1].Userlike{
-		forum.InsertInteraction(addPost_id, user_id, 0)
+		forum.InsertInteraction(addPost_id, user_id, 0, true, 0)
 		forum.AllPosts[addPost_id-1].UserDislike =  true
 	} else {
-		forum.UpdateInteraction(addPost_id, user_id, 0)
+		forum.UpdateInteraction(addPost_id, user_id, 0, true, 0)
 		forum.AllPosts[addPost_id-1].UserDislike =  true
 		forum.AllPosts[addPost_id-1].Userlike =  false
 	}
 }
 postData = forum.AllPosts[addPost_id-1]
 } else{
-		forum.RemoveInteraction(remPost_id, user_id) //remove is greater means there is already an interaction that needs to be removed
+		forum.RemoveInteraction(remPost_id, user_id, true, 0) //remove is greater means there is already an interaction that needs to be removed
 		forum.AllPosts[remPost_id-1].Userlike =  false
 		forum.AllPosts[remPost_id-1].UserDislike =  false
 		postData = forum.AllPosts[remPost_id-1]
