@@ -1,6 +1,6 @@
 module forum
 
-go 1.21.3
+go 1.21
 
 //XXX DO NOT GO MOD TIDY
 // github.com/gofrs/uuid v4.4.0+incompatible // indirect

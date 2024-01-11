@@ -1,3 +1,8 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
 .header {
   position: relative;
   background: url('../img/header-img.png') no-repeat;
@@ -24,6 +29,7 @@
   justify-content: space-between;
   padding: 0;
   margin: 0;
+  height: 6rem;
 }
   
 .header .row .header-content .logo {
@@ -47,128 +53,21 @@
 .nav-search {
   order: 3;
   padding: 0;
-  margin: 0;
-  width:100%;
+  margin-top: 40px;
+  width: 50%;
 }
 
-/* .nav-search .dropdown {
-  float: left;
-  overflow: hidden;
+.nav-search .my-search {
+  font-size: 2.4rem;
+  width: 100%;
+  height: 100%;
 }
 
-.nav-search .dropdown .dropbtn {
-  border: none;
-  font-size: 16px;
-  outline: none;
-  color: #FFF;
-  padding: 14px 16px;
-  background-color: inherit;
-  margin: 0;
-  cursor: pointer;
-}
-
-.nav-search .dropdown .dropdown-content {
-  display: none;
-  position: relative;
-  background-color: #F9F9F9;
-  min-width: 160px;
-  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-  z-index: 1;
-}
-
-.nav-search .dropdown .dropdown-content a {
-  float: none;
-  color: #000;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-  text-align: left;
-}
-
-.nav-search .dropdown .dropdown-content a:hover {
-  display: block;
-}
-
-.nav-search .dropdown:hover .dropdown-content {
-  display: block;
-} */
-
-/*
-.nav-search button{
-  order: 3;
-  padding: 0;
-  margin: 0;
-  opacity: transparent;
-} */
-/* .nav-search ul {
-  list-style: none;
+.my-search ul li {
+  display: inline;
+  margin: 0 25px;
   padding: 15px;
-  margin: 0 0 0 25px;
-  display: flex;
-} */
-
-/* .nav-search ul li {
-  margin: 0 0 0 25px;
-  display: block;
-} */
-
-/* .nav-search ul li a {
-  text-transform: uppercase;
-  color: var(--whiteColor);
-  font-weight: bold;
-} */
-
-/* .nav-search ul li a:hover {
-  color: var(--darkRedColor);
-} */
-
-/*
-
-BELOW CODE STYLING FOR OLD SEARCH INPUT IN NAV BAR
-
-*/
-  
-  /* .header .row .header-content .nav-search .form-group {
-    width: 100%;
-    position: relative;
-  } */
-  
-  /* .header .row .header-content .nav-search .form-group input {
-    height: 4rem;
-    padding-left: 2rem;
-    border-radius: 0.4rem;
-    border: solid 0.1rem #404040;
-    background-color: #404040;
-    font-size: var(--fs14);
-    font-weight: 500;
-    text-align: left;
-    color: var(--darkRedColor);
-    width: 100%;
-  } */
-  
-  /* .header .row .header-content .nav-search .form-group input:focus {
-    background-color: #f6f6f6;
-    color: var(--lightBlackColor);
-  } */
-  
-  /* .header .row .header-content .nav-search .form-group input::placeholder {
-    font-weight: 500;
-    color: var(--darkRedColor);
-    font-size: var(--fs14);
-  } */
-  
-  /* .header .row .header-content .nav-search .form-group i {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    width: 4rem;
-    height: 4rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: var(--fs18);
-    color: var(--darkRedColor);
-  } */
+}
   
   .header .row .header-content .nav-group {
     order: 2;
@@ -206,17 +105,16 @@ BELOW CODE STYLING FOR OLD SEARCH INPUT IN NAV BAR
   
     .header .row .header-content {
       align-items: center;
-      padding: var(--fs14) 0.5rem;
     }
   
     .header .row .header-content .logo {
       width: 23rem;
     }
   
-    .header .row .header-content .logo img {
+    /* .header .row .header-content .logo img {
       height: 4.5rem;
       width: 16rem;
-    }
+    } */
   
     /* .header .row .header-content .nav-search {
       order: 2;

@@ -19,18 +19,21 @@
                 <a href="/"
                 ><h2>Reboot01 Forum</h2></a>
               </div>
-    
+              
+              <div class="nav-search">
+                <div class="my-search">
+                  <ul>{{if .IsLogged}}
+                    <li><a href="/mylikes/?user={{.LoggedUserID}}">MY LIKES</a></li>
+                    <li><a href="/mydislikes/?user={{.LoggedUserID}}">MY DISLIKES</a></li>
+                    <li><a href="/myposts/?user={{.LoggedUserID}}">MY POSTS</a></li>
+                    {{else}}
+                    {{end}} 
+                  </ul>
+                </div>
+              </div>
+              
               <div class="nav-group">
                 <ul>
-                  <li>
-                    <div class="dropdown">
-                      <button class="dropbtn"></button>
-                    </div>
-                    <select>
-                      <option>Categories</option>
-                      {{range .AllCategories}}<option><a href="/filtercategory/?category={{.CategoryID}}">{{.CategoryName}}</a></option>{{end}}
-                    </select>
-                  </li>
                   {{if .CategoryCheck}}
                   {{if .IsLogged}}
                   <li class="createpost">
@@ -57,28 +60,8 @@
                   </li>
                   
                   {{end}}
-                  </div>
-                </ul>              
-                <div class="nav-search">
-                    <div class="my-search">
-                      <ul>{{if .IsLogged}}
-                      <li><a href="/mylikes/?user={{.LoggedUserID}}">MY LIKES</a></li>
-                      <li><a href="/mydislikes/?user={{.LoggedUserID}}">MY DISLIKES</a></li>
-                      <li><a href="/myposts/?user={{.LoggedUserID}}">MY POSTS</a></li>
-                      {{else}}
-                      {{end}} 
-                      </ul></div>
-                  <!-- <ul>          
-                      {{range .AllCategories}}<a href="/filtercategory/?category={{.CategoryID}}"><li>{{.CategoryName}}</a>{{end}}</li>
-                    </ul> -->
-                  <!-- <div class="dropdown">
-                    <button class="dropbtn">Categories</button>
-                    <div class="dropdown-content">
-                      {{range .AllCategories}}<a href="/filtercategory/?category={{.CategoryID}}">{{.CategoryName}}</a>{{end}}
-                    </div>
-                  </div> -->
-                </div>
-            </div>
+                </ul>
+              </div>
             {{else}}
                   {{end}}
           </div>
@@ -97,27 +80,32 @@
         <div class="container">
           <div class="row">
             <section class="left">
-              <!-- <h2>Welcome to Reboot01 Forum</h2> -->
-                  {{range .AllPosts}}
-                  <a href="/postpage?id={{.PostID}}">
-                  <div class="box">
-                    <img src="">
-                    <div class="details">
+              <h2>Categories</h2>
+              <ul class="dropdown">
+                {{range .AllCategories}}<li><a href="/filtercategory/?category={{.CategoryID}}">{{.CategoryName}}</a></li>{{end}}
+              </ul>
+            </section>
+            <section class="right">
+              {{range .AllPosts}}
+              <a href="/postpage?id={{.PostID}}">
+              <div class="box">
+                <img src="">
+                <div class="details">
                       
-                      <h1><option value="{{.}}">{{.Title}}</option></h1><div class="categories">Categories: {{range .Category}} <option value="{{.}}"><h6>{{ .CategoryName}}</h6></option><span>&#44;&nbsp;</span>{{end}}</div>
-                          <span><option value="{{.}}">Created on: <h6>{{.TimeCreated}}</h6></option></span>
-                          <span><option value="{{.}}">Created by: <h6>{{.Username}}</h6></option></span>
-                          <div class="sub-details">
-                            <i class="fa-solid fa-comment"></i><span>{{.NumbOfComments}}</span>
-                            <span><option value="{{.}}"><i class="fa fa-thumbs-up"></i> {{.Likes}} </option></span>
-                            <span><option value="{{.}}"><i class="fa fa-thumbs-down"></i> {{.Dislikes}}</option></span>
-                      </div>
-                    </div>
-                  
+                  <h1><option value="{{.}}">{{.Title}}</option></h1><div class="categories">Categories: {{range .Category}} <option value="{{.}}"><h6>{{ .CategoryName}}</h6></option><span>&#44;&nbsp;</span>{{end}}</div>
+                  <span><option value="{{.}}">Created on: <h6>{{.TimeCreated}}</h6></option></span>
+                  <span><option value="{{.}}">Created by: <h6>{{.Username}}</h6></option></span>
+                  <div class="sub-details">
+                    <i class="fa-solid fa-comment"></i><span>{{.NumbOfComments}}</span>
+                    <span><option value="{{.}}"><i class="fa fa-thumbs-up"></i> {{.Likes}} </option></span>
+                    <span><option value="{{.}}"><i class="fa fa-thumbs-down"></i> {{.Dislikes}}</option></span>
                   </div>
-                  {{end}}
-                </div></a>
+                </div>
+                  
               </div>
+              {{end}}
+            </div></a>
+            </div>
             </section>
           </div>
         </div>

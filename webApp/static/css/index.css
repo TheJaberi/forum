@@ -1,6 +1,30 @@
+main .container .row {
+  width: 100%;
+}
 
+main .left {
+  width: 10%;
+  background-color: var(--lightBlackColor);
+  padding: 10px;
+  border: 1px solid #000;
+  border-radius: 10px;
+}
 
 main .left h2 {
+  margin-top: 20px;
+  color: #FFF;
+  text-transform: uppercase;
+}
+
+main .left ul {
+  margin-top: 20px;
+}
+
+main .left ul li {
+  padding: 15px 0;
+}
+
+main .right h2 {
   margin-bottom: 2.7rem;
   font-size: var(--fs24);
   color: var(--darkBlueColor);
@@ -8,7 +32,7 @@ main .left h2 {
 h2:hover{
   color: var(--aquaColor);
 }
-main .left form select {
+main .right form select {
   width: 30%;
   padding: 1rem 0 1rem 0;
   border-radius: 5rem;
@@ -20,8 +44,9 @@ main .left form select {
 .header-content {
 text-align: center;
 } 
-main .left {
+main .right {
   margin-top: 20px;
+  width: 90%;
 }
 li{
   color:var(--aquaColor);
@@ -30,7 +55,7 @@ li{
   /* display: flex; */
 }
 
-main .left .box {
+main .right .box {
   /* display: inline-flex; */
   color:rgb(255, 255, 255);
   /* align-items: center; */
@@ -49,7 +74,7 @@ main .left .box {
   
 }
 
-main .left .box:hover {
+main .right .box:hover {
   background-color: black;
   transition: var(--transition);
   color:#CAADFF;
@@ -63,11 +88,11 @@ main .left .box:hover {
   overflow: hidden;
 } */
   
-  main .left .box .details {
+  main .right .box .details {
     padding-left: 1.2rem;
     font-size: 1.5rem;
   }
-  main .left .box .details .categories {
+  main .right .box .details .categories {
     display: inline-flex;
     /* min-height: 20px; */
     /* max-width: 20%; */
@@ -78,14 +103,14 @@ main .left .box:hover {
   /* main .left .box .details .categories option {
     font-size: 1.5rem;
   } */
-  main .left .box .details h1{
+  main .right .box .details h1{
     font-weight: 700;
     color: var(--aquaColor);
     font-size: 4.5rem;
     letter-spacing: -0.02rem;
     display: flex;
   }
-  main .left .box .details h6{
+  main .right .box .details h6{
     font-weight: 700;
     /* color: var(--aquaColor); */
     font-size: 1.3rem;
@@ -94,7 +119,7 @@ main .left .box:hover {
 
   }
   
-  main .left .box .details .sub-details {
+  main .right .box .details .sub-details {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
@@ -102,12 +127,12 @@ main .left .box:hover {
     font-size: 2rem;
   }
   
-  main .left .box .details .sub-details span {
+  main .right .box .details .sub-details span {
     color: var(--aquaColor);
     margin-left: 0.5rem;
   }
   
-  main .left .box .details .sub-details .comment {
+  main .right .box .details .sub-details .comment {
     padding: 0.2rem 0.8rem 0;
     background-color: var(--lightWhiteColor);
     color: var(--darkGrayColor);
@@ -210,38 +235,6 @@ margin-bottom: 0;
     flex: 1;
     /* height: 230px; */
   }
-
-  /* .input {
-    border: 1.5px solid #9E9E9E;
-    border-radius: 1rem;
-    background: none;
-    padding: 1rem;
-    font-size: 1rem;
-    color: #F5F5F5;
-    transition: border 150ms cubic-bezier(0.4,0,0.2,1);
-    margin-top: 20px;
-  } */
-
-  /* .user-email, .user-pass, .user-name {
-    position: absolute;
-    left: 15px;
-    color: #E8E8E8;
-    pointer-events: none;
-    transform: translateY(1rem);
-    transition: 150ms cubic-bezier(0.4,0,0.2,1);
-  }
-
-  .input:focus, input:valid {
-    outline: none;
-    border: solid 1.5px #1A73E8;
-  }
-
-  .input:focus ~ label, input:valid ~ label {
-    transform: translateY(-50%) scale(0.8);
-    background-color: transparent;
-    padding: 0 .2em;
-    color: #2196F3;
-  } */
   
   .login .row .content .login-left form input,
   .login .row .content .login-right form input {
