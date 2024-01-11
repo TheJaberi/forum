@@ -8,6 +8,9 @@ main .left {
   padding: 10px;
   border: 1px solid #000;
   border-radius: 10px;
+  display: inline-block;
+  max-height: fit-content;
+  overflow: hidden;
 }
 
 main .left h2 {

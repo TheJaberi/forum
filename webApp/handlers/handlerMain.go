@@ -6,6 +6,8 @@ import (
 	"net/http"
 )
 
+const PerPage = 10
+
 func MainHandler(w http.ResponseWriter, req *http.Request) {
 	if req.URL.Path != "/" {
 		ErrorHandler(w, req, http.StatusNotFound)
@@ -34,7 +36,7 @@ func MainHandler(w http.ResponseWriter, req *http.Request) {
 
 func RSort(list []forum.Post) []forum.Post {
 	var arrAllPosts []forum.Post
-	for i:=len(list)-1;i>0;i--{
+	for i := len(list) - 1; i > 0; i-- {
 		arrAllPosts = append(arrAllPosts, list[i])
 	}
 	return arrAllPosts
