@@ -1,7 +1,6 @@
 package forum
 
 import (
-	"fmt"
 	"log"
 	"strings"
 
@@ -57,5 +56,4 @@ func ViewPosts() {
 	}
 UpdatePosts()
 AllData.AllPosts = AllPosts
-fmt.Println(AllData.AllPosts)
 }

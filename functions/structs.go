@@ -57,7 +57,7 @@ type Post struct {
 }
 
 type Comment struct {
-	Comment_id int
+	
 	Body string
 	Post_id int
 	User_id int
@@ -65,7 +65,8 @@ type Comment struct {
 	TimeCreated string
 	Likes int
 	Dislikes int
-	Userlike bool
-	UserDislike bool
-	LoggedUser bool
+	CommentUserlike bool
+	CommentUserDislike bool
+	CommentLoggedUser bool
+	Comment_id int
 }

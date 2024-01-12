@@ -14,9 +14,9 @@ func UpdateComments() {
 				continue
 			} else {
 				if interaction == 1 {
-					AllData.Postpage.Comments[i].Userlike = true
+					AllData.Postpage.Comments[i].CommentUserlike = true
 				} else {
-					AllData.Postpage.Comments[i].UserDislike = true
+					AllData.Postpage.Comments[i].CommentUserDislike = true
 				}
 			}
 		}
