@@ -13,7 +13,8 @@
 <a href="/"><h2>Reboot01 Forum</h2></a>
     <a href="/postpage/?id={{.PostID}}"><h1>{{.Title}}</h1></a>
 <body>
-    <div class="likeButton">{{ if .LoggedUser }}
+    <div class="likeButton">
+{{ if .LoggedUser }}
 {{ if .Userlike }}
 <form method="GET" action="/like">
 <button name= "removeInteraction" id = "removeInteraction" value="{{.PostID}}"><i class="fa fa-thumbs-up fa-5x" style="color: #9519ce;"></i></button></form>
@@ -61,7 +62,7 @@
         <form method="GET" action="/commentlike/">
         <button name= "removeInteraction" id = "removeInteraction" value="{{.Comment_id}}"><i class="fa fa-thumbs-up fa-5x" style="color: #9519ce;"></i></button></form>
         <form method="GET" action="/commentdislike/">
-            <button name= "commentInteraction" id = "commentInteraction" value="{{.Comment_id}}"><i class="fa fa-thumbs-down fa-5x" id="notclicked"></i></button></form>
+            <button name= "commentInteraction" id = "commentInteraction" value="{{.Comment_id}}"><i class="fa fa-thumbs-down fa-5x"></i></button></form>
         {{else}}
         {{if .CommentUserDislike}}
         <form method="GET" action="/commentlike/">
@@ -74,7 +75,7 @@
                 <form method="GET" action="/commentdislike/">
                 <button name= "commentInteraction" id = "commentInteraction" value="{{.Comment_id}}">
                     <i class="fa fa-thumbs-down fa-5x"></i></button></form></div>
-               {{end}}{{end}}{{end}}</div>{{end}}
+               {{end}}{{end}}</div>{{else}}{{end}}{{end}}
 </body>
 </html>
 <script>
