@@ -57,25 +57,28 @@
 <div class="postbox" id="postbox">
     <div class="username" id="username"><h3>{{.CommentUsername}}</h3><h5>Comment added on: {{.TimeCreated}}</h5></div>
     <h4>{{.Body}}</h4>
-        {{ if .CommentLoggedUser }}<div class="likeButton">
+       <div class="likeButton"> {{ if .CommentLoggedUser }}
         {{ if .CommentUserlike }}
         <form method="GET" action="/commentlike/">
-        <button name= "removeInteraction" id = "removeInteraction" value="{{.Comment_id}}"><i class="fa fa-thumbs-up fa-5x" style="color: #9519ce;"></i></button></form>
+        <button name= "removeInteraction" id = "removeInteraction" value="{{.Comment_id}}"><i class="fa fa-thumbs-up fa-5x" style="color: #9519ce;"></i></button></form>{{.Likes}}
         <form method="GET" action="/commentdislike/">
-            <button name= "commentInteraction" id = "commentInteraction" value="{{.Comment_id}}"><i class="fa fa-thumbs-down fa-5x"></i></button></form>
+            <button name= "commentInteraction" id = "commentInteraction" value="{{.Comment_id}}"><i class="fa fa-thumbs-down fa-5x"></i></button></form>{{.Dislikes}}</div>
         {{else}}
-        {{if .CommentUserDislike}}
+        {{ if .CommentUserDislike }}
         <form method="GET" action="/commentlike/">
-            <button name= "commentInteraction" id = "commentInteraction" value="{{.Comment_id}}"><i class="fa fa-thumbs-up fa-5x"></i></button></form>
-            <form method="GET" action="/commentdislike/">
-            <button name= "removeInteraction" id = "removeInteraction" value="{{.Comment_id}}"><i class="fa fa-thumbs-down fa-5x" style="color: #9519ce;"></i></button></form>
-            {{else}}
-                <form method="GET" action="/commentlike/">
-                <button name= "commentInteraction" id = "commentInteraction" value="{{.Comment_id}}"><i class="fa fa-thumbs-up fa-5x"></i></button></form>
-                <form method="GET" action="/commentdislike/">
-                <button name= "commentInteraction" id = "commentInteraction" value="{{.Comment_id}}">
-                    <i class="fa fa-thumbs-down fa-5x"></i></button></form></div>
-               {{end}}{{end}}</div>{{else}}{{end}}{{end}}
+        <button name= "commentInteraction" id = "commentInteraction" value="{{.Comment_id}}"><i class="fa fa-thumbs-up fa-5x"></i></button></form>{{.Likes}}
+        <form method="GET" action="/commentdislike/">
+        <button name= "removeInteraction" id = "removeInteraction" value="{{.Comment_id}}"><i class="fa fa-thumbs-down fa-5x" style="color: #9519ce;"></i></button></form>{{.Dislikes}}</div>
+        {{else}}
+        <form method="GET" action="/commentlike/">
+        <button name= "commentInteraction" id = "commentInteraction" value="{{.Comment_id}}"><i class="fa fa-thumbs-up fa-5x"></i></button></form>{{.Likes}}
+        <form method="GET" action="/commentdislike/">
+        <button name= "commentInteraction" id = "commentInteraction" value="{{.Comment_id}}">
+        <i class="fa fa-thumbs-down fa-5x"></i></button></form>{{.Dislikes}}</div>
+        {{end}}{{end}}{{else}}
+        <span><option value="{{.}}"><i class="fa fa-thumbs-up"></i> {{.Likes}} </option></span>
+        <span><option value="{{.}}"><i class="fa fa-thumbs-down"></i> {{.Dislikes}}</option></span>
+        {{end}}</div>{{end}}
 </body>
 </html>
 <script>
