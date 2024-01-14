@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/css/postpage.css">
     <link rel="stylesheet" href="/css/general.css">
+    <link rel="stylesheet" href="/css/header.css">
     <script src=""></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <title>Reboot Journal</title>
@@ -46,7 +47,7 @@
 <div class="overlaycomments">
     <div class="commentbox" id="commentbox">
     <form method="post" action="/comment">
-        <textarea name="commentContent" id="commentContent" rows="2" cols="40" placeholder="add comment..." required="true" maxlength="2000"></textarea>
+        <textarea name="commentContent" id="commentContent" rows="2" cols="56" placeholder="add comment..." required="true" maxlength="2000"></textarea>
       <button name= "postid" id = "postid" value="{{.PostID}}">Submit</button>
     </div><br>
   </form>
@@ -95,4 +96,8 @@
       if (location.href !== ("http://localhost:8080/postpage/?id={{.PostID}}")){
         window.location.replace("http://localhost:8080/postpage/?id={{.PostID}}")
       }
+      window.addEventListener("scroll", (event) => {
+    let scroll = this.scrollY;
+    console.log(scroll)
+});
 </script>

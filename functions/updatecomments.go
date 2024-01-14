@@ -1,8 +1,6 @@
 package forum
 
 import (
-	"fmt"
-
 	_ "github.com/mattn/go-sqlite3"
 )
 
@@ -23,10 +21,8 @@ func UpdateComments() {
 			}
 			likeCommentdata := DB.QueryRow("SELECT COUNT(user_id) FROM interaction_comments where comment_id = ? AND interaction = ?", AllData.Postpage.Comments[i].Comment_id, 1) // to present the numb of likes for each post
 			likeCommentdata.Scan(&AllData.Postpage.Comments[i].Likes)
-			fmt.Println(AllData.Postpage.Comments[i].Likes)
 			dislikeCommentdata := DB.QueryRow("SELECT COUNT(user_id) FROM interaction_comments where comment_id = ? AND interaction = ?", AllData.Postpage.Comments[i].Comment_id, 0) // to present the numb of dislikes for each post
 			dislikeCommentdata.Scan(&AllData.Postpage.Comments[i].Dislikes)
-			fmt.Println(AllData.Postpage.Comments[i].Dislikes)
 		}
 	}
 

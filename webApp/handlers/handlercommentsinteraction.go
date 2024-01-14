@@ -1,23 +1,14 @@
 package forum
 
 import (
-	"fmt"
 	"html/template"
 	"net/http"
 	"strconv"
-
-	// "fmt"
 	forum "forum/functions"
-
 	_ "github.com/mattn/go-sqlite3"
 )
 
 func HandlerCommentsLikes(w http.ResponseWriter, req *http.Request) {
-	// if !forum.AllData.IsLogged {
-	// 	fmt.Println(11)
-	// 	ErrorHandler(w, req, http.StatusNotFound)
-	// 	return
-	// }
 	if req.URL.Path != "/commentlike/" && req.URL.Path != "/commentdislike/" {
 		ErrorHandler(w, req, http.StatusNotFound)
 		return
@@ -33,9 +24,7 @@ func HandlerCommentsLikes(w http.ResponseWriter, req *http.Request) {
 	}
 	w.WriteHeader(http.StatusOK)
 	addComment_id, _ := strconv.Atoi(req.FormValue("commentInteraction")) // comment interaction handles the data from like or dislike button if the user logged hasn't already clicked on it
-	fmt.Println(addComment_id)
 	remComment_id, _ := strconv.Atoi(req.FormValue("removeInteraction"))  // remove interaction handles the data from like or dislike button if the user logged has already clicked on it
-	fmt.Println(remComment_id)
 	user_id := forum.LoggedUser.Userid
 	commentPos := 0
 	for i:=0;i<len(forum.AllData.Postpage.Comments);i++{
@@ -65,12 +54,10 @@ func HandlerCommentsLikes(w http.ResponseWriter, req *http.Request) {
 			}
 		}
 	} else {
-		fmt.Println(11)
 		forum.RemoveInteraction(forum.AllData.Postpage.PostID, user_id, false, remComment_id) // remove is greater means there is already an interaction that needs to be removed
 		forum.AllData.Postpage.Comments[commentPos].CommentUserlike = false
 		forum.AllData.Postpage.Comments[commentPos].CommentUserDislike = false
 	}
 	forum.AllData.Postpage.LoggedUser = true
-	fmt.Println(forum.AllData.Postpage)
 	t.ExecuteTemplate(w, "postpage.html", forum.AllData.Postpage)
 }

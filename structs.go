@@ -20,11 +20,3 @@ type Session struct {
 	UserId    int
 	CreatedAt time.Time
 }
-
-type Comment struct {
-	UserName      string
-	UserId        int
-	Body          string
-	Count_Likes   int
-	Count_Dislike int
-}
