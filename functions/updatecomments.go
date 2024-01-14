@@ -25,5 +25,4 @@ func UpdateComments() {
 			dislikeCommentdata.Scan(&AllData.Postpage.Comments[i].Dislikes)
 		}
 	}
-
 }

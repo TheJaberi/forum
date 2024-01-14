@@ -5,7 +5,7 @@
 }
 
 body {
-text-align: left;
+text-align: center;
   color: var(--aquaColor);
   background-color: var(--blackColor);
   align-content: center;
@@ -75,9 +75,17 @@ width: 98%;
     opacity: 0.5;
    }
   body .likeButton {
-    text-align: left;
-    margin-left: 1rem;
-    /* margin-top: -4.5rem; */
+    text-align: right;
+    margin-right: 8rem;
+    margin-top: -1rem;
+    /* border-radius: 0.4rem; */
+    /* background-color: var(--lightBlackColor) */
+    position: inline-flex;
+  }
+  body .likeButton .dislikebutton{
+    text-align: right;
+    margin-top: -4rem;
+    margin-right: -5rem;
     /* border-radius: 0.4rem; */
     /* background-color: var(--lightBlackColor) */
     position: inline-flex;
@@ -85,7 +93,7 @@ width: 98%;
   body .likeButton button{
    /* position: inline-flex; */
    font-size: xx-small;
-   color: #000;
+   color: #5900ff;
    background-color: var(--blackColor);
       cursor: pointer;
       border:0
@@ -94,9 +102,10 @@ width: 98%;
     /* position: relative; */
     /* font-size: xx-small; */
     background-color: var(--blackColor);
-    color:#CAADFF;
+    color:#5900ff;
     cursor: pointer;
     transition: 0.2s;
+    opacity: 0.5;
    }
 
 body .postbox .username {
@@ -119,18 +128,41 @@ body .postbox {
 }
 body .postedby {
   font-size: xx-large;
-  color: #CAADFF;
+  color: #5900ff;
   font-weight:900;
 }
 
 body .details{
   text-align: left;
   align-content: left;
-  /* margin-left: -27rem; */
-  /* margin-top: -9rem; */
+  margin-left: 2rem;
+  margin-top: -3rem;
+  color: #5900ff;
+  font-weight: 900;
+}
+
+body .detailsnotlogged{
+  text-align: left;
+  align-content: left;
+  margin-left: 2rem;
+  margin-top: -3rem;
+  color: #5900ff;
+  font-weight: 900;
 }
 
 .postbox .username h5 {
   color:#ffffff;
-  font-size:1.2rem
+  font-size:1.2rem;
+}
+
+.postbox .likecount {
+  margin-top: -4rem;
+  margin-right: -23rem;
+}
+.postbox .dislikecount {
+  margin-top: -2.2rem;
+  margin-right: -8rem;
+}
+.postbox h5 {
+  margin-top:3rem;
 }
