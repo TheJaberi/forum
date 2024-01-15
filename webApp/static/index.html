@@ -95,8 +95,9 @@
             </section>
             <section class="right">
               {{range .AllPosts}}
-                <a href="/postpage?id={{.PostID}}">
+                
                 <div class="box">
+                  <a href="/postpage?id={{.PostID}}">
                   <img src="">
                   <div class="details">
                       
@@ -109,8 +110,8 @@
                       <span><option value="{{.}}"><i class="fa fa-thumbs-down"></i> {{.Dislikes}}</option></span>
                     </div>
                   </div>
-                  
-                </div></a>
+                </a>
+                </div>
               {{end}}
             </section>
           </div>
