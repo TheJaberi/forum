@@ -1,6 +1,7 @@
 package forum
 
 import (
+	// "fmt"
 	forum "forum/functions"
 	"html/template"
 	"net/http"
@@ -33,7 +34,12 @@ func HandlerPostPage(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 	postData = forum.AllPosts[postNumb-1]
+	
 	postData.LoggedUser = forum.AllData.IsLogged // if the user is registered the like and dislike buttons appear on the post's page
-	t.ExecuteTemplate(w, "postpage.html", postData) // data from the post clicked on is sent to the template only
-	forum.UpdatePosts()
+	forum.AllData.Postpage = postData
+	forum.UpdateComments()
+	for i:=0;i<len(forum.AllData.Postpage.Comments);i++{
+		forum.AllData.Postpage.Comments[i].CommentLoggedUser =forum.AllData.IsLogged}
+	t.ExecuteTemplate(w, "postpage.html", forum.AllData.Postpage) // data from the post clicked on is sent to the template only
+	// forum.UpdatePosts()
 }

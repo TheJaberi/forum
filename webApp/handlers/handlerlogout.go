@@ -1,7 +1,6 @@
 package forum
 
 import (
-	"fmt"
 	forum "forum/functions"
 	"html/template"
 		"net/http"
@@ -24,7 +23,6 @@ func HandlerLogout(w http.ResponseWriter, req *http.Request) {
 	w.WriteHeader(http.StatusOK)
 	var empty forum.User
 	forum.AllData.LoggedUser = empty
-	fmt.Println(forum.AllData.LoggedUser)
 	forum.AllData.IsLogged = false
 	forum.UpdatePosts()
 	t.ExecuteTemplate(w, "index.html", forum.AllData)

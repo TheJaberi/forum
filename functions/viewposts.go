@@ -34,17 +34,17 @@ func ViewPosts() {
 				}
 			}
 		}
-		commentData, commenterr := DB.Query("Select body, user_id, time_created from comments where post_id = ?", posttmp.PostID) // link between posts and its categories
+		commentData, commenterr := DB.Query("Select comment_id, body, user_id, time_created from comments where post_id = ?", posttmp.PostID) // link between posts and its categories
 		if commenterr != nil {
 			log.Fatal(categoryerr)
 		}
 		for commentData.Next() {
 			var commenttmp Comment
-			commentData.Scan(&commenttmp.Body, &commenttmp.User_id, &commenttmp.TimeCreated)
+			commentData.Scan(&commenttmp.Comment_id, &commenttmp.Body, &commenttmp.User_id, &commenttmp.TimeCreated)
 			commenttmp.TimeCreated = strings.Replace(commenttmp.TimeCreated, "T", " ", -1)
 			commenttmp.TimeCreated = strings.Replace(commenttmp.TimeCreated, "Z", " ", -1)
 			userData := DB.QueryRow("Select user_name from users where user_id = ?", commenttmp.User_id)
-			userData.Scan(&commenttmp.CommentUsername)
+			userData.Scan(&commenttmp.CommentUsername)		
 			posttmp.Comments = append(posttmp.Comments, commenttmp)
 		}
 		likedata := DB.QueryRow("SELECT COUNT(user_id) FROM Interaction where post_id = ? AND interaction = ?", posttmp.PostID, 1) // to present the numb of likes for each post
@@ -54,7 +54,6 @@ func ViewPosts() {
 		posttmp.NumbOfComments = len(posttmp.Comments)
 		AllPosts = append(AllPosts, posttmp)
 	}
-	
 UpdatePosts()
 AllData.AllPosts = AllPosts
 }
