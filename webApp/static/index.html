@@ -19,7 +19,19 @@
                 <a href="/"
                 ><h2>Reboot01 Forum</h2></a>
               </div>
-    
+              
+              <div class="nav-search">
+                <div class="my-search">
+                  <ul>{{if .IsLogged}}
+                    <li><a href="/mylikes/?user={{.LoggedUserID}}">MY LIKES</a></li>
+                    <li><a href="/mydislikes/?user={{.LoggedUserID}}">MY DISLIKES</a></li>
+                    <li><a href="/myposts/?user={{.LoggedUserID}}">MY POSTS</a></li>
+                    {{else}}
+                    {{end}} 
+                  </ul>
+                </div>
+              </div>
+              
               <div class="nav-group">
                 <ul>
                   {{if .CategoryCheck}}
@@ -48,24 +60,10 @@
                   </li>
                   
                   {{end}}
-                  </div>
-                </ul>              
-                  <div class="nav-search">
-                    <div class="my-search">
-                      <ul>{{if .IsLogged}}
-                      <li><a href="/mylikes/?user={{.LoggedUserID}}">MY LIKES</a></li>
-                      <li><a href="/mydislikes/?user={{.LoggedUserID}}">MY DISLIKES</a></li>
-                      <li><a href="/myposts/?user={{.LoggedUserID}}">MY POSTS</a></li>
-                      {{else}}
-                      {{end}} 
-                      </ul></div>
-                  <ul>          
-                      {{range .AllCategories}}<a href="/filtercategory/?category={{.CategoryID}}"><li>{{.CategoryName}}</a>{{end}}</li>
-                    </ul>
-                </div>
-            </div>
+                </ul>
+              </div>
             {{else}}
-                  {{end}}
+            {{end}}
           </div>
         </div>
     </header>
@@ -82,27 +80,44 @@
         <div class="container">
           <div class="row">
             <section class="left">
-              <!-- <h2>Welcome to Reboot01 Forum</h2> -->
-                  {{range .AllPosts}}
+              
+              <h2>Categories</h2>
+              <ul class="dropdown">
+                {{range .AllCategories}}<li><a href="/filtercategory/?category={{.CategoryID}}">{{.CategoryName}}</a></li>{{end}}
+              </ul>
+            </section>
+
+            <section class="right">
+              {{range .AllPosts}}
+                
+                <div class="box">
                   <a href="/postpage?id={{.PostID}}">
-                  <div class="box">
-                    <img src="">
-                    <div class="details">
+                  <img src="">
+                  <div class="details">
                       
-                      <h1><option value="{{.}}">{{.Title}}</option></h1><div class="categories">Categories:<span>&nbsp;</span>{{range .Category}} <option value="{{.}}"><h6>{{ .CategoryName}}</h6></option><span>&#44;&nbsp;</span>{{end}}</div>
-                          <span><option value="{{.}}">Created on: <h6>{{.TimeCreated}}</h6></option></span>
-                          <span><option value="{{.}}">Created by: <h6>{{.Username}}</h6></option></span>
-                          <div class="sub-details">
-                            <i class="fa-solid fa-comment"></i><span>{{.NumbOfComments}}</span>
-                            <span><option value="{{.}}"><i class="fa fa-thumbs-up"></i> {{.Likes}} </option></span>
-                            <span><option value="{{.}}"><i class="fa fa-thumbs-down"></i> {{.Dislikes}}</option></span>
-                      </div>
+                    <h1><option value="{{.}}">{{.Title}}</option></h1><div class="categories">Categories: {{range .Category}} <option value="{{.}}"><h6>{{ .CategoryName}}</h6></option><span>&#44;&nbsp;</span>{{end}}</div>
+                    <span><option value="{{.}}">Created on: <h6>{{.TimeCreated}}</h6></option></span>
+                    <span><option value="{{.}}">Created by: <h6>{{.Username}}</h6></option></span>
+                    <div class="sub-details">
+                      <i class="fa-solid fa-comment"></i><span>{{.NumbOfComments}}</span>
+                      <span><option value="{{.}}"><i class="fa fa-thumbs-up"></i> {{.Likes}} </option></span>
+                      <span><option value="{{.}}"><i class="fa fa-thumbs-down"></i> {{.Dislikes}}</option></span>
                     </div>
-                  
                   </div>
-                  {{end}}
-                </div></a>
-              </div>
+                </a>
+                </div>
+              {{end}}
+            </section>
+            <section class="center">
+              
+              <h2>Sort By</h2>
+              <ul class="dropdown">
+                <li><a href="/">Newest</a></li>
+                <li><a href="/?sortby=oldest">OLDEST</a></li>
+                <li><a href="/?sortby=mostliked">MOSTLIKED</a></li>
+                <li><a href="/?sortby=mostdisliked">MOSTDISLIKED</a></li>
+                <li><a href="/?sortby=mostcommentedon">MOST COMMENTED ON</a></li>
+                
             </section>
           </div>
         </div>
@@ -124,9 +139,11 @@
             <div class="content">
               <div class="login-left">
                   <form method="POST" action="/login">
-                  <input type="text" placeholder="Email" name="email"/>
+                  <input type="text" name="email" autocomplete="off" required class="input"/>
+                  <label class="user-email">Email Address</label>
                   <div class="form-group">
-                    <input type="password" placeholder="Password" name="password" id="passIn" />
+                    <input type="password" name="password" id="passIn" autocomplete="off" class="input" required />
+                    <label class="user-pass">Password</label>
                   </div>
                   <a href="#" class="btn"
                   >
@@ -137,16 +154,20 @@
                     Login with Google (Unavailable)</span
                   ></a
                 ><br><br>
-                  <button type="submit" class="btn btn-red">Log in</button></form>        
+                  <button type="submit" class="btn btn-red">Log in</button></form>
               </div>
               <div class="login-right">
                 <form method="POST" action="/register">
-                  <input type="email" placeholder="email" name="email" id="email"/>
+                  <input type="email" name="email" id="email" autocomplete="off" class="input"/>
+                  <label class="user-email">Email Address</label>
                 <div class="form-group">
-                  <input type="text" placeholder="Username" name="username"/>
+                  <input type="text" name="username" autocomplete="off" class="input"/>
+                  <label class="user-name">Username</label>
                 </div>
                 <div class="form-group">
-                  <input type="password" placeholder="Password" name="password" id="passIn" /></div><br><br>
+                  <input type="password" name="password" id="passIn" autocomplete="off" class="input" />
+                  <label class="user-pass">Password</label>
+                </div><br><br>
                 <button type="submit" class="btn btn-red">Join Now</button></form>
             </div>
           </div>
@@ -173,7 +194,7 @@
       })();
               
               crossorigin="anonymous"
-            if (location.href === ("http://localhost:8080/post") || location.href === ("http://localhost:8080/logout/") || location.href === ("http://localhost:8080/register") || location.href === ("http://localhost:8080/logout/") || location.href === ("http://localhost:8080/login") ){
+            if (location.href === ("http://localhost:8080/post") ||  location.href === ("http://localhost:8080/register") || location.href === ("http://localhost:8080/logout/") || location.href === ("http://localhost:8080/login") ){
               window.location.replace("http://localhost:8080")
             }     
       </script>

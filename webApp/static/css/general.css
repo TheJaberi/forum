@@ -97,15 +97,10 @@ input:focus::placeholder {
   border-color: #686c6e;
 }
 
-main {
-  padding: 12rem 0.5rem 2rem 0.5rem;
-  background-color: var(--lightWhiteColor);
-}
-
 @media (min-width: 768px) {
-  main {
+  /* main {
     padding-top: 1rem;
-  }
+  } */
 }
 
 .container {
@@ -116,8 +111,8 @@ main {
   width: 100%;
 }
 
-@media (min-width: 1300px) and (max-width: 1599px) {
+/* @media (min-width: 1300px) and (max-width: 1599px) {
   .container {
     width: 1200px;
   }
-}
+} */
