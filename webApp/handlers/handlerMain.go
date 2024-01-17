@@ -9,7 +9,7 @@ import (
 
 func MainHandler(w http.ResponseWriter, req *http.Request) {
 	if forum.AllData.IsLogged {
-		cookie, err2 := req.Cookie("test")
+		cookie, err2 := req.Cookie("myCookies")
 		if err2 != nil {
 			fmt.Println(err2)
 		}
