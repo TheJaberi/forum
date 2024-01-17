@@ -65,7 +65,7 @@ func UserDbLogin(email string, password string) (forum.Session, error) {
 	}
 	// XXX implement and return Cookie
 	Session = forum.Session{
-		Name:      "myCookies",
+		Name:      "test",
 		UserId:    LoggedUser.Userid,
 		Email:     email,
 		CreatedAt: time.Now(),
@@ -96,9 +96,8 @@ func CheckCookies(r *http.Request) error {
 	}
 	fmt.Println(cookie)
 	// Get cookie value:
-	if cookie.MaxAge < 0 || cookie.Value != Session.Uuid.String() {
+	if cookie.MaxAge < 0 {
 		Session = Empty
-		fmt.Println("here")
 		return errors.New("session expired")
 	}
 	return nil

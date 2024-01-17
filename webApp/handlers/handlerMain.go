@@ -1,6 +1,7 @@
 package forum
 
 import (
+	"fmt"
 	forum "forum/functions"
 	"html/template"
 	"net/http"
@@ -8,12 +9,18 @@ import (
 
 func MainHandler(w http.ResponseWriter, req *http.Request) {
 	if forum.AllData.IsLogged {
-		session := forum.CheckCookies(req)
-		if session != nil {
-			HandlerLogout(w, req)
+		cookie, err2 := req.Cookie("test")
+		if err2 != nil {
+			fmt.Println(err2)
 		}
+		fmt.Println(cookie)
 	}
 
+	check := forum.CheckCookies(req)
+
+	if check != nil {
+		HandlerLogout(w, req)
+	}
 	if req.URL.Path != "/" {
 		ErrorHandler(w, req, http.StatusNotFound)
 		return
