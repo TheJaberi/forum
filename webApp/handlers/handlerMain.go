@@ -1,14 +1,20 @@
 package forum
 
 import (
+	"fmt"
 	forum "forum/functions"
 	"html/template"
 	"net/http"
 )
 
-const PerPage = 10
-
 func MainHandler(w http.ResponseWriter, req *http.Request) {
+	if forum.AllData.IsLogged {
+		_, err2 := req.Cookie("myCookies")
+		if err2 != nil {
+			forum.AllData.IsLogged = false
+			forum.AllData.LoggedUser = forum.Empty
+		}
+	}
 	if req.URL.Path != "/" {
 		ErrorHandler(w, req, http.StatusNotFound)
 		return
@@ -16,6 +22,12 @@ func MainHandler(w http.ResponseWriter, req *http.Request) {
 	if req.Method != "GET" {
 		ErrorHandler(w, req, http.StatusMethodNotAllowed)
 		return
+	}
+	check := forum.CheckCookies(req)
+	if check != nil {
+		fmt.Println(check, "test")
+		forum.AllData.IsLogged = false
+		forum.AllData.LoggedUser = forum.Empty
 	}
 	t, err := template.ParseFiles(HTMLs...)
 	if err != nil {

@@ -37,8 +37,8 @@ width: 100%;
     color: var(--aquaColor);
     font-weight: 900;
     display: block;
-    /* margin-left: auto;
-    margin-right: auto; */
+    margin-left: auto;
+    margin-right: auto;
     text-align: center;
     align-items: center;
     align-content: center;
@@ -145,7 +145,7 @@ body .postedby {
 body .details{
   /* text-align: left; */
   /* align-content: left; */
-  /* margin-left: 2rem; */
+  margin-left: 2rem;
   margin-top: -3rem;
   color: #5900ff;
   font-weight: 900;
@@ -154,7 +154,7 @@ body .details{
 body .detailsnotlogged{
   /* text-align: left; */
   /* align-content: left; */
-  /* margin-left: 2rem; */
+  margin-left: 2rem;
   margin-top: -3rem;
   color: #5900ff;
   font-weight: 900;

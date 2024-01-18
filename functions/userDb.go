@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"errors"
 	"fmt"
+	"net/http"
 	"time"
 	"github.com/gofrs/uuid"
 	bcrypt "golang.org/x/crypto/bcrypt"
@@ -48,21 +49,20 @@ func UserDbRegisteration(applicant Applicant, db *sql.DB) error {
 }
 
 // Login
-func UserDbLogin(email string, password string) error {
+func UserDbLogin(email string, password string) (Session, error) {
 	if isEmailExists(email) != nil {
 		AllData.LoginErrorMsg = "User Email error!"
-		return UserEmailError
+		return EmptySession, UserEmailError
 	}
 	userdata := DB.QueryRow("SELECT user_id, user_name, user_pass, user_email, user_type FROM users where user_email = ?", email) // select gets the data from users table	
 	err := userdata.Scan(&LoggedUser.Userid, &LoggedUser.Username, &LoggedUser.Password, &LoggedUser.Email, &LoggedUser.Type) // scan assigns the data of the row to variables
-	fmt.Println(LoggedUser.Username)
-	if err != nil || LoggedUser.Username == ""{
-		return err
+	if err != nil{
+		fmt.Print(err)
 			} else {
 				err2 := bcrypt.CompareHashAndPassword([]byte(LoggedUser.Password), []byte(password))
 				if err2 != nil {
 					AllData.LoginErrorMsg = "User Password error!"
-					return err2
+					return EmptySession, err2
 				}
 		LoggedUser.Registered = true
 		AllData.IsLogged = true
@@ -74,18 +74,19 @@ func UserDbLogin(email string, password string) error {
 	}
 	uuid, err := uuid.NewV4()
 	if err != nil {
-		return err
+		return EmptySession, err
 	}
 	// XXX implement and return Cookie
 	LiveSession = Session{
-		Id: LoggedUser.Userid,
+		Name:      "myCookies",
+		UserId:    LoggedUser.Userid,
 		Email:     email,
 		CreatedAt: time.Now(),
 		Uuid:      uuid,
 	}
 	fmt.Println(LiveSession)
 	UpdatePosts()	
-	return nil
+	return LiveSession, nil
 }
 
 func isEmailExists(applicantEmail string) error {
@@ -100,3 +101,17 @@ func isEmailExists(applicantEmail string) error {
 	}
 	return nil
 }
+
+func CheckCookies(r *http.Request) error {
+	cookie, err := r.Cookie(LiveSession.Name)
+	if err != nil {
+		return err
+	}
+	// Get cookie value:
+	if cookie.MaxAge < 0 {
+		LiveSession = EmptySession
+		return errors.New("session expired")
+	}
+	return nil
+}
+

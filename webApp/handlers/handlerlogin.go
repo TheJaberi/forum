@@ -1,10 +1,10 @@
 package forum
 
 import (
-	"fmt"
-	forum "forum/functions"
 	"html/template"
 	"net/http"
+
+	forum "forum/functions"
 )
 
 func HandlerLogin(w http.ResponseWriter, req *http.Request) {
@@ -21,16 +21,26 @@ func HandlerLogin(w http.ResponseWriter, req *http.Request) {
 		ErrorHandler(w, req, http.StatusInternalServerError)
 		return
 	}
+
 	w.WriteHeader(http.StatusOK)
-	email := req.FormValue("email") // when the login button is clicked the username data is assigned to a variable
-	password := req.FormValue("password") // when the login button is clicked the password data is assigned to a variable
-	errlogin := forum.UserDbLogin(email, password)       // login func goes over all the rows in the users table and checks if it matches
+	email := req.FormValue("email")                         // when the login button is clicked the username data is assigned to a variable
+	password := req.FormValue("password")                   // when the login button is clicked the password data is assigned to a variable
+	session, errlogin := forum.UserDbLogin(email, password) // login func goes over all the rows in the users table and checks if it matches
+	sessionCookie := &http.Cookie{
+		Name:     session.Name,
+		Value:    session.Uuid.String(),
+		Path:     "/",
+		MaxAge:   10,
+		HttpOnly: true,
+	}
+
 	if errlogin != nil {
 		forum.LoginError2 = true
 	} else {
 		forum.LoginError2 = false
 	}
+	http.SetCookie(w, sessionCookie)
 	forum.UpdatePosts()
-	fmt.Print(forum.AllData.LoginErrorMsg)
+	w.WriteHeader(http.StatusOK)
 	t.ExecuteTemplate(w, "index.html", forum.AllData)
 }
