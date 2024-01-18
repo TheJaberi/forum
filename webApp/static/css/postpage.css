@@ -23,7 +23,7 @@ h1 {
   /* background-color: rgb(15, 15, 15); */
 }
 h2 {
-width: 98%;
+width: 100%;
 }
   button i {
     color: rgb(255, 255, 255);
@@ -37,8 +37,8 @@ width: 98%;
     color: var(--aquaColor);
     font-weight: 900;
     display: block;
-    margin-left: auto;
-    margin-right: auto;
+    /* margin-left: auto;
+    margin-right: auto; */
     text-align: center;
     align-items: center;
     align-content: center;
@@ -116,7 +116,7 @@ width: 98%;
 
 body .postbox .username {
   font-size: xx-large;
-  color: #D7C2FF;
+  color: #ffffff;
 
 }
 body .postbox {
@@ -138,14 +138,14 @@ body .postbox {
 }
 body .postedby {
   font-size: xx-large;
-  color: #D7C2FF;
+  color: #ffffff;
   font-weight:900;
 }
 
 body .details{
   /* text-align: left; */
   /* align-content: left; */
-  margin-left: 2rem;
+  /* margin-left: 2rem; */
   margin-top: -3rem;
   color: #5900ff;
   font-weight: 900;
@@ -154,7 +154,7 @@ body .details{
 body .detailsnotlogged{
   /* text-align: left; */
   /* align-content: left; */
-  margin-left: 2rem;
+  /* margin-left: 2rem; */
   margin-top: -3rem;
   color: #5900ff;
   font-weight: 900;

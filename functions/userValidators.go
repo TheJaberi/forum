@@ -3,15 +3,21 @@ package forum
 import "regexp"
 
 func NameChecker(name string) bool {
-	if len(name) < 2 && len(name) > 8 {
+	if len(name) < 3 || len(name) > 14 {
+		AllData.LoginErrorMsg = "Username must be between 3 and 13 characters"
 		return false
 	}
 	re := regexp.MustCompile(`^[a-zA-Z0-9]+$`)
-	return re.MatchString(name)
+	if !re.MatchString(name){
+		AllData.LoginErrorMsg = "Username must contain numbers and letters only"
+		return false
+	} else {
+return true
+	}
 }
 
 func PasswordChecker(pass string) bool {
-	if len(pass) < 8 && len(pass) > 25 {
+	if len(pass) < 6 && len(pass) > 25 {
 		return false
 	}
 	for _, r := range pass {
@@ -19,11 +25,11 @@ func PasswordChecker(pass string) bool {
 			return false
 		}
 	}
-	for i := 0; i < len(pass)-2; i++ {
-		if pass[i] == pass[i+1] && pass[i+1] == pass[i+2] {
-			return false
-		}
-	}
+	// for i := 0; i < len(pass)-2; i++ {
+	// 	if pass[i] == pass[i+1] && pass[i+1] == pass[i+2] {
+	// 		return false
+	// 	}
+	// }
 	return true
 }
 

@@ -39,3 +39,26 @@ func CreatePost(title string, body string, postCategories []int) {
 		AllPosts = append(AllPosts, postData)
 		AllData.AllPosts = AllPosts
 }
+func CreateComment(commentContent string, postID int) {
+	query := "INSERT INTO `comments` (`post_id`, `user_id`, `body`) VALUES (?, ?, ?)"
+	_, err2 := DB.ExecContext(context.Background(), query, postID, LoggedUser.Userid, commentContent)
+	if err2 != nil {
+		log.Fatal(err2)
+	}
+	var commenTmp Comment
+	commenTmp.Post_id = postID
+	commenTmp.User_id = AllData.LoggedUser.Userid
+	commenTmp.CommentUsername = AllData.LoggedUser.Username
+	commenTmp.Body = commentContent
+	AllData.AllPosts[postID-1].Comments = append(AllData.AllPosts[postID-1].Comments, commenTmp)
+}
+func CreateCategory(name string) {
+	var cat Category
+	query := "INSERT INTO `Category` (`Name`) VALUES (?)"
+	_, err2 := DB.ExecContext(context.Background(), query, name)
+	if err2 != nil { // the category is added using the ExecContext
+		log.Fatal(err2)
+	}
+	cat.CategoryName = name
+	AllCategories = append(AllCategories, cat)
+}

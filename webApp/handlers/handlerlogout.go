@@ -3,7 +3,7 @@ package forum
 import (
 	forum "forum/functions"
 	"html/template"
-		"net/http"
+	"net/http"
 )
 
 func HandlerLogout(w http.ResponseWriter, req *http.Request) {
@@ -24,6 +24,7 @@ func HandlerLogout(w http.ResponseWriter, req *http.Request) {
 	var empty forum.User
 	forum.AllData.LoggedUser = empty
 	forum.AllData.IsLogged = false
+	forum.LiveSession = forum.EmptySession
 	forum.UpdatePosts()
 	t.ExecuteTemplate(w, "index.html", forum.AllData)
 }

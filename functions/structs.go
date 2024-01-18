@@ -1,6 +1,10 @@
 package forum
 
-import "database/sql"
+import (
+	"time"
+"database/sql"
+	"github.com/gofrs/uuid"
+)
 
 var (
 	Database      *sql.DB
@@ -9,6 +13,9 @@ var (
 	AllCategories []Category
 	AllData       Data
 	AllPosts      []Post
+	LiveSession   Session
+	EmptySession  Session
+	LoginError2   bool
 )
 
 type Data struct {
@@ -20,6 +27,8 @@ type Data struct {
 	IsLogged      bool	
 	LoggedUserID  int
 	TypeAdmin     bool
+	LoginError    bool
+	LoginErrorMsg string
 }
 type Category struct {
 	CategoryName string
@@ -69,4 +78,19 @@ type Comment struct {
 	CommentUserDislike bool
 	CommentLoggedUser bool
 	Comment_id int
+}
+
+type Applicant struct {
+	Username string
+	Email    string
+	Password []byte
+	Type     string
+}
+
+type Session struct {
+	Id        int
+	Uuid      uuid.UUID
+	Email     string
+	UserId    int
+	CreatedAt time.Time
 }
