@@ -1,6 +1,7 @@
 package forum
 
 import (
+	"fmt"
 	"html/template"
 	"net/http"
 
@@ -33,13 +34,14 @@ func HandlerLogin(w http.ResponseWriter, req *http.Request) {
 		MaxAge:   10,
 		HttpOnly: true,
 	}
-
+	fmt.Println(sessionCookie)
+	http.SetCookie(w, sessionCookie)
 	if errlogin != nil {
 		forum.LoginError2 = true
 	} else {
 		forum.LoginError2 = false
 	}
-	http.SetCookie(w, sessionCookie)
+
 	forum.UpdatePosts()
 	w.WriteHeader(http.StatusOK)
 	t.ExecuteTemplate(w, "index.html", forum.AllData)

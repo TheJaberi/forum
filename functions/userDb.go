@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"net/http"
 	"time"
+
 	"github.com/gofrs/uuid"
 	bcrypt "golang.org/x/crypto/bcrypt"
 )
@@ -15,7 +16,7 @@ var (
 	UserNameError     = errors.New("User Name error!")
 	UserEmailError    = errors.New("User Email error!")
 	UserPasswordError = errors.New("User Password error!")
-	RegPasswordError =  errors.New("Password too weak!")
+	RegPasswordError  = errors.New("Password too weak!")
 	UserExistsError   = errors.New("Email Already in Use!")
 )
 
@@ -25,11 +26,11 @@ func UserDbRegisteration(applicant Applicant, db *sql.DB) error {
 		AllData.LoginErrorMsg = "Email Already in Use!"
 		return UserExistsError
 	}
-	if !PasswordChecker(string(applicant.Password)){
+	if !PasswordChecker(string(applicant.Password)) {
 		AllData.LoginErrorMsg = "Password too weak!\nmust be more than 6 characters"
 		return RegPasswordError
 	}
-	if !NameChecker(applicant.Username){
+	if !NameChecker(applicant.Username) {
 		return UserNameError
 	}
 	sqlStmt, err := db.Prepare("INSERT INTO users (user_name, user_email, user_pass, user_type) VALUES (?, ?, ?, ?)")
@@ -54,16 +55,16 @@ func UserDbLogin(email string, password string) (Session, error) {
 		AllData.LoginErrorMsg = "User Email error!"
 		return EmptySession, UserEmailError
 	}
-	userdata := DB.QueryRow("SELECT user_id, user_name, user_pass, user_email, user_type FROM users where user_email = ?", email) // select gets the data from users table	
-	err := userdata.Scan(&LoggedUser.Userid, &LoggedUser.Username, &LoggedUser.Password, &LoggedUser.Email, &LoggedUser.Type) // scan assigns the data of the row to variables
-	if err != nil{
+	userdata := DB.QueryRow("SELECT user_id, user_name, user_pass, user_email, user_type FROM users where user_email = ?", email) // select gets the data from users table
+	err := userdata.Scan(&LoggedUser.Userid, &LoggedUser.Username, &LoggedUser.Password, &LoggedUser.Email, &LoggedUser.Type)     // scan assigns the data of the row to variables
+	if err != nil {
 		fmt.Print(err)
-			} else {
-				err2 := bcrypt.CompareHashAndPassword([]byte(LoggedUser.Password), []byte(password))
-				if err2 != nil {
-					AllData.LoginErrorMsg = "User Password error!"
-					return EmptySession, err2
-				}
+	} else {
+		err2 := bcrypt.CompareHashAndPassword([]byte(LoggedUser.Password), []byte(password))
+		if err2 != nil {
+			AllData.LoginErrorMsg = "User Password error!"
+			return EmptySession, err2
+		}
 		LoggedUser.Registered = true
 		AllData.IsLogged = true
 		AllData.LoggedUser = LoggedUser
@@ -85,7 +86,7 @@ func UserDbLogin(email string, password string) (Session, error) {
 		Uuid:      uuid,
 	}
 	fmt.Println(LiveSession)
-	UpdatePosts()	
+	UpdatePosts()
 	return LiveSession, nil
 }
 
@@ -114,4 +115,3 @@ func CheckCookies(r *http.Request) error {
 	}
 	return nil
 }
-
