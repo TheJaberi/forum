@@ -23,7 +23,7 @@ h1 {
   /* background-color: rgb(15, 15, 15); */
 }
 h2 {
-width: 98%;
+width: 100%;
 }
   button i {
     color: rgb(255, 255, 255);
@@ -116,7 +116,7 @@ width: 98%;
 
 body .postbox .username {
   font-size: xx-large;
-  color: #D7C2FF;
+  color: #ffffff;
 
 }
 body .postbox {
@@ -138,7 +138,7 @@ body .postbox {
 }
 body .postedby {
   font-size: xx-large;
-  color: #D7C2FF;
+  color: #ffffff;
   font-weight:900;
 }
 

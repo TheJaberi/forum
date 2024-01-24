@@ -2,8 +2,8 @@ package forum
 
 import (
 	forum "forum/functions"
+	"net/http"
 	"html/template"
-		"net/http"
 )
 
 func HandlerLogout(w http.ResponseWriter, req *http.Request) {
@@ -21,9 +21,10 @@ func HandlerLogout(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 	w.WriteHeader(http.StatusOK)
-	var empty forum.User
-	forum.AllData.LoggedUser = empty
+	forum.AllData.LoggedUser = forum.Empty
 	forum.AllData.IsLogged = false
+	forum.LiveSession = forum.EmptySession
+	// http.Redirect(w, req, "/", http.StatusOK)
 	forum.UpdatePosts()
 	t.ExecuteTemplate(w, "index.html", forum.AllData)
 }

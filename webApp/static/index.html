@@ -7,6 +7,10 @@
     <link rel="stylesheet" href="/css/header.css">
     <link rel="stylesheet" href="/css/index.css" />
     <link rel="stylesheet" href="/css/footer.css" />
+
+    <meta name="Author" content="Reboot Journal">
+    <meta name="Description" content="Reboot Bahrain Forum">
+    
     <title>Reboot Journal</title>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
@@ -19,7 +23,6 @@
                 <a href="/"
                 ><h2>Reboot01 Forum</h2></a>
               </div>
-              
               <div class="nav-search">
                 <div class="my-search">
                   <ul>{{if .IsLogged}}
@@ -37,9 +40,9 @@
                   {{if .CategoryCheck}}
                   {{if .IsLogged}}
                   <li class="createpost">
-                    <a href="/#"><i class="fa-solid fa-comment"></i> Create Post</a>
+                    <a href="/##"><i class="fa-solid fa-comment"></i> Create Post</a>
                   </li>
-                  <li class="join">
+                  <li class="logout">
                     <a href="/logout">         
                       <i class="fa fa-sign-out"></i>
                       LogOut
@@ -47,7 +50,7 @@
                   </li>
                   {{if .TypeAdmin}}
                   <li class="createcategory">
-                    <a href="##"><i class="fa-solid fa-comment"></i> Create Category</a>
+                    <a href="/###"><i class="fa-solid fa-comment"></i> Create Category</a>
                   </li>
                   {{end}}
                   {{else}}
@@ -58,9 +61,11 @@
                       Login / Join
                     </a>
                   </li>
-                  
+                
+
                   {{end}}
                 </ul>
+                </div>
               </div>
             {{else}}
             {{end}}
@@ -80,7 +85,6 @@
         <div class="container">
           <div class="row">
             <section class="left">
-              
               <h2>Categories</h2>
               <ul class="dropdown">
                 {{range .AllCategories}}<li><a href="/filtercategory/?category={{.CategoryID}}">{{.CategoryName}}</a></li>{{end}}
@@ -109,7 +113,6 @@
               {{end}}
             </section>
             <section class="center">
-              
               <h2>Sort By</h2>
               <ul class="dropdown">
                 <li><a href="/">Newest</a></li>
@@ -117,7 +120,6 @@
                 <li><a href="/?sortby=mostliked">MOSTLIKED</a></li>
                 <li><a href="/?sortby=mostdisliked">MOSTDISLIKED</a></li>
                 <li><a href="/?sortby=mostcommentedon">MOST COMMENTED ON</a></li>
-                
             </section>
           </div>
         </div>
@@ -174,6 +176,7 @@
         </div>
       </div>
     </div>
+  </div>
       <div class="overlayposts">
         <div class="postbox" id="postbox">
         <form method="post" action="/post">
@@ -181,9 +184,11 @@
           Post Body<textarea name="post" id="post" rows="20" cols="150" placeholder="(max 2000 characters)" required="true" maxlength="2000"></textarea>
           Category
           {{range .AllCategories}}<input type="checkbox" name= "{{.CategoryID}}" id = "category" value="{{.CategoryID}}">{{.CategoryName}}{{end}}
-          <button class="downl-btn" id="format" name="format" value="txt">Create post</button></div>
-      </form>
+          <button class="downl-btn" id="format" name="format" value="txt">Create post</button>
+      </form></div>
     </div>
+    <div class="errormsg" value="{{.LoginErrorMsg}}"></div> 
+     <script src="js/index.js"></script>
     <script>
       (function () {
           window.onpageshow = function(event) {
@@ -199,6 +204,14 @@
             }     
       </script>
       <script src="https://kit.fontawesome.com/9e5ba2e3f5.js"></script>
-  <script src="js/index.js"></script>
+
+  {{if .LoginError}}
+  <script>
+    window.location.replace("http://localhost:8080/#")
+document.querySelector(".overlay").classList.add("active")
+const errormsg = document.querySelector(".errormsg").getAttribute("value")
+alert(errormsg)
+  </script>
+{{end}}
 </body>
 </html>
