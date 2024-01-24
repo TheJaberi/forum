@@ -22,8 +22,6 @@ func HandlerLogin(w http.ResponseWriter, req *http.Request) {
 		ErrorHandler(w, req, http.StatusInternalServerError)
 		return
 	}
-
-	w.WriteHeader(http.StatusOK)
 	email := req.FormValue("email")                         // when the login button is clicked the username data is assigned to a variable
 	password := req.FormValue("password")                   // when the login button is clicked the password data is assigned to a variable
 	session, errlogin := forum.UserDbLogin(email, password) // login func goes over all the rows in the users table and checks if it matches
@@ -31,7 +29,7 @@ func HandlerLogin(w http.ResponseWriter, req *http.Request) {
 		Name:     session.Name,
 		Value:    session.Uuid.String(),
 		Path:     "/",
-		MaxAge:   10,
+		MaxAge:   3600,
 		HttpOnly: true,
 	}
 	fmt.Println(sessionCookie)

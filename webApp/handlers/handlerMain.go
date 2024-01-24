@@ -1,7 +1,6 @@
 package forum
 
 import (
-	"fmt"
 	forum "forum/functions"
 	"html/template"
 	"net/http"
@@ -11,8 +10,9 @@ func MainHandler(w http.ResponseWriter, req *http.Request) {
 	if forum.AllData.IsLogged {
 		check := forum.CheckCookies(req)
 		if check != nil {
-			fmt.Println(check, "test")
-			HandlerLogout(w, req)
+			forum.AllData.LoggedUser = forum.Empty
+			forum.AllData.IsLogged = false
+			forum.LiveSession = forum.EmptySession
 		}
 	}
 	if req.URL.Path != "/" {
@@ -29,7 +29,6 @@ func MainHandler(w http.ResponseWriter, req *http.Request) {
 		ErrorHandler(w, req, http.StatusInternalServerError)
 		return
 	}
-	w.WriteHeader(http.StatusOK)
 	forum.ViewCategory()
 	forum.ViewPosts()
 	forum.AllData.AllPosts = forum.RSort(forum.AllPosts)

@@ -12,10 +12,6 @@ const join = document.querySelector(".join"),
 
 //   var loginerror = document.getElementById('testerror').getAttribute('value')
 
-// if (loginerror === 1) {
-//   overlay.classList.add("active");
-//   alert("email or password is wrong")
-// }
 join.addEventListener("click", () => {
   overlay.classList.add("active");
 });
