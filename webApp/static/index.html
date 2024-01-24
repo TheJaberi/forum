@@ -40,7 +40,7 @@
                   {{if .CategoryCheck}}
                   {{if .IsLogged}}
                   <li class="createpost">
-                    <a href="##"><i class="fa-solid fa-comment"></i> Create Post</a>
+                    <a href="/##"><i class="fa-solid fa-comment"></i> Create Post</a>
                   </li>
                   <li class="logout">
                     <a href="/logout">         
@@ -50,7 +50,7 @@
                   </li>
                   {{if .TypeAdmin}}
                   <li class="createcategory">
-                    <a href="###"><i class="fa-solid fa-comment"></i> Create Category</a>
+                    <a href="/###"><i class="fa-solid fa-comment"></i> Create Category</a>
                   </li>
                   {{end}}
                   {{else}}
@@ -61,9 +61,11 @@
                       Login / Join
                     </a>
                   </li>
-                  
+                
+
                   {{end}}
                 </ul>
+                </div>
               </div>
             {{else}}
             {{end}}
@@ -185,7 +187,8 @@
           <button class="downl-btn" id="format" name="format" value="txt">Create post</button>
       </form></div>
     </div>
-    <div class="errormsg" value="{{.LoginErrorMsg}}"></div>
+    <div class="errormsg" value="{{.LoginErrorMsg}}"></div> 
+     <script src="js/index.js"></script>
     <script>
       (function () {
           window.onpageshow = function(event) {
@@ -201,7 +204,7 @@
             }     
       </script>
       <script src="https://kit.fontawesome.com/9e5ba2e3f5.js"></script>
-  <script src="js/index.js"></script>
+
   {{if .LoginError}}
   <script>
     window.location.replace("http://localhost:8080/#")
