@@ -11,9 +11,8 @@ text-align: center;
   align-content: center;
   /* position: inline; */
   width: 100%;
-  /* margin-left: 32rem; */
-  /* margin-right: 32rem; */
-  margin-top: 3rem;
+  word-wrap: break-word;
+  /* margin-top: 3rem; */
   /* width: 100rem; */
 }
 h1 {
@@ -99,7 +98,7 @@ width: 100%;
   body .likeButton button{
    /* position: inline-flex; */
    font-size: xx-small;
-   color: #5900ff;
+   color: var(--aquaColor);
    background-color: var(--blackColor);
       cursor: pointer;
       border:0
@@ -108,7 +107,7 @@ width: 100%;
     /* position: relative; */
     /* font-size: xx-small; */
     background-color: var(--blackColor);
-    color:#5900ff;
+    color:var(--aquaColor);
     cursor: pointer;
     transition: 0.2s;
     opacity: 0.5;
@@ -134,6 +133,7 @@ body .postbox {
   max-width: 110rem;
   min-height: 200px;
   /* float: left; */
+  word-wrap:break-word;
   border: 1px solid #000;
 }
 body .postedby {
@@ -147,7 +147,7 @@ body .details{
   /* align-content: left; */
   margin-left: 2rem;
   margin-top: -3rem;
-  color: #5900ff;
+  color: var(--aquaColor);
   font-weight: 900;
 }
 
@@ -156,10 +156,22 @@ body .detailsnotlogged{
   /* align-content: left; */
   margin-left: 2rem;
   margin-top: -3rem;
-  color: #5900ff;
+  color: var(--aquaColor);
   font-weight: 900;
 }
 
+.postbody {
+  background-color: var(--lightBlackColor);
+  border: #000000;
+  border-width: 2;
+  box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.11),
+  0 0.1rem 0.1rem rgba(0, 0, 0, 0.04);
+  width:50%;
+  border-radius: 5px;
+  display: inline-block;
+  text-align: center;
+  align-items: center;
+  align-content: center;}
 .postbox .username h5 {
   color:#ffffff;
   font-size:1.2rem;
@@ -194,14 +206,14 @@ body .likeButtonComment .dislikebutton{
 .postbox .likeButtonComment button{
   /* position: inline-flex; */
   font-size: xx-small;
-  color: #5900ff;
+  color: var(--aquaColor);
   background-color: var(--lightBlackColor);
      cursor: pointer;
      border:0
  }
  .postbox .likeButtonComment button i:hover{
   background-color: var(--lightBlackColor);
-  color:#5900ff;
+  color:var(--aquaColor);
   cursor: pointer;
   transition: 0.2s;
   opacity: 0.4;

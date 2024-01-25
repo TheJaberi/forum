@@ -85,7 +85,7 @@ func UserDbLogin(email string, password string) (Session, error) {
 		CreatedAt: time.Now(),
 		Uuid:      uuid,
 	}
-	fmt.Println(LiveSession)
+	// fmt.Println(LiveSession)
 	UpdatePosts()
 	return LiveSession, nil
 }

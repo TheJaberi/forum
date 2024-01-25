@@ -355,6 +355,9 @@ margin-bottom: 0;
     margin-top: 1rem;
   }
 
+  a {
+    font-weight: 900;
+  }
   /* .login .row .content .login-left .btn-red,
   .login .row .content .login-right .btn-red {
     min-width: 8rem;
@@ -390,7 +393,7 @@ margin-bottom: 0;
     position: relative;
     border-radius: 0.4rem;
     padding: 1rem;
-    background-color: aqua;
+    background-color: rgb(2, 161, 161);
     max-width: 108rem;
     width: 100%;
     margin: 4rem auto 10rem;
@@ -428,7 +431,7 @@ margin-bottom: 0;
     position: fixed;
     inset: 0;
     z-index: 999;
-    background-color: rgba(255, 0, 0, 0.35);
+    background-color: rgba(0, 0, 0, 0.35);
     transition: var(--transition);
     padding: 0 1.5rem;
     opacity: 0;

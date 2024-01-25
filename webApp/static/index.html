@@ -23,8 +23,8 @@
               <div class="nav-search">
                 <div class="my-search">
                   <ul>{{if .IsLogged}}
-                    <li><a href="/mylikes/?user={{.LoggedUserID}}">MY LIKES</a></li>
-                    <li><a href="/mydislikes/?user={{.LoggedUserID}}">MY DISLIKES</a></li>
+                    <li><a href="/mylikes/?user={{.LoggedUserID}}">MY LIKES</a></li><span>&nbsp;&nbsp;&nbsp;</span>
+                    <li><a href="/mydislikes/?user={{.LoggedUserID}}">MY DISLIKES</a></li><span>&nbsp;&nbsp;&nbsp;</span>
                     <li><a href="/myposts/?user={{.LoggedUserID}}">MY POSTS</a></li>
                     {{else}}
                     {{end}} 
@@ -95,9 +95,9 @@
                   <img src="">
                   <div class="details">
                       
-                    <h1><option value="{{.}}">{{.Title}}</option></h1><div class="categories">Categories: {{range .Category}} <option value="{{.}}"><h6>{{ .CategoryName}}</h6></option><span>&#44;&nbsp;</span>{{end}}</div>
-                    <span><option value="{{.}}">Created on: <h6>{{.TimeCreated}}</h6></option></span>
-                    <span><option value="{{.}}">Created by: <h6>{{.Username}}</h6></option></span>
+                    <h1><option value="{{.}}">{{.Title}}</option></h1><div class="categories">Categories:<span>&nbsp;&nbsp;</span>{{range .Category}} <option value="{{.}}"><h6>{{ .CategoryName}}</h6></option><span>&#44;&nbsp;</span>{{end}}</div>
+                    <span><option value="{{.}}">Created on:<span>&nbsp;&nbsp;</span><h6>{{.TimeCreated}}</h6></option></span>
+                    <span><option value="{{.}}">Created by:<span>&nbsp;&nbsp;</span><h6>{{.Username}}</h6></option></span>
                     <div class="sub-details">
                       <i class="fa-solid fa-comment"></i><span>{{.NumbOfComments}}</span>
                       <span><option value="{{.}}"><i class="fa fa-thumbs-up"></i> {{.Likes}} </option></span>
@@ -161,7 +161,7 @@
                   <input type="email" name="email" id="email" autocomplete="off" class="input"/>
                   <label class="user-email">Email Address</label>
                 <div class="form-group">
-                  <input type="text" name="username" autocomplete="off" class="input"/>
+                  <input type="text" name="username" autocomplete="off" class="input" maxlength="13"/>
                   <label class="user-name">Username</label>
                 </div>
                 <div class="form-group">
