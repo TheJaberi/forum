@@ -4,6 +4,7 @@ import (
 	forum "forum/functions"
 	"html/template"
 	"net/http"
+	"strconv"
 )
 
 func MainHandler(w http.ResponseWriter, req *http.Request) {
@@ -33,7 +34,6 @@ func MainHandler(w http.ResponseWriter, req *http.Request) {
 	forum.ViewPosts()
 	forum.AllData.AllPosts = forum.RSort(forum.AllPosts)
 	forum.AllData.AllCategories = forum.AllCategories
-	forum.AllData.CategoryCheck = true
 	// forum.AllData.LoggedUser = forum.LoggedUser
 	// forum.AllData.LoggedUserID = forum.LoggedUser.Userid
 	// forum.AllData.IsLogged = forum.LoggedUser.Registered
@@ -52,6 +52,19 @@ func MainHandler(w http.ResponseWriter, req *http.Request) {
 	} else {
 		forum.AllData.LoginError = false
 	}
+	category, _ := strconv.Atoi(req.FormValue("category")) // gets the data from the button clicked for filtering
+	if category>0{
+		var filteredPosts []forum.Post
+	for i := 0; i < len(forum.AllPosts); i++ {
+		for j := 0; j < len(forum.AllPosts[i].Category); j++ {
+			if category == forum.AllPosts[i].Category[j].CategoryID { // loop over all the categories of all the posts if it matches "category" append the data of the post
+				filteredPosts = append(filteredPosts, forum.AllPosts[i])
+				break
+			}
+		}
+	}
+	forum.AllData.AllPosts = forum.RSort(filteredPosts)
+}
 	t.ExecuteTemplate(w, "index.html", forum.AllData)
 	forum.AllData.LoginError = false
 	forum.LoginError2 = false

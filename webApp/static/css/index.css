@@ -19,7 +19,7 @@ main .container .row .center {
   background-color: var(--lightBlackColor);
   padding: 10px;
   border: 1px solid #000;
-  border-radius: 10px;
+  border-radius: 2.7rem;
   /* max-height: fit-content; */
   overflow: hidden;
   text-align: center;
@@ -37,7 +37,7 @@ main .left {
   background-color: var(--lightBlackColor);
   padding: 10px;
   border: 1px solid #000;
-  border-radius: 10px;
+  border-radius: 2.7rem;
   /* max-height: fit-content; */
   overflow: hidden;
   text-align: center;
@@ -71,6 +71,7 @@ main .right h2 {
   margin-bottom: 2.7rem;
   font-size: var(--fs24);
   color: var(--darkBlueColor);
+  margin-top: 200px;
 }
 h2:hover{
   color: var(--aquaColor);
@@ -105,7 +106,7 @@ main .right .box {
   /* align-items: center; */
   background-color: var(--lightBlackColor);
   padding: 0.9rem 1.2rem;
-  border-radius: 0.7rem;
+  border-radius: 2.7rem;
   margin-bottom: 0.9rem;
   /* margin-left: 1.7rem; */
   box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.11),
@@ -114,8 +115,8 @@ main .right .box {
   width: 100%;
   border: 1px solid #000;
   font-size: 1.2rem;
-  /* display: inline-block; */
-  
+  justify-content: space-between;
+  overflow: hidden;
 }
 
 main .right .box:hover {

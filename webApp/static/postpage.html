@@ -13,14 +13,13 @@
     </header></a>
 <title>Reboot Journal</title>
 
-<!-- <a href="/"><h2>Reboot01 Forum</h2></a> -->
-    <a href="/postpage/?id={{.PostID}}"><h1>{{.Title}}</h1></a>
-<body>
-<br><br>
-    <div class="details">
-        <span>&nbsp;&nbsp;</span>{{range .Category}}{{.CategoryName}}<span>&#44;&nbsp;&nbsp;</span>{{end}}</div> 
+
+<h1>{{.Title}}</h1>
+<div class="details">Categories:<span>&nbsp;&nbsp;</span> 
+{{range .Category}}{{.CategoryName}}<span>&#44;&nbsp;&nbsp;</span>{{end}}<br></div>
         
-<br><div class="postbody"><br><h2>{{.Body}}</h2><br><br></div><div class="postedby">Posted by {{.Username}}</div><br>
+<body><div class="postbody">
+<br><h2>{{.Body}}</h2><br><br><div class="postedby">Posted by {{.Username}}</div><br>
 {{ if .LoggedUser }}
 <div class="likeButton">
 
@@ -43,8 +42,8 @@
         <i class="fa fa-thumbs-down fa-5x"></i></button></form></div>
     {{end}}
     {{end}}</div>
-      {{end}}
-      <br>
+      {{end}}</div>
+      <br><br>
 {{ if .LoggedUser }}
 <div class="overlaycomments">
     <div class="commentbox" id="commentbox">

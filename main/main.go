@@ -23,7 +23,6 @@ func main() {
 	// forumfunc.CreateTables() // create table creates the database and the tables for the project
 	http.HandleFunc("/createcategory", forum.HandlerCreateCategory)  // for the admin only to create new categories
 	http.HandleFunc("/postpage/", forum.HandlerPostPage)             // handles the post that is clicked on in the homepage
-	http.HandleFunc("/filtercategory/", forum.HandlerFilterCategory) // handles the filtering by category
 	http.HandleFunc("/myposts/", forum.HandlerMyFilter)              // handles the filtering by user's posts, likes or dislikes
 	http.HandleFunc("/mylikes/", forum.HandlerMyFilter)
 	http.HandleFunc("/logout/", forum.HandlerLogout)
