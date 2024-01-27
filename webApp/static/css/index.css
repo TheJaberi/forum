@@ -11,9 +11,11 @@ main .container .row {
 }
 
 main .container .row .right {
-  margin-left: 20px;
+  margin-left: 10px;
 }
-
+main .container .row .left {
+  margin-left: 10px;
+}
 main .container .row .center {
   min-width: 300px;
   background-color: var(--lightBlackColor);
@@ -23,7 +25,7 @@ main .container .row .center {
   /* max-height: fit-content; */
   overflow: hidden;
   text-align: center;
-  margin-left: 20px;
+  margin-left: 10px;
 }
 
 main .center {
@@ -220,9 +222,9 @@ main .right .box:hover {
     max-width: 80rem;
     width: 100%;
     margin: 4rem auto 1rem;
-    margin-top: 25vh;
+    margin-top: 17vh;
     box-shadow: 0 0.5rem 1.5rem 0 rgba(0 0 0 / 0.5);
-    overflow: hidden;
+    /* overflow: hidden; */
   }
   
   .login .top {
@@ -238,7 +240,10 @@ main .right .box:hover {
 margin-bottom: 0;
     margin-right: 12rem;
   }
-  
+  .login-right h2 {
+    margin-top: -4.2rem;
+    overflow: auto;
+  }
   .login .top i {
     font-size: var(--fs24);
     color: var(--whiteColor);

@@ -38,15 +38,16 @@
                   <li class="createpost">
                     <a href="/#"><i class="fa-solid fa-comment"></i> Create Post</a>
                   </li>
-                  <li>
+                 
+                  {{if .TypeAdmin}}
+                  <li class="createcategory">
+                    <a href="##"><i class="fa-solid fa-comment"></i> Create Category</a>
+                  </li>
+                   <li>
                     <a href="/logout">         
                       <i class="fa fa-sign-out"></i>
                       LogOut
                     </a>
-                  </li>
-                  {{if .TypeAdmin}}
-                  <li class="createcategory">
-                    <a href="##"><i class="fa-solid fa-comment"></i> Create Category</a>
                   </li>
                   {{end}}
                   {{else}}
@@ -129,7 +130,7 @@
       <div class="overlay">
         <div class="login" id="login">
           <div class="top">
-            <h2>Log in</h2><span>&nbsp;</span><h2>Register</h2>
+            <h2>Log in</h2><span>&nbsp;</span>
             <i class="fa-solid fa-xmark close"></i>
           </div>
           <div class="row">
@@ -152,8 +153,8 @@
                   ></a
                 ><br><br>
                   <button type="submit" class="btn btn-red">Log in</button></form>
-              </div>
-              <div class="login-right">
+              </div><br><br>
+              <div class="login-right"><h2>Register</h2>
                 <form method="POST" action="/register">
                   <input type="email" name="email" id="email" autocomplete="off" class="input"/>
                   <label class="user-email">Email Address</label>
@@ -164,7 +165,7 @@
                 <div class="form-group">
                   <input type="password" name="password" id="passIn" autocomplete="off" class="input" />
                   <label class="user-pass">Password</label>
-                </div><br><br>
+                </div><br>
                 <button type="submit" class="btn btn-red">Join Now</button></form>
             </div>
           </div>
