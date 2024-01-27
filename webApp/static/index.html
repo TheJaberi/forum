@@ -93,12 +93,12 @@
                   <div class="details">
                       
                     <h1><option value="{{.}}">{{.Title}}</option></h1><div class="categories">Categories:<span>&nbsp;&nbsp;</span>{{range .Category}} <option value="{{.}}"><h6>{{ .CategoryName}}</h6></option><span>&#44;&nbsp;</span>{{end}}</div>
-                    <span><option value="{{.}}">Created on:<span>&nbsp;&nbsp;</span><h6>{{.TimeCreated}}</h6></option></span>
-                    <span><option value="{{.}}">Created by:<span>&nbsp;&nbsp;</span><h6>{{.Username}}</h6></option></span>
+                    <span>Created on:<span>&nbsp;&nbsp;</span><h6>{{.TimeCreated}}</h6></span><br>
+                    <span>Created by:<span>&nbsp;&nbsp;</span><h6>{{.Username}}</h6></span>
                     <div class="sub-details">
                       <i class="fa-solid fa-comment"></i><span>{{.NumbOfComments}}</span>
-                      <span><option value="{{.}}"><i class="fa fa-thumbs-up"></i> {{.Likes}} </option></span>
-                      <span><option value="{{.}}"><i class="fa fa-thumbs-down"></i> {{.Dislikes}}</option></span>
+                      <i class="fa fa-thumbs-up"></i><span>{{.Likes}}</span>
+                      <i class="fa fa-thumbs-down"></i><span>{{.Dislikes}}</span>
                     </div>
                   </div>
                 </a>
