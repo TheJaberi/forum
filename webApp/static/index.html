@@ -31,29 +31,26 @@
                   </ul>
                 </div>
               </div>
-              
               <div class="nav-group">
                 <ul>
                   {{if .IsLogged}}
                   <li class="createpost">
                     <a href="/#"><i class="fa-solid fa-comment"></i> Create Post</a>
                   </li>
-                 
                   {{if .TypeAdmin}}
                   <li class="createcategory">
                     <a href="##"><i class="fa-solid fa-comment"></i> Create Category</a>
                   </li>
-                   <li>
+                  {{end}}
+                  <li class="join">
                     <a href="/logout">         
                       <i class="fa fa-sign-out"></i>
                       LogOut
                     </a>
                   </li>
-                  {{end}}
-                  {{else}}
-                  
+                  {{else}}             
                   <li class="join">
-                    <a href="#">
+                    <a href="/#">
                       <i class="fa-solid fa-user"></i>
                       Login / Join
                     </a>
