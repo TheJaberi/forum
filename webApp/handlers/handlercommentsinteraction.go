@@ -58,6 +58,7 @@ func HandlerCommentsLikes(w http.ResponseWriter, req *http.Request) {
 		forum.AllData.Postpage.Comments[commentPos].CommentUserlike = false
 		forum.AllData.Postpage.Comments[commentPos].CommentUserDislike = false
 	}
+	forum.UpdateComments()
 	forum.AllData.Postpage.LoggedUser = true
 	t.ExecuteTemplate(w, "postpage.html", forum.AllData.Postpage)
 }

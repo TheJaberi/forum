@@ -47,15 +47,21 @@ func ViewPosts() {
 			userData.Scan(&commenttmp.CommentUsername)		
 			posttmp.Comments = append(posttmp.Comments, commenttmp)
 		}
+		for i := 0; i < len(posttmp.Comments); i++ {
+		likeCommentdata := DB.QueryRow("SELECT COUNT(*) FROM interaction_comments where comment_id = ? AND interaction = ?", posttmp.Comments[i].Comment_id, 1) // to present the numb of likes for each post
+		likeCommentdata.Scan(&posttmp.Comments[i].Likes)
+		dislikeCommentdata := DB.QueryRow("SELECT COUNT(*) FROM interaction_comments where comment_id = ? AND interaction = ?", posttmp.Comments[i].Comment_id, 0) // to present the numb of dislikes for each post
+		dislikeCommentdata.Scan(&posttmp.Comments[i].Dislikes)}
 		likedata := DB.QueryRow("SELECT COUNT(user_id) FROM Interaction where post_id = ? AND interaction = ?", posttmp.PostID, 1) // to present the numb of likes for each post
 		likedata.Scan(&posttmp.Likes)
 		dislikedata := DB.QueryRow("SELECT COUNT(user_id) FROM Interaction where post_id = ? AND interaction = ?", posttmp.PostID, 0) // to present the numb of dislikes for each post
 		dislikedata.Scan(&posttmp.Dislikes)
 		posttmp.NumbOfComments = len(posttmp.Comments)
 		AllPosts = append(AllPosts, posttmp)
-	}
+}	
 UpdatePosts()
 AllData.AllPosts = AllPosts
+
 }
 func ViewCategory() {
 	AllCategories = nil

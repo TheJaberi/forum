@@ -67,7 +67,8 @@
         <button name= "removeInteraction" id = "removeInteraction" value="{{.Comment_id}}"><i class="fa fa-thumbs-up fa-5x" style="color: #00a5c2;"></i></button></form>{{.Likes}}
         <div class="dislikebutton"><form method="GET" action="/commentdislike/">
             <button name= "commentInteraction" id = "commentInteraction" value="{{.Comment_id}}"><i class="fa fa-thumbs-down fa-5x"></i></button></form>{{.Dislikes}}</div>
-        </div>{{else}}
+        </div>
+        {{else}}
         {{ if .CommentUserDislike }}
         <form method="GET" action="/commentlike/">
         <button name= "commentInteraction" id = "commentInteraction" value="{{.Comment_id}}"><i class="fa fa-thumbs-up fa-5x"></i></button></form>{{.Likes}}
@@ -81,7 +82,7 @@
         <i class="fa fa-thumbs-down fa-5x"></i></button></form>{{.Dislikes}}</div></div>
         {{end}}{{end}}{{else}}
         <div class="likecount"><br><span><option value="{{.}}"><i class="fa fa-thumbs-up"></i> {{.Likes}} </option></span>
-            <div class="dislikecount"><span><option value="{{.}}"><i class="fa fa-thumbs-down"></i> {{.Dislikes}}</option></span></div></div>
+            <div class="dislikecount"><span><option value="{{.}}"><i class="fa fa-thumbs-down"></i>{{.Dislikes}}</option></span></div></div>
         {{end}}<br><br><br><br><h3>{{.Body}}</h3></div>{{end}}
 </body>
 </html>

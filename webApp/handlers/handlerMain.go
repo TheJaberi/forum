@@ -32,6 +32,7 @@ func MainHandler(w http.ResponseWriter, req *http.Request) {
 	}
 	forum.ViewCategory()
 	forum.ViewPosts()
+	forum.UpdateComments()
 	forum.AllData.AllPosts = forum.RSort(forum.AllPosts)
 	forum.AllData.AllCategories = forum.AllCategories
 	// forum.AllData.LoggedUser = forum.LoggedUser
