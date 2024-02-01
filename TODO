@@ -10,4 +10,5 @@ TODO For the best use of this file, find and add this extension --> Gruntfuggly.
 
 fixed liked post as soon as you login
 fixed no like count(just remove the continue)
-fixed categoriesd to show on /
+fixed categories to show on /
+added window click to close overlay box
