@@ -1,8 +1,6 @@
 package forum
 
 import (
-	// "fmt"
-	"fmt"
 	forum "forum/functions"
 	"html/template"
 	"net/http"
@@ -41,7 +39,6 @@ func HandlerPostPage(w http.ResponseWriter, req *http.Request) {
 	forum.UpdateComments()
 	for i:=0;i<len(forum.AllData.Postpage.Comments);i++{
 		forum.AllData.Postpage.Comments[i].CommentLoggedUser =forum.AllData.IsLogged}
-		fmt.Println(forum.AllData.Postpage)
 	t.ExecuteTemplate(w, "postpage.html", forum.AllData.Postpage) // data from the post clicked on is sent to the template only
 	// forum.UpdatePosts()
 }
