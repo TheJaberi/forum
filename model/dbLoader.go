@@ -22,6 +22,7 @@ func DatabaseLoader() {
 		if err != nil {
 			log.Fatalf("%v", err)
 		}
+		defer sqlStmt.Close()
 		admin_pass, _ := bcrypt.GenerateFromPassword([]byte("admin"), 4)
 		sqlStmt.Exec("admin", "admin", admin_pass, "admin")
 	}

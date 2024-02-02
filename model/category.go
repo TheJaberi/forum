@@ -38,10 +38,10 @@ func GetCategories() error {
 	AllCategories = nil // FIXME Why do we clear it all the time?
 	var category Category
 	categoryData, err := DB.Query("Select id, Name from Category")
-	defer categoryData.Close() // TODO when is defering required?
 	if err != nil {
 		return err
 	}
+	defer categoryData.Close()
 	for categoryData.Next() {
 		err := categoryData.Scan(&category.CategoryID, &category.CategoryName)
 		if err != nil {

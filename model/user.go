@@ -10,6 +10,7 @@ func userInsertDb(applicant Applicant, db *sql.DB, pass []byte) error {
 	if err != nil {
 		return err
 	}
+	defer sqlStmt.Close()
 	_, err = sqlStmt.Exec(applicant.Username, applicant.Email, pass, applicant.Type)
 	if err != nil {
 		return err
