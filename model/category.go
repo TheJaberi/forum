@@ -8,16 +8,19 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
-var CategoryError = errors.New("Error adding category!") //TODO Add remaining errors then move to errors file
+var (
+	NewCategoryError  = errors.New("Error adding category!")
+	ScanCategoryError = errors.New("Categry Scan Error!")
+)
 
 func CreateCategory(name string) {
 	err := createCategoryDb(name)
 	if err != nil {
-		log.Println(CategoryError.Error() + err.Error())
+		log.Println(NewCategoryError.Error() + err.Error())
 	}
 	newCategory, err := GetCategory(name)
 	if err != nil {
-		log.Println(CategoryError.Error() + err.Error())
+		log.Println(NewCategoryError.Error() + err.Error())
 	}
 	AllCategories = append(AllCategories, newCategory)
 }
@@ -31,23 +34,31 @@ func createCategoryDb(name string) error {
 	return nil
 }
 
-func GetCategories() {
+func GetCategories() error {
 	AllCategories = nil // FIXME Why do we clear it all the time?
 	var category Category
-	categoryData, _ := DB.Query("Select id, Name from Category") // FIXME Add proper error handling for query
-	defer categoryData.Close()                                   // TODO when is defering required?
+	categoryData, err := DB.Query("Select id, Name from Category")
+	defer categoryData.Close() // TODO when is defering required?
+	if err != nil {
+		return err
+	}
 	for categoryData.Next() {
-		categoryData.Scan(&category.CategoryID, &category.CategoryName) // FIXME Add proper error handling for scan
+		err := categoryData.Scan(&category.CategoryID, &category.CategoryName)
+		if err != nil {
+			log.Printf(ScanCategoryError.Error())
+			return err
+		}
 		AllCategories = append(AllCategories, category)
 	}
+	return nil
 }
 
 func GetCategory(name string) (Category, error) {
-	row := DB.QueryRow("SELECT id, Name from Category WHERE name=?", name) // FIXME Add proper error handling for query
+	row := DB.QueryRow("SELECT id, Name from Category WHERE name=?", name)
 	var category Category
-	err := row.Scan(&category.CategoryID, &category.CategoryName) // FIXME Add proper error handling for scan
+	err := row.Scan(&category.CategoryID, &category.CategoryName)
 	if err != nil {
-		log.Printf("Id not found")
+		log.Printf(ScanCategoryError.Error())
 		return category, err
 	}
 	return category, nil
