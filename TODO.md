@@ -12,17 +12,17 @@
 
 [x] Separate custom error messages
 
-[ ] Change the scope of variables and functions as necessary
+[x] Category
 
-[ ] Category
-
-[ ] Posts
+[x] Posts
 
 [ ] Comments
 
 [ ] Interactions
 
+[ ] Change the scope of variables and functions as necessary
 
+[ ] Add close methods to query and prepared statements
 ## View
 
 [ ] 
