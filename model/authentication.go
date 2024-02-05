@@ -36,15 +36,15 @@ func UserLogin(email string, password string) (*http.Cookie, error) {
 		AllData.LoginErrorMsg = UserEmailError.Error()
 		return EmptyCookie, UserEmailError
 	}
-	// Validates Entered Password
-	err := bcrypt.CompareHashAndPassword([]byte(LoggedUser.Password), []byte(password))
+	// Retrieves User Data
+	err := UserRetrieveDb(email, password)
 	if err != nil {
-		AllData.LoginErrorMsg = err.Error()
 		return EmptyCookie, err
 	}
-	// Retrieves User Data
-	err = UserRetrieveDb(email, password)
+	// Validates Entered Password
+	err = bcrypt.CompareHashAndPassword([]byte(LoggedUser.Password), []byte(password))
 	if err != nil {
+		AllData.LoginErrorMsg = err.Error()
 		return EmptyCookie, err
 	}
 
