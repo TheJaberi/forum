@@ -46,7 +46,8 @@ func UserRetrieveDb(email string, password string) error {
 }
 
 func GetPostUsername(p *Post) error {
-	userData := DB.QueryRow("Select user_name from users where user_id = ?", p.PostID)
+
+	userData := DB.QueryRow("Select user_name from users where user_id = ?", p.UserID)
 	err := userData.Scan(&p.Username)
 	if err != nil {
 		return errors.New("User Scan Error:" + err.Error())
