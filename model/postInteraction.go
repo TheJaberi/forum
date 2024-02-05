@@ -4,11 +4,55 @@ import (
 	"context"
 	"errors"
 	"log"
+	"strconv"
 
 	_ "github.com/mattn/go-sqlite3"
 )
 
 // TABLE: Interactions
+
+func PostInteractions(add, remove, path string) (Post, error) {
+	var p Post
+	addPost_id, err := strconv.Atoi(add) // post interaction handles the data from like or dislike button if the user logged hasn't already clicked on it
+	if err != nil {
+		return p, err
+	}
+	remPost_id, err := strconv.Atoi(remove) // remove interaction handles the data from like or dislike button if the user logged has already clicked on it
+	if err != nil {
+		return p, err
+	}
+	user_id := LoggedUser.Userid
+	if addPost_id > remPost_id { // which ever value is greater determines whether to add or remove
+		p = AllPosts[addPost_id-1]
+		if path == "/like/" {
+			if !AllPosts[addPost_id-1].UserDislike {
+				InsertPostInteraction(addPost_id, user_id, 1, true, 0) // insert adds the interaction to the database 1 is like 0 is dislike
+				AllPosts[addPost_id-1].Userlike = true                 // changes the post like or dislike for the logged in user in the all posts var
+			} else {
+				UpdatePostInteraction(addPost_id, user_id, 1, true, 0) // update is used if a like has to be changed to a dislike or vice versa
+				AllPosts[addPost_id-1].Userlike = true
+				AllPosts[addPost_id-1].UserDislike = false
+			}
+		} else {
+			if !AllPosts[addPost_id-1].Userlike {
+				InsertPostInteraction(addPost_id, user_id, 0, true, 0)
+				AllPosts[addPost_id-1].UserDislike = true
+			} else {
+				UpdatePostInteraction(addPost_id, user_id, 0, true, 0)
+				AllPosts[addPost_id-1].UserDislike = true
+				AllPosts[addPost_id-1].Userlike = false
+			}
+		}
+		p = AllPosts[addPost_id-1]
+	} else {
+		RemovePostInteraction(remPost_id, user_id, true, 0) //remove is greater means there is already an interaction that needs to be removed
+		AllPosts[remPost_id-1].Userlike = false
+		AllPosts[remPost_id-1].UserDislike = false
+		p = AllPosts[remPost_id-1]
+	}
+	p.LoggedUser = true
+	return p, nil
+}
 
 func InsertPostInteraction(post_id int, user_id int, likeOrDislike int, post bool, comment_id int) {
 	query := "INSERT INTO `Interaction` (`post_id`, `user_id`, `interaction`) VALUES (?, ?, ?)"
