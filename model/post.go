@@ -118,7 +118,7 @@ func GetPosts() error {
 		}
 		p.TimeCreated = strings.Replace(p.TimeCreated, "T", " ", -1)
 		p.TimeCreated = strings.Replace(p.TimeCreated, "Z", " ", -1)
-		p, err = getPostsDetails(p)
+		p, err = getPostDetails(p)
 		AllPosts = append(AllPosts, p)
 	}
 	if LoggedUser.Registered {
@@ -131,7 +131,7 @@ func GetPosts() error {
 	return nil
 }
 
-func getPostsDetails(p Post) (Post, error) {
+func getPostDetails(p Post) (Post, error) {
 	// USERNAME
 	err := getPostUsername(&p)
 	if err != nil {
@@ -209,22 +209,13 @@ func getPostComments(p *Post) error {
 		}
 		c.TimeCreated = strings.Replace(c.TimeCreated, "T", " ", -1)
 		c.TimeCreated = strings.Replace(c.TimeCreated, "Z", " ", -1)
-		err = getCommentUsername(&c)
+		err = GetCommentUsername(&c)
 		if err != nil {
 			return err
 		}
 		p.Comments = append(p.Comments, c)
 	}
 	p.NumbOfComments = len(p.Comments)
-	return nil
-}
-
-func getCommentUsername(c *Comment) error {
-	userData := DB.QueryRow("Select user_name from users where user_id = ?", c.User_id)
-	err := userData.Scan(&c.CommentUsername)
-	if err != nil {
-		return errors.New("Comment Username Scan Error:" + err.Error())
-	}
 	return nil
 }
 
