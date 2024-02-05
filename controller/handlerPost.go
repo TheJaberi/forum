@@ -1,14 +1,13 @@
 package forum
 
 import (
-	forum "forum/functions"
+	model "forum/model"
 	"html/template"
 	"net/http"
 	"strconv"
 )
 
 func HandlerPost(w http.ResponseWriter, req *http.Request) {
-	var postCategories []int
 	if req.URL.Path != "/post" {
 		ErrorHandler(w, req, http.StatusNotFound)
 		return
@@ -22,18 +21,19 @@ func HandlerPost(w http.ResponseWriter, req *http.Request) {
 		ErrorHandler(w, req, http.StatusInternalServerError)
 		return
 	}
-	w.WriteHeader(http.StatusOK)
-	title := req.FormValue("title") // when the createpost button is clicked the title data is assigned to a variable
-	body := req.FormValue("post")   // when the createpost button is clicked the body data is assigned to a variable
-	body = forum.AdjustText(body)
-	for i := 1; i <= len(forum.AllCategories); i++ {
-		categorytmp := req.FormValue(strconv.Itoa(i))
+
+	var postCategories []int
+	for i := 1; i <= len(model.AllCategories); i++ {
+		categorytmp := req.FormValue(strconv.Itoa(i)) // XXX is this correct form value?
 		if categorytmp != "" {
 			postCategories = append(postCategories, i)
 		}
 	}
-	forum.CreatePost(title, body, postCategories) // create post adds the title and body to the table in the database
-	// MainHandler(w, req)
-	
-	t.ExecuteTemplate(w, "index.html", forum.AllData)
+	err = model.CreatePost(req.FormValue("title"), model.AdjustText(req.FormValue("post")), postCategories)
+	if err != nil {
+		ErrorHandler(w, req, http.StatusBadRequest)
+		return
+	}
+	w.WriteHeader(http.StatusOK)
+	t.ExecuteTemplate(w, "index.html", model.AllData)
 }
