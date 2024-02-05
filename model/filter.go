@@ -5,11 +5,11 @@ import (
 	"strconv"
 )
 
-func FilterByCategory(c string) error {
+func FilterByCategory(categoryID string) error {
 	var filteredPosts []Post
 	GetCategories()
 	GetPosts()
-	category, err := strconv.Atoi(c)
+	category, err := strconv.Atoi(categoryID)
 	if err != nil {
 		log.Printf(err.Error())
 		return err
@@ -25,5 +25,28 @@ func FilterByCategory(c string) error {
 	AllData.AllPosts = RSort(filteredPosts)
 	AllData.CategoryCheck = false
 	AllData.LoggedUser = LoggedUser
+	return nil
+}
+
+func FilterUserData(userID, path string) error {
+	var filteredPosts []Post
+	user_id, err := strconv.Atoi(userID)
+	if err != nil {
+		log.Printf(err.Error())
+		return err
+	}
+	for i := 0; i < len(AllPosts); i++ {
+		if path == "/myposts/" && AllPosts[i].UserID == user_id {
+			filteredPosts = append(filteredPosts, AllPosts[i])
+		}
+		if path == "/mylikes/" && AllPosts[i].Userlike {
+			filteredPosts = append(filteredPosts, AllPosts[i])
+		}
+		if path == "/mydislikes/" && AllPosts[i].UserDislike {
+			filteredPosts = append(filteredPosts, AllPosts[i])
+		}
+	}
+	AllData.AllPosts = RSort(filteredPosts)
+	AllData.CategoryCheck = false
 	return nil
 }
