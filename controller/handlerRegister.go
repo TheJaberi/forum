@@ -1,7 +1,7 @@
 package forum
 
 import (
-	forum "forum/functions"
+	model "forum/model"
 	"html/template"
 	"net/http"
 )
@@ -21,13 +21,16 @@ func HandlerRegister(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 	w.WriteHeader(http.StatusOK)
-	var NewApplicant forum.Applicant
-	NewApplicant.Username = req.FormValue("username") // when the register button is clicked the username data is assigned to a variable
-	NewApplicant.Password = []byte(req.FormValue("password")) // when the register button is clicked the password data is assigned to a variable
-	NewApplicant.Email = req.FormValue("email")
-	errreg := forum.UserDbRegisteration(NewApplicant,forum.DB) // 
-	if errreg != nil {
-		forum.LoginError2 = true
+
+	var NewApplicant = model.Applicant{
+		Username: req.FormValue("username"),
+		Password: []byte(req.FormValue("password")),
+		Email:    req.FormValue("email"),
+	}
+
+	err = model.UserRegisteration(NewApplicant, model.DB)
+	if err != nil {
+		model.LoginError2 = true
 	}
 	// NewUser adds the username and password to the database
 	t.ExecuteTemplate(w, "index.html", nil)
