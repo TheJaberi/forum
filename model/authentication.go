@@ -29,47 +29,66 @@ func UserRegisteration(applicant Applicant, db *sql.DB) error {
 }
 
 // Receive login credentials, validate and respond with a session cookie
-func UserLogin(email string, password string) (Session, error) {
+func UserLogin(email string, password string) (*http.Cookie, error) {
+	var EmptyCookie *http.Cookie
 	// Validate User Existance
 	if UserExistsDb(email) != nil {
 		AllData.LoginErrorMsg = UserEmailError.Error()
-		return EmptySession, UserEmailError
+		return EmptyCookie, UserEmailError
 	}
 	// Validates Entered Password
 	err := bcrypt.CompareHashAndPassword([]byte(LoggedUser.Password), []byte(password))
 	if err != nil {
 		AllData.LoginErrorMsg = err.Error()
-		return EmptySession, err
+		return EmptyCookie, err
 	}
 	// Retrieves User Data
 	err = UserRetrieveDb(email, password)
 	if err != nil {
-		return EmptySession, err
+		return EmptyCookie, err
 	}
 
 	LoggedUser.Registered = true
 	AllData.IsLogged = true
 	AllData.LoggedUser = LoggedUser
 	AllData.LoggedUserID = LoggedUser.Userid
+
 	if LoggedUser.Type == "admin" {
 		AllData.TypeAdmin = true
 	}
-	session, err := CreateCookies()
+	session, err := CreateSession()
 	if err != nil {
-		return EmptySession, err
+		return EmptyCookie, err
 	}
-	//UpdatePosts()
-	return session, nil
+	cookie := CreateCookie(session)
+
+	err = GetUserPostInteractions()
+	if err != nil {
+		return EmptyCookie, err
+	}
+	return cookie, nil
 }
 
-// Create a session cookie from the user data from the global struct
-func CreateCookies() (Session, error) {
+// Create a cookie using the user session
+func CreateCookie(s Session) *http.Cookie {
+	c := &http.Cookie{
+		Name:     s.Name,
+		Value:    s.Uuid.String(),
+		Path:     "/",
+		MaxAge:   3600,
+		HttpOnly: true,
+	}
+	return c
+}
+
+// Create a session from the user data from the global struct
+func CreateSession() (Session, error) {
 	uuid, err := uuid.NewV4()
 	if err != nil {
 		return EmptySession, err
 	}
 	LiveSession = Session{
-		Name:      "myCookies",
+		Name:      LoggedUser.Username,
 		UserId:    LoggedUser.Userid,
 		Email:     LoggedUser.Email,
 		CreatedAt: time.Now(),
