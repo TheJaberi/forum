@@ -13,4 +13,6 @@ var (
 	UserExistsError     = errors.New("Email Already in Use!")
 	SessionExpired      = errors.New("Session Expired")
 	EmailFormatError    = errors.New("Wrong Email Format!")
+	NewCategoryError    = errors.New("Error adding category!")
+	ScanCategoryError   = errors.New("Categry Scan Error!")
 )

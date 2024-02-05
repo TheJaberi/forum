@@ -2,10 +2,13 @@ package forum
 
 import (
 	"database/sql"
+	"errors"
 )
 
+// TABLE: users
+
 // Insert new row into user table
-func userInsertDb(applicant Applicant, db *sql.DB, pass []byte) error {
+func UserInsertDb(applicant Applicant, db *sql.DB, pass []byte) error {
 	sqlStmt, err := db.Prepare("INSERT INTO users (user_name, user_email, user_pass, user_type) VALUES (?, ?, ?, ?)")
 	if err != nil {
 		return err
@@ -38,6 +41,24 @@ func UserRetrieveDb(email string, password string) error {
 	err := userdata.Scan(&LoggedUser.Userid, &LoggedUser.Username, &LoggedUser.Password, &LoggedUser.Email, &LoggedUser.Type)     // scan assigns the data of the row to variables
 	if err != nil {
 		return err
+	}
+	return nil
+}
+
+func GetPostUsername(p *Post) error {
+	userData := DB.QueryRow("Select user_name from users where user_id = ?", p.PostID)
+	err := userData.Scan(&p.Username)
+	if err != nil {
+		return errors.New("User Scan Error:" + err.Error())
+	}
+	return nil
+}
+
+func GetCommentUsername(c *Comment) error {
+	userData := DB.QueryRow("Select user_name from users where user_id = ?", c.User_id)
+	err := userData.Scan(&c.CommentUsername)
+	if err != nil {
+		return errors.New("Comment Username Scan Error:" + err.Error())
 	}
 	return nil
 }

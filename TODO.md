@@ -16,11 +16,13 @@
 
 [x] Posts
 
-[ ] Comments
+[x] Comments
 
-[ ] Interactions
+[x] Interactions
 
-[ ] Change the scope of variables and functions as necessary
+[x] Change the scope of variables and functions as necessary
+
+[x] Organize db methods by associated table
 
 [ ] Add close methods to query and prepared statements
 ## View

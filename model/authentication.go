@@ -21,7 +21,7 @@ func UserRegisteration(applicant Applicant, db *sql.DB) error {
 		AllData.LoginErrorMsg = UserPasswordError.Error() // Using simplified error for user
 		return err
 	}
-	err = userInsertDb(applicant, db, pass)
+	err = UserInsertDb(applicant, db, pass)
 	if err != nil {
 		return err
 	}
