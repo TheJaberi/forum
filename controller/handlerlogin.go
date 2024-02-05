@@ -4,7 +4,6 @@ import (
 	"html/template"
 	"net/http"
 
-	forum "forum/functions"
 	model "forum/model"
 )
 
@@ -25,12 +24,12 @@ func HandlerLogin(w http.ResponseWriter, req *http.Request) {
 
 	loginCookie, err := model.UserLogin(req.FormValue("email"), req.FormValue("password"))
 	if err != nil {
-		forum.LoginError2 = true
+		model.LoginError2 = true
 	} else {
-		forum.LoginError2 = false
+		model.LoginError2 = false
 	}
 
 	http.SetCookie(w, loginCookie)
 	w.WriteHeader(http.StatusOK)
-	t.ExecuteTemplate(w, "index.html", forum.AllData)
+	t.ExecuteTemplate(w, "index.html", model.AllData)
 }
