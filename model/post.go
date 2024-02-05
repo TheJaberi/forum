@@ -45,15 +45,21 @@ func CreatePostDb(post Post) int64 {
 }
 
 func GetPost(id int64) (Post, error) {
-	row := DB.QueryRow("SELECT id, Title, body, user_id, time_created from posts WHERE id=?", id)
+	row := DB.QueryRow("SELECT id, Title, body, user_id, time_created from posts WHERE id=?", id+1)
 	var p Post
 	err := row.Scan(&p.PostID, &p.Title, &p.Body, &p.UserID, &p.TimeCreated)
 	if err != nil {
+		log.Println(id)
 		log.Printf("Error Getting Post")
 		return p, err
 	}
 	p.TimeCreated = strings.Replace(p.TimeCreated, "T", " ", -1)
 	p.TimeCreated = strings.Replace(p.TimeCreated, "Z", " ", -1)
+	p, err = GetPostDetails(p)
+	if err != nil {
+		log.Println(errors.New("Post Scan Error: " + err.Error()))
+		return p, err
+	}
 	return p, nil
 }
 
