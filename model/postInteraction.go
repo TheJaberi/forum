@@ -39,24 +39,21 @@ func GetUserPostInteractions() error {
 		for i := range AllPosts {
 			var interaction int
 			postData := DB.QueryRow("SELECT interaction from Interaction where post_id = ? AND user_id = ?", i+1, LoggedUser.Userid)
-			errpost := postData.Scan(&interaction)
-			if errpost != nil {
-				// FIXME what is the case for this?
-				// continue
-				return errors.New("Error scanning user post interactions")
-			}
-			if interaction == 1 {
-				AllPosts[i].Userlike = true
+			err := postData.Scan(&interaction)
+			if err == nil {
+				if interaction == 1 {
+					AllPosts[i].Userlike = true
+				} else {
+					AllPosts[i].UserDislike = true
+				}
 			} else {
-				AllPosts[i].UserDislike = true
+				log.Printf(err.Error())
+				continue // used for logout (remove user post interactions from global struct)?
 			}
 		}
-	} else {
-		return errors.New("User must log in to get post interactions")
 	}
 	return nil
 }
-
 func GetPostLikes(p *Post) error {
 	likedata := DB.QueryRow("SELECT COUNT(user_id) FROM Interaction where post_id = ? AND interaction = ?", p.PostID, 1)
 	err := likedata.Scan(&p.Likes)
