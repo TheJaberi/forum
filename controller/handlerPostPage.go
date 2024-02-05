@@ -2,15 +2,13 @@ package forum
 
 import (
 	// "fmt"
-	forum "forum/functions"
+	model "forum/model"
 	"html/template"
 	"net/http"
 	"strconv"
 )
 
 func HandlerPostPage(w http.ResponseWriter, req *http.Request) {
-	var postData forum.Post
-	forum.ViewPosts()
 	if req.URL.Path != "/postpage/" {
 		ErrorHandler(w, req, http.StatusNotFound)
 		return
@@ -24,22 +22,30 @@ func HandlerPostPage(w http.ResponseWriter, req *http.Request) {
 		ErrorHandler(w, req, http.StatusInternalServerError)
 		return
 	}
-	postNumb, err := strconv.Atoi(req.URL.Query().Get("id")) // get the id for the post that is clicked on
+	err = model.GetPosts()
+	if err != nil {
+		ErrorHandler(w, req, http.StatusInternalServerError)
+		return
+	}
+	postID, err := strconv.Atoi(req.URL.Query().Get("id"))
+	if err != nil {
+		ErrorHandler(w, req, http.StatusBadRequest)
+		return
+	}
+	model.AllData.Postpage, err = model.GetPost(int64(postID) - 1)
 	if err != nil {
 		ErrorHandler(w, req, http.StatusNotFound)
 		return
 	}
-	if postNumb > len(forum.AllPosts){
+	model.AllData.Postpage.LoggedUser = model.AllData.IsLogged // TODO (Use checkCookie) if the user is registered the like and dislike buttons appear on the post's page
+	err = model.GetPostComments(&model.AllData.Postpage)
+	if err != nil {
 		ErrorHandler(w, req, http.StatusNotFound)
 		return
 	}
-	postData = forum.AllPosts[postNumb-1]
-	
-	postData.LoggedUser = forum.AllData.IsLogged // if the user is registered the like and dislike buttons appear on the post's page
-	forum.AllData.Postpage = postData
-	forum.UpdateComments()
-	for i:=0;i<len(forum.AllData.Postpage.Comments);i++{
-		forum.AllData.Postpage.Comments[i].CommentLoggedUser =forum.AllData.IsLogged}
-	t.ExecuteTemplate(w, "postpage.html", forum.AllData.Postpage) // data from the post clicked on is sent to the template only
-	// forum.UpdatePosts()
+	for i := 0; i < len(model.AllData.Postpage.Comments); i++ { // XXX Not sure what this does..
+		model.AllData.Postpage.Comments[i].CommentLoggedUser = model.AllData.IsLogged
+	}
+	w.WriteHeader(http.StatusOK)
+	t.ExecuteTemplate(w, "postpage.html", model.AllData.Postpage)
 }
