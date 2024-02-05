@@ -12,7 +12,7 @@ var DB *sql.DB
 
 func DatabaseLoader() {
 	var err error
-	DB, err = sql.Open("sqlite3", "../functions/forum.db")
+	DB, err = sql.Open("sqlite3", "../model/forum.db")
 	if err != nil {
 		log.Fatalf("%v", err)
 	}
