@@ -1,10 +1,9 @@
 package forum
 
 import (
-	forum "forum/functions"
+	model "forum/model"
 	"html/template"
 	"net/http"
-	"strconv"
 )
 
 func HandlerComments(w http.ResponseWriter, req *http.Request) {
@@ -21,13 +20,18 @@ func HandlerComments(w http.ResponseWriter, req *http.Request) {
 		ErrorHandler(w, req, http.StatusInternalServerError)
 		return
 	}
-	w.WriteHeader(http.StatusOK)
-	post_id, _ := strconv.Atoi(req.FormValue("postid")) // when the createpost button is clicked the title data is assigned to a variable
-	commentContent := req.FormValue("commentContent")
-	commentContent = forum.AdjustText(commentContent)
-	forum.CreateComment(commentContent, post_id) // create post adds the title and body to the table in the database
-	forum.ViewPosts()
-	postData := forum.AllData.AllPosts[post_id-1]
+	// when the createpost button is clicked the title data is assigned to a variable
+	postData, err := model.CreateComment(req.FormValue("commentContent"), req.FormValue("postid")) // create post adds the title and body to the table in the database
+	if err != nil {
+		ErrorHandler(w, req, http.StatusBadRequest)
+		return
+	}
+	err = model.GetPosts()
+	if err != nil {
+		ErrorHandler(w, req, http.StatusInternalServerError)
+		return
+	}
 	postData.LoggedUser = true
+	w.WriteHeader(http.StatusOK)
 	t.ExecuteTemplate(w, "postpage.html", postData)
 }

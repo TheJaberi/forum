@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"log"
+	"strconv"
 	"strings"
 
 	_ "github.com/mattn/go-sqlite3"
@@ -11,19 +12,26 @@ import (
 
 // TABLE: comments
 
-func CreateComment(commentContent string, postID int) {
+func CreateComment(rawComment, postStrID string) (Post, error) {
+
+	postID, err := strconv.Atoi(postStrID)
+	if err != nil {
+		return Post{}, err
+	}
+
 	var c = Comment{
 		Post_id:         postID,
 		User_id:         AllData.LoggedUser.Userid,
 		CommentUsername: AllData.LoggedUser.Username,
-		Body:            commentContent,
+		Body:            AdjustText(rawComment),
 	}
 	id, err := CreateCommentDb(c)
 	if err != nil {
-		// TODO RETURN ERROR
+		return Post{}, err
 	}
 	c, err = GetComment(id)
 	AllData.AllPosts[c.Post_id-1].Comments = append(AllData.AllPosts[c.Post_id-1].Comments, c)
+	return AllData.AllPosts[c.Post_id-1], nil
 }
 
 func CreateCommentDb(c Comment) (int64, error) {
