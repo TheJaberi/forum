@@ -1,10 +1,11 @@
 package forum
 
 import (
-	"forum/functions"
-	_ "github.com/mattn/go-sqlite3"
+	model "forum/model"
 	"html/template"
 	"net/http"
+
+	_ "github.com/mattn/go-sqlite3"
 )
 
 func HandlerCreateCategory(w http.ResponseWriter, req *http.Request) {
@@ -16,13 +17,16 @@ func HandlerCreateCategory(w http.ResponseWriter, req *http.Request) {
 		ErrorHandler(w, req, http.StatusMethodNotAllowed)
 		return
 	}
+	err := model.CreateCategory(req.FormValue("category"))
+	if err != nil {
+		ErrorHandler(w, req, http.StatusBadRequest)
+		return
+	}
 	t, err := template.ParseFiles(HTMLs...)
 	if err != nil {
 		ErrorHandler(w, req, http.StatusInternalServerError)
 		return
 	}
 	w.WriteHeader(http.StatusOK)
-	categoryName := req.FormValue("category")
-	forum.CreateCategory(categoryName)
-	t.ExecuteTemplate(w, "index.html", forum.AllData)
+	t.ExecuteTemplate(w, "index.html", model.AllData)
 }

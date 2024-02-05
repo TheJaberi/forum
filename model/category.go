@@ -10,16 +10,19 @@ import (
 
 // TABLE: Category
 
-func CreateCategory(name string) {
+func CreateCategory(name string) error {
 	err := CreateCategoryDb(name)
 	if err != nil {
 		log.Println(NewCategoryError.Error() + err.Error())
+		return err
 	}
 	newCategory, err := GetCategory(name)
 	if err != nil {
 		log.Println(NewCategoryError.Error() + err.Error())
+		return err
 	}
 	AllCategories = append(AllCategories, newCategory)
+	return nil
 }
 
 func CreateCategoryDb(name string) error {
