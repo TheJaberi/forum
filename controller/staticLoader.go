@@ -8,16 +8,16 @@ func StaticFileLoader() {
 	if HTMLs == nil {
 		HTMLs = []string{
 			// Add new html / template names here
-			"../webApp/static/index.html",
-			"../webApp/static/main.html",
-			"../webApp/static/error2.html",
-			"../webApp/static/postpage.html",
+			"../view/index.html",
+			"../view/main.html",
+			"../view/error.html",
+			"../view/postpage.html",
 		}
 	}
-	cssFiles := http.FileServer(http.Dir("../webApp/static/css"))
-	jsFiles := http.FileServer(http.Dir("../webApp/static/js"))
-	imgFiles := http.FileServer(http.Dir("../webApp/static/img"))
-	fontFiles := http.FileServer(http.Dir("../webApp/static/fonts"))
+	cssFiles := http.FileServer(http.Dir("../view/css"))
+	jsFiles := http.FileServer(http.Dir("../view/js"))
+	imgFiles := http.FileServer(http.Dir("../view/img"))
+	fontFiles := http.FileServer(http.Dir("../view/fonts"))
 	http.Handle("/css/", http.StripPrefix("/css/", cssFiles))
 	http.Handle("/js/", http.StripPrefix("/js/", jsFiles))
 	http.Handle("/img/", http.StripPrefix("/img/", imgFiles))
