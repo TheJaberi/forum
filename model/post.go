@@ -63,7 +63,7 @@ func GetPost(id int) (Post, error) {
 }
 
 func GetPosts() error {
-	AllPosts = nil // FIXME Why do we clear it all the time?
+	AllPosts = nil
 	postData, err := DB.Query("Select id, Title, body, user_id, time_created from posts")
 	if err != nil {
 		log.Println(err)

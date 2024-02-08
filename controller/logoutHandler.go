@@ -26,7 +26,7 @@ func HandlerLogout(w http.ResponseWriter, req *http.Request) {
 	model.LiveSession = model.EmptySession
 	err = model.GetUserPostInteractions()
 	if err != nil {
-		// XXX Currently set to return nil only
+		// XXX Currently set to return nil only to allow logout
 	}
 	t.ExecuteTemplate(w, "index.html", model.AllData)
 }

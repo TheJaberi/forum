@@ -35,7 +35,7 @@ func CreateCategoryDb(name string) error {
 }
 
 func GetCategories() error {
-	AllCategories = nil // FIXME Why do we clear it all the time?
+	AllCategories = nil
 	var category Category
 	categoryData, err := DB.Query("Select id, Name from Category")
 	if err != nil {

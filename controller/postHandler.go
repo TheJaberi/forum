@@ -24,7 +24,7 @@ func HandlerPost(w http.ResponseWriter, req *http.Request) {
 
 	var postCategories []int
 	for i := 1; i <= len(model.AllCategories); i++ {
-		categorytmp := req.FormValue(strconv.Itoa(i)) // XXX is this correct form value?
+		categorytmp := req.FormValue(strconv.Itoa(i))
 		if categorytmp != "" {
 			postCategories = append(postCategories, i)
 		}
