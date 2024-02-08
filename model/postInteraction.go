@@ -13,13 +13,23 @@ import (
 
 func PostInteractions(add, remove, path string) (Post, error) {
 	var p Post
-	addPost_id, err := strconv.Atoi(add) // post interaction handles the data from like or dislike button if the user logged hasn't already clicked on it
-	if err != nil {
-		return p, err
+	var addPost_id int
+	var remPost_id int
+	var err error
+	if add != "" {
+		addPost_id, err = strconv.Atoi(add) // post interaction handles the data from like or dislike button if the user logged hasn't already clicked on it
+		if err != nil {
+			log.Println(err)
+			return p, err
+		}
+
 	}
-	remPost_id, err := strconv.Atoi(remove) // remove interaction handles the data from like or dislike button if the user logged has already clicked on it
-	if err != nil {
-		return p, err
+	if remove != "" {
+		remPost_id, err = strconv.Atoi(remove) // remove interaction handles the data from like or dislike button if the user logged has already clicked on it
+		if err != nil {
+			log.Println(err)
+			return p, err
+		}
 	}
 	user_id := LoggedUser.Userid
 	if addPost_id > remPost_id { // which ever value is greater determines whether to add or remove
@@ -58,7 +68,7 @@ func InsertPostInteraction(postID int, userID int, likeOrDislike int) {
 	query := "INSERT INTO `Interaction` (`post_id`, `user_id`, `interaction`) VALUES (?, ?, ?)"
 	_, err := DB.ExecContext(context.Background(), query, postID, userID, likeOrDislike)
 	if err != nil { // the post is added using the ExecContext along with the userid which is in the LoggedUser variable
-		log.Fatal(err)
+		log.Println(err)
 	}
 }
 
@@ -66,7 +76,7 @@ func RemovePostInteraction(postID int, userID int) {
 	query := "DELETE FROM `Interaction` where post_id = ? AND user_id = ?"
 	_, err := DB.ExecContext(context.Background(), query, postID, userID)
 	if err != nil { // the post is added using the ExecContext along with the userid which is in the LoggedUser variable
-		log.Fatal(err)
+		log.Println(err)
 	}
 }
 
@@ -74,25 +84,25 @@ func UpdatePostInteraction(postID int, userID int, likeOrDislike int) {
 	query := "UPDATE Interaction SET interaction = ? where post_id= ? AND user_id = ?"
 	_, err := DB.ExecContext(context.Background(), query, likeOrDislike, postID, userID)
 	if err != nil { // the post is added using the ExecContext along with the userid which is in the LoggedUser variable
-		log.Fatal(err)
+		log.Println(err)
 	}
 }
 
 func GetUserPostInteractions() error {
 	if LoggedUser.Registered { // FIXME Possibly redundent
+
 		for i := range AllPosts {
 			var interaction int
 			postData := DB.QueryRow("SELECT interaction from Interaction where post_id = ? AND user_id = ?", i+1, LoggedUser.Userid)
 			err := postData.Scan(&interaction)
-			if err == nil {
+			if err != nil {
+				continue // used for logout (remove user post interactions from global struct)?
+			} else {
 				if interaction == 1 {
 					AllPosts[i].Userlike = true
 				} else {
 					AllPosts[i].UserDislike = true
 				}
-			} else {
-				log.Printf(err.Error())
-				continue // used for logout (remove user post interactions from global struct)?
 			}
 		}
 	}
