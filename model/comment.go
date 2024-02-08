@@ -13,12 +13,14 @@ import (
 // TABLE: comments
 
 func CreateComment(rawComment, postStrID string) (Post, error) {
-
-	postID, err := strconv.Atoi(postStrID)
-	if err != nil {
-		return Post{}, err
+	var postID int
+	var err error
+	if postStrID != "" {
+		postID, err = strconv.Atoi(postStrID)
+		if err != nil {
+			return Post{}, err
+		}
 	}
-
 	var c = Comment{
 		Post_id:         postID,
 		User_id:         AllData.LoggedUser.Userid,
@@ -34,20 +36,20 @@ func CreateComment(rawComment, postStrID string) (Post, error) {
 	return AllData.AllPosts[c.Post_id-1], nil
 }
 
-func CreateCommentDb(c Comment) (int64, error) {
+func CreateCommentDb(c Comment) (int, error) {
 	query := "INSERT INTO `comments` (`post_id`, `user_id`, `body`) VALUES (?, ?, ?)"
 	rowData, err := DB.ExecContext(context.Background(), query, c.Post_id, c.User_id, c.Body)
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
 	}
 	commentID, err := rowData.LastInsertId()
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
 	}
-	return commentID, nil
+	return int(commentID), nil
 }
-func GetComment(id int64) (Comment, error) {
-	row := DB.QueryRow("SELECT comment_id, post_id, user_id, body, time_created from comments WHERE id=?", id)
+func GetComment(id int) (Comment, error) {
+	row := DB.QueryRow("SELECT comment_id, post_id, user_id, body, time_created from comments WHERE comment_id=?", id)
 	var c Comment
 	err := row.Scan(&c.Comment_id, &c.Post_id, &c.User_id, &c.Body, &c.TimeCreated)
 	if err != nil {
@@ -65,6 +67,7 @@ func GetComment(id int64) (Comment, error) {
 }
 
 func GetPostComments(p *Post) error {
+	p.Comments = nil
 	commentData, err := DB.Query("Select comment_id, body, user_id, time_created from comments where post_id = ?", p.PostID)
 	if err != nil {
 		return errors.New("Comment Query Error:" + err.Error())
