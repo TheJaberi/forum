@@ -1,7 +1,5 @@
 # TODO LIST
 
-## Model
-
 [x] Database & Business Logic Directory
 
 [x] Copy Structs and db files into directory
@@ -24,45 +22,15 @@
 
 [x] Organize db methods by associated table
 
-[ ] Add close methods to query and prepared statements
-## View
-
-[ ] 
-
-[ ] 
-
-[ ] 
-
-[ ] 
-
-## Controller
-
-[ ] 
-
-[ ] 
-
-[ ] 
-
-[ ] 
-
-## Microservices
-
-[ ] 
-
-[ ] 
-
-[ ] 
-
-[ ] 
+[x] Add close methods to query and prepared statements
 
 ## Miscellaneous
 
-[ ] Remove Extra Files
+[x] Rename handlers
 
-[ ] Final Test
+[x] Remove Extra Files
 
-[ ] 
+[x] Final Test
 
-[ ] 
 
 For the best use of this file, find and add this extension --> Gruntfuggly.todo-tree
