@@ -71,17 +71,9 @@ func AssignPostCategoryDb(postID int, postCategories []int) error {
 		queryCategory := "INSERT INTO `Post2Category` (`post_id`, `category_id`) VALUES (?, ?)"
 		_, err := DB.ExecContext(context.Background(), queryCategory, postID, category)
 		if err != nil { // the post is added using the ExecContext along with the userid which is in the LoggedUser variable
-			log.Fatal(err)
+			log.Println(err)
 			return err
 		}
-		/*
-		   for j := 0; j < len(AllCategories); j++ {
-		       if AllCategories[j].CategoryID == postCategories[i] {
-		           postData.Category = append(postData.Category, AllCategories[j])
-		           break
-		       }
-		   }
-		*/
 	}
 	err := GetCategories()
 	if err != nil {

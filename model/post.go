@@ -35,11 +35,11 @@ func CreatePostDb(post Post) int {
 	query := "INSERT INTO `posts` (`Title`, `body`, `user_id`) VALUES (?, ?, ?)"
 	rowData, err := DB.ExecContext(context.Background(), query, post.Title, post.Body, post.UserID)
 	if err != nil { // the post is added using the ExecContext along with the userid which is in the LoggedUser variable
-		log.Fatal(err)
+		log.Println(err)
 	}
 	postID, err := rowData.LastInsertId()
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
 	}
 	return int(postID)
 }
@@ -65,9 +65,9 @@ func GetPost(id int) (Post, error) {
 
 func GetPosts() error {
 	AllPosts = nil // FIXME Why do we clear it all the time?
-	postData, errpost := DB.Query("Select id, Title, body, user_id, time_created from posts")
-	if errpost != nil {
-		log.Fatal(errpost)
+	postData, err := DB.Query("Select id, Title, body, user_id, time_created from posts")
+	if err != nil {
+		log.Println(err)
 	}
 	defer postData.Close()
 	for postData.Next() {
