@@ -32,13 +32,13 @@ func CommentInteraction(add, remove, path string) (Post, error) {
 	if addComment_id > remComment_id { // which ever value is greater determines whether to add or remove
 		if path == "/commentlike/" {
 			if !AllData.Postpage.Comments[commentPos].CommentUserDislike {
-				err := InsertCommentInteraction(AllData.Postpage.PostID, user_id, 1, false, addComment_id) // insert adds the interaction to the database 1 is like 0 is dislike
+				err := InsertCommentInteraction(AllData.Postpage.PostID, user_id, 1, addComment_id) // insert adds the interaction to the database 1 is like 0 is dislike
 				if err != nil {
 					return p, err
 				}
 				AllData.Postpage.Comments[commentPos].CommentUserlike = true // changes the comment like or dislike for the logged in user in the all comments var
 			} else {
-				err := UpdateCommentInteraction(AllData.Postpage.PostID, user_id, 1, false, addComment_id) // update is used if a like has to be changed to a dislike or vice versa
+				err := UpdateCommentInteraction(user_id, 1, addComment_id) // update is used if a like has to be changed to a dislike or vice versa
 				if err != nil {
 					return p, err
 				}
@@ -47,13 +47,13 @@ func CommentInteraction(add, remove, path string) (Post, error) {
 			}
 		} else {
 			if !AllData.Postpage.Comments[commentPos].CommentUserlike {
-				err := InsertCommentInteraction(AllData.Postpage.PostID, user_id, 0, false, addComment_id)
+				err := InsertCommentInteraction(AllData.Postpage.PostID, user_id, 0, addComment_id)
 				if err != nil {
 					return p, err
 				}
 				AllData.Postpage.Comments[commentPos].CommentUserDislike = true
 			} else {
-				err := UpdateCommentInteraction(AllData.Postpage.PostID, user_id, 0, false, addComment_id)
+				err := UpdateCommentInteraction(user_id, 0, addComment_id)
 				if err != nil {
 					return p, err
 				}
@@ -62,7 +62,7 @@ func CommentInteraction(add, remove, path string) (Post, error) {
 			}
 		}
 	} else {
-		err := RemoveCommentInteraction(AllData.Postpage.PostID, user_id, false, remComment_id) // remove is greater means there is already an interaction that needs to be removed
+		err := RemoveCommentInteraction(user_id, remComment_id) // remove is greater means there is already an interaction that needs to be removed
 		if err != nil {
 			return p, err
 		}
@@ -72,27 +72,27 @@ func CommentInteraction(add, remove, path string) (Post, error) {
 	AllData.Postpage.LoggedUser = true
 	return AllData.Postpage, nil
 }
-func InsertCommentInteraction(post_id int, user_id int, likeOrDislike int, post bool, comment_id int) error {
+func InsertCommentInteraction(postID int, userID int, likeOrDislike int, commentID int) error {
 	query := "INSERT INTO `interaction_comments` (`comment_id`, `post_id`, `user_id`, `interaction`) VALUES (?, ?, ?, ?)"
-	_, err := DB.ExecContext(context.Background(), query, comment_id, post_id, user_id, likeOrDislike)
+	_, err := DB.ExecContext(context.Background(), query, commentID, postID, userID, likeOrDislike)
 	if err != nil { // the post is added using the ExecContext along with the userid which is in the LoggedUser variable
 		log.Fatal(err)
 		return err
 	}
 	return nil
 }
-func RemoveCommentInteraction(post_id int, user_id int, post bool, comment_id int) error {
+func RemoveCommentInteraction(userID int, commentID int) error {
 	query := "DELETE FROM `interaction_comments` where comment_id = ? AND user_id = ?"
-	_, err := DB.ExecContext(context.Background(), query, comment_id, user_id)
+	_, err := DB.ExecContext(context.Background(), query, commentID, userID)
 	if err != nil { // the post is added using the ExecContext along with the userid which is in the LoggedUser variable
 		log.Fatal(err)
 		return err
 	}
 	return nil
 }
-func UpdateCommentInteraction(post_id int, user_id int, likeOrDislike int, post bool, comment_id int) error {
+func UpdateCommentInteraction(userID int, likeOrDislike int, commentID int) error {
 	query := "UPDATE interaction_comments SET interaction = ? where comment_id= ? AND user_id = ?"
-	_, err := DB.ExecContext(context.Background(), query, likeOrDislike, comment_id, user_id)
+	_, err := DB.ExecContext(context.Background(), query, likeOrDislike, commentID, userID)
 	if err != nil { // the post is added using the ExecContext along with the userid which is in the LoggedUser variable
 		log.Fatal(err)
 		return err

@@ -26,26 +26,26 @@ func PostInteractions(add, remove, path string) (Post, error) {
 		p = AllPosts[addPost_id-1]
 		if path == "/like/" {
 			if !AllPosts[addPost_id-1].UserDislike {
-				InsertPostInteraction(addPost_id, user_id, 1, true, 0) // insert adds the interaction to the database 1 is like 0 is dislike
-				AllPosts[addPost_id-1].Userlike = true                 // changes the post like or dislike for the logged in user in the all posts var
+				InsertPostInteraction(addPost_id, user_id, 1) // insert adds the interaction to the database 1 is like 0 is dislike
+				AllPosts[addPost_id-1].Userlike = true        // changes the post like or dislike for the logged in user in the all posts var
 			} else {
-				UpdatePostInteraction(addPost_id, user_id, 1, true, 0) // update is used if a like has to be changed to a dislike or vice versa
+				UpdatePostInteraction(addPost_id, user_id, 1) // update is used if a like has to be changed to a dislike or vice versa
 				AllPosts[addPost_id-1].Userlike = true
 				AllPosts[addPost_id-1].UserDislike = false
 			}
 		} else {
 			if !AllPosts[addPost_id-1].Userlike {
-				InsertPostInteraction(addPost_id, user_id, 0, true, 0)
+				InsertPostInteraction(addPost_id, user_id, 0)
 				AllPosts[addPost_id-1].UserDislike = true
 			} else {
-				UpdatePostInteraction(addPost_id, user_id, 0, true, 0)
+				UpdatePostInteraction(addPost_id, user_id, 0)
 				AllPosts[addPost_id-1].UserDislike = true
 				AllPosts[addPost_id-1].Userlike = false
 			}
 		}
 		p = AllPosts[addPost_id-1]
 	} else {
-		RemovePostInteraction(remPost_id, user_id, true, 0) //remove is greater means there is already an interaction that needs to be removed
+		RemovePostInteraction(remPost_id, user_id) //remove is greater means there is already an interaction that needs to be removed
 		AllPosts[remPost_id-1].Userlike = false
 		AllPosts[remPost_id-1].UserDislike = false
 		p = AllPosts[remPost_id-1]
@@ -54,25 +54,25 @@ func PostInteractions(add, remove, path string) (Post, error) {
 	return p, nil
 }
 
-func InsertPostInteraction(post_id int, user_id int, likeOrDislike int, post bool, comment_id int) {
+func InsertPostInteraction(postID int, userID int, likeOrDislike int) {
 	query := "INSERT INTO `Interaction` (`post_id`, `user_id`, `interaction`) VALUES (?, ?, ?)"
-	_, err := DB.ExecContext(context.Background(), query, post_id, user_id, likeOrDislike)
+	_, err := DB.ExecContext(context.Background(), query, postID, userID, likeOrDislike)
 	if err != nil { // the post is added using the ExecContext along with the userid which is in the LoggedUser variable
 		log.Fatal(err)
 	}
 }
 
-func RemovePostInteraction(post_id int, user_id int, post bool, comment_id int) {
+func RemovePostInteraction(postID int, userID int) {
 	query := "DELETE FROM `Interaction` where post_id = ? AND user_id = ?"
-	_, err := DB.ExecContext(context.Background(), query, post_id, user_id)
+	_, err := DB.ExecContext(context.Background(), query, postID, userID)
 	if err != nil { // the post is added using the ExecContext along with the userid which is in the LoggedUser variable
 		log.Fatal(err)
 	}
 }
 
-func UpdatePostInteraction(post_id int, user_id int, likeOrDislike int, post bool, comment_id int) {
+func UpdatePostInteraction(postID int, userID int, likeOrDislike int) {
 	query := "UPDATE Interaction SET interaction = ? where post_id= ? AND user_id = ?"
-	_, err := DB.ExecContext(context.Background(), query, likeOrDislike, post_id, user_id)
+	_, err := DB.ExecContext(context.Background(), query, likeOrDislike, postID, userID)
 	if err != nil { // the post is added using the ExecContext along with the userid which is in the LoggedUser variable
 		log.Fatal(err)
 	}
