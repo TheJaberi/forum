@@ -25,7 +25,7 @@ func CreateComment(rawComment, postStrID string) (Post, error) {
 		Post_id:         postID,
 		User_id:         AllData.LoggedUser.Userid,
 		CommentUsername: AllData.LoggedUser.Username,
-		Body:            AdjustText(rawComment),
+		Body:            rawComment,
 	}
 	id, err := CreateCommentDb(c)
 	if err != nil {

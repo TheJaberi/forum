@@ -29,7 +29,7 @@ func HandlerPost(w http.ResponseWriter, req *http.Request) {
 			postCategories = append(postCategories, i)
 		}
 	}
-	err = model.CreatePost(req.FormValue("title"), model.AdjustText(req.FormValue("post")), postCategories)
+	err = model.CreatePost(req.FormValue("title"), req.FormValue("post"), postCategories)
 	if err != nil {
 		ErrorHandler(w, req, http.StatusBadRequest)
 		return
