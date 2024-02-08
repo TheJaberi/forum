@@ -13,13 +13,20 @@ import (
 
 func CommentInteraction(add, remove, path string) (Post, error) {
 	var p Post
-	addComment_id, err := strconv.Atoi(add) // comment interaction handles the data from like or dislike button if the user logged hasn't already clicked on it
-	if err != nil {
-		return p, err
+	var addComment_id int
+	var remComment_id int
+	var err error
+	if add != "" {
+		addComment_id, err = strconv.Atoi(add) // comment interaction handles the data from like or dislike button if the user logged hasn't already clicked on it
+		if err != nil {
+			return p, err
+		}
 	}
-	remComment_id, err := strconv.Atoi(remove) // remove interaction handles the data from like or dislike button if the user logged has already clicked on it
-	if err != nil {
-		return p, err
+	if remove != "" {
+		remComment_id, err = strconv.Atoi(remove) // remove interaction handles the data from like or dislike button if the user logged has already clicked on it
+		if err != nil {
+			return p, err
+		}
 	}
 	user_id := LoggedUser.Userid
 	commentPos := 0
@@ -76,7 +83,7 @@ func InsertCommentInteraction(postID int, userID int, likeOrDislike int, comment
 	query := "INSERT INTO `interaction_comments` (`comment_id`, `post_id`, `user_id`, `interaction`) VALUES (?, ?, ?, ?)"
 	_, err := DB.ExecContext(context.Background(), query, commentID, postID, userID, likeOrDislike)
 	if err != nil { // the post is added using the ExecContext along with the userid which is in the LoggedUser variable
-		log.Fatal(err)
+		log.Println(err)
 		return err
 	}
 	return nil
@@ -85,7 +92,7 @@ func RemoveCommentInteraction(userID int, commentID int) error {
 	query := "DELETE FROM `interaction_comments` where comment_id = ? AND user_id = ?"
 	_, err := DB.ExecContext(context.Background(), query, commentID, userID)
 	if err != nil { // the post is added using the ExecContext along with the userid which is in the LoggedUser variable
-		log.Fatal(err)
+		log.Println(err)
 		return err
 	}
 	return nil
@@ -94,7 +101,7 @@ func UpdateCommentInteraction(userID int, likeOrDislike int, commentID int) erro
 	query := "UPDATE interaction_comments SET interaction = ? where comment_id= ? AND user_id = ?"
 	_, err := DB.ExecContext(context.Background(), query, likeOrDislike, commentID, userID)
 	if err != nil { // the post is added using the ExecContext along with the userid which is in the LoggedUser variable
-		log.Fatal(err)
+		log.Println(err)
 		return err
 	}
 	return nil
