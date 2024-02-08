@@ -66,7 +66,7 @@ func GetCategory(name string) (Category, error) {
 
 // TABLE: Post2Category
 
-func AssignPostCategoryDb(postID int64, postCategories []int) error {
+func AssignPostCategoryDb(postID int, postCategories []int) error {
 	for _, category := range postCategories {
 		queryCategory := "INSERT INTO `Post2Category` (`post_id`, `category_id`) VALUES (?, ?)"
 		_, err := DB.ExecContext(context.Background(), queryCategory, postID, category)
@@ -75,12 +75,12 @@ func AssignPostCategoryDb(postID int64, postCategories []int) error {
 			return err
 		}
 		/*
-			for j := 0; j < len(AllCategories); j++ {
-				if AllCategories[j].CategoryID == postCategories[i] {
-					postData.Category = append(postData.Category, AllCategories[j])
-					break
-				}
-			}
+		   for j := 0; j < len(AllCategories); j++ {
+		       if AllCategories[j].CategoryID == postCategories[i] {
+		           postData.Category = append(postData.Category, AllCategories[j])
+		           break
+		       }
+		   }
 		*/
 	}
 	err := GetCategories()

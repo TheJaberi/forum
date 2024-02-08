@@ -31,7 +31,7 @@ func CreatePost(title string, body string, postCategories []int) error {
 	return nil
 }
 
-func CreatePostDb(post Post) int64 {
+func CreatePostDb(post Post) int {
 	query := "INSERT INTO `posts` (`Title`, `body`, `user_id`) VALUES (?, ?, ?)"
 	rowData, err := DB.ExecContext(context.Background(), query, post.Title, post.Body, post.UserID)
 	if err != nil { // the post is added using the ExecContext along with the userid which is in the LoggedUser variable
@@ -41,11 +41,11 @@ func CreatePostDb(post Post) int64 {
 	if err != nil {
 		log.Fatal(err)
 	}
-	return postID
+	return int(postID)
 }
 
-func GetPost(id int64) (Post, error) {
-	row := DB.QueryRow("SELECT id, Title, body, user_id, time_created from posts WHERE id=?", id+1)
+func GetPost(id int) (Post, error) {
+	row := DB.QueryRow("SELECT id, Title, body, user_id, time_created from posts WHERE id=?", id)
 	var p Post
 	err := row.Scan(&p.PostID, &p.Title, &p.Body, &p.UserID, &p.TimeCreated)
 	if err != nil {
