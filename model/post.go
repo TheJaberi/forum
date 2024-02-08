@@ -49,7 +49,6 @@ func GetPost(id int) (Post, error) {
 	var p Post
 	err := row.Scan(&p.PostID, &p.Title, &p.Body, &p.UserID, &p.TimeCreated)
 	if err != nil {
-		log.Println(id)
 		log.Printf("Error Getting Post")
 		return p, err
 	}
