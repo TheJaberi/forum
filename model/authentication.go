@@ -62,7 +62,7 @@ func UserLogin(email string, password string) (*http.Cookie, error) {
 	}
 	cookie := CreateCookie(session)
 
-	err = GetUserPostInteractions()
+	err = GetUserPostsInteractions()
 	if err != nil {
 		return EmptyCookie, err
 	}

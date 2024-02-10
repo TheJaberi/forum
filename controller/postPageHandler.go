@@ -47,5 +47,6 @@ func HandlerPostPage(w http.ResponseWriter, req *http.Request) {
 		model.AllData.Postpage.Comments[i].CommentLoggedUser = model.AllData.IsLogged
 	}
 	w.WriteHeader(http.StatusOK)
+	model.GetUserPostInteractions(postID)
 	t.ExecuteTemplate(w, "postpage.html", model.AllData.Postpage)
 }

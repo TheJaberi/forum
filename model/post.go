@@ -59,6 +59,12 @@ func GetPost(id int) (Post, error) {
 		log.Println(errors.New("Post Scan Error: " + err.Error()))
 		return p, err
 	}
+	if LoggedUser.Registered {
+		err := GetUserPostsInteractions()
+		if err != nil {
+			return p, err
+		}
+	}
 	return p, nil
 }
 
@@ -82,7 +88,7 @@ func GetPosts() error {
 		AllPosts = append(AllPosts, p)
 	}
 	if LoggedUser.Registered {
-		err := GetUserPostInteractions()
+		err := GetUserPostsInteractions()
 		if err != nil {
 			return err
 		}

@@ -88,7 +88,7 @@ func UpdatePostInteraction(postID int, userID int, likeOrDislike int) {
 	}
 }
 
-func GetUserPostInteractions() error {
+func GetUserPostsInteractions() error {
 	if LoggedUser.Registered { // FIXME Possibly redundent
 
 		for i := range AllPosts {
@@ -106,6 +106,23 @@ func GetUserPostInteractions() error {
 			}
 		}
 	}
+	return nil
+}
+
+func GetUserPostInteractions(post_id int) error {
+	if LoggedUser.Registered { // FIXME Possibly redundent
+			var interaction int
+			postData := DB.QueryRow("SELECT interaction from Interaction where post_id = ? AND user_id = ?", post_id, LoggedUser.Userid)
+			err := postData.Scan(&interaction)
+			if err != nil {
+			} else {
+				if interaction == 1 {
+					AllData.Postpage.Userlike = true
+				} else {
+					AllData.Postpage.UserDislike = true
+				}
+			}
+		}
 	return nil
 }
 func GetPostLikes(p *Post) error {
