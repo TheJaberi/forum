@@ -65,6 +65,7 @@ type Post struct {
 	TimeCreated    string
 	Comments       []Comment
 	NumbOfComments int
+	Image          string
 }
 
 type Comment struct {

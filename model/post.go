@@ -70,21 +70,21 @@ func GetPost(id int) (Post, error) {
 
 func GetPosts() error {
 	AllPosts = nil
-	postData, err := DB.Query("Select id, Title, body, user_id, time_created from posts")
+	postData, err := DB.Query("Select id, Title, body, user_id, time_created, img_url from posts")
 	if err != nil {
 		log.Println(err)
 	}
 	defer postData.Close()
 	for postData.Next() {
 		var p Post
-		err := postData.Scan(&p.PostID, &p.Title, &p.Body, &p.UserID, &p.TimeCreated)
+		err := postData.Scan(&p.PostID, &p.Title, &p.Body, &p.UserID, &p.TimeCreated, &p.Image)
 		if err != nil {
 			log.Println(errors.New("Post Scan Error: " + err.Error()))
 			return err
 		}
 		p.TimeCreated = strings.Replace(p.TimeCreated, "T", " ", -1)
 		p.TimeCreated = strings.Replace(p.TimeCreated, "Z", " ", -1)
-		p, err = GetPostDetails(p)
+		p, _ = GetPostDetails(p)
 		AllPosts = append(AllPosts, p)
 	}
 	if LoggedUser.Registered {

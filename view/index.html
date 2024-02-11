@@ -98,6 +98,7 @@
                     <h1><option value="{{.}}">{{.Title}}</option></h1><div class="categories">Categories: {{range .Category}} <option value="{{.}}"><h6>{{ .CategoryName}}</h6></option><span>&#44;&nbsp;</span>{{end}}</div>
                     <span><option value="{{.}}">Created on: <h6>{{.TimeCreated}}</h6></option></span>
                     <span><option value="{{.}}">Created by: <h6>{{.Username}}</h6></option></span>
+                    <img src="{{.Image}}" alt="image">
                     <div class="sub-details">
                       <i class="fa-solid fa-comment"></i><span>{{.NumbOfComments}}</span>
                       <span><option value="{{.}}"><i class="fa fa-thumbs-up"></i> {{.Likes}} </option></span>
