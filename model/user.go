@@ -35,6 +35,19 @@ func UserExistsDb(applicantEmail string) error {
 	return nil
 }
 
+func UsernameExistsDb(applicantUsername string) error {
+	sqlStmt := `SELECT EXISTS (SELECT 1 FROM users WHERE user_name = ?)`
+	var exists bool
+	err := DB.QueryRow(sqlStmt, applicantUsername).Scan(&exists)
+	if err != nil {
+		return err
+	}
+	if !exists {
+		return UsernameExistsError
+	}
+	return nil
+}
+
 // Retrieve data from the user table and assign into the global struct
 func UserRetrieveDb(email string, password string) error {
 	userdata := DB.QueryRow("SELECT user_id, user_name, user_pass, user_email, user_type FROM users where user_email = ?", email) // select gets the data from users table

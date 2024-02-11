@@ -19,6 +19,9 @@ func RegisterValidator(applicant Applicant) error {
 	if err != nil {
 		return UserNameError
 	}
+	if UsernameExistsDb(applicant.Username) == nil {
+		return UsernameExistsError
+	}
 	return nil
 }
 

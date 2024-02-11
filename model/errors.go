@@ -11,6 +11,7 @@ var (
 	UserPasswordError   = errors.New("User Password error!")
 	RegPasswordError    = errors.New("Password too weak!\nmust be more than 6 characters")
 	UserExistsError     = errors.New("Email Already in Use!")
+	UsernameExistsError = errors.New("Username Already in Use!")
 	SessionExpired      = errors.New("Session Expired")
 	EmailFormatError    = errors.New("Wrong Email Format!")
 	NewCategoryError    = errors.New("Error adding category!")
