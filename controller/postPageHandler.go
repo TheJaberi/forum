@@ -1,8 +1,6 @@
 package forum
 
 import (
-	// "fmt"
-	"fmt"
 	model "forum/model"
 	"html/template"
 	"net/http"
@@ -23,34 +21,21 @@ func HandlerPostPage(w http.ResponseWriter, req *http.Request) {
 		ErrorHandler(w, req, http.StatusInternalServerError)
 		return
 	}
-	// err = model.GetPosts()
-	// if err != nil {
-	// 	ErrorHandler(w, req, http.StatusInternalServerError)
-	// 	return
-	// }
+
 	postID, err := strconv.Atoi(req.URL.Query().Get("id"))
-	fmt.Println(model.AllData.Postpage)
 	if err != nil {
 		ErrorHandler(w, req, http.StatusBadRequest)
 		return
 	}
-	// model.AllData.Postpage, err = model.GetPost((postID))
-	// if err != nil {
-	// 	ErrorHandler(w, req, http.StatusNotFound)
-	// 	return
-	// }
+
 	model.AllData.Postpage = model.AllPosts[postID-1]
-	fmt.Println(model.AllData.Postpage.PostID)
-	model.AllData.Postpage.LoggedUser = model.AllData.IsLogged // TODO (Use checkCookie) if the user is registered the like and dislike buttons appear on the post's page
-	// err = model.GetPostComments(&model.AllData.Postpage)
-	// if err != nil {
-	// 	ErrorHandler(w, req, http.StatusNotFound)
-	// 	return
-	// }
-	if model.AllData.IsLogged{
-	for i := 0; i < len(model.AllData.Postpage.Comments); i++ { // XXX Not sure what this does..
-		model.AllData.Postpage.Comments[i].CommentLoggedUser = model.AllData.IsLogged
-	}}
+	model.AllData.Postpage.LoggedUser = model.AllData.IsLogged
+
+	if model.AllData.IsLogged {
+		for i := 0; i < len(model.AllData.Postpage.Comments); i++ {
+			model.AllData.Postpage.Comments[i].CommentLoggedUser = model.AllData.IsLogged
+		}
+	}
 	w.WriteHeader(http.StatusOK)
 	model.GetUserCommentInteractions()
 	t.ExecuteTemplate(w, "postpage.html", model.AllData.Postpage)
