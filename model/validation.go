@@ -4,12 +4,12 @@ import "regexp"
 
 // Validate all registeration requirements
 func RegisterValidator(applicant Applicant) error {
-	if UserExistsDb(applicant.Email) == nil {
-		return UserExistsError
-	}
 	err := emailChecker(applicant.Email)
 	if err != nil {
 		return err
+	}
+	if UserExistsDb(applicant.Email) == nil {
+		return UserExistsError
 	}
 	err = passwordChecker(string(applicant.Password))
 	if err != nil {
