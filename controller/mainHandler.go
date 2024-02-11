@@ -30,8 +30,8 @@ func MainHandler(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	model.GetCategories() // forum.ViewCategory()
-	model.GetPosts()      // forum.ViewPosts()
+	model.GetCategories()
+	model.GetPosts()
 	model.AllData.AllPosts = model.RSort(model.AllPosts)
 	model.AllData.AllCategories = model.AllCategories
 	model.AllData.CategoryCheck = true
