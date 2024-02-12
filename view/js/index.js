@@ -6,10 +6,6 @@ const join = document.querySelector(".join"),
   post = document.querySelector(".overlayposts"),
   closepost = document.querySelector(".overlayposts .close");
 
-  const create2 = document.querySelector(".createcategory"),
-  catogary = document.querySelector(".overlaycatogaries"),
-  closecatogary = document.querySelector(".overlaycatogaries .close");
-
 join.addEventListener("click", () => {
   overlay.classList.add("active");
 });
@@ -31,10 +27,15 @@ closepost.addEventListener("click", () => {
   post.classList.remove("active");
 });
 window.addEventListener("click", (e) => { 
-  if (e.target === catogary){
-    catogary.classList.remove("active");
+  if (e.target === post){
+    post.classList.remove("active");
   }
 });
+
+const create2 = document.querySelector(".createcategory"),
+catogary = document.querySelector(".overlaycatogaries"),
+closecatogary = document.querySelector(".overlaycatogaries .close");
+
 create2.addEventListener("click", () => {
   catogary.classList.add("active");
 });
@@ -42,8 +43,8 @@ closecatogary.addEventListener("click", () => {
   catogary.classList.remove("active");
 });
 window.addEventListener("click", (e) => { 
-  if (e.target === post){
-    post.classList.remove("active");
+  if (e.target === catogary){
+    catogary.classList.remove("active");
   }
 });
 function togglePass() {

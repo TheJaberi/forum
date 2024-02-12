@@ -12,6 +12,8 @@ func init() {
 	log.SetFlags(log.Lshortfile | log.LstdFlags)
 	controller.StaticFileLoader()
 	model.DatabaseLoader()
+	model.GetCategories()
+	model.GetPosts()
 }
 func main() {
 	const port = ":8080"
