@@ -9,7 +9,6 @@ func StaticFileLoader() {
 		HTMLs = []string{
 			// Add new html / template names here
 			"../view/index.html",
-			"../view/main.html",
 			"../view/error.html",
 			"../view/postpage.html",
 		}

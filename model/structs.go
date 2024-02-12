@@ -31,6 +31,7 @@ type Data struct {
 	TypeAdmin     bool
 	LoginError    bool
 	LoginErrorMsg string
+	Port          int
 }
 type Category struct {
 	CategoryName string
@@ -66,6 +67,7 @@ type Post struct {
 	Comments       []Comment
 	NumbOfComments int
 	Image          string
+	Port           int
 }
 
 type Comment struct {

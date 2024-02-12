@@ -29,19 +29,18 @@ func MainHandler(w http.ResponseWriter, req *http.Request) {
 		ErrorHandler(w, req, http.StatusInternalServerError)
 		return
 	}
-
 	model.GetCategories()
 	model.GetPosts()
 	model.AllData.AllPosts = model.RSort(model.AllPosts)
 	model.AllData.AllCategories = model.AllCategories
 	model.AllData.CategoryCheck = true
 	model.SortPosts(req.FormValue("sortby"))
+	model.FilterByCategory(req.FormValue("category"))
 	if model.LoginError2 {
 		model.AllData.LoginError = true
 	} else {
 		model.AllData.LoginError = false
 	}
-
 	t.ExecuteTemplate(w, "index.html", model.AllData)
 	model.AllData.LoginError = false
 	model.LoginError2 = false

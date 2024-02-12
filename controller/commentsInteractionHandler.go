@@ -27,7 +27,7 @@ func HandlerCommentsLikes(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 	w.WriteHeader(http.StatusOK)
-	model.AllData.Postpage, err = model.CommentInteraction(req.FormValue("commentInteraction"), req.FormValue("removeInteraction"), req.URL.Path)
+	_, err = model.CommentInteraction(req.FormValue("commentInteraction"), req.FormValue("removeInteraction"), req.URL.Path)
 	if err != nil {
 		ErrorHandler(w, req, http.StatusBadRequest)
 		return

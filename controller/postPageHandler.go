@@ -12,7 +12,7 @@ func HandlerPostPage(w http.ResponseWriter, req *http.Request) {
 		ErrorHandler(w, req, http.StatusNotFound)
 		return
 	}
-	if req.Method != "GET" {
+	if req.Method != "GET" || model.AllData.AllPosts == nil {
 		ErrorHandler(w, req, http.StatusMethodNotAllowed)
 		return
 	}
@@ -23,14 +23,14 @@ func HandlerPostPage(w http.ResponseWriter, req *http.Request) {
 	}
 
 	postID, err := strconv.Atoi(req.URL.Query().Get("id"))
-	if err != nil {
+	if err != nil || postID >= len(model.AllData.AllPosts){
 		ErrorHandler(w, req, http.StatusBadRequest)
 		return
 	}
 
 	model.AllData.Postpage = model.AllPosts[postID-1]
 	model.AllData.Postpage.LoggedUser = model.AllData.IsLogged
-
+	model.AllData.Postpage.Port = model.AllData.Port
 	if model.AllData.IsLogged {
 		for i := 0; i < len(model.AllData.Postpage.Comments); i++ {
 			model.AllData.Postpage.Comments[i].CommentLoggedUser = model.AllData.IsLogged

@@ -26,11 +26,11 @@ func HandlerLikes(w http.ResponseWriter, req *http.Request) {
 		ErrorHandler(w, req, http.StatusInternalServerError)
 		return
 	}
-	postData, err := model.PostInteractions(req.FormValue("postInteraction"), req.FormValue("removeInteraction"), req.URL.Path)
+	_, err = model.PostInteractions(req.FormValue("postInteraction"), req.FormValue("removeInteraction"), req.URL.Path)
 	if err != nil {
 		ErrorHandler(w, req, http.StatusBadRequest)
 		return
 	}
 	w.WriteHeader(http.StatusOK)
-	t.ExecuteTemplate(w, "postpage.html", postData)
+	t.ExecuteTemplate(w, "postpage.html", model.AllData.Postpage)
 }

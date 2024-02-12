@@ -18,17 +18,33 @@ closeBtn.addEventListener("click", () => {
   overlay.classList.remove("active");
 });
 
+window.addEventListener("click", (e) => { 
+  if (e.target === overlay){
+    overlay.classList.remove("active");
+  }
+});
+
 create.addEventListener("click", () => {
   post.classList.add("active");
 });
 closepost.addEventListener("click", () => {
   post.classList.remove("active");
 });
+window.addEventListener("click", (e) => { 
+  if (e.target === catogary){
+    catogary.classList.remove("active");
+  }
+});
 create2.addEventListener("click", () => {
   catogary.classList.add("active");
 });
 closecatogary.addEventListener("click", () => {
   catogary.classList.remove("active");
+});
+window.addEventListener("click", (e) => { 
+  if (e.target === post){
+    post.classList.remove("active");
+  }
 });
 function togglePass() {
   var x = document.getElementById("passIn");

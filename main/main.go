@@ -1,23 +1,21 @@
 package main
-
 import (
 	"fmt"
 	"log"
 	"net/http"
-
 	controller "forum/controller"
 	model "forum/model"
+	"strconv"
 )
-
 // Whatever needs to load before the server starts (Files/APIs)
 func init() {
 	log.SetFlags(log.Lshortfile | log.LstdFlags)
 	controller.StaticFileLoader()
 	model.DatabaseLoader()
 }
-
 func main() {
 	const port = ":8080"
+	model.AllData.Port, _ = strconv.Atoi(port[1:])
 	http.HandleFunc("/", controller.MainHandler)
 	fmt.Println("http://localhost" + port)
 	// model.CreateTables() // create table creates the database and the tables for the project

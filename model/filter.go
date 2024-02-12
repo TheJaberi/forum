@@ -7,12 +7,9 @@ import (
 
 func FilterByCategory(categoryID string) error {
 	var filteredPosts []Post
-	GetCategories()
-	GetPosts()
 	category, err := strconv.Atoi(categoryID)
 	if err != nil {
-		log.Printf(err.Error())
-		return err
+		return nil
 	}
 	for i := 0; i < len(AllPosts); i++ {
 		for j := 0; j < len(AllPosts[i].Category); j++ {
