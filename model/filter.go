@@ -5,6 +5,7 @@ import (
 	"strconv"
 )
 
+// filters depending on category
 func FilterByCategory(categoryID string) error {
 	var filteredPosts []Post
 	category, err := strconv.Atoi(categoryID)
@@ -25,6 +26,7 @@ func FilterByCategory(categoryID string) error {
 	return nil
 }
 
+// filters depending on the user data
 func FilterUserData(userID, path string) error {
 	var filteredPosts []Post
 	user_id, err := strconv.Atoi(userID)

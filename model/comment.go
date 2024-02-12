@@ -10,8 +10,7 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
-// TABLE: comments
-
+// create comment adds the comment to the database and also appends it to the post struct
 func CreateComment(rawComment, postStrID string) (Post, error) {
 	var postID int
 	var err error
@@ -31,7 +30,7 @@ func CreateComment(rawComment, postStrID string) (Post, error) {
 	if err != nil {
 		return Post{}, err
 	}
-	c, err = GetComment(id)
+	c, _ = GetComment(id)
 	// Using AllPosts, otherswise AllData is sorted in reverese
 	AllPosts[c.Post_id-1].Comments = append(AllPosts[c.Post_id-1].Comments, c)
 	return AllPosts[c.Post_id-1], nil
@@ -49,6 +48,8 @@ func CreateCommentDb(c Comment) (int, error) {
 	}
 	return int(commentID), nil
 }
+
+// gets the comment using the ID
 func GetComment(id int) (Comment, error) {
 	row := DB.QueryRow("SELECT comment_id, post_id, user_id, body, time_created from comments WHERE comment_id=?", id)
 	var c Comment
@@ -67,6 +68,7 @@ func GetComment(id int) (Comment, error) {
 	return c, nil
 }
 
+// get post comments adds the comments to each post 
 func GetPostComments(p *Post) error {
 	p.Comments = nil
 	commentData, err := DB.Query("Select comment_id, body, user_id, time_created from comments where post_id = ?", p.PostID)

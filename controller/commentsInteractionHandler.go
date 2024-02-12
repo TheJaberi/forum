@@ -8,6 +8,7 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
+// handles the click on the like or dislike button for a comment
 func HandlerCommentsLikes(w http.ResponseWriter, req *http.Request) {
 	if !model.AllData.IsLogged {
 		ErrorHandler(w, req, http.StatusNotFound)

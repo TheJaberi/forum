@@ -7,6 +7,7 @@ import (
 	model "forum/model"
 )
 
+// handles the user logging in 
 func HandlerLogin(w http.ResponseWriter, req *http.Request) {
 	if req.URL.Path != "/login" {
 		ErrorHandler(w, req, http.StatusNotFound)

@@ -7,6 +7,7 @@ import (
 	"strconv"
 )
 
+// handler postpage handles the post clicked on in the main page
 func HandlerPostPage(w http.ResponseWriter, req *http.Request) {
 	if req.URL.Path != "/postpage/" {
 		ErrorHandler(w, req, http.StatusNotFound)
@@ -23,7 +24,7 @@ func HandlerPostPage(w http.ResponseWriter, req *http.Request) {
 	}
 
 	postID, err := strconv.Atoi(req.URL.Query().Get("id"))
-	if err != nil || postID >= len(model.AllData.AllPosts){
+	if err != nil || postID > len(model.AllData.AllPosts){
 		ErrorHandler(w, req, http.StatusBadRequest)
 		return
 	}
@@ -32,7 +33,7 @@ func HandlerPostPage(w http.ResponseWriter, req *http.Request) {
 	model.AllData.Postpage.LoggedUser = model.AllData.IsLogged
 	model.AllData.Postpage.Port = model.AllData.Port
 	if model.AllData.IsLogged {
-		for i := 0; i < len(model.AllData.Postpage.Comments); i++ {
+		for i := 0; i < len(model.AllData.Postpage.Comments); i++ { // for loop to set all comments in the post to logged to show the like buttons
 			model.AllData.Postpage.Comments[i].CommentLoggedUser = model.AllData.IsLogged
 		}
 	}

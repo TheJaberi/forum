@@ -10,6 +10,7 @@ import (
 
 var DB *sql.DB
 
+// loads the database and checks if the tables are created
 func DatabaseLoader() {
 	var err error
 	DB, err = sql.Open("sqlite3", "../model/forum.db")
@@ -29,6 +30,7 @@ func DatabaseLoader() {
 
 }
 
+// checks if the tables exist
 func IsTableExists(db *sql.DB, tableName string) bool {
 	sqlStmt, err := db.Prepare("SELECT COUNT(*) FROM sqlite_master WHERE type = 'table' AND name = ?")
 	if err != nil {

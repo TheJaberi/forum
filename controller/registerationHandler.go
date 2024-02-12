@@ -6,6 +6,7 @@ import (
 	"net/http"
 )
 
+// handles the registration process for the user
 func HandlerRegister(w http.ResponseWriter, req *http.Request) {
 	if req.URL.Path != "/register" {
 		ErrorHandler(w, req, http.StatusNotFound)

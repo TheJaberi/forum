@@ -8,6 +8,7 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
+// handles the like and dislikes for the post
 func HandlerLikes(w http.ResponseWriter, req *http.Request) {
 	if !model.AllData.IsLogged {
 		ErrorHandler(w, req, http.StatusNotFound)

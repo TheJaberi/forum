@@ -4,10 +4,10 @@ import "net/http"
 
 var HTMLs []string
 
+// loads all the html, css and js files
 func StaticFileLoader() {
 	if HTMLs == nil {
 		HTMLs = []string{
-			// Add new html / template names here
 			"../view/index.html",
 			"../view/error.html",
 			"../view/postpage.html",

@@ -6,6 +6,7 @@ import (
 	"net/http"
 )
 
+// handles the creation of a comment
 func HandlerComments(w http.ResponseWriter, req *http.Request) {
 	if req.URL.Path != "/comment" {
 		ErrorHandler(w, req, http.StatusNotFound)
@@ -20,8 +21,7 @@ func HandlerComments(w http.ResponseWriter, req *http.Request) {
 		ErrorHandler(w, req, http.StatusInternalServerError)
 		return
 	}
-	// when the createpost button is clicked the title data is assigned to a variable
-	postData, err := model.CreateComment(req.FormValue("commentContent"), req.FormValue("postid")) // create post adds the title and body to the table in the database
+	postData, err := model.CreateComment(req.FormValue("commentContent"), req.FormValue("postid"))
 	if err != nil {
 		ErrorHandler(w, req, http.StatusBadRequest)
 		return

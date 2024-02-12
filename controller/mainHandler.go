@@ -6,9 +6,10 @@ import (
 	"net/http"
 )
 
+// handles the main page
 func MainHandler(w http.ResponseWriter, req *http.Request) {
 	if model.AllData.IsLogged {
-		check := model.CheckCookies(req) // forum.CheckCookies(req)
+		check := model.CheckCookies(req)
 		if check != nil {
 			model.AllData.LoggedUser = model.Empty
 			model.AllData.IsLogged = false

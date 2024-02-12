@@ -9,21 +9,20 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
-// TABLE: interaction_comments
-
+// comment interaction handles the addition of the interaction to the database and the struct
 func CommentInteraction(add, remove, path string) (Post, error) {
 	var p Post
 	var addComment_id int
 	var remComment_id int
 	var err error
-	if add != "" {
-		addComment_id, err = strconv.Atoi(add) // comment interaction handles the data from like or dislike button if the user logged hasn't already clicked on it
+	if add != "" { // if the button is not clicked the id is sent to 'add'
+		addComment_id, err = strconv.Atoi(add) 
 		if err != nil {
 			return p, err
 		}
 	}
-	if remove != "" {
-		remComment_id, err = strconv.Atoi(remove) // remove interaction handles the data from like or dislike button if the user logged has already clicked on it
+	if remove != "" { // if the button is already clicked the id is sent to 'remove'
+		remComment_id, err = strconv.Atoi(remove)
 		if err != nil {
 			return p, err
 		}
@@ -79,6 +78,8 @@ func CommentInteraction(add, remove, path string) (Post, error) {
 	AllData.Postpage.LoggedUser = true
 	return AllData.Postpage, nil
 }
+
+// inserts comment interaction to the database
 func InsertCommentInteraction(postID int, userID int, likeOrDislike int, commentID int) error {
 	query := "INSERT INTO `interaction_comments` (`comment_id`, `post_id`, `user_id`, `interaction`) VALUES (?, ?, ?, ?)"
 	_, err := DB.ExecContext(context.Background(), query, commentID, postID, userID, likeOrDislike)
@@ -88,6 +89,8 @@ func InsertCommentInteraction(postID int, userID int, likeOrDislike int, comment
 	}
 	return nil
 }
+
+// removes the comment interaction from the database
 func RemoveCommentInteraction(userID int, commentID int) error {
 	query := "DELETE FROM `interaction_comments` where comment_id = ? AND user_id = ?"
 	_, err := DB.ExecContext(context.Background(), query, commentID, userID)
@@ -97,6 +100,8 @@ func RemoveCommentInteraction(userID int, commentID int) error {
 	}
 	return nil
 }
+
+// updates the comment interaction in the database 
 func UpdateCommentInteraction(userID int, likeOrDislike int, commentID int) error {
 	query := "UPDATE interaction_comments SET interaction = ? where comment_id= ? AND user_id = ?"
 	_, err := DB.ExecContext(context.Background(), query, likeOrDislike, commentID, userID)
@@ -106,6 +111,8 @@ func UpdateCommentInteraction(userID int, likeOrDislike int, commentID int) erro
 	}
 	return nil
 }
+
+// gets all comments interaction from the database and adds them to the comment struct
 func GetUserCommentInteractions() error {
 		for i := 0; i < len(AllData.Postpage.Comments); i++ {
 			if LoggedUser.Registered { // if the user is logged in the fact that he has liked or disliked the post is saved in all posts
@@ -133,6 +140,8 @@ func GetUserCommentInteractions() error {
 	}
 	return nil
 }
+
+// get the number of likes for each comment
 func GetCommentLikes(c *Comment) error {
 	likeCommentdata := DB.QueryRow("SELECT COUNT(user_id) FROM interaction_comments where comment_id = ? AND interaction = ?", c.Comment_id, 1) // to present the numb of likes for each comment
 	err := likeCommentdata.Scan(&c.Likes)
@@ -141,6 +150,8 @@ func GetCommentLikes(c *Comment) error {
 	}
 	return nil
 }
+
+// get the number of dislikes for each comment
 func GetCommentDislikes(c *Comment) error {
 	dislikedata := DB.QueryRow("SELECT COUNT(user_id) FROM interaction_comments where comment_id = ? AND interaction = ?", c.Comment_id, 0) // to present the numb of likes for each comment
 	err := dislikedata.Scan(&c.Dislikes)
