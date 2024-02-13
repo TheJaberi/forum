@@ -2,6 +2,7 @@ package forum
 
 import (
 	"database/sql"
+	"net/http"
 	"time"
 
 	"github.com/gofrs/uuid"
@@ -18,8 +19,9 @@ var (
 	EmptySession  Session
 	Empty         User
 	LoginError2   bool
+	LoginCookie   *http.Cookie
+	EmptyCookie   *http.Cookie
 )
-
 type Data struct {
 	AllPosts      []Post
 	AllCategories []Category

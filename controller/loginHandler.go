@@ -23,14 +23,14 @@ func HandlerLogin(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	loginCookie, err := model.UserLogin(req.FormValue("email"), req.FormValue("password"))
+	model.LoginCookie, err = model.UserLogin(req.FormValue("email"), req.FormValue("password"))
 	if err != nil {
 		model.LoginError2 = true
 	} else {
 		model.LoginError2 = false
 	}
 
-	http.SetCookie(w, loginCookie)
+	http.SetCookie(w, model.LoginCookie)
 	w.WriteHeader(http.StatusOK)
 	t.ExecuteTemplate(w, "index.html", model.AllData)
 }

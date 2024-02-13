@@ -1,7 +1,7 @@
 package forum
 
 import (
-	"log"
+	"fmt"
 	"strconv"
 )
 
@@ -31,7 +31,7 @@ func FilterUserData(userID, path string) error {
 	var filteredPosts []Post
 	user_id, err := strconv.Atoi(userID)
 	if err != nil {
-		log.Printf(err.Error())
+		fmt.Println(err.Error())
 		return err
 	}
 	for i := 0; i < len(AllPosts); i++ {

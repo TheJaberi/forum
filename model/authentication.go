@@ -30,7 +30,6 @@ func UserRegisteration(applicant Applicant, db *sql.DB) error {
 
 // Receive login credentials, validate and respond with a session cookie
 func UserLogin(email string, password string) (*http.Cookie, error) {
-	var EmptyCookie *http.Cookie
 	// Validate User Existance
 	if UserExistsDb(email) != nil {
 		AllData.LoginErrorMsg = UserEmailError.Error()
