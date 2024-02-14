@@ -73,6 +73,7 @@ func CreateCookie(s Session) *http.Cookie {
 	c := &http.Cookie{
 		Name:     s.Name,
 		Value:    s.Uuid.String(),
+		Domain:   "localhost",
 		Path:     "/",
 		MaxAge:   3600,
 		HttpOnly: true,
@@ -80,6 +81,18 @@ func CreateCookie(s Session) *http.Cookie {
 	return c
 }
 
+// Clears cookie to delete in the header
+func ClearCookie(s Session) *http.Cookie{
+	c := &http.Cookie{
+		Name:     s.Name,
+		Value:    s.Uuid.String(),
+		Path:     "/",
+		Domain: "localhost",
+		Expires: time.Unix(0, 0),
+		HttpOnly: true,
+	}
+	return c
+}
 // Create a session from the user data from the global struct
 func CreateSession() (Session, error) {
 	uuid, err := uuid.NewV4()

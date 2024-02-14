@@ -1,7 +1,6 @@
 package forum
 
 import (
-	"fmt"
 	model "forum/model"
 	"html/template"
 	"net/http"
@@ -26,23 +25,8 @@ func HandlerLogout(w http.ResponseWriter, req *http.Request) {
 	model.AllData.LoggedUser = model.Empty
 	model.AllData.IsLogged = false
 	model.AllData.TypeAdmin = false
-	fmt.Println(model.LiveSession)
-	fmt.Println(model.LoginCookie)
-	model.LoginCookie = &http.Cookie{
-		Name:     model.LiveSession.Name,
-		Value:    model.LiveSession.Uuid.String(),
-		Path:     "/",
-		MaxAge:   -1,
-		HttpOnly: true,
-	}
-	fmt.Println(model.LoginCookie)
+	model.LoginCookie = model.ClearCookie(model.LiveSession)
 	http.SetCookie(w, model.LoginCookie)
-	cookie, err := req.Cookie(model.LiveSession.Name)
-	if err != nil {
-		fmt.Println(err)
-	}
-	fmt.Println(cookie)
 	model.LiveSession = model.EmptySession
-	fmt.Println(model.LiveSession)
 	t.ExecuteTemplate(w, "index.html", model.AllData)
 }

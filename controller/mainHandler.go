@@ -14,9 +14,10 @@ func MainHandler(w http.ResponseWriter, req *http.Request) {
 			model.AllData.LoggedUser = model.Empty
 			model.AllData.IsLogged = false
 			model.LiveSession = model.EmptySession
+		} else {
 		}
 	}
-
+	http.SetCookie(w, model.LoginCookie)
 	if req.URL.Path != "/" {
 		ErrorHandler(w, req, http.StatusNotFound)
 		return
