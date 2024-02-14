@@ -81,7 +81,7 @@ func CreateCookie(s Session) *http.Cookie {
 	return c
 }
 
-// Clears cookie to delete in the header
+// Clears cookie and delete's it in the header
 func ClearCookie(s Session) *http.Cookie{
 	c := &http.Cookie{
 		Name:     s.Name,

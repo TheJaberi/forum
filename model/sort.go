@@ -1,5 +1,6 @@
 package forum
 
+// sorts the post depending on the link clicked in the frontend
 func SortPosts(sortby string) {
 	if sortby == "oldest" {
 		AllData.AllPosts = AllPosts
@@ -12,6 +13,7 @@ func SortPosts(sortby string) {
 	}
 }
 
+// sorts posts in reverse  
 func RSort(list []Post) []Post {
 	var arrAllPosts []Post
 	for i := len(list) - 1; i >= 0; i-- {
@@ -20,6 +22,7 @@ func RSort(list []Post) []Post {
 	return arrAllPosts
 }
 
+// sorts posts depending on number of likes
 func SortByLike(list []Post) []Post {
 	var arrAllPosts []Post
 	for i := 0; i >= 0; i++ {
@@ -35,6 +38,7 @@ func SortByLike(list []Post) []Post {
 	return RSort(arrAllPosts)
 }
 
+// sorts posts depending on number of dislikes
 func SortByDislike(list []Post) []Post {
 	var arrAllPosts []Post
 	for i := 0; i >= 0; i++ {
@@ -50,6 +54,7 @@ func SortByDislike(list []Post) []Post {
 	return RSort(arrAllPosts)
 }
 
+// sorts posts depending on number of comments
 func SortByComment(list []Post) []Post {
 	var arrAllPosts []Post
 	for i := 0; i >= 0; i++ {

@@ -42,7 +42,7 @@ type Category struct {
 type User struct {
 	Userid     int
 	Username   string
-	Password   string // TODO is this necessary? Can we hash prior to assigning?
+	Password   string 
 	Email      string
 	Registered bool
 	Type       string
