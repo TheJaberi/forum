@@ -8,6 +8,7 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
+// to handle the admin creating a new category
 func HandlerCreateCategory(w http.ResponseWriter, req *http.Request) {
 	if req.URL.Path != "/createcategory" {
 		ErrorHandler(w, req, http.StatusNotFound)

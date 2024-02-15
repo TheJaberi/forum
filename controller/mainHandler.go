@@ -6,16 +6,18 @@ import (
 	"net/http"
 )
 
+// handles the main page
 func MainHandler(w http.ResponseWriter, req *http.Request) {
 	if model.AllData.IsLogged {
-		check := model.CheckCookies(req) // forum.CheckCookies(req)
+		check := model.CheckCookies(req)
 		if check != nil {
 			model.AllData.LoggedUser = model.Empty
 			model.AllData.IsLogged = false
 			model.LiveSession = model.EmptySession
+		} else {
 		}
 	}
-
+	http.SetCookie(w, model.LoginCookie)
 	if req.URL.Path != "/" {
 		ErrorHandler(w, req, http.StatusNotFound)
 		return
@@ -29,19 +31,18 @@ func MainHandler(w http.ResponseWriter, req *http.Request) {
 		ErrorHandler(w, req, http.StatusInternalServerError)
 		return
 	}
-
 	model.GetCategories()
 	model.GetPosts()
 	model.AllData.AllPosts = model.RSort(model.AllPosts)
 	model.AllData.AllCategories = model.AllCategories
 	model.AllData.CategoryCheck = true
 	model.SortPosts(req.FormValue("sortby"))
+	model.FilterByCategory(req.FormValue("category"))
 	if model.LoginError2 {
 		model.AllData.LoginError = true
 	} else {
 		model.AllData.LoginError = false
 	}
-
 	t.ExecuteTemplate(w, "index.html", model.AllData)
 	model.AllData.LoginError = false
 	model.LoginError2 = false

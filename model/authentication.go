@@ -30,7 +30,6 @@ func UserRegisteration(applicant Applicant, db *sql.DB) error {
 
 // Receive login credentials, validate and respond with a session cookie
 func UserLogin(email string, password string) (*http.Cookie, error) {
-	var EmptyCookie *http.Cookie
 	// Validate User Existance
 	if UserExistsDb(email) != nil {
 		AllData.LoginErrorMsg = UserEmailError.Error()
@@ -74,6 +73,7 @@ func CreateCookie(s Session) *http.Cookie {
 	c := &http.Cookie{
 		Name:     s.Name,
 		Value:    s.Uuid.String(),
+		Domain:   "localhost",
 		Path:     "/",
 		MaxAge:   3600,
 		HttpOnly: true,
@@ -81,6 +81,18 @@ func CreateCookie(s Session) *http.Cookie {
 	return c
 }
 
+// Clears cookie and delete's it in the header
+func ClearCookie(s Session) *http.Cookie{
+	c := &http.Cookie{
+		Name:     s.Name,
+		Value:    s.Uuid.String(),
+		Path:     "/",
+		Domain: "localhost",
+		Expires: time.Unix(0, 0),
+		HttpOnly: true,
+	}
+	return c
+}
 // Create a session from the user data from the global struct
 func CreateSession() (Session, error) {
 	uuid, err := uuid.NewV4()

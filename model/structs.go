@@ -2,6 +2,7 @@ package forum
 
 import (
 	"database/sql"
+	"net/http"
 	"time"
 
 	"github.com/gofrs/uuid"
@@ -18,8 +19,9 @@ var (
 	EmptySession  Session
 	Empty         User
 	LoginError2   bool
+	LoginCookie   *http.Cookie
+	EmptyCookie   *http.Cookie
 )
-
 type Data struct {
 	AllPosts      []Post
 	AllCategories []Category
@@ -31,6 +33,7 @@ type Data struct {
 	TypeAdmin     bool
 	LoginError    bool
 	LoginErrorMsg string
+	Port          int
 }
 type Category struct {
 	CategoryName string
@@ -39,7 +42,7 @@ type Category struct {
 type User struct {
 	Userid     int
 	Username   string
-	Password   string // TODO is this necessary? Can we hash prior to assigning?
+	Password   string 
 	Email      string
 	Registered bool
 	Type       string
@@ -66,6 +69,7 @@ type Post struct {
 	Comments       []Comment
 	NumbOfComments int
 	Image          string
+	Port           int
 }
 
 type Comment struct {

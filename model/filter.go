@@ -1,18 +1,16 @@
 package forum
 
 import (
-	"log"
+	"fmt"
 	"strconv"
 )
 
+// filters depending on category
 func FilterByCategory(categoryID string) error {
 	var filteredPosts []Post
-	GetCategories()
-	GetPosts()
 	category, err := strconv.Atoi(categoryID)
 	if err != nil {
-		log.Printf(err.Error())
-		return err
+		return nil
 	}
 	for i := 0; i < len(AllPosts); i++ {
 		for j := 0; j < len(AllPosts[i].Category); j++ {
@@ -28,11 +26,12 @@ func FilterByCategory(categoryID string) error {
 	return nil
 }
 
+// filters depending on the user data
 func FilterUserData(userID, path string) error {
 	var filteredPosts []Post
 	user_id, err := strconv.Atoi(userID)
 	if err != nil {
-		log.Printf(err.Error())
+		fmt.Println(err.Error())
 		return err
 	}
 	for i := 0; i < len(AllPosts); i++ {

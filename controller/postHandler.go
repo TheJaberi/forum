@@ -7,6 +7,7 @@ import (
 	"strconv"
 )
 
+// handles the creation of a post
 func HandlerPost(w http.ResponseWriter, req *http.Request) {
 	if req.URL.Path != "/post" {
 		ErrorHandler(w, req, http.StatusNotFound)

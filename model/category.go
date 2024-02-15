@@ -82,6 +82,7 @@ func AssignPostCategoryDb(postID int, postCategories []int) error {
 	return nil
 }
 
+// gets the category id from the post id then the category name from categories
 func GetPostCategories(p *Post) error {
 	categoryData, err := DB.Query("Select category_id from Post2Category where post_id = ?", p.PostID)
 	if err != nil {

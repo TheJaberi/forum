@@ -9,8 +9,7 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
-// TABLE: posts
-
+// adds the post created and its categories to the database
 func CreatePost(title string, body string, postCategories []int) error {
 	var postData = Post{
 		Title:    title,
@@ -27,10 +26,11 @@ func CreatePost(title string, body string, postCategories []int) error {
 	if err != nil {
 		return err
 	}
-	AllData.AllPosts = append(AllPosts, newPost)
+	AllData.AllPosts = append(AllData.AllPosts, newPost)
 	return nil
 }
 
+// adds the post created to the database
 func CreatePostDb(post Post) int {
 	query := "INSERT INTO `posts` (`Title`, `body`, `user_id`) VALUES (?, ?, ?)"
 	rowData, err := DB.ExecContext(context.Background(), query, post.Title, post.Body, post.UserID)
@@ -44,6 +44,7 @@ func CreatePostDb(post Post) int {
 	return int(postID)
 }
 
+// adds all the data for the post to a variable and returns it
 func GetPost(id int) (Post, error) {
 	row := DB.QueryRow("SELECT id, Title, body, user_id, time_created from posts WHERE id=?", id)
 	var p Post
@@ -68,6 +69,7 @@ func GetPost(id int) (Post, error) {
 	return p, nil
 }
 
+// adds all the data for the post to a struct then appends them to an array
 func GetPosts() error {
 	AllPosts = nil
 	postData, err := DB.Query("Select id, Title, body, user_id, time_created, img_url from posts")
@@ -97,6 +99,7 @@ func GetPosts() error {
 	return nil
 }
 
+// gets the data required to fill the struct from every table
 func GetPostDetails(p Post) (Post, error) {
 	// USERNAME
 	err := GetPostUsername(&p)

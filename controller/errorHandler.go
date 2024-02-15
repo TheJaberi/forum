@@ -6,6 +6,7 @@ import (
 	"net/http"
 )
 
+// handles all errors in the program
 func ErrorHandler(w http.ResponseWriter, req *http.Request, statusError int) {
 	var errResponse struct {
 		StatusCode    int

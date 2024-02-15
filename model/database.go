@@ -4,6 +4,7 @@ import (
 	"database/sql"
 )
 
+// creates all the tables in the database
 func DataBase(db *sql.DB) {
 	var query string
 	query = `CREATE TABLE IF NOT EXISTS users (

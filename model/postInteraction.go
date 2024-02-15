@@ -9,8 +9,7 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
-// TABLE: Interactions
-
+// post interaction handles the like and dislike buttons
 func PostInteractions(add, remove, path string) (Post, error) {
 	var p Post
 	var addPost_id int
@@ -33,7 +32,6 @@ func PostInteractions(add, remove, path string) (Post, error) {
 	}
 	user_id := LoggedUser.Userid
 	if addPost_id > remPost_id { // which ever value is greater determines whether to add or remove
-		p = AllPosts[addPost_id-1]
 		if path == "/like/" {
 			if !AllPosts[addPost_id-1].UserDislike {
 				InsertPostInteraction(addPost_id, user_id, 1) // insert adds the interaction to the database 1 is like 0 is dislike
@@ -64,33 +62,35 @@ func PostInteractions(add, remove, path string) (Post, error) {
 	return p, nil
 }
 
+// insert the interaction into the database 
 func InsertPostInteraction(postID int, userID int, likeOrDislike int) {
 	query := "INSERT INTO `Interaction` (`post_id`, `user_id`, `interaction`) VALUES (?, ?, ?)"
 	_, err := DB.ExecContext(context.Background(), query, postID, userID, likeOrDislike)
-	if err != nil { // the post is added using the ExecContext along with the userid which is in the LoggedUser variable
+	if err != nil { 
 		log.Println(err)
 	}
 }
 
+// removes the interaction into the database 
 func RemovePostInteraction(postID int, userID int) {
 	query := "DELETE FROM `Interaction` where post_id = ? AND user_id = ?"
 	_, err := DB.ExecContext(context.Background(), query, postID, userID)
-	if err != nil { // the post is added using the ExecContext along with the userid which is in the LoggedUser variable
+	if err != nil { 
 		log.Println(err)
 	}
 }
 
+// updates the interaction in the data
 func UpdatePostInteraction(postID int, userID int, likeOrDislike int) {
 	query := "UPDATE Interaction SET interaction = ? where post_id= ? AND user_id = ?"
 	_, err := DB.ExecContext(context.Background(), query, likeOrDislike, postID, userID)
-	if err != nil { // the post is added using the ExecContext along with the userid which is in the LoggedUser variable
+	if err != nil {
 		log.Println(err)
 	}
 }
 
+// gets the users interaction from the database once he is logged in and adds it to the database
 func GetUserPostsInteractions() error {
-	if LoggedUser.Registered { // FIXME Possibly redundent
-
 		for i := range AllPosts {
 			var interaction int
 			postData := DB.QueryRow("SELECT interaction from Interaction where post_id = ? AND user_id = ?", i+1, LoggedUser.Userid)
@@ -105,26 +105,10 @@ func GetUserPostsInteractions() error {
 				}
 			}
 		}
-	}
 	return nil
 }
 
-func GetUserPostInteractions(post_id int) error {
-	if LoggedUser.Registered { // FIXME Possibly redundent
-			var interaction int
-			postData := DB.QueryRow("SELECT interaction from Interaction where post_id = ? AND user_id = ?", post_id, LoggedUser.Userid)
-			err := postData.Scan(&interaction)
-			if err != nil {
-			} else {
-				if interaction == 1 {
-					AllData.Postpage.Userlike = true
-				} else {
-					AllData.Postpage.UserDislike = true
-				}
-			}
-		}
-	return nil
-}
+// counts the likes for the post from the database
 func GetPostLikes(p *Post) error {
 	likedata := DB.QueryRow("SELECT COUNT(user_id) FROM Interaction where post_id = ? AND interaction = ?", p.PostID, 1)
 	err := likedata.Scan(&p.Likes)
@@ -134,6 +118,7 @@ func GetPostLikes(p *Post) error {
 	return nil
 }
 
+//counts the dislikes for the post from the database
 func GetPostDislikes(p *Post) error {
 	dislikedata := DB.QueryRow("SELECT COUNT(user_id) FROM Interaction where post_id = ? AND interaction = ?", p.PostID, 0)
 	err := dislikedata.Scan(&p.Dislikes)

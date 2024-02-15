@@ -23,35 +23,32 @@
               <div class="nav-search">
                 <div class="my-search">
                   <ul>{{if .IsLogged}}
-                    <li><a href="/mylikes/?user={{.LoggedUserID}}">MY LIKES</a></li>
-                    <li><a href="/mydislikes/?user={{.LoggedUserID}}">MY DISLIKES</a></li>
+                    <li><a href="/mylikes/?user={{.LoggedUserID}}">MY LIKES</a></li><span>&nbsp;&nbsp;&nbsp;</span>
+                    <li><a href="/mydislikes/?user={{.LoggedUserID}}">MY DISLIKES</a></li><span>&nbsp;&nbsp;&nbsp;</span>
                     <li><a href="/myposts/?user={{.LoggedUserID}}">MY POSTS</a></li>
                     {{else}}
                     {{end}} 
                   </ul>
                 </div>
               </div>
-              
               <div class="nav-group">
                 <ul>
-                  {{if .CategoryCheck}}
                   {{if .IsLogged}}
                   <li class="createpost">
                     <a href="/#"><i class="fa-solid fa-comment"></i> Create Post</a>
-                  </li>
-                  <li class="join">
-                    <a href="/logout">         
-                      <i class="fa fa-sign-out"></i>
-                      LogOut
-                    </a>
                   </li>
                   {{if .TypeAdmin}}
                   <li class="createcategory">
                     <a href="##"><i class="fa-solid fa-comment"></i> Create Category</a>
                   </li>
                   {{end}}
-                  {{else}}
-                  
+                  <li class="join">
+                    <a href="/logout">         
+                      <i class="fa fa-sign-out"></i>
+                      LogOut
+                    </a>
+                  </li>
+                  {{else}}             
                   <li class="join">
                     <a href="/#">
                       <i class="fa-solid fa-user"></i>
@@ -62,8 +59,6 @@
                   {{end}}
                 </ul>
               </div>
-            {{else}}
-            {{end}}
           </div>
         </div>
     </header>
@@ -83,10 +78,10 @@
               
               <h2>Categories</h2>
               <ul class="dropdown">
-                {{range .AllCategories}}<li><a href="/filtercategory/?category={{.CategoryID}}">{{.CategoryName}}</a></li>{{end}}
+                {{range .AllCategories}}<li><a href="/?category={{.CategoryID}}">{{.CategoryName}}</a></li>{{end}}
               </ul>
             </section>
-
+            
             <section class="right">
               {{range .AllPosts}}
                 
@@ -95,14 +90,13 @@
                   <img src="">
                   <div class="details">
                       
-                    <h1><option value="{{.}}">{{.Title}}</option></h1><div class="categories">Categories: {{range .Category}} <option value="{{.}}"><h6>{{ .CategoryName}}</h6></option><span>&#44;&nbsp;</span>{{end}}</div>
-                    <span><option value="{{.}}">Created on: <h6>{{.TimeCreated}}</h6></option></span>
-                    <span><option value="{{.}}">Created by: <h6>{{.Username}}</h6></option></span>
-                    <img src="{{.Image}}" alt="image">
+                    <h1><option value="{{.}}">{{.Title}}</option></h1><div class="categories">Categories:<span>&nbsp;&nbsp;</span>{{range .Category}} <option value="{{.}}"><h6>{{ .CategoryName}}</h6></option><span>&#44;&nbsp;</span>{{end}}</div>
+                    <span>Created on:<span>&nbsp;&nbsp;</span><h6>{{.TimeCreated}}</h6></span><br>
+                    <span>Created by:<span>&nbsp;&nbsp;</span><h6>{{.Username}}</h6></span>
                     <div class="sub-details">
                       <i class="fa-solid fa-comment"></i><span>{{.NumbOfComments}}</span>
-                      <span><option value="{{.}}"><i class="fa fa-thumbs-up"></i> {{.Likes}} </option></span>
-                      <span><option value="{{.}}"><i class="fa fa-thumbs-down"></i> {{.Dislikes}}</option></span>
+                      <i class="fa fa-thumbs-up"></i><span>{{.Likes}}</span>
+                      <i class="fa fa-thumbs-down"></i><span>{{.Dislikes}}</span>
                     </div>
                   </div>
                 </a>
@@ -113,10 +107,10 @@
               
               <h2>Sort By</h2>
               <ul class="dropdown">
-                <li><a href="/">Newest</a></li>
+                <li><a href="/">NEWEST</a></li>
                 <li><a href="/?sortby=oldest">OLDEST</a></li>
-                <li><a href="/?sortby=mostliked">MOSTLIKED</a></li>
-                <li><a href="/?sortby=mostdisliked">MOSTDISLIKED</a></li>
+                <li><a href="/?sortby=mostliked">MOST LIKED</a></li>
+                <li><a href="/?sortby=mostdisliked">MOST DISLIKED</a></li>
                 <li><a href="/?sortby=mostcommentedon">MOST COMMENTED ON</a></li>
                 
             </section>
@@ -133,7 +127,7 @@
       <div class="overlay">
         <div class="login" id="login">
           <div class="top">
-            <h2>Log in</h2><span>&nbsp;</span><h2>Register</h2>
+            <h2>Log in</h2><span>&nbsp;</span>
             <i class="fa-solid fa-xmark close"></i>
           </div>
           <div class="row">
@@ -156,19 +150,19 @@
                   ></a
                 ><br><br>
                   <button type="submit" class="btn btn-red">Log in</button></form>
-              </div>
-              <div class="login-right">
+              </div><br><br>
+              <div class="login-right"><h2>Register</h2>
                 <form method="POST" action="/register">
                   <input type="email" name="email" id="email" autocomplete="off" class="input"/>
                   <label class="user-email">Email Address</label>
                 <div class="form-group">
-                  <input type="text" name="username" autocomplete="off" class="input"/>
+                  <input type="text" name="username" autocomplete="off" class="input" maxlength="13"/>
                   <label class="user-name">Username</label>
                 </div>
                 <div class="form-group">
                   <input type="password" name="password" id="passIn" autocomplete="off" class="input" />
                   <label class="user-pass">Password</label>
-                </div><br><br>
+                </div><br>
                 <button type="submit" class="btn btn-red">Join Now</button></form>
             </div>
           </div>
@@ -196,15 +190,15 @@
       })();
               
               crossorigin="anonymous"
-            if (location.href === ("http://localhost:8080/post") ||  location.href === ("http://localhost:8080/register") || location.href === ("http://localhost:8080/logout/") || location.href === ("http://localhost:8080/login") ){
-              window.location.replace("http://localhost:8080")
+            if (location.href === ("http://localhost:{{.Port}}/post") ||  location.href === ("http://localhost:{{.Port}}/register") || location.href === ("http://localhost:{{.Port}}/logout/") || location.href === ("http://localhost:{{.Port}}/login") ){
+              window.location.replace("http://localhost:{{.Port}}")
             }     
       </script>
       <script src="https://kit.fontawesome.com/9e5ba2e3f5.js"></script>
   <script src="js/index.js"></script>
   {{if .LoginError}}
   <script>
-    window.location.replace("http://localhost:8080/#")
+    window.location.replace("http://localhost:{{.Port}}/#")
 document.querySelector(".overlay").classList.add("active")
 const errormsg = document.querySelector(".errormsg").getAttribute("value")
 alert(errormsg)

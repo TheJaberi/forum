@@ -6,6 +6,7 @@ import (
 	"net/http"
 )
 
+// handles all the users filters 
 func HandlerMyFilter(w http.ResponseWriter, req *http.Request) {
 	if req.URL.Path != "/mylikes/" && req.URL.Path != "/myposts/" && req.URL.Path != "/mydislikes/" {
 		ErrorHandler(w, req, http.StatusNotFound)

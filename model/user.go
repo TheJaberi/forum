@@ -35,6 +35,7 @@ func UserExistsDb(applicantEmail string) error {
 	return nil
 }
 
+// Check if username exists in user table
 func UsernameExistsDb(applicantUsername string) error {
 	sqlStmt := `SELECT EXISTS (SELECT 1 FROM users WHERE user_name = ?)`
 	var exists bool
@@ -58,8 +59,8 @@ func UserRetrieveDb(email string, password string) error {
 	return nil
 }
 
+// get post username from database
 func GetPostUsername(p *Post) error {
-
 	userData := DB.QueryRow("Select user_name from users where user_id = ?", p.UserID)
 	err := userData.Scan(&p.Username)
 	if err != nil {
@@ -68,6 +69,7 @@ func GetPostUsername(p *Post) error {
 	return nil
 }
 
+// get comment username from database
 func GetCommentUsername(c *Comment) error {
 	userData := DB.QueryRow("Select user_name from users where user_id = ?", c.User_id)
 	err := userData.Scan(&c.CommentUsername)

@@ -6,6 +6,7 @@ import (
 	"net/http"
 )
 
+// handles the logout process
 func HandlerLogout(w http.ResponseWriter, req *http.Request) {
 	if req.URL.Path != "/logout/" {
 		ErrorHandler(w, req, http.StatusNotFound)
@@ -23,10 +24,9 @@ func HandlerLogout(w http.ResponseWriter, req *http.Request) {
 	w.WriteHeader(http.StatusOK)
 	model.AllData.LoggedUser = model.Empty
 	model.AllData.IsLogged = false
+	model.AllData.TypeAdmin = false
+	model.LoginCookie = model.ClearCookie(model.LiveSession)
+	http.SetCookie(w, model.LoginCookie)
 	model.LiveSession = model.EmptySession
-	// err = model.GetUserPostsInteractions()
-	// if err != nil {
-	// 	// XXX Currently set to return nil only to allow logout
-	// }
 	t.ExecuteTemplate(w, "index.html", model.AllData)
 }
