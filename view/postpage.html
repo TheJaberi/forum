@@ -8,17 +8,16 @@
     <link rel="stylesheet" href="/css/general.css">
     <link rel="stylesheet" href="/css/header.css">
     <script src=""></script>
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script></head>
-    <a href="/"><header class="header" id="header">
-    </header></a>
-<title>Reboot Journal</title>
-
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <title>Reboot Journal</title>
+</head>
 
 <h1>{{.Title}}</h1>
 <div class="details">Categories:<span>&nbsp;&nbsp;</span> 
 {{range .Category}}{{.CategoryName}}<span>&#44;&nbsp;&nbsp;</span>{{end}}<br></div>
         
-<body><div class="postbody">
+<body>
+    <div class="postbody">
 <br><h2>{{.Body}}</h2><br><br><div class="postedby">Posted by {{.Username}}</div><br>
 {{ if .LoggedUser }}
 <div class="likeButton">

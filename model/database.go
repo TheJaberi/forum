@@ -2,6 +2,8 @@ package forum
 
 import (
 	"database/sql"
+	"fmt"
+	"os"
 )
 
 // creates all the tables in the database
@@ -16,7 +18,11 @@ func DataBase(db *sql.DB) {
 		time_created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 		PRIMARY KEY("user_id" AUTOINCREMENT)
 	);`
-	usersTable, _ := db.Prepare(query)
+	usersTable, err1 := db.Prepare(query)
+	if err1 != nil {
+		fmt.Println(err1.Error())
+		os.Exit(0)
+	}
 	usersTable.Exec()
 	query = `CREATE TABLE IF NOT EXISTS posts (
 		id INTEGER NOT NULL,
