@@ -198,10 +198,10 @@
   <script src="js/index.js"></script>
   {{if .LoginError}}
   <script>
-    window.location.replace("http://localhost:{{.Port}}/#")
 document.querySelector(".overlay").classList.add("active")
 const errormsg = document.querySelector(".errormsg").getAttribute("value")
 alert(errormsg)
+window.location.replace("http://localhost:{{.Port}}/#")
   </script>
 {{end}}  
 </body>

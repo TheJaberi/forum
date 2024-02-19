@@ -28,11 +28,9 @@ func HandlerRegister(w http.ResponseWriter, req *http.Request) {
 		Password: []byte(req.FormValue("password")),
 		Email:    req.FormValue("email"),
 	}
-
 	err = model.UserRegisteration(NewApplicant, model.DB)
 	if err != nil {
 		model.LoginError2 = true
 	}
-	// NewUser adds the username and password to the database
-	t.ExecuteTemplate(w, "index.html", nil)
+	t.ExecuteTemplate(w, "index.html", model.AllData)
 }
