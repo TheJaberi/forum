@@ -1,6 +1,8 @@
 package forum
 
-import "regexp"
+import (
+	"regexp"
+)
 
 // Validate all registeration requirements
 func RegisterValidator(applicant Applicant) error {
@@ -13,7 +15,7 @@ func RegisterValidator(applicant Applicant) error {
 	}
 	err = passwordChecker(string(applicant.Password))
 	if err != nil {
-		return err
+		return RegPasswordError
 	}
 	err = nameChecker(applicant.Username)
 	if err != nil {
@@ -36,11 +38,11 @@ func emailChecker(email string) error {
 
 // Validate password length and characters
 func passwordChecker(pass string) error {
-	if len(pass) < 6 && len(pass) > 25 {
+	if len(pass) < 6 || len(pass) > 25 {
 		return RegPasswordError
 	}
 	for _, r := range pass {
-		if r < 32 && r > 126 {
+		if r < 32 || r > 126 {
 			return RegPasswordError
 		}
 	}

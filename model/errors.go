@@ -15,5 +15,6 @@ var (
 	SessionExpired      = errors.New("Session Expired")
 	EmailFormatError    = errors.New("Wrong Email Format!")
 	NewCategoryError    = errors.New("Error adding category!")
-	ScanCategoryError   = errors.New("Categry Scan Error!")
+	ScanCategoryError   = errors.New("Category Scan Error!")
+	PostError           = errors.New("Post Title and Body must contain characters")
 )

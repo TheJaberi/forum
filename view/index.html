@@ -170,6 +170,7 @@
       </div>
     </div>
     <div class="errormsg" value="{{.LoginErrorMsg}}"></div> 
+    <div class="posterrormsg" value="{{.PostErrorMsg}}"></div> 
       <div class="overlayposts">
         <div class="postbox" id="postbox">
         <form method="post" action="/post">
@@ -203,6 +204,14 @@ const errormsg = document.querySelector(".errormsg").getAttribute("value")
 alert(errormsg)
 window.location.replace("http://localhost:{{.Port}}/#")
   </script>
+{{end}}  
+{{if .PostError}}
+<script>
+document.querySelector(".overlayposts").classList.add("active")
+const posterrormsg = document.querySelector(".posterrormsg").getAttribute("value")
+alert(posterrormsg)
+window.location.replace("http://localhost:{{.Port}}/#")
+</script>
 {{end}}  
 </body>
 </html>

@@ -11,6 +11,11 @@ import (
 
 // adds the post created and its categories to the database
 func CreatePost(title string, body string, postCategories []int) error {
+	title = RemoveSpaces(title)
+	body = RemoveSpaces(body)
+	if len(title) == 0 || len(body) == 0 {
+		return PostError
+	}
 	var postData = Post{
 		Title:    title,
 		Body:     body,
@@ -72,14 +77,14 @@ func GetPost(id int) (Post, error) {
 // adds all the data for the post to a struct then appends them to an array
 func GetPosts() error {
 	AllPosts = nil
-	postData, err := DB.Query("Select id, Title, body, user_id, time_created, img_url from posts")
+	postData, err := DB.Query("Select id, Title, body, user_id, time_created from posts")
 	if err != nil {
 		log.Println(err)
 	}
 	defer postData.Close()
 	for postData.Next() {
 		var p Post
-		err := postData.Scan(&p.PostID, &p.Title, &p.Body, &p.UserID, &p.TimeCreated, &p.Image)
+		err := postData.Scan(&p.PostID, &p.Title, &p.Body, &p.UserID, &p.TimeCreated)
 		if err != nil {
 			log.Println(errors.New("Post Scan Error: " + err.Error()))
 			return err

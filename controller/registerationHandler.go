@@ -31,6 +31,7 @@ func HandlerRegister(w http.ResponseWriter, req *http.Request) {
 	err = model.UserRegisteration(NewApplicant, model.DB)
 	if err != nil {
 		model.LoginError2 = true
-	}
+		model.AllData.LoginErrorMsg = err.Error()
+		}
 	t.ExecuteTemplate(w, "index.html", model.AllData)
 }
