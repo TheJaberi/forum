@@ -24,11 +24,10 @@ func HandlerPostPage(w http.ResponseWriter, req *http.Request) {
 	}
 
 	postID, err := strconv.Atoi(req.URL.Query().Get("id"))
-	if err != nil || postID > len(model.AllData.AllPosts){
+	if err != nil{
 		ErrorHandler(w, req, http.StatusBadRequest)
 		return
 	}
-
 	model.AllData.Postpage = model.AllPosts[postID-1]
 	model.AllData.Postpage.LoggedUser = model.AllData.IsLogged
 	model.AllData.Postpage.Port = model.AllData.Port

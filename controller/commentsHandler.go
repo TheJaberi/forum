@@ -33,5 +33,5 @@ func HandlerComments(w http.ResponseWriter, req *http.Request) {
 	}
 	postData.LoggedUser = true
 	w.WriteHeader(http.StatusOK)
-	t.ExecuteTemplate(w, "postpage.html", postData)
+	t.ExecuteTemplate(w, "postpage.html", model.AllData.Postpage)
 }

@@ -43,7 +43,7 @@ func UserLogin(email string, password string) (*http.Cookie, error) {
 	// Validates Entered Password
 	err = bcrypt.CompareHashAndPassword([]byte(LoggedUser.Password), []byte(password))
 	if err != nil {
-		AllData.LoginErrorMsg = err.Error()
+		AllData.LoginErrorMsg = UserPasswordError.Error()
 		return EmptyCookie, err
 	}
 

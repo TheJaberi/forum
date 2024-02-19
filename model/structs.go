@@ -19,6 +19,7 @@ var (
 	EmptySession  Session
 	Empty         User
 	LoginError2   bool
+	PostError2    bool
 	LoginCookie   *http.Cookie
 	EmptyCookie   *http.Cookie
 )
@@ -33,6 +34,8 @@ type Data struct {
 	TypeAdmin     bool
 	LoginError    bool
 	LoginErrorMsg string
+	PostError     bool
+	PostErrorMsg  string
 	Port          int
 }
 type Category struct {

@@ -69,3 +69,22 @@ func SortByComment(list []Post) []Post {
 	}
 	return RSort(arrAllPosts)
 }
+
+func RemoveSpaces(text string) string {
+	var final []byte
+	var wordstart int
+	strbyte := []byte(text)
+	for i:=0;i<len(text);i++{
+		if strbyte[i] != 32 {
+			wordstart = i
+			break
+		}
+	}
+	if wordstart == 0 && strbyte[0] == 32 {
+		return ""
+	}
+	for j:=wordstart;j<len(text);j++{
+		final = append(final, strbyte[j])
+	}
+	return string(final)
+}

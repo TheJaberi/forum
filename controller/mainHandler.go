@@ -43,8 +43,15 @@ func MainHandler(w http.ResponseWriter, req *http.Request) {
 	} else {
 		model.AllData.LoginError = false
 	}
+	if model.PostError2 {
+		model.AllData.PostError = true
+	} else {
+		model.AllData.PostError = false
+	}
 	t.ExecuteTemplate(w, "index.html", model.AllData)
 	model.AllData.LoginError = false
 	model.LoginError2 = false
+	model.AllData.PostError = false
+	model.PostError2 = false
 	model.AllData.LoginErrorMsg = ""
 }
