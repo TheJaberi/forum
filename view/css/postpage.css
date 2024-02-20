@@ -1,0 +1,227 @@
+*{
+  /* background-color: var(--blackColor); */
+  /* color: var(--aquaColor); */
+  
+}
+
+body {
+text-align: center;
+color: var(--aquaColor);
+background-color: var(--blackColor);
+align-content: center;
+/* position: inline; */
+width: 100%;
+word-wrap: break-word;
+/* margin-top: 3rem; */
+/* width: 100rem; */
+}
+h1 {
+font-size: 6rem;
+text-align: left;
+width:57%;
+display: inline-block;
+}
+h2 {
+width: 100%;
+text-align: left;
+}
+button i {
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+}
+body .commentbox {
+  font-size: x-large;
+  /* resize: none; */
+  width: 60%;
+  /* background-color: black; */
+  color: var(--aquaColor);
+  font-weight: 900;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  align-items: center;
+  align-content: center;
+}
+.commentbox textarea {
+  /* position: center; */
+  font-size: x-large;
+  background-color: var(--blackColor);
+  color: var(--aquaColor);
+  font-weight: 900;
+  width: 100%;
+  max-width: 107rem;
+}
+li {
+  color:#ffffff;
+  font-weight:900;
+}
+.commentbox button {
+  font-size: large;
+  background-color: rgb(0, 0, 0);
+  color: var(--aquaColor);
+  font-weight: 900;
+  border-radius: 22px;
+  padding: 8px;
+  border: 1cap;
+  cursor:pointer;
+}
+.commentbox button:hover {
+  position: inline-flex;
+  background-color: var(--aquaColor);
+  color:#000;
+  cursor: pointer;
+ }
+ .commentbox button:active {
+  position: inline-flex;
+  background-color: var(--aquaColor);
+  color:#000;
+  cursor: pointer;
+  opacity: 0.5;
+ }
+
+body .likeButton {
+  text-align: left;
+  margin-right: 5rem;
+  margin-top: -1rem;
+}
+body .likeButton .dislikebutton{
+  margin-top: -3.8rem;
+  margin-left: 4rem;
+  position: inline-flex;
+}
+body .likeButton button{
+ /* position: inline-flex; */
+ font-size: 7px;
+ color: var(--aquaColor);
+ background-color: var(--lightBlackColor);
+    cursor: pointer;
+    border:0
+}
+button i:hover{
+  /* position: relative; */
+  /* font-size: xx-small; */
+  /* background-color: var(--blackColor); */
+  color:var(--aquaColor);
+  cursor: pointer;
+  transition: 0.2s;
+  opacity: 0.5;
+ }
+
+body .postbox .username {
+font-size: xx-large;
+color: #ffffff;
+
+}
+body .postbox {
+display: inline-block;
+text-align: center;
+align-items: center;
+align-content: center;
+background-color: var(--lightBlackColor);
+padding: 0.9rem 1.2rem;
+border-radius: 1.7rem;
+margin-bottom: 0.9rem;
+box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.11),
+  0 0.1rem 0.1rem rgba(0, 0, 0, 0.04);
+width: 57%;
+max-width: 110rem;
+min-height: 200px;
+/* float: left; */
+word-wrap:break-word;
+border: 1px solid #000;
+}
+body .postedby {
+font-size: large;
+color: #ffffff;
+font-weight:900;
+text-align: left;
+}
+
+body .details{
+text-align: left;
+width:57%;
+display: inline-block;
+/* align-content: left; */
+margin-left: 2rem;
+margin-top: -3rem;
+color: var(--aquaColor);
+font-weight: 900;
+}
+
+body .detailsnotlogged{
+/* text-align: left; */
+/* align-content: left; */
+margin-left: 2rem;
+margin-top: -3rem;
+color: var(--aquaColor);
+font-weight: 900;
+}
+
+.postbody {
+background-color: var(--lightBlackColor);
+border: #000000;
+border-radius: 1.7rem;
+box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.11),
+0 0.1rem 0.1rem rgba(0, 0, 0, 0.04);
+width:57%;
+padding: 0.9rem 1.2rem;
+border-radius: 5px;
+display: inline-block;
+text-align: center;
+align-items: center;
+align-content: center;
+border: 1px solid #000;
+}
+.postbox .username h5 {
+color:#ffffff;
+font-size:1.2rem;
+}
+
+.postbox .likecount {
+margin-top: -11.0rem;
+margin-right: -38rem;
+}
+.postbox .dislikecount {
+margin-top: -2.2rem;
+margin-right: -8rem;
+}
+.postbox h5 {
+margin-top:3rem;
+}
+.postbox .likeButtonComment {
+text-align: center;
+margin-top: -11.5rem;
+margin-right: -34rem;
+/* border-radius: 0.4rem; */
+/* background-color: var(--blackColor) */
+position: inline-flex;
+}
+body .likeButtonComment .dislikebutton{
+/* text-align: right; */
+margin-top: -5.5rem;
+margin-right: -10rem;
+/* border-radius: 0.4rem; */
+position: inline-flex;
+}
+.postbox .likeButtonComment button{
+/* position: inline-flex; */
+font-size: xx-small;
+color: var(--aquaColor);
+background-color: var(--lightBlackColor);
+   cursor: pointer;
+   border:0
+}
+.postbox .likeButtonComment button i:hover{
+background-color: var(--lightBlackColor);
+color:var(--aquaColor);
+cursor: pointer;
+transition: 0.2s;
+opacity: 0.4;
+}
+.postbox .likeButtonComment button i{
+/* position: inline-flex; */
+font-size: 3rem;
+   cursor: pointer;
+   border:0
+}

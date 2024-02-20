@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/postpage.css">
+    <link rel="stylesheet" href="/css/general.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <script src=""></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <title>Reboot Journal</title>
+</head>
+<a href="/"><header class="header" id="header">
+</header></a>
+<h1>{{.Title}}</h1>
+<div class="details">Categories:<span>&nbsp;&nbsp;</span> 
+{{range .Category}}{{.CategoryName}}<span>&#44;&nbsp;&nbsp;</span>{{end}}<br></div>
+        
+<body>
+    <div class="postbody">
+<br><h2>{{.Body}}</h2><br><br><div class="postedby">Posted by {{.Username}}</div><br>
+{{ if .LoggedUser }}
+<div class="likeButton">
+
+{{ if .Userlike }}
+<form method="GET" action="/like">
+<button name= "removeInteraction" id = "removeInteraction" value="{{.PostID}}"><i class="fa fa-thumbs-up fa-5x" style="color: #00a5c2;"></i></button></form>
+<form method="GET" action="/dislike">
+<div class="dislikebutton"><button name= "postInteraction" id = "postInteraction" value="{{.PostID}}"><i class="fa fa-thumbs-down fa-5x" id="notclicked"></i></button></form></div>
+{{else}}
+{{if .UserDislike}}
+<form method="GET" action="/like">
+<button name= "postInteraction" id = "postInteraction" value="{{.PostID}}"><i class="fa fa-thumbs-up fa-5x"></i></button></form>
+<form method="GET" action="/dislike">
+    <div class="dislikebutton"><button name= "removeInteraction" id = "removeInteraction" value="{{.PostID}}"><i class="fa fa-thumbs-down fa-5x" style="color: #00a5c2;"></i></button></form></div>
+{{else}}
+    <form method="GET" action="/like">
+    <button name= "postInteraction" id = "postInteraction" value="{{.PostID}}"><i class="fa fa-thumbs-up fa-5x"></i></button></form>
+    <form method="GET" action="/dislike">
+        <div class="dislikebutton"><button name= "postInteraction" id = "postInteraction" value="{{.PostID}}">
+        <i class="fa fa-thumbs-down fa-5x"></i></button></form></div>
+    {{end}}
+    {{end}}</div>
+      {{end}}</div>
+      <br><br>
+{{ if .LoggedUser }}
+<div class="overlaycomments">
+    <div class="commentbox" id="commentbox">
+    <form method="post" action="/comment">
+        <textarea name="commentContent" id="commentContent" rows="2" cols="56" placeholder="add comment..." required="true" maxlength="2000"></textarea>
+        <br><button name= "postid" id = "postid" value="{{.PostID}}">Submit</button>
+    </div><br>
+  </form>
+</div>
+{{else}}
+{{end}}
+{{range .Comments}}
+<div class="postbox" id="postbox">
+    <div class="username" id="username"><h3>{{.CommentUsername}}</h3></div>
+<br><h4>Comment added on: {{.TimeCreated}}</h4>       
+        {{ if .CommentLoggedUser }}   
+         <br>
+        <div class="likeButtonComment">
+        {{ if .CommentUserlike }}
+        <form method="GET" action="/commentlike/">
+        <button name= "removeInteraction" id = "removeInteraction" value="{{.Comment_id}}"><i class="fa fa-thumbs-up fa-5x" style="color: #00a5c2;"></i></button></form>{{.Likes}}
+        <div class="dislikebutton"><form method="GET" action="/commentdislike/">
+            <button name= "commentInteraction" id = "commentInteraction" value="{{.Comment_id}}"><i class="fa fa-thumbs-down fa-5x"></i></button></form>{{.Dislikes}}</div>
+        </div>
+        {{else}}
+        {{ if .CommentUserDislike }}
+        <form method="GET" action="/commentlike/">
+        <button name= "commentInteraction" id = "commentInteraction" value="{{.Comment_id}}"><i class="fa fa-thumbs-up fa-5x"></i></button></form>{{.Likes}}
+        <div class="dislikebutton"><form method="GET" action="/commentdislike/">
+        <button name= "removeInteraction" id = "removeInteraction" value="{{.Comment_id}}"><i class="fa fa-thumbs-down fa-5x" style="color: #00a5c2;"></i></button></form>{{.Dislikes}}</div></div>
+        {{else}}
+        <form method="GET" action="/commentlike/">
+        <button name= "commentInteraction" id = "commentInteraction" value="{{.Comment_id}}"><i class="fa fa-thumbs-up fa-5x"></i></button></form>{{.Likes}}
+        <div class="dislikebutton"><form method="GET" action="/commentdislike/">
+        <button name= "commentInteraction" id = "commentInteraction" value="{{.Comment_id}}">
+        <i class="fa fa-thumbs-down fa-5x"></i></button></form>{{.Dislikes}}</div></div>
+        {{end}}{{end}}{{else}}
+        <div class="likecount"><br><span><option value="{{.}}"><i class="fa fa-thumbs-up"></i> {{.Likes}} </option></span>
+            <div class="dislikecount"><span><option value="{{.}}"><i class="fa fa-thumbs-down"></i>{{.Dislikes}}</option></span></div></div>
+        {{end}}<br><br><br><br><h3>{{.Body}}</h3></div>{{end}}
+        <a href="/">Back Home</a>
+</body>
+</html>
+<script>
+(function () {
+    window.onpageshow = function(event) {
+        if (event.persisted) {
+            window.location.reload();
+        }
+    };
+})();
+        src="https://kit.fontawesome.com/9e5ba2e3f5.js"
+        src="/js/postpage.js"
+      crossorigin="anonymous"
+      if (location.href !== ("http://localhost:{{.Port}}/postpage/?id={{.PostID}}")){
+        window.location.replace("http://localhost:{{.Port}}/postpage/?id={{.PostID}}")
+      }
+      window.addEventListener("scroll", (event) => {
+    let scroll = this.scrollY;
+    console.log(scroll)
+});
+</script>
