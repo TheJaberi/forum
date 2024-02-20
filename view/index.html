@@ -35,11 +35,11 @@
                 <ul>
                   {{if .IsLogged}}
                   <li class="createpost">
-                    <a href="/#"><i class="fa-solid fa-comment"></i> Create Post</a>
+                    <a><i class="fa-solid fa-comment"></i> Create Post</a>
                   </li>
                   {{if .TypeAdmin}}
                   <li class="createcategory">
-                    <a href="##"><i class="fa-solid fa-comment"></i> Create Category</a>
+                    <a><i class="fa-solid fa-comment"></i> Create Category</a>
                   </li>
                   {{end}}
                   <li class="join">
@@ -50,7 +50,7 @@
                   </li>
                   {{else}}             
                   <li class="join">
-                    <a href="/#">
+                    <a>
                       <i class="fa-solid fa-user"></i>
                       Login / Join
                     </a>
@@ -140,11 +140,11 @@
                     <input type="password" name="password" id="passIn" autocomplete="off" class="input" required />
                     <label class="user-pass">Password</label>
                   </div>
-                  <a href="#" class="btn"
+                  <a href="" class="btn"
                   >
                   <span>  Login with GitHub (Unavailable)</span></a
                 >
-                <a href="#" class="btn"
+                <a href="" class="btn"
                   ><span>
                     Login with Google (Unavailable)</span
                   ></a
@@ -202,7 +202,7 @@
 document.querySelector(".overlay").classList.add("active")
 const errormsg = document.querySelector(".errormsg").getAttribute("value")
 alert(errormsg)
-window.location.replace("http://localhost:{{.Port}}/#")
+window.location.replace("http://localhost:{{.Port}}/")
   </script>
 {{end}}  
 {{if .PostError}}
@@ -210,7 +210,7 @@ window.location.replace("http://localhost:{{.Port}}/#")
 document.querySelector(".overlayposts").classList.add("active")
 const posterrormsg = document.querySelector(".posterrormsg").getAttribute("value")
 alert(posterrormsg)
-window.location.replace("http://localhost:{{.Port}}/#")
+window.location.replace("http://localhost:{{.Port}}/")
 </script>
 {{end}}  
 </body>
