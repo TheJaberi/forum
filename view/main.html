@@ -16,9 +16,9 @@
     {{if .IsLogged}}
     <form method="GET" action="/myposts">
         <button name= "interaction" id = "interaction" value="{{.LoggedUserID}}">my posts</button></form>
-        <form method="GET" action="/mylikes">
+    <form method="GET" action="/mylikes">
         <button name= "interaction" id = "interaction" value="{{.LoggedUserID}}">my likes</button></form>
-        <form method="GET" action="/mydislikes">
+    <form method="GET" action="/mydislikes">
         <button name= "interaction" id = "interaction" value="{{.LoggedUserID}}">my dislikes</button></form>
     {{else}}
     {{end}}
@@ -38,7 +38,9 @@ Post<input type="checkbox" id = "createpost">
     Post Body<textarea name="post" id="post" placeholder="Enter text here (maximum 500 characters)" rows="5" cols="33" required="true" maxlength="500"></textarea>
     Category
     {{range .AllCategories}}<input type="checkbox" name= "{{.CategoryID}}" id = "category" value="{{.CategoryID}}">{{.CategoryName}}{{end}}
-    <button class="downl-btn" id="format" name="format" value="txt">Create post</button></div>
+    <br>
+    <div style="width: 100%; text-align: center;"><button class="downl-btn" id="format" name="format" value="txt">Create post</button></div>
+    </div>
 </form>
     <form method="post" action="/createcategory">
         Create category<textarea name="category" id="category" placeholder="Enter text here (maximum 50 characters)" rows="1" cols="10" required="true" maxlength="50"></textarea>

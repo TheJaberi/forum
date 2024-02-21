@@ -11,8 +11,8 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <title>Reboot Journal</title>
 </head>
-<a href="/"><header class="header" id="header">
-</header></a>
+<a href="/"><header class="header" id="header"></a>
+</header>
 <h1>{{.Title}}</h1>
 <div class="details">Categories:<span>&nbsp;&nbsp;</span> 
 {{range .Category}}{{.CategoryName}}<span>&#44;&nbsp;&nbsp;</span>{{end}}<br></div>
@@ -84,7 +84,8 @@
         <div class="likecount"><br><span><option value="{{.}}"><i class="fa fa-thumbs-up"></i> {{.Likes}} </option></span>
             <div class="dislikecount"><span><option value="{{.}}"><i class="fa fa-thumbs-down"></i>{{.Dislikes}}</option></span></div></div>
         {{end}}<br><br><br><br><h3>{{.Body}}</h3></div>{{end}}
-        <a href="/">Back Home</a>
+        <br><br>
+        <a class="buttonback" href="/">Back Home</a>
 </body>
 </html>
 <script>
