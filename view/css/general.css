@@ -117,3 +117,12 @@ input:focus::placeholder {
     width: 1200px;
   }
 } */
+
+.WelcomeUser {
+  color: white; 
+  font-weight: bold; 
+  font-size: 1.5em;
+  height: 100%;
+  box-sizing: border-box;
+  display: block;
+}

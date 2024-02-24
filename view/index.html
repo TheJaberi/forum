@@ -16,21 +16,13 @@
           <div class="container">
             <div class="header-content">
               <div class="logo">
-                <a href="/"
-                ><h2>Reboot01 Forum</h2></a>
+                <a href="/"><h2>Reboot01 Forum</h2></a>
               </div>
-              
-              <div class="nav-search">
-                <div class="my-search">
-                  <ul>{{if .IsLogged}}
-                    <li><a href="/mylikes/?user={{.LoggedUserID}}">MY LIKES</a></li><span>&nbsp;&nbsp;&nbsp;</span>
-                    <li><a href="/mydislikes/?user={{.LoggedUserID}}">MY DISLIKES</a></li><span>&nbsp;&nbsp;&nbsp;</span>
-                    <li><a href="/myposts/?user={{.LoggedUserID}}">MY POSTS</a></li>
-                    {{else}}
-                    {{end}} 
-                  </ul>
-                </div>
+              {{if .IsLogged}}
+              <div class="logo">
+                <p class="WelcomeUser">Welcome {{.LoggedUser.Username}}</p>
               </div>
+              {{end}}
               <div class="nav-group">
                 <ul>
                   {{if .IsLogged}}
@@ -107,6 +99,11 @@
               
               <h2>Sort By</h2>
               <ul class="dropdown">
+                {{if .IsLogged}}
+                <li><a href="/?sortby=mylikes">MY LIKES</a></li>
+                <li><a href="/?sortby=mydislikes">MY DISLIKES</a></li>
+                <li><a href="/?sortby=myposts">MY POSTS</a></li>
+                {{end}}
                 <li><a href="/">NEWEST</a></li>
                 <li><a href="/?sortby=oldest">OLDEST</a></li>
                 <li><a href="/?sortby=mostliked">MOST LIKED</a></li>

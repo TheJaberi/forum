@@ -1,12 +1,14 @@
 package main
+
 import (
 	"fmt"
-	"log"
-	"net/http"
 	controller "forum/controller"
 	model "forum/model"
+	"log"
+	"net/http"
 	"strconv"
 )
+
 // Whatever needs to load before the server starts (Files/APIs)
 func init() {
 	log.SetFlags(log.Lshortfile | log.LstdFlags)
@@ -20,14 +22,11 @@ func main() {
 	model.AllData.Port, _ = strconv.Atoi(port[1:])
 	http.HandleFunc("/", controller.MainHandler)
 	fmt.Println("http://localhost" + port)
-	http.HandleFunc("/createcategory", controller.HandlerCreateCategory)  
-	http.HandleFunc("/postpage/", controller.HandlerPostPage)             
-	http.HandleFunc("/myposts/", controller.HandlerMyFilter)              
-	http.HandleFunc("/mylikes/", controller.HandlerMyFilter)
-	http.HandleFunc("/mydislikes/", controller.HandlerMyFilter)
+	http.HandleFunc("/createcategory", controller.HandlerCreateCategory)
+	http.HandleFunc("/postpage/", controller.HandlerPostPage)
 	http.HandleFunc("/logout/", controller.HandlerLogout)
 	http.HandleFunc("/comment", controller.HandlerComments)
-	http.HandleFunc("/like/", controller.HandlerLikes) 
+	http.HandleFunc("/like/", controller.HandlerLikes)
 	http.HandleFunc("/dislike/", controller.HandlerLikes)
 	http.HandleFunc("/commentlike/", controller.HandlerCommentsLikes)
 	http.HandleFunc("/commentdislike/", controller.HandlerCommentsLikes)

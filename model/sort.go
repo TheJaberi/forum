@@ -10,10 +10,14 @@ func SortPosts(sortby string) {
 		AllData.AllPosts = SortByDislike(AllPosts)
 	} else if sortby == "mostcommentedon" {
 		AllData.AllPosts = SortByComment(AllPosts)
+	} else {
+		if sortby != "" {
+			FilterUserData(sortby)
+		}
 	}
 }
 
-// sorts posts in reverse  
+// sorts posts in reverse
 func RSort(list []Post) []Post {
 	var arrAllPosts []Post
 	for i := len(list) - 1; i >= 0; i-- {
@@ -74,7 +78,7 @@ func RemoveSpaces(text string) string {
 	var final []byte
 	var wordstart int
 	strbyte := []byte(text)
-	for i:=0;i<len(text);i++{
+	for i := 0; i < len(text); i++ {
 		if strbyte[i] != 32 {
 			wordstart = i
 			break
@@ -83,7 +87,7 @@ func RemoveSpaces(text string) string {
 	if wordstart == 0 && strbyte[0] == 32 {
 		return ""
 	}
-	for j:=wordstart;j<len(text);j++{
+	for j := wordstart; j < len(text); j++ {
 		final = append(final, strbyte[j])
 	}
 	return string(final)
