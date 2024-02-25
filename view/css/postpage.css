@@ -225,3 +225,23 @@ font-size: 3rem;
    cursor: pointer;
    border:0
 }
+
+.buttonback {
+  font-size: large;
+  background-color: rgb(0, 0, 0);
+  color: var(--aquaColor);
+  font-weight: 900;
+  border-radius: 22px;
+  padding: 8px;
+  border: 1cap;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.buttonback:hover {
+  position: inline-flex;
+  background-color: var(--aquaColor);
+  color: #000;
+  cursor: pointer;
+  text-decoration: none;
+}

@@ -3,6 +3,7 @@ package forum
 import (
 	"context"
 	"errors"
+	"fmt"
 	"log"
 
 	_ "github.com/mattn/go-sqlite3"
@@ -45,7 +46,7 @@ func GetCategories() error {
 	for categoryData.Next() {
 		err := categoryData.Scan(&category.CategoryID, &category.CategoryName)
 		if err != nil {
-			log.Printf(ScanCategoryError.Error())
+			fmt.Println(ScanCategoryError.Error())
 			return err
 		}
 		AllCategories = append(AllCategories, category)
@@ -58,7 +59,7 @@ func GetCategory(name string) (Category, error) {
 	var category Category
 	err := row.Scan(&category.CategoryID, &category.CategoryName)
 	if err != nil {
-		log.Printf(ScanCategoryError.Error())
+		fmt.Println(ScanCategoryError.Error())
 		return category, err
 	}
 	return category, nil
