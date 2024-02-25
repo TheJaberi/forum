@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/general.css" />
+    <link rel="stylesheet" href="/css/general.css">
     <link rel="stylesheet" href="/css/header.css">
-    <link rel="stylesheet" href="/css/index.css" />
-    <link rel="stylesheet" href="/css/footer.css" />
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/footer.css">
     <title>Reboot Journal</title>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
@@ -19,8 +19,8 @@
                 <a href="/"><h2>Reboot01 Forum</h2></a>
               </div>
               {{if .IsLogged}}
-              <div class="logo">
-                <p class="WelcomeUser">Welcome {{.LoggedUser.Username}}</p>
+              <div class="logo" style="width: 500px;">
+                <p class="WelcomeUser">Welcome {{.LoggedUser.Username}} <a href="/logout"><i class="fa fa-sign-out"></i>LogOut</a></p>
               </div>
               {{end}}
               <div class="nav-group">
@@ -34,11 +34,8 @@
                     <a><i class="fa-solid fa-comment"></i> Create Category</a>
                   </li>
                   {{end}}
-                  <li>
-                    <a href="/logout">         
-                      <i class="fa fa-sign-out"></i>
-                      LogOut
-                    </a>
+                  <li class="join">
+                    
                   </li>
                   {{else}}             
                   <li class="join">
@@ -47,7 +44,6 @@
                       Login / Join
                     </a>
                   </li>
-                  
                   {{end}}
                 </ul>
               </div>
@@ -121,11 +117,6 @@
           <p>Any sufficiently advanced technology is indistinguishable from magic.</p>
         </div>
       </footer>
-      <!-- <div class="overlaylogout">
-        <div class="logout" id="logout">
-          <form action=""></form>
-        </div>
-      </div> -->
       <div class="overlay">
         <div class="login" id="login">
           <div class="top">
