@@ -187,7 +187,7 @@
             <form method="post" action="/post">
                 Post Title <textarea name="title" id="title" placeholder=" Title (max 35 characters)" rows="1" cols="35"
                     required="true" maxlength="35"></textarea><i class="fa-solid fa-xmark close"></i><br>
-                Post Body<textarea name="post" id="post" rows="20" cols="150" placeholder="(max 2000 characters)"
+                Post Body<textarea name="post" id="post" rows="15" cols="150" placeholder="(max 2000 characters)"
                     required="true" maxlength="2000"></textarea>
                 Category
                 {{range .AllCategories}}<input type="checkbox" name="{{.CategoryID}}" id="category"

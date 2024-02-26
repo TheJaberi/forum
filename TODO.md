@@ -40,7 +40,7 @@ FINAL FIXES
 
 [ ] Guest user cannot see like and dislike counter and icons on postpage
 
-[ ] Adjust Create Post Popup location on screen (Move or change size)
+[x] Adjust Create Post Popup location on screen (Move or change size)
 
 [x] Handle non-existing queries on url (405 / 404)
 
