@@ -28,6 +28,10 @@ func HandlerPostPage(w http.ResponseWriter, req *http.Request) {
 		ErrorHandler(w, req, http.StatusBadRequest)
 		return
 	}
+	if postID > len(model.AllPosts) {
+		ErrorHandler(w, req, http.StatusNotFound)
+		return
+	}
 	model.AllData.Postpage = model.AllPosts[postID-1]
 	model.AllData.Postpage.LoggedUser = model.AllData.IsLogged
 	model.AllData.Postpage.Port = model.AllData.Port
