@@ -17,4 +17,5 @@ var (
 	NewCategoryError    = errors.New("Error adding category!")
 	ScanCategoryError   = errors.New("Category Scan Error!")
 	PostError           = errors.New("Post Title and Body must contain characters")
+	CategoryNotSelected = errors.New("You must Select at least one Category for your post!")
 )

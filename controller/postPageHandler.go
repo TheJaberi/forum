@@ -24,7 +24,7 @@ func HandlerPostPage(w http.ResponseWriter, req *http.Request) {
 	}
 
 	postID, err := strconv.Atoi(req.URL.Query().Get("id"))
-	if err != nil{
+	if err != nil {
 		ErrorHandler(w, req, http.StatusBadRequest)
 		return
 	}

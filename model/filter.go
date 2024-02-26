@@ -1,7 +1,6 @@
 package forum
 
 import (
-	"fmt"
 	"strconv"
 )
 
@@ -27,25 +26,21 @@ func FilterByCategory(categoryID string) error {
 }
 
 // filters depending on the user data
-func FilterUserData(userID, path string) error {
+func FilterUserData(path string) error {
 	var filteredPosts []Post
-	user_id, err := strconv.Atoi(userID)
-	if err != nil {
-		fmt.Println(err.Error())
-		return err
-	}
+	userID := AllData.LoggedUserID
 	for i := 0; i < len(AllPosts); i++ {
-		if path == "/myposts/" && AllPosts[i].UserID == user_id {
+		if path == "myposts" && AllPosts[i].UserID == userID {
 			filteredPosts = append(filteredPosts, AllPosts[i])
 		}
-		if path == "/mylikes/" && AllPosts[i].Userlike {
+		if path == "mylikes" && AllPosts[i].Userlike {
 			filteredPosts = append(filteredPosts, AllPosts[i])
 		}
-		if path == "/mydislikes/" && AllPosts[i].UserDislike {
+		if path == "mydislikes" && AllPosts[i].UserDislike {
 			filteredPosts = append(filteredPosts, AllPosts[i])
 		}
 	}
 	AllData.AllPosts = RSort(filteredPosts)
-	AllData.CategoryCheck = false
+	// AllData.CategoryCheck = false
 	return nil
 }

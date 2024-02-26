@@ -47,6 +47,7 @@ window.addEventListener("click", (e) => {
     catogary.classList.remove("active");
   }
 });
+
 function togglePass() {
   var x = document.getElementById("passIn");
   var txt = document.getElementById("toggleTxt");

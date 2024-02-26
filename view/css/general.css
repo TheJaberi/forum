@@ -27,9 +27,13 @@
 html {
   font-size: 62.5%;
   scroll-behavior: smooth;
+  flex: 1;
 }
 
 body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
   font-family: "Inter", sans-serif;
   font-weight: 400;
   font-size: 1.5rem;
@@ -117,3 +121,12 @@ input:focus::placeholder {
     width: 1200px;
   }
 } */
+
+.WelcomeUser {
+  color: white; 
+  font-weight: bold; 
+  font-size: 1.5em;
+  height: 100%;
+  box-sizing: border-box;
+  display: block;
+}
