@@ -6,7 +6,7 @@ import (
 	"net/http"
 )
 
-// handles all the users filters 
+// handles all the users filters
 func HandlerMyFilter(w http.ResponseWriter, req *http.Request) {
 	if req.URL.Path != "/mylikes/" && req.URL.Path != "/myposts/" && req.URL.Path != "/mydislikes/" {
 		ErrorHandler(w, req, http.StatusNotFound)
@@ -21,7 +21,8 @@ func HandlerMyFilter(w http.ResponseWriter, req *http.Request) {
 		ErrorHandler(w, req, http.StatusInternalServerError)
 		return
 	}
-	err = model.FilterUserData(req.FormValue("user"), req.URL.Path) // depending on the url path that is displayed when each of the buttons is clicked the data well be filtered
+	// err = model.FilterUserData(req.FormValue("user"), req.URL.Path) // depending on the url path that is displayed when each of the buttons is clicked the data well be filtered
+	err = model.FilterUserData(req.URL.Path) // depending on the url path that is displayed when each of the buttons is clicked the data well be filtered
 	if err != nil {
 		ErrorHandler(w, req, http.StatusBadRequest)
 		return
