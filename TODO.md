@@ -32,5 +32,24 @@
 
 [x] Final Test
 
+FINAL FIXES
+
+[ ] Postpage Like count not visible in general
+
+[ ] Guest user cannot see like and dislike icons on comments
+
+[ ] Guest user cannot see like and dislike counter and icons on postpage
+
+[ ] Adjust Create Post Popup location on screen (Move or change size)
+
+[x] Handle non-existing queries on url (405 / 404)
+
+[ ] Add protection against empty comments (null / empty spaces)
+
+[ ] Add instructions for signing up (format and length)
+
+[ ] Set frontend check for signing up and signing in
+
+[x] Remove Extra Comma (just replace comma with space)
 
 For the best use of this file, find and add this extension --> Gruntfuggly.todo-tree
