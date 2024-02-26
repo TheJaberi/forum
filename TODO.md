@@ -48,7 +48,7 @@ FINAL FIXES
 
 [x] Handle non-existing queries on url (405 / 404)
 
-[ ] Add protection against empty comments (null / empty spaces)
+[x] Add protection against empty comments (null / empty spaces)
 
 [x] Add instructions for signing up (format and length)
 

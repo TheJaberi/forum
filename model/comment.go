@@ -14,6 +14,10 @@ import (
 func CreateComment(rawComment, postStrID string) (Post, error) {
 	var postID int
 	var err error
+	rawComment = RemoveSpaces(rawComment)
+	if rawComment == "" {
+		return Post{}, errors.New("comment invalid")
+	}
 	if postStrID != "" {
 		postID, err = strconv.Atoi(postStrID)
 		if err != nil {
@@ -68,7 +72,7 @@ func GetComment(id int) (Comment, error) {
 	return c, nil
 }
 
-// get post comments adds the comments to each post 
+// get post comments adds the comments to each post
 func GetPostComments(p *Post) error {
 	p.Comments = nil
 	commentData, err := DB.Query("Select comment_id, body, user_id, time_created from comments where post_id = ?", p.PostID)
