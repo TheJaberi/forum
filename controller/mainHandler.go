@@ -35,7 +35,14 @@ func MainHandler(w http.ResponseWriter, req *http.Request) {
 	model.AllData.AllPosts = model.RSort(model.AllPosts)
 	model.AllData.AllCategories = model.AllCategories
 	model.AllData.CategoryCheck = true
-	model.SortPosts(req.FormValue("sortby"))
+	if req.FormValue("sortby") != "" {
+		err = model.SortPosts(req.FormValue("sortby"))
+		if err != nil {
+			ErrorHandler(w, req, http.StatusNotFound)
+			return
+		}
+	}
+
 	if req.FormValue("category") != "" {
 		err = model.FilterByCategory(req.FormValue("category"))
 		if err != nil {

@@ -1,7 +1,9 @@
 package forum
 
+import "errors"
+
 // sorts the post depending on the link clicked in the frontend
-func SortPosts(sortby string) {
+func SortPosts(sortby string) error {
 	if sortby == "oldest" {
 		AllData.AllPosts = AllPosts
 	} else if sortby == "mostliked" {
@@ -10,11 +12,12 @@ func SortPosts(sortby string) {
 		AllData.AllPosts = SortByDislike(AllPosts)
 	} else if sortby == "mostcommentedon" {
 		AllData.AllPosts = SortByComment(AllPosts)
+	} else if sortby == "myposts" || sortby == "mylikes" || sortby == "mydislikes" {
+		FilterUserData(sortby)
 	} else {
-		if sortby != "" {
-			FilterUserData(sortby)
-		}
+		return errors.New("givin sortby not available")
 	}
+	return nil
 }
 
 // sorts posts in reverse

@@ -38,7 +38,7 @@ FINAL FIXES
 
 [ ] problem in the interaction in the post count like dislike
 
-[ ] handle sort by enquiry
+[x] handle sort by enquiry
 
 [x] Guest user cannot see like and dislike icons on comments
 
@@ -50,7 +50,7 @@ FINAL FIXES
 
 [ ] Add protection against empty comments (null / empty spaces)
 
-[ ] Add instructions for signing up (format and length)
+[x] Add instructions for signing up (format and length)
 
 [ ] Set frontend check for signing up and signing in
 
