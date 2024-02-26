@@ -32,36 +32,41 @@
             {{ if .Userlike }}
             <form method="GET" action="/like">
                 <button name="removeInteraction" id="removeInteraction" value="{{.PostID}}"><i
-                        class="fa fa-thumbs-up fa-5x" style="color: #00a5c2;"></i></button>
-            </form>
+                        class="fa fa-thumbs-up fa-5x" style="color: #00a5c2;"></i></button> 
+            </form>{{.Likes}} 
             <form method="GET" action="/dislike">
                 <div class="dislikebutton"><button name="postInteraction" id="postInteraction" value="{{.PostID}}"><i
-                            class="fa fa-thumbs-down fa-5x" id="notclicked"></i></button>
-            </form>
+                            class="fa fa-thumbs-down fa-5x" id="notclicked"></i></button> 
+            </form><br>{{.Dislikes}}
         </div>
         {{else}}
         {{if .UserDislike}}
-        <form method="GET" action="/like">
+        <form method="GET" action="/like/">
             <button name="postInteraction" id="postInteraction" value="{{.PostID}}"><i
-                    class="fa fa-thumbs-up fa-5x"></i></button>
-        </form>
-        <form method="GET" action="/dislike">
+                    class="fa fa-thumbs-up fa-5x"></i></button> 
+        </form>{{.Likes}}
+        <form method="GET" action="/dislike/">
             <div class="dislikebutton"><button name="removeInteraction" id="removeInteraction" value="{{.PostID}}"><i
-                        class="fa fa-thumbs-down fa-5x" style="color: #00a5c2;"></i></button>
-        </form>
+                        class="fa fa-thumbs-down fa-5x" style="color: #00a5c2;"></i></button> 
+        </form>{{.Dislikes}}
     </div>
     {{else}}
     <form method="GET" action="/like">
         <button name="postInteraction" id="postInteraction" value="{{.PostID}}"><i
-                class="fa fa-thumbs-up fa-5x"></i></button>
-    </form>
+                class="fa fa-thumbs-up fa-5x"></i></button> 
+    </form>{{.Likes}}
     <form method="GET" action="/dislike">
         <div class="dislikebutton"><button name="postInteraction" id="postInteraction" value="{{.PostID}}">
                 <i class="fa fa-thumbs-down fa-5x"></i></button>
-    </form>
+    </form>{{.Dislikes}}
     </div>
     {{end}}
     {{end}}</div>
+    {{else}}
+    <div class="dislikebutton">
+        <i class="fa fa-thumbs-up fa-5x" style="font-size: 3rem;"></i> {{.Likes}} <span>&nbsp;&nbsp;</span>
+            <i class="fa fa-thumbs-down fa-5x" style="font-size: 3rem;"></i> {{.Dislikes}}
+</div>
     {{end}}</div>
     <br><br>
     {{ if .LoggedUser }}
@@ -124,13 +129,11 @@
     </div>
     </div>
     {{end}}{{end}}{{else}}
-    <div class="likecount"><br><span>
-            <option value="{{.}}"><i class="fa fa-thumbs-up"></i> {{.Likes}} </option>
-        </span>
-        <div class="dislikecount"><span>
-                <option value="{{.}}"><i class="fa fa-thumbs-down"></i>{{.Dislikes}}</option>
-            </span></div>
-    </div>
+    <div class="likecount"><br>
+        <i class="fa fa-thumbs-up fa-5x" style="font-size: 3rem;"></i> {{.Likes}} <span>&nbsp;&nbsp;</span>
+        <i class="fa fa-thumbs-down fa-5x" style="font-size: 3rem;"></i> {{.Dislikes}}
+        <br>
+</div>
     {{end}}<br><br><br><br>
     <h3>{{.Body}}</h3>
     </div>{{end}}

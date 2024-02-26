@@ -34,11 +34,15 @@
 
 FINAL FIXES
 
-[ ] Postpage Like count not visible in general
+[x] Postpage Like count not visible in general
 
-[ ] Guest user cannot see like and dislike icons on comments
+[ ] problem in the interaction in the post count like dislike
 
-[ ] Guest user cannot see like and dislike counter and icons on postpage
+[ ] handle sort by enquiry
+
+[x] Guest user cannot see like and dislike icons on comments
+
+[x] Guest user cannot see like and dislike counter and icons on postpage
 
 [x] Adjust Create Post Popup location on screen (Move or change size)
 
