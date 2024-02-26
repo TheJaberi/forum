@@ -1,6 +1,7 @@
 package forum
 
 import (
+	"errors"
 	"strconv"
 )
 
@@ -9,7 +10,10 @@ func FilterByCategory(categoryID string) error {
 	var filteredPosts []Post
 	category, err := strconv.Atoi(categoryID)
 	if err != nil {
-		return nil
+		return err
+	}
+	if category > len(AllData.AllCategories) {
+		return errors.New("Category not found")
 	}
 	for i := 0; i < len(AllPosts); i++ {
 		for j := 0; j < len(AllPosts[i].Category); j++ {

@@ -36,7 +36,13 @@ func MainHandler(w http.ResponseWriter, req *http.Request) {
 	model.AllData.AllCategories = model.AllCategories
 	model.AllData.CategoryCheck = true
 	model.SortPosts(req.FormValue("sortby"))
-	model.FilterByCategory(req.FormValue("category"))
+	if req.FormValue("category") != "" {
+		err = model.FilterByCategory(req.FormValue("category"))
+		if err != nil {
+			ErrorHandler(w, req, http.StatusNotFound)
+			return
+		}
+	}
 	if model.LoginError2 {
 		model.AllData.LoginError = true
 	} else {
