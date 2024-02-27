@@ -36,26 +36,38 @@ func PostInteractions(add, remove, path string) (Post, error) {
 			if !AllPosts[addPost_id-1].UserDislike {
 				InsertPostInteraction(addPost_id, user_id, 1) // insert adds the interaction to the database 1 is like 0 is dislike
 				AllPosts[addPost_id-1].Userlike = true        // changes the post like or dislike for the logged in user in the all posts var
-			} else {
+				AllPosts[addPost_id-1].Likes++ 
+				} else {
 				UpdatePostInteraction(addPost_id, user_id, 1) // update is used if a like has to be changed to a dislike or vice versa
 				AllPosts[addPost_id-1].Userlike = true
 				AllPosts[addPost_id-1].UserDislike = false
+				AllPosts[addPost_id-1].Likes++ 
+				AllPosts[addPost_id-1].Dislikes-- 
 			}
 		} else {
 			if !AllPosts[addPost_id-1].Userlike {
 				InsertPostInteraction(addPost_id, user_id, 0)
 				AllPosts[addPost_id-1].UserDislike = true
+				AllPosts[addPost_id-1].Dislikes++
 			} else {
 				UpdatePostInteraction(addPost_id, user_id, 0)
 				AllPosts[addPost_id-1].UserDislike = true
 				AllPosts[addPost_id-1].Userlike = false
+				AllPosts[addPost_id-1].Likes--
+				AllPosts[addPost_id-1].Dislikes++
 			}
 		}
 		p = AllPosts[addPost_id-1]
 	} else {
 		RemovePostInteraction(remPost_id, user_id) //remove is greater means there is already an interaction that needs to be removed
-		AllPosts[remPost_id-1].Userlike = false
-		AllPosts[remPost_id-1].UserDislike = false
+		if AllPosts[remPost_id-1].Userlike {
+			AllPosts[remPost_id-1].Userlike = false
+			AllPosts[remPost_id-1].Likes--
+		}
+		if AllPosts[remPost_id-1].UserDislike {
+			AllPosts[remPost_id-1].UserDislike = false
+			AllPosts[remPost_id-1].Dislikes--
+		}
 		p = AllPosts[remPost_id-1]
 	}
 	p.LoggedUser = true

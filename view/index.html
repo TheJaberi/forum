@@ -24,7 +24,7 @@
                     </div>
                     {{if .IsLogged}}
                     <div class="logo" style="width: 500px;">
-                        <p class="WelcomeUser">Welcome {{.LoggedUser.Username}} <a href="/logout"><i
+                        <p class="WelcomeUser">Welcome {{.LoggedUser.Username}} <span>&nbsp;&nbsp;</span><a href="/logout"><i
                                     class="fa fa-sign-out"></i>LogOut</a></p>
                     </div>
                     {{end}}
@@ -151,9 +151,9 @@
                                 <label class="user-pass">Password</label>
                             </div>
                             <a href="" class="btn">
-                                <span> Login with GitHub (Unavailable)</span></a>
+                                <span> Login with GitHub (Coming Soon)</span></a>
                             <a href="" class="btn"><span>
-                                    Login with Google (Unavailable)</span></a><br><br>
+                                    Login with Google (Coming Soon)</span></a><br><br>
                             <button type="submit" class="btn btn-red">Log in</button>
                         </form>
                     </div><br><br>
@@ -177,8 +177,6 @@
             </div>
         </div>
     </div>
-    <div class="errormsg" value="{{.LoginErrorMsg}}"></div>
-    <div class="posterrormsg" value="{{.PostErrorMsg}}"></div>
     <div class="overlayposts">
         <div class="postbox" id="postbox">
             <form method="post" action="/post">
@@ -193,6 +191,8 @@
         </div>
         </form>
     </div>
+    <div class="errormsg" value="{{.LoginErrorMsg}}"></div>
+    <div class="posterrormsg" value="{{.PostErrorMsg}}"></div>
     <script>
         (function () {
             window.onpageshow = function (event) {

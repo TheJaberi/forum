@@ -364,6 +364,9 @@ margin-bottom: 0;
   a {
     font-weight: 900;
   }
+  a:hover {
+    cursor: pointer;
+  }
   /* .login .row .content .login-left .btn-red,
   .login .row .content .login-right .btn-red {
     min-width: 8rem;

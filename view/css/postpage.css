@@ -1,8 +1,3 @@
-*{
-  /* background-color: var(--blackColor); */
-  /* color: var(--aquaColor); */
-  
-}
 
 body {
 text-align: center;
@@ -97,6 +92,10 @@ body .likeButton button{
  background-color: var(--lightBlackColor);
     cursor: pointer;
     border:0
+}
+.postbody .likeButton .dislikebuttonpost {
+  margin-top:-5.8rem;
+  margin-left: 4.3rem;
 }
 button i:hover{
   /* position: relative; */

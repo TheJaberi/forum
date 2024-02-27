@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<a href="/">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,29 +13,27 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <title>Reboot Journal</title>
 </head>
-<a href="/">
     <header class="header" id="header">
-</a>
-</header>
-<h1>{{.Title}}</h1>
+
+</header></a>
+<br>
+<h1>{{.Title}}</h1><br>
 <div class="details">Categories:<span>&nbsp;&nbsp;</span>
     {{range .Category}}{{.CategoryName}}<span>&nbsp;&nbsp;</span>{{end}}<br></div>
-
-<body>
+<body> <br><br>
     <div class="postbody">
-        <br>
+       
         <h2>{{.Body}}</h2><br><br>
         <div class="postedby">Posted by {{.Username}}</div><br>
         {{ if .LoggedUser }}
         <div class="likeButton">
-
             {{ if .Userlike }}
             <form method="GET" action="/like">
                 <button name="removeInteraction" id="removeInteraction" value="{{.PostID}}"><i
                         class="fa fa-thumbs-up fa-5x" style="color: #00a5c2;"></i></button> 
             </form>{{.Likes}} 
             <form method="GET" action="/dislike">
-                <div class="dislikebutton"><button name="postInteraction" id="postInteraction" value="{{.PostID}}"><i
+                <div class="dislikebuttonpost"><button name="postInteraction" id="postInteraction" value="{{.PostID}}"><i
                             class="fa fa-thumbs-down fa-5x" id="notclicked"></i></button> 
             </form><br>{{.Dislikes}}
         </div>
@@ -46,9 +44,9 @@
                     class="fa fa-thumbs-up fa-5x"></i></button> 
         </form>{{.Likes}}
         <form method="GET" action="/dislike/">
-            <div class="dislikebutton"><button name="removeInteraction" id="removeInteraction" value="{{.PostID}}"><i
+            <div class="dislikebuttonpost"><button name="removeInteraction" id="removeInteraction" value="{{.PostID}}"><i
                         class="fa fa-thumbs-down fa-5x" style="color: #00a5c2;"></i></button> 
-        </form>{{.Dislikes}}
+        </form><br>{{.Dislikes}}
     </div>
     {{else}}
     <form method="GET" action="/like">
@@ -56,9 +54,9 @@
                 class="fa fa-thumbs-up fa-5x"></i></button> 
     </form>{{.Likes}}
     <form method="GET" action="/dislike">
-        <div class="dislikebutton"><button name="postInteraction" id="postInteraction" value="{{.PostID}}">
+        <div class="dislikebuttonpost"><button name="postInteraction" id="postInteraction" value="{{.PostID}}">
                 <i class="fa fa-thumbs-down fa-5x"></i></button>
-    </form>{{.Dislikes}}
+    </form><br>{{.Dislikes}}
     </div>
     {{end}}
     {{end}}</div>
@@ -161,6 +159,7 @@
     src = "/js/postpage.js"
     crossorigin = "anonymous"
     if (location.href !== ("http://localhost:{{.Port}}/postpage/?id={{.PostID}}")) {
+        history.back() = "http://localhost:{{.Port}}/"
         window.location.replace("http://localhost:{{.Port}}/postpage/?id={{.PostID}}")
     }
     window.addEventListener("scroll", (event) => {

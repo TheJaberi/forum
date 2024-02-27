@@ -36,7 +36,7 @@ FINAL FIXES
 
 [x] Postpage Like count not visible in general
 
-[ ] problem in the interaction in the post count like dislike
+[x] problem in the interaction in the post count like dislike
 
 [x] handle sort by enquiry
 
