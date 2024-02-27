@@ -52,7 +52,7 @@ FINAL FIXES
 
 [x] Add instructions for signing up (format and length)
 
-[ ] Set frontend check for signing up and signing in
+[x] Set frontend check for signing up and signing in
 
 [x] Remove Extra Comma (just replace comma with space)
 
