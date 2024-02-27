@@ -36,13 +36,13 @@ func PostInteractions(add, remove, path string) (Post, error) {
 			if !AllPosts[addPost_id-1].UserDislike {
 				InsertPostInteraction(addPost_id, user_id, 1) // insert adds the interaction to the database 1 is like 0 is dislike
 				AllPosts[addPost_id-1].Userlike = true        // changes the post like or dislike for the logged in user in the all posts var
-				AllPosts[addPost_id-1].Likes++ 
-				} else {
+				AllPosts[addPost_id-1].Likes++
+			} else {
 				UpdatePostInteraction(addPost_id, user_id, 1) // update is used if a like has to be changed to a dislike or vice versa
 				AllPosts[addPost_id-1].Userlike = true
 				AllPosts[addPost_id-1].UserDislike = false
-				AllPosts[addPost_id-1].Likes++ 
-				AllPosts[addPost_id-1].Dislikes-- 
+				AllPosts[addPost_id-1].Likes++
+				AllPosts[addPost_id-1].Dislikes--
 			}
 		} else {
 			if !AllPosts[addPost_id-1].Userlike {
@@ -74,20 +74,20 @@ func PostInteractions(add, remove, path string) (Post, error) {
 	return p, nil
 }
 
-// insert the interaction into the database 
+// insert the interaction into the database
 func InsertPostInteraction(postID int, userID int, likeOrDislike int) {
 	query := "INSERT INTO `Interaction` (`post_id`, `user_id`, `interaction`) VALUES (?, ?, ?)"
 	_, err := DB.ExecContext(context.Background(), query, postID, userID, likeOrDislike)
-	if err != nil { 
+	if err != nil {
 		log.Println(err)
 	}
 }
 
-// removes the interaction into the database 
+// removes the interaction into the database
 func RemovePostInteraction(postID int, userID int) {
 	query := "DELETE FROM `Interaction` where post_id = ? AND user_id = ?"
 	_, err := DB.ExecContext(context.Background(), query, postID, userID)
-	if err != nil { 
+	if err != nil {
 		log.Println(err)
 	}
 }
@@ -103,20 +103,20 @@ func UpdatePostInteraction(postID int, userID int, likeOrDislike int) {
 
 // gets the users interaction from the database once he is logged in and adds it to the database
 func GetUserPostsInteractions() error {
-		for i := range AllPosts {
-			var interaction int
-			postData := DB.QueryRow("SELECT interaction from Interaction where post_id = ? AND user_id = ?", i+1, LoggedUser.Userid)
-			err := postData.Scan(&interaction)
-			if err != nil {
-				continue // used for logout (remove user post interactions from global struct)?
+	for i := range AllPosts {
+		var interaction int
+		postData := DB.QueryRow("SELECT interaction from Interaction where post_id = ? AND user_id = ?", i+1, LoggedUser.Userid)
+		err := postData.Scan(&interaction)
+		if err != nil {
+			continue // used for logout (remove user post interactions from global struct)?
+		} else {
+			if interaction == 1 {
+				AllPosts[i].Userlike = true
 			} else {
-				if interaction == 1 {
-					AllPosts[i].Userlike = true
-				} else {
-					AllPosts[i].UserDislike = true
-				}
+				AllPosts[i].UserDislike = true
 			}
 		}
+	}
 	return nil
 }
 
@@ -130,7 +130,7 @@ func GetPostLikes(p *Post) error {
 	return nil
 }
 
-//counts the dislikes for the post from the database
+// counts the dislikes for the post from the database
 func GetPostDislikes(p *Post) error {
 	dislikedata := DB.QueryRow("SELECT COUNT(user_id) FROM Interaction where post_id = ? AND interaction = ?", p.PostID, 0)
 	err := dislikedata.Scan(&p.Dislikes)

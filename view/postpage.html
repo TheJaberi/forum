@@ -20,9 +20,9 @@
 <h1>{{.Title}}</h1><br>
 <div class="details">Categories:<span>&nbsp;&nbsp;</span>
     {{range .Category}}{{.CategoryName}}<span>&nbsp;&nbsp;</span>{{end}}<br></div>
-<body> <br><br>
+<body>
+    <br><br>
     <div class="postbody">
-       
         <h2>{{.Body}}</h2><br><br>
         <div class="postedby">Posted by {{.Username}}</div><br>
         {{ if .LoggedUser }}
@@ -159,7 +159,7 @@
     src = "/js/postpage.js"
     crossorigin = "anonymous"
     if (location.href !== ("http://localhost:{{.Port}}/postpage/?id={{.PostID}}")) {
-        history.back() = "http://localhost:{{.Port}}/"
+        //history.back() = "http://localhost:{{.Port}}/"
         window.location.replace("http://localhost:{{.Port}}/postpage/?id={{.PostID}}")
     }
     window.addEventListener("scroll", (event) => {
