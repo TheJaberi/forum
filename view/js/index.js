@@ -59,3 +59,18 @@ function togglePass() {
     txt.textContent = "Show";
   }
 }
+
+function isEmail(email) {
+  const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  return emailRegex.test(email);
+}
+
+let loginemail = document.getElementById("loginemail");
+if (isEmail(loginemail)) {
+  alert("Login email incorrect")
+}
+
+let registeremail = document.getElementById("email");
+if (isEmail(registeremail)) {
+  alert("Register email incorrect")
+}

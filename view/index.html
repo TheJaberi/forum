@@ -144,11 +144,11 @@
                 <div class="content">
                     <div class="login-left">
                         <form method="POST" action="/login">
-                            <input type="text" name="email" autocomplete="off" required class="input" title="Enter your Email!"/>
+                            <input id="loginemail" type="email" name="email" autocomplete="off" required class="input" title="Enter your Email!"/>
                             <label class="user-email">Email Address</label>
                             <div class="form-group">
-                                <input type="password" name="password" id="passIn" autocomplete="off" class="input"
-                                    required title="Your username must be between 6 to 25 long"/>
+                                <input type="password" name="password" id="passIn" autocomplete="off" class="input" minlength="6" maxlength="25"
+                                    required title="Your password must be between 6 to 25 long"/>
                                 <label class="user-pass">Password</label>
                             </div>
                             <a href="" class="btn">
@@ -164,11 +164,11 @@
                             <input type="email" name="email" id="email" autocomplete="off" class="input" title="Enter your Email!"/>
                             <label class="user-email">Email Address</label>
                             <div class="form-group">
-                                <input type="text" name="username" autocomplete="off" class="input" maxlength="13" title="Your username must be between 3 to 14 long"/>
+                                <input type="text" name="username" autocomplete="off" class="input" minlength="3" maxlength="14" title="Your username must be between 3 to 14 long"/>
                                 <label class="user-name">Username</label>
                             </div>
                             <div class="form-group">
-                                <input type="password" name="password" id="passIn" autocomplete="off" class="input" title="Your username must be between 6 to 25 long"/>
+                                <input type="password" name="password" id="passIn" autocomplete="off" class="input" minlength="6" maxlength="25" title="Your password must be between 6 to 25 long"/>
                                 <label class="user-pass">Password</label>
                             </div><br>
                             <button type="submit" class="btn btn-red">Join Now</button>
