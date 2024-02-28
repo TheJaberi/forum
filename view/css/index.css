@@ -391,13 +391,55 @@ margin-bottom: 0;
     visibility: hidden;
     transition: opacity 0.5s, visibility 0.5s;
     border-radius: 10px;
+    color: whitesmoke;
   }
   
+  .postbox button:hover {
+    background-color: var(--aquaColor);
+color:var(--lightBlackColor);
+cursor: pointer;
+transition: 0.2s;
+/* opacity: 0.7; */
+  }
+
+  label {
+    font-weight: 700;
+    color:var(--darkBlueColor);
+  }
   .overlayposts.active {
     opacity: 1;
     visibility: visible;
   }
-  
+  .postbox label {
+    background: #282828;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  input[type="checkbox"] {  
+    opacity: 0;
+  }
+
+  input[type="checkbox"] ~label {  
+    color: whitesmoke;
+    font-weight: 400;
+  }
+
+  .overlaycatogaries i{
+    position: absolute;
+  }
+
+  input[type="checkbox"]:checked ~label {  
+    color:#00eeff;
+    font-weight:800
+  }
+  input[type="checkbox"]:hover ~label .for{  
+    color:#00eeff;
+    opacity:0.5;
+  }
   .postbox {
     position: relative;
     border-radius: 0.4rem;
@@ -416,12 +458,23 @@ margin-bottom: 0;
     font-size: var(--fs24);
     color: var(--blackColor);
     cursor: pointer;
-    margin-left: 53%;
+    margin-left: 51.8%;
   }
-  .postbox button {
+  .postbox button{
     font-size: x-large;
-    color: #2fbcfd;
+    color: var(--darkBlueColor);
     background-color: black;
+    padding: 6px;
+    border-radius: 10px;
+    text-align: right;
+  }
+  .postbox button:active{
+  opacity: 0.9;
+  }
+  .postbox button:hover{
+    font-size: x-large;
+    color: black;
+    background-color: var(--darkBlueColor);
     padding: 6px;
     border-radius: 10px;
   }
@@ -433,7 +486,7 @@ margin-bottom: 0;
     color: rgb(255, 255, 255);
     font-weight: 900;
     border-radius: 10px;
-
+    padding: 3px;
   }
 
   .overlaycatogaries {

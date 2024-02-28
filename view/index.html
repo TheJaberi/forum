@@ -58,10 +58,10 @@
         <div class="overlaycatogaries">
             <div class="postbox" id="postbox">
                 <form method="post" action="/createcategory">
-                    Category Name<textarea name="category" id="title" placeholder="Category Name (max 35 characters)"
-                        rows="1" cols="35" required="true" maxlength="35"></textarea><i
-                        class="fa-solid fa-xmark close"></i><br>
-                    <button class="downl-btn" id="format" name="format" value="txt">Create Category</button>
+                    Category Name  <textarea name="category" id="title" placeholder="Category Name (max 35 characters)"
+                        rows="1" cols="35" required="true" maxlength="35"></textarea>
+                    <button class="downl-btn" id="format" name="format" value="txt">Create Category</button><i
+                        class="fa-solid fa-xmark close"></i>
             </div>
             </form>
         </div>
@@ -181,13 +181,13 @@
     <div class="overlayposts">
         <div class="postbox" id="postbox">
             <form method="post" action="/post">
-                Post Title <textarea name="title" id="title" placeholder=" Title (max 35 characters)" rows="1" cols="35"
+                Post Title  <textarea name="title" id="title" placeholder=" Title (max 35 characters)" rows="1" cols="35"
                     required="true" maxlength="35"></textarea><i class="fa-solid fa-xmark close"></i><br>
                 Post Body<textarea name="post" id="post" rows="15" cols="150" placeholder="(max 2000 characters)"
                     required="true" maxlength="2000"></textarea>
-                Category
-                {{range .AllCategories}}<input type="checkbox" name="{{.CategoryID}}" id="category"
-                    value="{{.CategoryID}}">{{.CategoryName}}{{end}}
+                Category:{{range .AllCategories}}<span>&nbsp;</span>
+                <input type="checkbox" name="{{.CategoryID}}" id="{{.CategoryName}}"
+                    value="{{.CategoryID}}"><span>&nbsp;</span><label for="{{.CategoryName}}">{{.CategoryName}}{{end}}</label><span>&nbsp;&nbsp;&nbsp;&nbsp;</span></label>
                 <button class="downl-btn" id="format" name="format" value="txt">Create post</button>
         </div>
         </form>
@@ -204,7 +204,8 @@
         })();
 
         crossorigin = "anonymous"
-        if (location.href === ("http://localhost:{{.Port}}/post") || location.href === ("http://localhost:{{.Port}}/register") || location.href === ("http://localhost:{{.Port}}/logout/") || location.href === ("http://localhost:{{.Port}}/login")) {
+        if (location.href === ("http://localhost:{{.Port}}/post") || location.href === ("http://localhost:{{.Port}}/register") || location.href === ("http://localhost:{{.Port}}/logout/") ||
+        location.href === ("http://localhost:{{.Port}}/createcategory/") ||  location.href === ("http://localhost:{{.Port}}/login")) {
             window.location.replace("http://localhost:{{.Port}}")
         }
     </script>

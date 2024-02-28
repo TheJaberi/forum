@@ -3,9 +3,7 @@ const join = document.querySelector(".join"),
   closeBtn = document.querySelector(".overlay .close");
 
   const create = document.querySelector(".createpost"),
-  post = document.querySelector(".overlayposts"),
-  closepost = document.querySelector(".overlayposts .close");
-
+  post = document.querySelector(".overlayposts")
 join.addEventListener("click", () => {
   overlay.classList.add("active");
 });
