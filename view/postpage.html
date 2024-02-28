@@ -158,9 +158,13 @@
     src = "https://kit.fontawesome.com/9e5ba2e3f5.js"
     src = "/js/postpage.js"
     crossorigin = "anonymous"
+    const firstNameInput = document.getElementById('commentContent');
+        firstNameInput.value = '';
     if (location.href !== ("http://localhost:{{.Port}}/postpage/?id={{.PostID}}")) {
-        //history.back() = "http://localhost:{{.Port}}/"
-        window.location.replace("http://localhost:{{.Port}}/postpage/?id={{.PostID}}")
+        
+        history.back() = "http://localhost:{{.Port}}/"
+        window.location.replace("http://localhost:{{.Port}}/postpage/?id={{.PostID}}") 
+
     }
     window.addEventListener("scroll", (event) => {
         let scroll = this.scrollY;
