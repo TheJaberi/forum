@@ -2,19 +2,22 @@ package forum
 
 import (
 	"context"
-	"fmt"
 	model "forum/model"
 	"html/template"
+	"log"
 	"net/http"
+
 	bcrypt "golang.org/x/crypto/bcrypt"
 )
 
 // handles the main page
 func MainHandler(w http.ResponseWriter, req *http.Request) {
 	query := "UPDATE users SET user_pass = ? where user_id = '1'"
-	admin_pass, _ := bcrypt.GenerateFromPassword([]byte("adminpass"), 4)
-	_, err := model.DB.ExecContext(context.Background(), query, admin_pass)
-	fmt.Println(err)
+	admin_pass, err := bcrypt.GenerateFromPassword([]byte("adminpass"), 4)
+	if err != nil {
+		log.Println(err.Error())
+	}
+	_, err = model.DB.ExecContext(context.Background(), query, admin_pass)
 	if model.AllData.IsLogged {
 		check := model.CheckCookies(req)
 		if check != nil {

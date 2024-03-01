@@ -91,7 +91,10 @@ func GetPosts() error {
 		}
 		p.TimeCreated = strings.Replace(p.TimeCreated, "T", " ", -1)
 		p.TimeCreated = strings.Replace(p.TimeCreated, "Z", " ", -1)
-		p, _ = GetPostDetails(p)
+		p, err = GetPostDetails(p)
+		if err != nil {
+			log.Println(err.Error())
+		}
 		AllPosts = append(AllPosts, p)
 	}
 	if LoggedUser.Registered {

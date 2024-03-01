@@ -6,6 +6,7 @@ import (
 	model "forum/model"
 	"log"
 	"net/http"
+	"os"
 	"strconv"
 )
 
@@ -19,7 +20,12 @@ func init() {
 }
 func main() {
 	const port = ":8080"
-	model.AllData.Port, _ = strconv.Atoi(port[1:])
+	var err error
+	model.AllData.Port, err = strconv.Atoi(port[1:])
+	if err != nil {
+		log.Println(err.Error())
+		os.Exit(0)
+	}
 	http.HandleFunc("/", controller.MainHandler)
 	fmt.Println("http://localhost" + port)
 	http.HandleFunc("/createcategory", controller.HandlerCreateCategory)

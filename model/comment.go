@@ -34,7 +34,10 @@ func CreateComment(rawComment, postStrID string) (Post, error) {
 	if err != nil {
 		return Post{}, err
 	}
-	c, _ = GetComment(id)
+	c, err = GetComment(id)
+	if err != nil {
+		log.Println(err.Error())
+	}
 	// Using AllPosts, otherswise AllData is sorted in reverese
 	AllPosts[c.Post_id-1].Comments = append(AllPosts[c.Post_id-1].Comments, c)
 	return AllPosts[c.Post_id-1], nil
