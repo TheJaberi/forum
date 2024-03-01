@@ -2,14 +2,25 @@ package forum
 
 import (
 	"database/sql"
-	"fmt"
+	"log"
 	"os"
 )
 
 // creates all the tables in the database
-func DataBase(db *sql.DB) {
-	var query string
-	query = `CREATE TABLE IF NOT EXISTS users (
+func CreateDBTables(db *sql.DB) {
+	UsersTable(db)
+	PostsTable(db)
+	PostInteractionsTable(db)
+	CommentsTable(db)
+	CommentInteractionsTable(db)
+	RequestsTable(db)
+	ActionsTable(db)
+	CategoryTable(db)
+	PostCategoryTable(db)
+}
+
+func UsersTable(db *sql.DB) {
+	query := `CREATE TABLE IF NOT EXISTS users (
 		user_id INTEGER NOT NULL,
 		user_name CHAR(10) NOT NULL UNIQUE,
 		user_email CHAR(25) NOT NULL UNIQUE,
@@ -18,13 +29,19 @@ func DataBase(db *sql.DB) {
 		time_created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 		PRIMARY KEY("user_id" AUTOINCREMENT)
 	);`
-	usersTable, err1 := db.Prepare(query)
-	if err1 != nil {
-		fmt.Println(err1.Error())
+	usersTable, err := db.Prepare(query)
+	if err != nil {
+		log.Println(err.Error())
 		os.Exit(0)
 	}
-	usersTable.Exec()
-	query = `CREATE TABLE IF NOT EXISTS posts (
+	defer usersTable.Close()
+	_, err = usersTable.Exec()
+	if err != nil {
+		log.Println(err.Error())
+	}
+}
+func PostsTable(db *sql.DB) {
+	query := `CREATE TABLE IF NOT EXISTS posts (
 		id INTEGER NOT NULL,
 		user_id INTEGER NOT NULL,
 		Title TEXT NOT NULL,
@@ -34,16 +51,34 @@ func DataBase(db *sql.DB) {
 		PRIMARY KEY("id" AUTOINCREMENT),
 		FOREIGN KEY("user_id") REFERENCES users("user_id")
 	);`
-	postsTable, _ := db.Prepare(query)
-	postsTable.Exec()
-	query = `CREATE TABLE IF NOT EXISTS Interaction (
+	postsTable, err := db.Prepare(query)
+	if err != nil {
+		log.Println(err.Error())
+	}
+	defer postsTable.Close()
+	_, err = postsTable.Exec()
+	if err != nil {
+		log.Println(err.Error())
+	}
+}
+func PostInteractionsTable(db *sql.DB) {
+	query := `CREATE TABLE IF NOT EXISTS Interaction (
 		id INTEGER PRIMARY KEY,
 		post_id INTEGER NOT NULL,
 		user_id INTEGER NOT NULL,
 		interaction BIT NOT NULL);`
-	interaction_postsTable, _ := db.Prepare(query)
-	interaction_postsTable.Exec()
-	query = `CREATE TABLE IF NOT EXISTS comments (
+	interaction_postsTable, err := db.Prepare(query)
+	if err != nil {
+		log.Println(err.Error())
+	}
+	defer interaction_postsTable.Close()
+	_, err = interaction_postsTable.Exec()
+	if err != nil {
+		log.Println(err.Error())
+	}
+}
+func CommentsTable(db *sql.DB) {
+	query := `CREATE TABLE IF NOT EXISTS comments (
 		comment_id INTEGER NOT NULL,
 		post_id INTEGER NOT NULL,
 		user_id INTEGER NOT NULL,
@@ -53,9 +88,18 @@ func DataBase(db *sql.DB) {
 		FOREIGN KEY("post_id") REFERENCES posts("post_id"),
 		FOREIGN KEY("user_id") REFERENCES users("user_id")
 	);`
-	commentsTable, _ := db.Prepare(query)
-	commentsTable.Exec()
-	query = `CREATE TABLE IF NOT EXISTS interaction_comments (
+	commentsTable, err := db.Prepare(query)
+	if err != nil {
+		log.Println(err.Error())
+	}
+	defer commentsTable.Close()
+	_, err = commentsTable.Exec()
+	if err != nil {
+		log.Println(err.Error())
+	}
+}
+func CommentInteractionsTable(db *sql.DB) {
+	query := `CREATE TABLE IF NOT EXISTS interaction_comments (
 		comment_id INTEGER NOT NULL,
 		post_id INTEGER NOT NULL,
 		user_id INTEGER NOT NULL,
@@ -64,9 +108,18 @@ func DataBase(db *sql.DB) {
 		FOREIGN KEY("post_id") REFERENCES posts("post_id"),
 		FOREIGN KEY("user_id") REFERENCES users("user_id")
 	)`
-	interaction_commentsTable, _ := db.Prepare(query)
-	interaction_commentsTable.Exec()
-	query = `CREATE TABLE IF NOT EXISTS requests (
+	interaction_commentsTable, err := db.Prepare(query)
+	if err != nil {
+		log.Println(err.Error())
+	}
+	defer interaction_commentsTable.Close()
+	_, err = interaction_commentsTable.Exec()
+	if err != nil {
+		log.Println(err.Error())
+	}
+}
+func RequestsTable(db *sql.DB) {
+	query := `CREATE TABLE IF NOT EXISTS requests (
 		request_id INTEGER NOT NULL,
 		user_id INTEGER NOT NULL,
 		body TEXT NOT NULL,
@@ -74,9 +127,18 @@ func DataBase(db *sql.DB) {
 		PRIMARY KEY("request_id" AUTOINCREMENT),
 		FOREIGN KEY("user_id") REFERENCES users("user_id")
 	)`
-	requestsTable, _ := db.Prepare(query)
-	requestsTable.Exec()
-	query = `CREATE TABLE IF NOT EXISTS actions (
+	requestsTable, err := db.Prepare(query)
+	if err != nil {
+		log.Println(err.Error())
+	}
+	defer requestsTable.Close()
+	_, err = requestsTable.Exec()
+	if err != nil {
+		log.Println(err.Error())
+	}
+}
+func ActionsTable(db *sql.DB) {
+	query := `CREATE TABLE IF NOT EXISTS actions (
 		request_id INTEGER NOT NULL,
 		user_id INTEGER NOT NULL,
 		body TEXT NOT NULL,
@@ -84,19 +146,44 @@ func DataBase(db *sql.DB) {
 		FOREIGN KEY("request_id") REFERENCES requests("request_id"),
 		FOREIGN KEY("user_id") REFERENCES users("user_id")
 	)`
-	actionsTable, _ := db.Prepare(query)
-	actionsTable.Exec()
-	query = `CREATE TABLE IF NOT EXISTS Category (
+	actionsTable, err := db.Prepare(query)
+	if err != nil {
+		log.Println(err.Error())
+	}
+	defer actionsTable.Close()
+	_, err = actionsTable.Exec()
+	if err != nil {
+		log.Println(err.Error())
+	}
+}
+func CategoryTable(db *sql.DB) {
+	query := `CREATE TABLE IF NOT EXISTS Category (
 		id INTEGER PRIMARY KEY,
 		Name TEXT
 	)`
-	categoryTable, _ := db.Prepare(query)
-	categoryTable.Exec()
-	query = `CREATE TABLE IF NOT EXISTS Post2Category
-		(id INTEGER PRIMARY KEY,
-		post_id INTEGER NOT NULL,
-		category_id INTEGER NOT NULL
-	)`
-	post2categoryTable, _ := db.Prepare(query)
-	post2categoryTable.Exec()
+	categoryTable, err := db.Prepare(query)
+	if err != nil {
+		log.Println(err.Error())
+	}
+	defer categoryTable.Close()
+	_, err = categoryTable.Exec()
+	if err != nil {
+		log.Println(err.Error())
+	}
+}
+func PostCategoryTable(db *sql.DB) {
+	query := `CREATE TABLE IF NOT EXISTS Post2Category
+	(id INTEGER PRIMARY KEY,
+	post_id INTEGER NOT NULL,
+	category_id INTEGER NOT NULL
+)`
+	post2categoryTable, err := db.Prepare(query)
+	if err != nil {
+		log.Println(err.Error())
+	}
+	defer post2categoryTable.Close()
+	_, err = post2categoryTable.Exec()
+	if err != nil {
+		log.Println(err.Error())
+	}
 }

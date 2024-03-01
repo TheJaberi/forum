@@ -17,21 +17,24 @@ func DatabaseLoader() {
 	if err != nil {
 		log.Fatalf("%v", err)
 	}
-	if !IsTableExists(DB, "users") {
-		DataBase(DB)
+	if !TableExists(DB, "users") {
+		CreateDBTables(DB)
 		sqlStmt, err := DB.Prepare("INSERT INTO users (user_name, user_email, user_pass, user_type) VALUES (?, ?, ?, ?)")
 		if err != nil {
 			log.Fatalf("%v", err)
 		}
 		defer sqlStmt.Close()
-		admin_pass, _ := bcrypt.GenerateFromPassword([]byte("adminpass"), 4)
+		admin_pass, err := bcrypt.GenerateFromPassword([]byte("adminpass"), 4)
+		if err != nil {
+			log.Println(err.Error())
+		}
 		sqlStmt.Exec("admin", "admin@gmail.com", admin_pass, "admin")
 	}
 
 }
 
 // checks if the tables exist
-func IsTableExists(db *sql.DB, tableName string) bool {
+func TableExists(db *sql.DB, tableName string) bool {
 	sqlStmt, err := db.Prepare("SELECT COUNT(*) FROM sqlite_master WHERE type = 'table' AND name = ?")
 	if err != nil {
 		return false
