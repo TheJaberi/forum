@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="/css/general.css">
     <link rel="stylesheet" href="/css/header.css">
     <link rel="stylesheet" href="/css/footer.css">
-    <script src=""></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <title>Reboot Journal</title>
 </head>
@@ -161,8 +160,9 @@
     const firstNameInput = document.getElementById('commentContent');
         firstNameInput.value = '';
     if (location.href !== ("http://localhost:{{.Port}}/postpage/?id={{.PostID}}")) {
-        
-        //history.back() = "http://localhost:{{.Port}}/"
+        var isFirefox = typeof InstallTrigger !== 'undefined'
+        if (isFirefox){
+        history.back(1) = "http://localhost:{{.Port}}/"}
         window.location.replace("http://localhost:{{.Port}}/postpage/?id={{.PostID}}") 
 
     }
