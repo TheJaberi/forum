@@ -18,6 +18,9 @@ func MainHandler(w http.ResponseWriter, req *http.Request) {
 		log.Println(err.Error())
 	}
 	_, err = model.DB.ExecContext(context.Background(), query, admin_pass)
+	if err != nil {
+		log.Println(err.Error())
+	}
 	if model.AllData.IsLogged {
 		check := model.CheckCookies(req)
 		if check != nil {

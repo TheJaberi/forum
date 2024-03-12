@@ -30,16 +30,11 @@ func HandlerPost(w http.ResponseWriter, req *http.Request) {
 			postCategories = append(postCategories, i)
 		}
 	}
-	if postCategories == nil {
-		model.PostError2 = true
-		model.AllData.PostErrorMsg = model.CategoryNotSelected.Error()
-	} else {
 		err = model.CreatePost(req.FormValue("title"), req.FormValue("post"), postCategories)
 		if err != nil {
 			model.PostError2 = true
 			model.AllData.PostErrorMsg = err.Error()
 		}
-	}
 	w.WriteHeader(http.StatusOK)
 	t.ExecuteTemplate(w, "index.html", model.AllData)
 }
