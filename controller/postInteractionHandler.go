@@ -22,6 +22,10 @@ func HandlerLikes(w http.ResponseWriter, req *http.Request) {
 		ErrorHandler(w, req, http.StatusMethodNotAllowed)
 		return
 	}
+	// if model.ValidateSession(req) != nil {
+	// 	ErrorHandler(w, req, http.StatusUnauthorized)
+	// 	return
+	// }
 	t, err := template.ParseFiles(HTMLs...)
 	if err != nil {
 		ErrorHandler(w, req, http.StatusInternalServerError)

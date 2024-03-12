@@ -4,7 +4,7 @@ import (
 	"html/template"
 	"net/http"
 
-	model "forum/model"
+	m "forum/model"
 )
 
 // handles the user logging in
@@ -23,14 +23,14 @@ func HandlerLogin(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	model.LoginCookie, err = model.UserLogin(req.FormValue("email"), req.FormValue("password"))
+	cookie, err := m.UserLogin(req.FormValue("email"), req.FormValue("password"))
 	if err != nil {
-		model.LoginError2 = true
+		m.LoginError2 = true
 	} else {
-		model.LoginError2 = false
+		m.LoginError2 = false
 	}
 
-	http.SetCookie(w, model.LoginCookie)
+	http.SetCookie(w, cookie)
 	w.WriteHeader(http.StatusOK)
-	t.ExecuteTemplate(w, "index.html", model.AllData)
+	t.ExecuteTemplate(w, "index.html", m.AllData)
 }

@@ -1,8 +1,9 @@
 package forum
 
 import (
-	model "forum/model"
+	m "forum/model"
 	"html/template"
+	"log"
 	"net/http"
 )
 
@@ -22,11 +23,15 @@ func HandlerLogout(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 	w.WriteHeader(http.StatusOK)
-	model.AllData.LoggedUser = model.Empty
-	model.AllData.IsLogged = false
-	model.AllData.TypeAdmin = false
-	model.LoginCookie = model.ClearCookie(model.LiveSession)
-	http.SetCookie(w, model.LoginCookie)
-	model.LiveSession = model.EmptySession
-	t.ExecuteTemplate(w, "index.html", model.AllData)
+	resp := m.RemoveSession(req)
+	if resp != 0 {
+		log.Println(resp)
+	}
+	m.AllData.LoggedUser = m.Empty
+	m.AllData.IsLogged = false
+	m.AllData.TypeAdmin = false
+	m.LiveSession = m.EmptySession
+
+	http.SetCookie(w, m.BlankCookie)
+	t.ExecuteTemplate(w, "index.html", m.AllData)
 }

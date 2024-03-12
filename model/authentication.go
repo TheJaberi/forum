@@ -3,9 +3,7 @@ package forum
 import (
 	"database/sql"
 	"net/http"
-	"time"
 
-	"github.com/gofrs/uuid"
 	bcrypt "golang.org/x/crypto/bcrypt"
 )
 
@@ -33,18 +31,18 @@ func UserLogin(email string, password string) (*http.Cookie, error) {
 	// Validate User Existance
 	if UserExistsDb(email) != nil {
 		AllData.LoginErrorMsg = UserEmailError.Error()
-		return EmptyCookie, UserEmailError
+		return BlankCookie, UserEmailError
 	}
 	// Retrieves User Data
 	err := UserRetrieveDb(email, password)
 	if err != nil {
-		return EmptyCookie, err
+		return BlankCookie, err
 	}
 	// Validates Entered Password
 	err = bcrypt.CompareHashAndPassword([]byte(LoggedUser.Password), []byte(password))
 	if err != nil {
 		AllData.LoginErrorMsg = UserPasswordError.Error()
-		return EmptyCookie, err
+		return BlankCookie, err
 	}
 
 	LoggedUser.Registered = true
@@ -55,70 +53,14 @@ func UserLogin(email string, password string) (*http.Cookie, error) {
 	if LoggedUser.Type == "admin" {
 		AllData.TypeAdmin = true
 	}
-	session, err := CreateSession()
+	cookie, err := CreateSession()
 	if err != nil {
-		return EmptyCookie, err
+		return BlankCookie, err
 	}
-	cookie := CreateCookie(session)
-
+	ActiveUsersData[LoggedUser.Userid] = AllData
 	err = GetUserPostsInteractions()
 	if err != nil {
-		return EmptyCookie, err
+		return BlankCookie, err
 	}
 	return cookie, nil
-}
-
-// Create a cookie using the user session
-func CreateCookie(s Session) *http.Cookie {
-	c := &http.Cookie{
-		Name:     s.Name,
-		Value:    s.Uuid.String(),
-		Domain:   "localhost",
-		Path:     "/",
-		MaxAge:   3600,
-		HttpOnly: true,
-	}
-	return c
-}
-
-// Clears cookie and delete's it in the header
-func ClearCookie(s Session) *http.Cookie{
-	c := &http.Cookie{
-		Name:     s.Name,
-		Value:    s.Uuid.String(),
-		Path:     "/",
-		Domain: "localhost",
-		Expires: time.Unix(0, 0),
-		HttpOnly: true,
-	}
-	return c
-}
-// Create a session from the user data from the global struct
-func CreateSession() (Session, error) {
-	uuid, err := uuid.NewV4()
-	if err != nil {
-		return EmptySession, err
-	}
-	LiveSession = Session{
-		Name:      LoggedUser.Username,
-		UserId:    LoggedUser.Userid,
-		Email:     LoggedUser.Email,
-		CreatedAt: time.Now(),
-		Uuid:      uuid,
-	}
-	return LiveSession, nil
-}
-
-// Validate session remaining time
-func CheckCookies(r *http.Request) error {
-	cookie, err := r.Cookie(LiveSession.Name)
-	if err != nil {
-		return err
-	}
-	// Get cookie value:
-	if cookie.MaxAge < 0 {
-		LiveSession = EmptySession
-		return SessionExpired
-	}
-	return nil
 }

@@ -1,0 +1,105 @@
+package forum
+
+import (
+	"log"
+	"net/http"
+	"time"
+
+	"github.com/gofrs/uuid"
+)
+
+func CreateSession() (*http.Cookie, error) {
+	// Create New Token Value
+	uuid, err := uuid.NewV4()
+	if err != nil {
+		return BlankCookie, err
+	}
+	_, exists := ActiveUsersData[LoggedUser.Userid]
+	if exists {
+		delete(ActiveUsersData, ActiveSessions[SessionLinks[LoggedUser.Userid].String()].UserId)
+		delete(ActiveSessions, SessionLinks[LoggedUser.Userid].String())
+		delete(SessionLinks, LoggedUser.Userid)
+	}
+
+	// Add Session Token Details To Active Sessions Map
+	ActiveSessions[uuid.String()] = Session{
+		User:      LoggedUser.Username,
+		UserId:    LoggedUser.Userid,
+		Uuid:      uuid,
+		CreatedAt: time.Now(),
+		Expires:   time.Now().Add(3600 * time.Second),
+	}
+
+	SessionLinks[LoggedUser.Userid] = uuid
+
+	// Assign Token Value in Cookie
+	c := &http.Cookie{
+		Name:     "session_token",
+		Value:    uuid.String(),
+		Domain:   "localhost",
+		Path:     "/",
+		MaxAge:   3600,
+		HttpOnly: true,
+	}
+	return c, nil
+}
+
+func (s Session) isExpired() bool {
+	return s.Expires.Before(time.Now())
+}
+
+// Validate session remaining time
+func ValidateSession(r *http.Request) error {
+	c, err := r.Cookie("session_token")
+	if err != nil {
+		log.Println()
+		return err
+	}
+	sessionToken := c.Value
+	userSession, exists := ActiveSessions[sessionToken]
+	if !exists && AllData.IsLogged {
+		// If the session token is not present in session map, return an unauthorized error
+		return SessionInvalid
+	}
+	if userSession.isExpired() || c.MaxAge < 0 {
+		log.Println()
+		return SessionExpired
+	}
+	if LoadSession(userSession.UserId) != nil {
+		log.Println()
+		return ActiveUserError
+	}
+	return nil
+}
+
+func LoadSession(userID int) error {
+	data, exists := ActiveUsersData[userID]
+	if !exists {
+		return ActiveUserError
+	}
+	AllData = data
+	err := GetPosts()
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func RemoveSession(r *http.Request) int {
+	c, err := r.Cookie("session_token")
+	if err != nil {
+		if err == http.ErrNoCookie {
+			return http.StatusUnauthorized
+		}
+		// For any other type of error, return a bad request status
+		return http.StatusBadRequest
+	}
+	sessionToken := c.Value
+	delete(ActiveUsersData, ActiveSessions[sessionToken].UserId)
+	delete(ActiveSessions, sessionToken)
+	AllData.LoggedUser = Empty
+	AllData.IsLogged = false
+	AllData.TypeAdmin = false
+	LiveSession = EmptySession
+	return 0
+}

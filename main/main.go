@@ -17,6 +17,7 @@ func init() {
 	model.DatabaseLoader()
 	model.GetCategories()
 	model.GetPosts()
+
 }
 func main() {
 	const port = ":8080"

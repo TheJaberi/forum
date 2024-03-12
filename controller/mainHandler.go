@@ -2,7 +2,7 @@ package forum
 
 import (
 	"context"
-	model "forum/model"
+	m "forum/model"
 	"html/template"
 	"log"
 	"net/http"
@@ -17,19 +17,18 @@ func MainHandler(w http.ResponseWriter, req *http.Request) {
 	if err != nil {
 		log.Println(err.Error())
 	}
-	_, err = model.DB.ExecContext(context.Background(), query, admin_pass)
+	_, err = m.DB.ExecContext(context.Background(), query, admin_pass)
 	if err != nil {
 		log.Println(err.Error())
 	}
-	if model.AllData.IsLogged {
-		check := model.CheckCookies(req)
-		if check != nil {
-			model.AllData.LoggedUser = model.Empty
-			model.AllData.IsLogged = false
-			model.LiveSession = model.EmptySession
+	if m.ValidateSession(req) != nil {
+		resp := m.RemoveSession(req)
+		if resp != 0 {
+			ErrorHandler(w, req, resp)
+			return
 		}
+		http.SetCookie(w, m.BlankCookie)
 	}
-	http.SetCookie(w, model.LoginCookie)
 	if req.URL.Path != "/" {
 		ErrorHandler(w, req, http.StatusNotFound)
 		return
@@ -43,13 +42,13 @@ func MainHandler(w http.ResponseWriter, req *http.Request) {
 		ErrorHandler(w, req, http.StatusInternalServerError)
 		return
 	}
-	model.GetCategories()
-	model.GetPosts()
-	model.AllData.AllPosts = model.RSort(model.AllPosts)
-	model.AllData.AllCategories = model.AllCategories
-	model.AllData.CategoryCheck = true
+	m.GetCategories()
+	m.GetPosts()
+	m.AllData.AllPosts = m.RSort(m.AllPosts)
+	m.AllData.AllCategories = m.AllCategories
+	m.AllData.CategoryCheck = true
 	if req.FormValue("sortby") != "" {
-		err = model.SortPosts(req.FormValue("sortby"))
+		err = m.SortPosts(req.FormValue("sortby"))
 		if err != nil {
 			ErrorHandler(w, req, http.StatusNotFound)
 			return
@@ -57,26 +56,26 @@ func MainHandler(w http.ResponseWriter, req *http.Request) {
 	}
 
 	if req.FormValue("category") != "" {
-		err = model.FilterByCategory(req.FormValue("category"))
+		err = m.FilterByCategory(req.FormValue("category"))
 		if err != nil {
 			ErrorHandler(w, req, http.StatusNotFound)
 			return
 		}
 	}
-	if model.LoginError2 {
-		model.AllData.LoginError = true
+	if m.LoginError2 {
+		m.AllData.LoginError = true
 	} else {
-		model.AllData.LoginError = false
+		m.AllData.LoginError = false
 	}
-	if model.PostError2 {
-		model.AllData.PostError = true
+	if m.PostError2 {
+		m.AllData.PostError = true
 	} else {
-		model.AllData.PostError = false
+		m.AllData.PostError = false
 	}
-	t.ExecuteTemplate(w, "index.html", model.AllData)
-	model.AllData.LoginError = false
-	model.LoginError2 = false
-	model.AllData.PostError = false
-	model.PostError2 = false
-	model.AllData.LoginErrorMsg = ""
+	t.ExecuteTemplate(w, "index.html", m.AllData)
+	m.AllData.LoginError = false
+	m.LoginError2 = false
+	m.AllData.PostError = false
+	m.PostError2 = false
+	m.AllData.LoginErrorMsg = ""
 }

@@ -20,9 +20,8 @@ var (
 	Empty         User
 	LoginError2   bool
 	PostError2    bool
-	LoginCookie   *http.Cookie
-	EmptyCookie   *http.Cookie
 )
+
 type Data struct {
 	AllPosts      []Post
 	AllCategories []Category
@@ -45,7 +44,7 @@ type Category struct {
 type User struct {
 	Userid     int
 	Username   string
-	Password   string 
+	Password   string
 	Email      string
 	Registered bool
 	Type       string
@@ -97,9 +96,24 @@ type Applicant struct {
 }
 
 type Session struct {
-	Name      string
-	Uuid      uuid.UUID
-	Email     string
+	User      string
 	UserId    int
+	Uuid      uuid.UUID
 	CreatedAt time.Time
+	Expires   time.Time
 }
+
+var ActiveSessions map[string]Session = make(map[string]Session)
+
+var BlankCookie = &http.Cookie{
+	Name:     "session_token",
+	Value:    "",
+	Domain:   "localhost",
+	Path:     "/",
+	MaxAge:   3600,
+	HttpOnly: true,
+}
+
+var ActiveUsersData map[int]Data = make(map[int]Data)
+
+var SessionLinks map[int]uuid.UUID = make(map[int]uuid.UUID)

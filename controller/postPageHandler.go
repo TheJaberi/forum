@@ -3,6 +3,7 @@ package forum
 import (
 	model "forum/model"
 	"html/template"
+	"log"
 	"net/http"
 	"strconv"
 )
@@ -15,6 +16,12 @@ func HandlerPostPage(w http.ResponseWriter, req *http.Request) {
 	}
 	if req.Method != "GET" || model.AllData.AllPosts == nil {
 		ErrorHandler(w, req, http.StatusMethodNotAllowed)
+		return
+	}
+
+	if model.ValidateSession(req) != nil {
+		log.Println()
+		HandlerLogout(w, req)
 		return
 	}
 	t, err := template.ParseFiles(HTMLs...)
