@@ -3,7 +3,6 @@ package forum
 import (
 	model "forum/model"
 	"html/template"
-	"log"
 	"net/http"
 	"strconv"
 )
@@ -24,9 +23,7 @@ func HandlerPost(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 	if model.ValidateSession(req) != nil {
-		log.Println()
-		ErrorHandler(w, req, http.StatusUnauthorized)
-		return
+		// log.Println()
 	}
 	var postCategories []int
 	for i := 1; i <= len(model.AllCategories); i++ {

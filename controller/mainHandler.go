@@ -1,26 +1,13 @@
 package forum
 
 import (
-	"context"
 	m "forum/model"
 	"html/template"
-	"log"
 	"net/http"
-
-	bcrypt "golang.org/x/crypto/bcrypt"
 )
 
 // handles the main page
 func MainHandler(w http.ResponseWriter, req *http.Request) {
-	query := "UPDATE users SET user_pass = ? where user_id = '1'"
-	admin_pass, err := bcrypt.GenerateFromPassword([]byte("adminpass"), 4)
-	if err != nil {
-		log.Println(err.Error())
-	}
-	_, err = m.DB.ExecContext(context.Background(), query, admin_pass)
-	if err != nil {
-		log.Println(err.Error())
-	}
 	if m.ValidateSession(req) != nil {
 		resp := m.RemoveSession(req)
 		if resp != 0 {

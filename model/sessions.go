@@ -79,7 +79,7 @@ func LoadSession(userID int) error {
 	AllData.IsLogged = data.IsLogged
 	AllData.Postpage.UserID = data.Postpage.UserID
 	AllData.LoggedUserID = data.LoggedUserID
-	
+
 	// GetUserPostsInteractions()
 	err := GetPosts()
 	if err != nil {
@@ -93,7 +93,12 @@ func RemoveSession(r *http.Request) int {
 	c, err := r.Cookie("session_token")
 	if err != nil {
 		if err == http.ErrNoCookie {
-			return http.StatusUnauthorized
+			// log.Print()
+			AllData.LoggedUser = Empty
+			AllData.IsLogged = false
+			AllData.TypeAdmin = false
+			LiveSession = EmptySession
+			return 0
 		}
 		// For any other type of error, return a bad request status
 		return http.StatusBadRequest

@@ -110,7 +110,7 @@ var BlankCookie = &http.Cookie{
 	Value:    "",
 	Domain:   "localhost",
 	Path:     "/",
-	MaxAge:   3600,
+	MaxAge:   -1,
 	HttpOnly: true,
 }
 

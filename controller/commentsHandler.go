@@ -3,7 +3,6 @@ package forum
 import (
 	model "forum/model"
 	"html/template"
-	"log"
 	"net/http"
 )
 
@@ -18,9 +17,7 @@ func HandlerComments(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 	if model.ValidateSession(req) != nil {
-		log.Println()
-		ErrorHandler(w, req, http.StatusUnauthorized)
-		return
+		// log.Println()
 	}
 	t, err := template.ParseFiles(HTMLs...)
 	if err != nil {
