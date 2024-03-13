@@ -3,7 +3,6 @@ package forum
 import (
 	model "forum/model"
 	"html/template"
-	"log"
 	"net/http"
 
 	_ "github.com/mattn/go-sqlite3"
@@ -24,7 +23,6 @@ func HandlerCommentsLikes(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 	if model.ValidateSession(req) != nil {
-		log.Println()
 		ErrorHandler(w, req, http.StatusUnauthorized)
 		return
 	}

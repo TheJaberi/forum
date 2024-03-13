@@ -27,7 +27,7 @@ func CommentInteraction(add, remove, path string) (Post, error) {
 			return p, err
 		}
 	}
-	user_id := LoggedUser.Userid
+	user_id := AllData.LoggedUser.Userid
 	commentPos := 0
 	for i := 0; i < len(AllData.Postpage.Comments); i++ {
 		if AllData.Postpage.Comments[i].Comment_id == addComment_id || AllData.Postpage.Comments[i].Comment_id == remComment_id {
@@ -115,9 +115,9 @@ func UpdateCommentInteraction(userID int, likeOrDislike int, commentID int) erro
 // gets all comments interaction from the database and adds them to the comment struct
 func GetUserCommentInteractions() error {
 		for i := 0; i < len(AllData.Postpage.Comments); i++ {
-			if LoggedUser.Registered { // if the user is logged in the fact that he has liked or disliked the post is saved in all posts
+			if AllData.LoggedUser.Registered { // if the user is logged in the fact that he has liked or disliked the post is saved in all posts
 			var interaction int
-			postData := DB.QueryRow("SELECT interaction from interaction_comments where comment_id = ? AND user_id = ?", AllData.Postpage.Comments[i].Comment_id, LoggedUser.Userid)
+			postData := DB.QueryRow("SELECT interaction from interaction_comments where comment_id = ? AND user_id = ?", AllData.Postpage.Comments[i].Comment_id, AllData.LoggedUser.Userid)
 			err := postData.Scan(&interaction)
 			if err != nil {
 			} else {

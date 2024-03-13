@@ -3,7 +3,6 @@ package forum
 import (
 	model "forum/model"
 	"html/template"
-	"log"
 	"net/http"
 	"strconv"
 )
@@ -20,8 +19,7 @@ func HandlerPostPage(w http.ResponseWriter, req *http.Request) {
 	}
 
 	if model.ValidateSession(req) != nil {
-		log.Println()
-		HandlerLogout(w, req)
+		ErrorHandler(w, req, http.StatusUnauthorized)
 		return
 	}
 	t, err := template.ParseFiles(HTMLs...)

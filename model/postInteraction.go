@@ -30,7 +30,7 @@ func PostInteractions(add, remove, path string) (Post, error) {
 			return p, err
 		}
 	}
-	user_id := LoggedUser.Userid
+	user_id := AllData.LoggedUser.Userid
 	if addPost_id > remPost_id { // which ever value is greater determines whether to add or remove
 		if path == "/like/" {
 			if !AllPosts[addPost_id-1].UserDislike {
@@ -105,7 +105,7 @@ func UpdatePostInteraction(postID int, userID int, likeOrDislike int) {
 func GetUserPostsInteractions() error {
 	for i := range AllPosts {
 		var interaction int
-		postData := DB.QueryRow("SELECT interaction from Interaction where post_id = ? AND user_id = ?", i+1, LoggedUser.Userid)
+		postData := DB.QueryRow("SELECT interaction from Interaction where post_id = ? AND user_id = ?", i+1, AllData.LoggedUser.Userid)
 		err := postData.Scan(&interaction)
 		if err != nil {
 			continue // used for logout (remove user post interactions from global struct)?

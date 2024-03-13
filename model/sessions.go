@@ -1,7 +1,6 @@
 package forum
 
 import (
-	"log"
 	"net/http"
 	"time"
 
@@ -52,7 +51,6 @@ func (s Session) isExpired() bool {
 func ValidateSession(r *http.Request) error {
 	c, err := r.Cookie("session_token")
 	if err != nil {
-		log.Println()
 		return err
 	}
 	sessionToken := c.Value
@@ -62,12 +60,12 @@ func ValidateSession(r *http.Request) error {
 		return SessionInvalid
 	}
 	if userSession.isExpired() || c.MaxAge < 0 {
-		log.Println()
-		return SessionExpired
+		RemoveSession(r)
+		return err
 	}
 	if LoadSession(userSession.UserId) != nil {
-		log.Println()
-		return ActiveUserError
+		RemoveSession(r)
+		return err
 	}
 	return nil
 }
@@ -77,11 +75,17 @@ func LoadSession(userID int) error {
 	if !exists {
 		return ActiveUserError
 	}
-	AllData = data
+	AllData.LoggedUser = data.LoggedUser
+	AllData.IsLogged = data.IsLogged
+	AllData.Postpage.UserID = data.Postpage.UserID
+	AllData.LoggedUserID = data.LoggedUserID
+	
+	// GetUserPostsInteractions()
 	err := GetPosts()
 	if err != nil {
 		return err
 	}
+	GetUserCommentInteractions()
 	return nil
 }
 
