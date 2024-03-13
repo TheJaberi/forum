@@ -24,7 +24,7 @@ func MainHandler(w http.ResponseWriter, req *http.Request) {
 		ErrorHandler(w, req, http.StatusMethodNotAllowed)
 		return
 	}
-	t, err := template.ParseFiles(HTMLs...)
+	t, err := template.ParseFiles("../view/index.html")
 	if err != nil {
 		ErrorHandler(w, req, http.StatusInternalServerError)
 		return

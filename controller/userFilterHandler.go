@@ -19,7 +19,7 @@ func HandlerMyFilter(w http.ResponseWriter, req *http.Request) {
 	if model.ValidateSession(req) != nil {
 		// log.Println()
 	}
-	t, err := template.ParseFiles(HTMLs...)
+	t, err := template.ParseFiles("../view/index.html")
 	if err != nil {
 		ErrorHandler(w, req, http.StatusInternalServerError)
 		return

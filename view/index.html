@@ -205,7 +205,7 @@
 
         crossorigin = "anonymous"
         if (location.href === ("http://localhost:{{.Port}}/post") || location.href === ("http://localhost:{{.Port}}/register") || location.href === ("http://localhost:{{.Port}}/logout/") ||
-        location.href === ("http://localhost:{{.Port}}/createcategory/") ||  location.href === ("http://localhost:{{.Port}}/login")) {
+        location.href === ("http://localhost:{{.Port}}/createcategory") ||  location.href === ("http://localhost:{{.Port}}/login")) {
             window.location.replace("http://localhost:{{.Port}}")
         }
     </script>

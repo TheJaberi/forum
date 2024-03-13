@@ -18,16 +18,12 @@ func HandlerCreateCategory(w http.ResponseWriter, req *http.Request) {
 		ErrorHandler(w, req, http.StatusMethodNotAllowed)
 		return
 	}
-	// if model.ValidateSession(req) != nil {
-	// 	ErrorHandler(w, req, http.StatusUnauthorized)
-	// 	return
-	// }
 	err := model.CreateCategory(req.FormValue("category"))
 	if err != nil {
 		ErrorHandler(w, req, http.StatusBadRequest)
 		return
 	}
-	t, err := template.ParseFiles(HTMLs...)
+	t, err := template.ParseFiles("../view/index.html")
 	if err != nil {
 		ErrorHandler(w, req, http.StatusInternalServerError)
 		return

@@ -29,7 +29,7 @@ func ErrorHandler(w http.ResponseWriter, req *http.Request, statusError int) {
 	default:
 		errResponse.StatusMessage = "Unknown Error, Contact The Pope for Answers"
 	}
-	t, err := template.ParseFiles(HTMLs...)
+	t, err := template.ParseFiles("../view/error.html")
 	if err != nil {
 		log.Fatalf("Files Not Parsed, 505")
 	}

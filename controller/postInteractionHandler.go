@@ -25,7 +25,7 @@ func HandlerLikes(w http.ResponseWriter, req *http.Request) {
 	if model.ValidateSession(req) != nil {
 		// log.Print()
 	}
-	t, err := template.ParseFiles(HTMLs...)
+	t, err := template.ParseFiles("../view/postpage.html")
 	if err != nil {
 		ErrorHandler(w, req, http.StatusInternalServerError)
 		return
